@@ -1,11 +1,19 @@
+<!-- Title: Coop Bank Growth Marketing Specialist Landingsside -->
+<!-- filepath: index.html -->
 <!DOCTYPE html>
 <html lang="da" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mikkel E. Frost | Growth Marketing Specialist – Coop Bank</title>
+    
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Google Fonts (Inter til skarpt, moderne digitalt udtryk) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Ikoner -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <script>
@@ -18,354 +26,557 @@
                     colors: {
                         coopRed: '#b71a21',
                         coopRedDark: '#921318',
-                        coopDark: '#1a1a1a',
-                        coopGray: '#f4f4f6',
-                        coopText: '#2d2d2d'
+                        coopDark: '#0f0f11',
+                        coopMedium: '#1c1c21',
+                        coopGrayLight: '#f4f4f6',
+                        coopText: '#1f1f23',
+                        coopTextMuted: '#5e5e6e'
                     }
                 }
             }
         }
     </script>
     <style>
-        .active-nav {
-            border-bottom: 2px solid #b71a21;
-            color: #b71a21 !important;
+        /* Custom scrollbar to look extremely premium */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f4f4f6;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #b71a21;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #921318;
+        }
+        
+        /* Smooth fade-in animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.6s ease-out forwards;
         }
     </style>
 </head>
-<body class="bg-white text-coopText font-sans antialiased">
+<body class="bg-white text-coopText font-sans antialiased selection:bg-coopRed selection:text-white">
 
-    <header class="sticky top-0 z-50 bg-white shadow-sm border-b border-gray-100">
+    <!-- STICKY TOP NAVIGATION -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-200">
         <div class="max-w-6xl mx-auto px-4 h-20 flex items-center justify-between">
-            <a href="#" class="flex items-center">
-                <img src="https://coopbank.dk/cbimg/coop_bank_logo.svg?v2" alt="Coop Bank" class="h-8 md:h-10">
+            <!-- Brand Logo -->
+            <a href="#" class="flex items-center space-x-2 transition-transform active:scale-95">
+                <img src="https://coopbank.dk/cbimg/coop_bank_logo.svg?v2" alt="Coop Bank Logo" class="h-9 md:h-11">
             </a>
 
-            <nav class="hidden md:flex space-x-8 font-medium text-gray-600">
-                <a href="#ansøgning" class="hover:text-coopRed transition-colors py-2">Ansøgning</a>
-                <a href="#resultater" class="hover:text-coopRed transition-colors py-2">Resultater</a>
-                <a href="#erfaring" class="hover:text-coopRed transition-colors py-2">Erfaring</a>
-                <a href="#kompetencer" class="hover:text-coopRed transition-colors py-2">Kompetencer</a>
-                <a href="#kontakt" class="hover:text-coopRed transition-colors py-2">Kontakt</a>
+            <!-- Desktop Menu links -->
+            <nav class="hidden md:flex space-x-6 lg:space-x-8 font-semibold text-sm tracking-wide text-coopMedium">
+                <a href="#ansøgning" class="hover:text-coopRed transition-colors py-2 border-b-2 border-transparent hover:border-coopRed">ANSØGNING</a>
+                <a href="#resultater" class="hover:text-coopRed transition-colors py-2 border-b-2 border-transparent hover:border-coopRed">RESULTATER</a>
+                <a href="#erfaring" class="hover:text-coopRed transition-colors py-2 border-b-2 border-transparent hover:border-coopRed">ERFARING</a>
+                <a href="#kompetencer" class="hover:text-coopRed transition-colors py-2 border-b-2 border-transparent hover:border-coopRed">KOMPETENCER</a>
+                <a href="#kontakt" class="hover:text-coopRed transition-colors py-2 border-b-2 border-transparent hover:border-coopRed">KONTAKT</a>
             </nav>
 
-            <button id="menu-btn" class="md:hidden text-coopDark text-2xl focus:outline-none">
-                <i class="fa-solid fa-bars"></i>
+            <!-- CTA Header Button -->
+            <div class="hidden md:block">
+                <a href="#kontakt" class="bg-coopRed hover:bg-coopRedDark text-white text-xs font-bold uppercase tracking-wider px-5 py-3 rounded-lg shadow-sm transition-all duration-200 hover:-translate-y-0.5">
+                    Book Kaffemøde
+                </a>
+            </div>
+
+            <!-- Hamburger Button for Mobile -->
+            <button id="menu-btn" class="md:hidden text-coopDark p-2 focus:outline-none transition-transform active:scale-90" aria-label="Toggle menu">
+                <i class="fa-solid fa-bars text-2xl"></i>
             </button>
         </div>
 
-        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 px-4 py-4 space-y-3 shadow-lg">
-            <a href="#ansøgning" class="mobile-link block font-medium text-gray-600 hover:text-coopRed py-2">Ansøgning</a>
-            <a href="#resultater" class="mobile-link block font-medium text-gray-600 hover:text-coopRed py-2">Resultater</a>
-            <a href="#erfaring" class="mobile-link block font-medium text-gray-600 hover:text-coopRed py-2">Erfaring</a>
-            <a href="#kompetencer" class="mobile-link block font-medium text-gray-600 hover:text-coopRed py-2">Kompetencer</a>
-            <a href="#kontakt" class="mobile-link block font-medium text-gray-600 hover:text-coopRed py-2">Kontakt</a>
+        <!-- Mobile Navigation Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200 absolute top-20 left-0 w-full px-6 py-6 space-y-4 shadow-xl animate-fade-in">
+            <a href="#ansøgning" class="mobile-link block font-bold text-coopMedium hover:text-coopRed py-1 border-b border-gray-100">Ansøgning</a>
+            <a href="#resultater" class="mobile-link block font-bold text-coopMedium hover:text-coopRed py-1 border-b border-gray-100">Resultater</a>
+            <a href="#erfaring" class="mobile-link block font-bold text-coopMedium hover:text-coopRed py-1 border-b border-gray-100">Erfaring</a>
+            <a href="#kompetencer" class="mobile-link block font-bold text-coopMedium hover:text-coopRed py-1 border-b border-gray-100">Kompetencer</a>
+            <a href="#kontakt" class="mobile-link block font-bold text-coopMedium hover:text-coopRed py-1">Kontakt</a>
+            <a href="#kontakt" class="mobile-link block bg-coopRed hover:bg-coopRedDark text-white text-center font-bold uppercase tracking-wider py-3 rounded-lg mt-4">
+                Book Kaffemøde
+            </a>
         </div>
     </header>
 
-    <section class="relative bg-coopGray py-12 md:py-24 overflow-hidden">
-        <div class="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+    <!-- HERO / INTRO SECTION -->
+    <section class="relative bg-coopGrayLight py-16 md:py-28 overflow-hidden">
+        <!-- Background accents for premium look -->
+        <div class="absolute top-0 right-0 w-96 h-96 bg-coopRed/5 rounded-full blur-3xl -mr-20 -mt-20"></div>
+        <div class="absolute bottom-0 left-0 w-72 h-72 bg-coopMedium/5 rounded-full blur-2xl -ml-20 -mb-20"></div>
+        
+        <div class="max-w-6xl mx-auto px-4 relative z-10 grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
             
-            <div class="md:col-span-7 order-2 md:order-1 text-center md:text-left">
-                <span class="inline-block bg-coopRed text-white text-xs font-bold tracking-wider uppercase px-3 py-1 rounded-full mb-4">
-                    CASE: JOBANSØGNING
-                </span>
-                <h1 class="text-3xl md:text-5xl font-extrabold text-coopDark leading-tight mb-4">
-                    Skal vi opbygge Coop Banks nye <span class="text-coopRed">AI-understøttede</span> marketing setup?
+            <!-- Left text info -->
+            <div class="md:col-span-7 order-2 md:order-1 text-center md:text-left animate-fade-in">
+                <div class="inline-flex items-center space-x-2 bg-coopRed/10 border border-coopRed/20 text-coopRed text-xs font-extrabold tracking-widest uppercase px-4 py-1.5 rounded-full mb-6">
+                    <span class="w-2 h-2 rounded-full bg-coopRed animate-pulse"></span>
+                    <span>Growth Marketing Ansøgning</span>
+                </div>
+                <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-coopDark leading-none mb-6">
+                    Skal vi accelerere <br class="hidden sm:inline">
+                    <span class="text-coopRed">Coop Banks</span> digitale kundetilgang?
                 </h1>
-                <p class="text-lg text-gray-600 mb-8 max-w-xl">
-                    Hej Coop Bank. I leder efter en selvkørende, datadrevet profil, der kan tage fuldt ejerskab over performance og vækst. Med erfaring som bureau-specialist og selvstændig er jeg klar til at levere målbare resultater fra dag ét.
+                <p class="text-md sm:text-lg text-coopTextMuted mb-8 max-w-2xl leading-relaxed">
+                    I søger en skarp, selvkørende digital profil, der trives med performance, data, AI og eksperimenterende markedsføring. Med en solid baggrund fra bureauverdenen og som selvstændig, overtager jeg det fulde ejerskab over jeres marketingkanaler fra dag ét.
                 </p>
                 <div class="flex flex-col sm:flex-row justify-center md:justify-start gap-4">
-                    <a href="#ansøgning" class="bg-coopRed hover:bg-coopRedDark text-white font-semibold px-8 py-4 rounded-lg shadow-md transition-colors text-center">
-                        Læs ansøgningen
+                    <a href="#ansøgning" class="bg-coopRed hover:bg-coopRedDark text-white font-bold text-sm uppercase tracking-wider px-8 py-4 rounded-xl shadow-md transition-all duration-200 hover:-translate-y-1 hover:shadow-lg text-center">
+                        Læs ansøgningen <i class="fa-solid fa-arrow-right ml-2 text-xs"></i>
                     </a>
-                    <a href="#kontakt" class="bg-white border-2 border-gray-300 hover:border-coopDark text-coopDark font-semibold px-8 py-4 rounded-lg transition-colors text-center">
+                    <a href="#kontakt" class="bg-white border-2 border-gray-300 hover:border-coopRed text-coopDark font-bold text-sm uppercase tracking-wider px-8 py-4 rounded-xl transition-all duration-200 hover:-translate-y-1 text-center">
                         Kontakt mig
                     </a>
                 </div>
             </div>
 
-            <div class="md:col-span-5 order-1 md:order-2 flex justify-center">
-                <div class="relative w-64 h-64 md:w-80 md:w-80 rounded-full border-4 border-white shadow-xl overflow-hidden bg-white">
-                    <img src="https://media.licdn.com/dms/image/v2/D4E03AQE9VsvGZ8hitw/profile-displayphoto-scale_400_400/B4EZ1sdGyJIsAg-/0/1775641064298?e=1781136000&v=beta&t=Qie0wkTgOTIYnWBP9UWjqzt8ipo7YjxbiUbcQXNl7f8" alt="Mikkel E. Frost" class="w-full h-full object-cover">
+            <!-- Right Profile Image Card -->
+            <div class="md:col-span-5 order-1 md:order-2 flex justify-center animate-fade-in">
+                <div class="relative">
+                    <div class="absolute -inset-1 rounded-3xl bg-gradient-to-tr from-coopRed to-coopMedium opacity-30 blur-lg animate-pulse"></div>
+                    <div class="relative bg-white p-4 rounded-3xl shadow-2xl border border-gray-100 max-w-xs sm:max-w-sm">
+                        <div class="w-64 h-64 sm:w-72 sm:h-72 rounded-2xl overflow-hidden bg-coopGrayLight mb-4 relative group">
+                            <img src="https://media.licdn.com/dms/image/v2/D4E03AQE9VsvGZ8hitw/profile-displayphoto-scale_400_400/B4EZ1sdGyJIsAg-/0/1775641064298?e=1781136000&v=beta&t=Qie0wkTgOTIYnWBP9UWjqzt8ipo7YjxbiUbcQXNl7f8" alt="Mikkel E. Frost" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                            <div class="absolute bottom-3 left-3 bg-coopDark/80 backdrop-blur-md text-white text-[10px] font-black tracking-widest uppercase px-3 py-1 rounded-md">
+                                MIKKEL E. FROST
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between px-1">
+                            <div>
+                                <h3 class="font-extrabold text-coopDark text-base">Growth Specialist</h3>
+                                <p class="text-xs text-coopTextMuted">27 år · Vanløse</p>
+                            </div>
+                            <span class="bg-emerald-100 text-emerald-800 text-[10px] font-extrabold px-2.5 py-1 rounded-full uppercase tracking-wider">
+                                Aktiv jobsøgende
+                            </span>
+                        </div>
+                    </div>
                 </div>
             </div>
 
         </div>
     </section>
 
-    <section id="resultater" class="py-16 bg-coopDark text-white">
-        <div class="max-w-6xl mx-auto px-4">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold tracking-tight">Hvert projekt. Konkrete tal.</h2>
-                <p class="text-gray-400 mt-2">Ikke estimater eller potentiale – men dokumenterede resultater fra reelle cases.</p>
+    <!-- RESULTS / STATS GRID SECTION (DANSKE SPIL INSPIRERET) -->
+    <section id="resultater" class="py-20 bg-coopDark text-white relative">
+        <div class="absolute inset-0 bg-[radial-gradient(#b71a21_1px,transparent_1px)] [background-size:16px_16px] opacity-10"></div>
+        <div class="max-w-6xl mx-auto px-4 relative z-10">
+            
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-coopRed text-xs font-extrabold uppercase tracking-widest">DOKUMENTEREDE RESULTATER</span>
+                <h2 class="text-3xl md:text-4xl font-black mt-2">Tal, der taler for sig selv</h2>
+                <p class="text-gray-400 mt-3 text-sm sm:text-base">Ikke varm luft. Ikke mavefornemmelser. Her er de faktiske effekter fra mine tidligere performance marketing- og CRO-kampagner.</p>
             </div>
             
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="bg-[#262626] p-6 rounded-xl border border-gray-800 text-center">
-                    <div class="text-coopRed text-3xl mb-2"><i class="fa-solid fa-wallet"></i></div>
-                    <div class="text-4xl font-extrabold mb-1">500k</div>
-                    <div class="text-sm font-semibold tracking-wide uppercase text-gray-400 mb-2">DKK / MÅNED</div>
-                    <p class="text-xs text-gray-400">Annoncebudgetter administreret på tværs af Meta, Google Ads, LinkedIn, TikTok og Bing.</p>
+                
+                <!-- Stat Card 1 -->
+                <div class="bg-coopMedium p-8 rounded-2xl border border-gray-800/80 hover:border-coopRed/50 transition-all duration-300 flex flex-col justify-between group">
+                    <div>
+                        <div class="flex items-center justify-between mb-6">
+                            <span class="text-xs font-extrabold tracking-widest text-coopRed uppercase">ADENTIFY APS</span>
+                            <div class="w-8 h-8 rounded-lg bg-coopRed/10 text-coopRed flex items-center justify-center text-sm">
+                                <i class="fa-solid fa-chart-line"></i>
+                            </div>
+                        </div>
+                        <div class="text-5xl font-black text-white tracking-tight mb-2 group-hover:scale-105 transition-transform origin-left">500k</div>
+                        <div class="text-xs font-bold tracking-wider uppercase text-gray-400 mb-4">DKK / MÅNED I ANNONCEBUDGET</div>
+                        <p class="text-xs text-gray-400 leading-relaxed">
+                            Operationelt ansvar for omnichannel annoncering og kontinuerlig skalering på tværs af Meta, Google Ads, TikTok og LinkedIn.
+                        </p>
+                    </div>
+                    <div class="border-t border-gray-800/80 mt-6 pt-4 text-[11px] font-semibold text-gray-400">
+                        Fokus: Bundlinjevækst & Omnichannel Performance
+                    </div>
                 </div>
-                <div class="bg-[#262626] p-6 rounded-xl border border-gray-800 text-center">
-                    <div class="text-coopRed text-3xl mb-2"><i class="fa-solid fa-chart-line"></i></div>
-                    <div class="text-4xl font-extrabold mb-1">5X</div>
-                    <div class="text-sm font-semibold tracking-wide uppercase text-gray-400 mb-2">OMSÆTNINGSVÆKST</div>
-                    <p class="text-xs text-gray-400">Skalering af e-commerce-virksomheden AYAVA fra 190.000 kr. til 1.000.000 kr. pr. måned.</p>
+
+                <!-- Stat Card 2 -->
+                <div class="bg-coopMedium p-8 rounded-2xl border border-gray-800/80 hover:border-coopRed/50 transition-all duration-300 flex flex-col justify-between group">
+                    <div>
+                        <div class="flex items-center justify-between mb-6">
+                            <span class="text-xs font-extrabold tracking-widest text-coopRed uppercase">AYAVA CASE</span>
+                            <div class="w-8 h-8 rounded-lg bg-coopRed/10 text-coopRed flex items-center justify-center text-sm">
+                                <i class="fa-solid fa-arrow-up-right-dots"></i>
+                            </div>
+                        </div>
+                        <div class="text-5xl font-black text-white tracking-tight mb-2 group-hover:scale-105 transition-transform origin-left">5X</div>
+                        <div class="text-xs font-bold tracking-wider uppercase text-gray-400 mb-4">OMSÆTNINGS-SKALERING</div>
+                        <p class="text-xs text-gray-400 leading-relaxed">
+                            Eksekverede en komplet digital performance-strategi, der løftede virksomhedens månedlige omsætning fra 190.000 kr. til 1.000.000 kr. på under 2 måneder.
+                        </p>
+                    </div>
+                    <div class="border-t border-gray-800/80 mt-6 pt-4 text-[11px] font-semibold text-gray-400">
+                        Fokus: Paid SoMe, PPC & Skalerbar Arkitektur
+                    </div>
                 </div>
-                <div class="bg-[#262626] p-6 rounded-xl border border-gray-800 text-center">
-                    <div class="text-coopRed text-3xl mb-2"><i class="fa-solid fa-arrow-pointer"></i></div>
-                    <div class="text-4xl font-extrabold mb-1">5.5%</div>
-                    <div class="text-sm font-semibold tracking-wide uppercase text-gray-400 mb-2">KONVERTERINGSRATE</div>
-                    <p class="text-xs text-gray-400">Løftet konverteringsrate hos BY MINELLA ApS fra 2% via systematisk CRO og UX-optimering.</p>
+
+                <!-- Stat Card 3 -->
+                <div class="bg-coopMedium p-8 rounded-2xl border border-gray-800/80 hover:border-coopRed/50 transition-all duration-300 flex flex-col justify-between group">
+                    <div>
+                        <div class="flex items-center justify-between mb-6">
+                            <span class="text-xs font-extrabold tracking-widest text-coopRed uppercase">BY MINELLA ApS</span>
+                            <div class="w-8 h-8 rounded-lg bg-coopRed/10 text-coopRed flex items-center justify-center text-sm">
+                                <i class="fa-solid fa-percent"></i>
+                            </div>
+                        </div>
+                        <div class="text-5xl font-black text-white tracking-tight mb-2 group-hover:scale-105 transition-transform origin-left">5,5%</div>
+                        <div class="text-xs font-bold tracking-wider uppercase text-gray-400 mb-4">KONVERTERINGSRATE (CRO)</div>
+                        <p class="text-xs text-gray-400 leading-relaxed">
+                            Øgede konverteringsraten med over 150% (fra 2% til 5,5%) gennem optimeret UX-design, forbedrede loadtider samt grundig adfærdsanalyse.
+                        </p>
+                    </div>
+                    <div class="border-t border-gray-800/80 mt-6 pt-4 text-[11px] font-semibold text-gray-400">
+                        Fokus: Brugerrejse & Teknisk Hastigheds-Optimering
+                    </div>
                 </div>
-                <div class="bg-[#262626] p-6 rounded-xl border border-gray-800 text-center">
-                    <div class="text-coopRed text-3xl mb-2"><i class="fa-solid fa-bolt"></i></div>
-                    <div class="text-4xl font-extrabold mb-1">40%</div>
-                    <div class="text-sm font-semibold tracking-wide uppercase text-gray-400 mb-2">LUKKERATE</div>
-                    <p class="text-xs text-gray-400">Firdobling af lukkeraten hos Holms Maler Entreprise via intelligente, AI-drevne CRM-flows.</p>
+
+                <!-- Stat Card 4 -->
+                <div class="bg-coopMedium p-8 rounded-2xl border border-gray-800/80 hover:border-coopRed/50 transition-all duration-300 flex flex-col justify-between group">
+                    <div>
+                        <div class="flex items-center justify-between mb-6">
+                            <span class="text-xs font-extrabold tracking-widest text-coopRed uppercase">HOLMS MALER ENTREPRISE</span>
+                            <div class="w-8 h-8 rounded-lg bg-coopRed/10 text-coopRed flex items-center justify-center text-sm">
+                                <i class="fa-solid fa-robot"></i>
+                            </div>
+                        </div>
+                        <div class="text-5xl font-black text-white tracking-tight mb-2 group-hover:scale-105 transition-transform origin-left">40%</div>
+                        <div class="text-xs font-bold tracking-wider uppercase text-gray-400 mb-4">LUKKERATE PÅ LEADS</div>
+                        <p class="text-xs text-gray-400 leading-relaxed">
+                            Firdoblede virksomhedens lukkerate fra 10% til 40% udelukkende via intelligente, AI-drevne e-mail- og SMS-automationsflows til tilbudsgivning.
+                        </p>
+                    </div>
+                    <div class="border-t border-gray-800/80 mt-6 pt-4 text-[11px] font-semibold text-gray-400">
+                        Fokus: AI Integration & Lead Nurturing
+                    </div>
                 </div>
-                <div class="bg-[#262626] p-6 rounded-xl border border-gray-800 text-center">
-                    <div class="text-coopRed text-3xl mb-2"><i class="fa-solid fa-tags"></i></div>
-                    <div class="text-4xl font-extrabold mb-1">90 kr.</div>
-                    <div class="text-sm font-semibold tracking-wide uppercase text-gray-400 mb-2">MINIMERET CPA</div>
-                    <p class="text-xs text-gray-400">Sænkede den gennemsnitlige anskaffelsespris markant fra 334 kr. udelukkende via præcis segmentering.</p>
+
+                <!-- Stat Card 5 -->
+                <div class="bg-coopMedium p-8 rounded-2xl border border-gray-800/80 hover:border-coopRed/50 transition-all duration-300 flex flex-col justify-between group">
+                    <div>
+                        <div class="flex items-center justify-between mb-6">
+                            <span class="text-xs font-extrabold tracking-widest text-coopRed uppercase">COST PER ACQUISITION</span>
+                            <div class="w-8 h-8 rounded-lg bg-coopRed/10 text-coopRed flex items-center justify-center text-sm">
+                                <i class="fa-solid fa-tags"></i>
+                            </div>
+                        </div>
+                        <div class="text-5xl font-black text-white tracking-tight mb-2 group-hover:scale-105 transition-transform origin-left">90 kr</div>
+                        <div class="text-xs font-bold tracking-wider uppercase text-gray-400 mb-4">MINIMERET ANKØBSPRIS (CPA)</div>
+                        <p class="text-xs text-gray-400 leading-relaxed">
+                            Sænkede den gennemsnitlige lead-anskaffelsespris markant fra 334 kr. til blot 90 kr. via ultra-skarp målgruppesegmentering på Meta Ads.
+                        </p>
+                    </div>
+                    <div class="border-t border-gray-800/80 mt-6 pt-4 text-[11px] font-semibold text-gray-400">
+                        Fokus: Audience Tuning & Budgetfordeling
+                    </div>
                 </div>
-                <div class="bg-[#262626] p-6 rounded-xl border border-gray-800 text-center">
-                    <div class="text-coopRed text-3xl mb-2"><i class="fa-solid fa-arrow-up-right-dots"></i></div>
-                    <div class="text-4xl font-extrabold mb-1">+175%</div>
-                    <div class="text-sm font-semibold tracking-wide uppercase text-gray-400 mb-2">CVR-FORBEDRING</div>
-                    <p class="text-xs text-gray-400">Dokumenteret vækst gennem avanceret personalisering og løbende A/B-testning af funnels.</p>
+
+                <!-- Stat Card 6 -->
+                <div class="bg-coopMedium p-8 rounded-2xl border border-gray-800/80 hover:border-coopRed/50 transition-all duration-300 flex flex-col justify-between group">
+                    <div>
+                        <div class="flex items-center justify-between mb-6">
+                            <span class="text-xs font-extrabold tracking-widest text-coopRed uppercase">E-COMMERCE SKALERING</span>
+                            <div class="w-8 h-8 rounded-lg bg-coopRed/10 text-coopRed flex items-center justify-center text-sm">
+                                <i class="fa-solid fa-store"></i>
+                            </div>
+                        </div>
+                        <div class="text-5xl font-black text-white tracking-tight mb-2 group-hover:scale-105 transition-transform origin-left">Mio+</div>
+                        <div class="text-xs font-bold tracking-wider uppercase text-gray-400 mb-4">I MILIONOMSÆTNING PÅ UNDER 2,5 ÅR</div>
+                        <p class="text-xs text-gray-400 leading-relaxed">
+                            Spillede en afgørende rolle i opbygningen af webshoppen Nuttet Baby fra bunden af, med fuldt ansvar for hele e-commerce paletten og indkøb.
+                        </p>
+                    </div>
+                    <div class="border-t border-gray-800/80 mt-6 pt-4 text-[11px] font-semibold text-gray-400">
+                        Fokus: E-commerce Driftsoptimering & Feed-management
+                    </div>
                 </div>
+
             </div>
         </div>
     </section>
 
+    <!-- MOTIVATED APPLICATION (ANSØGNING) -->
     <section id="ansøgning" class="py-20 bg-white">
         <div class="max-w-4xl mx-auto px-4">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-coopDark">Motiveret Ansøgning</h2>
-                <div class="w-16 h-1 bg-coopRed mx-auto mt-3"></div>
-            </div>
             
-            <div class="prose prose-lg text-gray-700 space-y-6 leading-relaxed">
-                <p class="font-semibold text-lg text-coopDark">Hej Coop Bank,</p>
+            <div class="text-center mb-16">
+                <span class="text-coopRed text-xs font-extrabold uppercase tracking-widest">MOTIVERET ANSØGNING</span>
+                <h2 class="text-3xl md:text-4xl font-black text-coopDark mt-2">Klar til at tage fuldt ejerskab</h2>
+                <div class="w-16 h-1 bg-coopRed mx-auto mt-4"></div>
+            </div>
+
+            <!-- Crisp Prose Styling for easy reading -->
+            <div class="bg-coopGrayLight p-8 sm:p-12 rounded-3xl border border-gray-200/60 shadow-sm text-coopText leading-relaxed space-y-6">
+                
+                <p class="font-bold text-lg text-coopDark">Kære Coop Bank,</p>
                 
                 <p>
                     I søger en selvkørende <strong>Growth Marketing Specialist</strong>, der kan tage det fulde ejerskab over jeres digitale kundetilgang og opbygge et moderne, tech- og AI-understøttet marketing setup. Med en baggrund som både bureau-specialist og selvstændig er jeg vant til at balancere overordnet strategi med benhård, operationel eksekvering. Jeg motiveres direkte af jeres ambition om at teste, optimere og tænke smartere, frem for blot at gøre som alle andre.
                 </p>
 
-                <h3 class="text-xl font-bold text-coopDark pt-4">Hvorfor min profil passer direkte ind i jeres setup:</h3>
-                
-                <ul class="list-disc pl-5 space-y-2">
-                    <li><strong>Omnichannel Performance Marketing & Budgetansvar:</strong> I min rolle hos Adentify ApS administrerer jeg annoncebudgetter på ca. 500.000 kr. om måneden. Jeg sikrer stabil, skalerbar vækst på tværs af Meta, Google Ads og LinkedIn, hvor fokus altid er at reducere CPL og øge ROAS via dybdegående dataanalyse.</li>
-                    <li><strong>AI & Automation som standardværktøj:</strong> I efterspørger nysgerrighed på AI-baserede optimeringsværktøjer. Det er en fuldt integreret del af min værktøjskasse. Jeg har designet AI-first CRM-arkitekturer og operationaliseret AI-drevne e-mail/SMS-flows, hvilket bl.a. firdoblede lukkeraten hos en af mine faste partnere.</li>
-                    <li><strong>Konverteringsoptimering (CRO) end-to-end:</strong> Jeg stopper ikke ved klikket. Jeg arbejder systematisk med brugeradfærd (UX/UI) via Hotjar, Google Tag Manager og A/B-testning for at maksimere vækstbunden og sikre, at den indhentede trafik reelt konverterer.</li>
-                </ul>
-
-                <h3 class="text-xl font-bold text-coopDark pt-4">Klar til en digital hverdag i højt tempo</h3>
-                <p>
-                    Jeg er uddannet Markedsføringsøkonom og afsluttede mit hovedprojekt med topkarakteren 12. Jeg trives med stor synlighed i organisationen, og jeg er klar til at styre jeres marketingkalender, udtænke kampagner og udrulle det tech-understøttede marketing setup, som rykker Coop Bank foran konkurrenterne.
-                </p>
-                <p>
-                    Lad os tage en snak om, hvordan mine erfaringer med performance marketing og AI-integration kan skabe reelle kommercielle resultater hos jer.
-                </p>
-                
-                <div class="pt-6">
-                    <p class="font-medium text-coopDark">Med venlig hilsen,</p>
-                    <p class="font-bold text-coopRed text-xl">Mikkel E. Frost</p>
+                <div class="border-l-4 border-coopRed pl-5 my-8 py-1 bg-white rounded-r-lg">
+                    <h3 class="font-extrabold text-coopDark text-base uppercase tracking-wider mb-2">Tre værdier jeg bringer direkte i spil hos jer:</h3>
+                    <ul class="space-y-3 text-sm">
+                        <li>
+                            <strong class="text-coopRed">1. Omnichannel Performance Marketing & Budgetansvar:</strong> I min rolle hos Adentify ApS administrerer jeg samlede annoncebudgetter på ca. 500.000 kr. om måneden. Jeg mestrer hele kunderejsen og skalerer kampagner datadrevet på tværs af Meta, Google Ads og LinkedIn for at sikre lavere CPL og øget ROAS.
+                        </li>
+                        <li>
+                            <strong class="text-coopRed">2. AI-Drevne CRM-Flows & Automatisering:</strong> Nysgerrighed på AI er en integreret del af min værkstøjskasse. Jeg har designet AI-first CRM-arkitekturer og operationaliseret AI-drevne e-mail/SMS-flows, hvilket bl.a. firdoblede lukkeraten hos en af mine partnere.
+                        </li>
+                        <li>
+                            <strong class="text-coopRed">3. Konverteringsoptimering (CRO) & Skalering:</strong> Jeg stopper ikke ved klikket. Jeg arbejder systematisk med brugeradfærd (UX/UI) via Hotjar, Google Tag Manager og A/B-testning for at optimere landingssider og maksimere ROI.
+                        </li>
+                    </ul>
                 </div>
+
+                <p>
+                    Jeg er uddannet Markedsføringsøkonom og afsluttede mit hovedprojekt med topkarakteren 12. Jeg trives i en hverdag med højt tempo, stor synlighed og klar måling på KPI'er. Jeg er klar til at overtage jeres marketingkalender, styre jeres affiliate- og performanceindsats og sikre, at Coop Banks kundetilgang hele tiden bliver bedre.
+                </p>
+
+                <p class="font-medium">
+                    Lad os tage en snak om, hvordan jeg kan skalere jeres digitale performance.
+                </p>
+
+                <div class="pt-6 border-t border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <div>
+                        <p class="text-xs text-coopTextMuted">MED VENLIG HILSEN</p>
+                        <p class="font-black text-xl text-coopDark">Mikkel E. Frost</p>
+                    </div>
+                    <a href="mailto:mikkelemilfrost@gmail.com" class="bg-coopRed hover:bg-coopRedDark text-white font-bold text-xs uppercase tracking-wider px-6 py-3.5 rounded-xl transition-all">
+                        <i class="fa-solid fa-paper-plane mr-2"></i> Send direkte mail
+                    </a>
+                </div>
+
             </div>
         </div>
     </section>
 
-    <section id="erfaring" class="py-20 bg-coopGray">
+    <!-- PROFESSIONAL TIMELINE (ERFARING) -->
+    <section id="erfaring" class="py-20 bg-coopGrayLight">
         <div class="max-w-4xl mx-auto px-4">
+            
             <div class="text-center mb-16">
-                <h2 class="text-3xl font-bold text-coopDark">Erhvervserfaring</h2>
-                <div class="w-16 h-1 bg-coopRed mx-auto mt-3"></div>
+                <span class="text-coopRed text-xs font-extrabold uppercase tracking-widest">MIN REJSE</span>
+                <h2 class="text-3xl md:text-4xl font-black text-coopDark mt-2">Erhvervserfaring</h2>
+                <div class="w-16 h-1 bg-coopRed mx-auto mt-4"></div>
             </div>
 
+            <!-- Timeline wrapper -->
             <div class="relative border-l-2 border-gray-300 ml-4 md:ml-6 space-y-12">
-                <div class="relative pl-8">
-                    <div class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-coopRed border-4 border-white"></div>
-                    <span class="text-xs font-bold text-coopRed tracking-wider uppercase">MAJ 2025 – NU</span>
-                    <h3 class="text-xl font-bold text-coopDark mt-1">Marketingspecialist</h3>
-                    <h4 class="text-md font-medium text-gray-600">Adentify ApS</h4>
-                    <p class="text-gray-600 mt-2 text-sm leading-relaxed">
-                        Strategisk og operationel partner for en bred portefølje af B2B- og B2C-kunder. Forvalter samlede annoncebudgetter på ca. 500.000 kr./md. med skarpt fokus på omnichannel performance marketing (Meta, Google, Bing, TikTok, LinkedIn) samt løbende funnels- og konverteringsoptimering (CRO).
+                
+                <!-- Position 1 -->
+                <div class="relative pl-8 md:pl-10 group">
+                    <div class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-coopRed border-4 border-white group-hover:bg-coopRedDark transition-colors"></div>
+                    <span class="inline-block bg-coopRed/10 text-coopRed text-[10px] font-extrabold uppercase tracking-widest px-3 py-1 rounded-md mb-2">
+                        MAJ 2025 – I DAG
+                    </span>
+                    <h3 class="text-xl font-extrabold text-coopDark">Marketingspecialist</h3>
+                    <h4 class="text-sm font-semibold text-coopRed uppercase tracking-wide">Adentify ApS, Brøndby (Marketing Bureau)</h4>
+                    <p class="text-sm text-coopTextMuted mt-3 leading-relaxed">
+                        Fungerer som fast strategisk og operationel partner for en bred portefølje af B2B- og B2C-kunder. Administrerer samlede månedlige annoncebudgetter på ca. 500.000 kr. 
                     </p>
+                    <div class="flex flex-wrap gap-2 mt-3">
+                        <span class="bg-white border border-gray-200 text-coopDark text-[10px] font-bold px-2.5 py-1 rounded-md">Omnichannel Performance</span>
+                        <span class="bg-white border border-gray-200 text-coopDark text-[10px] font-bold px-2.5 py-1 rounded-md">Meta, Google & LinkedIn Ads</span>
+                        <span class="bg-white border border-gray-200 text-coopDark text-[10px] font-bold px-2.5 py-1 rounded-md">CRO</span>
+                    </div>
                 </div>
 
-                <div class="relative pl-8">
-                    <div class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-gray-400 border-4 border-white"></div>
-                    <span class="text-xs font-bold text-gray-500 tracking-wider uppercase">DECEMBER 2022 – MAJ 2025</span>
-                    <h3 class="text-xl font-bold text-coopDark mt-1">Selvstændig Marketing Specialist</h3>
-                    <h4 class="text-md font-medium text-gray-600">Online Marketing Nu</h4>
-                    <p class="text-gray-600 mt-2 text-sm leading-relaxed">
-                        Drevet fuldt ejerskab over PPC, Paid SoMe, SEO og webudvikling for en række udvalgte vækstcases:
+                <!-- Position 2 -->
+                <div class="relative pl-8 md:pl-10 group">
+                    <div class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-coopMedium border-4 border-white group-hover:bg-coopRed transition-colors"></div>
+                    <span class="inline-block bg-coopMedium/10 text-coopDark text-[10px] font-extrabold uppercase tracking-widest px-3 py-1 rounded-md mb-2">
+                        DECEMBER 2022 – MAJ 2025
+                    </span>
+                    <h3 class="text-xl font-extrabold text-coopDark">Selvstændig Marketing Specialist</h3>
+                    <h4 class="text-sm font-semibold text-coopRed uppercase tracking-wide">Online Marketing Nu, Hvidovre</h4>
+                    <p class="text-sm text-coopTextMuted mt-3 leading-relaxed">
+                        Konsulentbistand for ambitiøse brands og tech-startups. Udvalgte partnerskaber inkluderer:
                     </p>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-3 text-xs bg-white p-4 rounded-lg shadow-sm border border-gray-100">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4 bg-white p-5 rounded-2xl border border-gray-200/60 shadow-sm">
                         <div>
-                            <strong class="text-coopDark">3Match (Brand Manager):</strong>
-                            <p class="text-gray-500 mt-0.5">Ansvarlig for multi-kanal kunderejser, leadgenerering via Google/Meta samt design af AI-first CRM-arkitekturer.</p>
+                            <span class="text-[10px] font-bold text-coopRed">3MATCH (JAN 2024 – MAJ 2025)</span>
+                            <h5 class="font-bold text-xs text-coopDark mt-0.5">Brand Manager</h5>
+                            <p class="text-xs text-coopTextMuted mt-1">Stod for fuld leadgenerering og udvikling af AI-CRM arkitekturer for sammenligningstjenesten.</p>
                         </div>
                         <div>
-                            <strong class="text-coopDark">BY MINELLA ApS:</strong>
-                            <p class="text-gray-500 mt-0.5">Udviklede ny hjemmeside og øgede konverteringsraten med over 150% (fra 2% til 5,5%) via datadrevet UX-design.</p>
+                            <span class="text-[10px] font-bold text-coopRed">BY MINELLA APS (JUN 2023 – MAJ 2025)</span>
+                            <h5 class="font-bold text-xs text-coopDark mt-0.5">Marketingkonsulent</h5>
+                            <p class="text-xs text-coopTextMuted mt-1">Udvikling af optimeret platform, der firdoblede konverteringsraten til 5,5% gennem fokuseret UX.</p>
                         </div>
                         <div>
-                            <strong class="text-coopDark">Nuttet Baby:</strong>
-                            <p class="text-gray-500 mt-0.5">Opbyggede webshoppen helt fra bunden og skalerede den til millionomsætning på under 2,5 år.</p>
+                            <span class="text-[10px] font-bold text-coopRed">NUTTET BABY (DEC 2022 – MAJ 2025)</span>
+                            <h5 class="font-bold text-xs text-coopDark mt-0.5">E-commerce Konsulent</h5>
+                            <p class="text-xs text-coopTextMuted mt-1">Byggede webshoppen fra bunden til en millionomsætning på under 2,5 år med fuldt driftansvar.</p>
                         </div>
                         <div>
-                            <strong class="text-coopDark">Holms Maler Entreprise:</strong>
-                            <p class="text-gray-500 mt-0.5">Automatiserede salgsprocesser med AI-flows, firdoblede lukkeraten (10% til 40%) og sænkede CPA markant.</p>
+                            <span class="text-[10px] font-bold text-coopRed">HOLMS MALER ENTREPRISE (JUN 2023 – DEC 2024)</span>
+                            <h5 class="font-bold text-xs text-coopDark mt-0.5">Automationskonsulent</h5>
+                            <p class="text-xs text-coopTextMuted mt-1">Implementerede AI-drevne e-mail/sms tilbudsløsninger, der firdoblede lukkeraten.</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="relative pl-8">
-                    <div class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-gray-400 border-4 border-white"></div>
-                    <span class="text-xs font-bold text-gray-500 tracking-wider uppercase">2021 – 2023</span>
-                    <h3 class="text-xl font-bold text-coopDark mt-1">Markedsføringsøkonom (AP Degree)</h3>
-                    <h4 class="text-md font-medium text-gray-600">CPH Business Academy</h4>
-                    <p class="text-gray-600 mt-2 text-sm leading-relaxed">
-                        Teoretisk fundament inden for markedskommunikation, forbrugeradfærd og digital strategi. Afsluttede det afsluttende hovedprojekt med karakteren <strong>12</strong>.
+                <!-- Position 3 -->
+                <div class="relative pl-8 md:pl-10 group">
+                    <div class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-gray-400 border-4 border-white group-hover:bg-coopRed transition-colors"></div>
+                    <span class="inline-block bg-gray-400/15 text-gray-600 text-[10px] font-extrabold uppercase tracking-widest px-3 py-1 rounded-md mb-2">
+                        2021 – 2023
+                    </span>
+                    <h3 class="text-xl font-extrabold text-coopDark">Markedsføringsøkonom (AP)</h3>
+                    <h4 class="text-sm font-semibold text-coopRed uppercase tracking-wide">Copenhagen Business Academy (Roskilde & København)</h4>
+                    <p class="text-sm text-coopTextMuted mt-3 leading-relaxed">
+                        Første år i Roskilde. Det sidste år på Copenhagen Business Academy i København. Afsluttede afgangsprojekt med karakteren <strong>12</strong>.
                     </p>
                 </div>
+
             </div>
         </div>
     </section>
 
+    <!-- SKILLS GRID (KOMPETENCER) -->
     <section id="kompetencer" class="py-20 bg-white">
         <div class="max-w-6xl mx-auto px-4">
+            
             <div class="text-center mb-16">
-                <h2 class="text-3xl font-bold text-coopDark">Kompetencer & Værktøjer</h2>
-                <div class="w-16 h-1 bg-coopRed mx-auto mt-3"></div>
+                <span class="text-coopRed text-xs font-extrabold uppercase tracking-widest">MIN VÆRKTØJSKASSE</span>
+                <h2 class="text-3xl md:text-4xl font-black text-coopDark mt-2">Kompetencer & Værktøjer</h2>
+                <div class="w-16 h-1 bg-coopRed mx-auto mt-4"></div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                <div class="p-6 bg-coopGray rounded-xl border border-gray-100">
-                    <div class="w-10 h-10 bg-coopRed text-white flex items-center justify-center rounded-lg mb-4 text-lg">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                
+                <!-- Skill 1 -->
+                <div class="bg-coopGrayLight p-6 rounded-2xl border border-gray-200/60 shadow-sm hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 rounded-xl bg-coopRed text-white flex items-center justify-center text-lg mb-6">
                         <i class="fa-solid fa-rectangle-ad"></i>
                     </div>
-                    <h3 class="text-lg font-bold text-coopDark mb-3">Performance Marketing</h3>
-                    <ul class="text-sm text-gray-600 space-y-2">
-                        <li><i class="fa-solid fa-check text-coopRed mr-2"></i>Meta Ads Manager</li>
-                        <li><i class="fa-solid fa-check text-coopRed mr-2"></i>Google Ads (Search/OLV)</li>
-                        <li><i class="fa-solid fa-check text-coopRed mr-2"></i>LinkedIn Campaign Mgr</li>
-                        <li><i class="fa-solid fa-check text-coopRed mr-2"></i>TikTok Ads Manager</li>
-                        <li><i class="fa-solid fa-check text-coopRed mr-2"></i>Affiliate-strukturer & 10</li>
+                    <h3 class="font-black text-coopDark text-base mb-4">Performance Marketing</h3>
+                    <ul class="text-sm text-coopTextMuted space-y-2.5">
+                        <li class="flex items-center"><i class="fa-solid fa-check text-coopRed mr-2.5 text-xs"></i> Meta Ads Manager</li>
+                        <li class="flex items-center"><i class="fa-solid fa-check text-coopRed mr-2.5 text-xs"></i> Google Ads (Search/YouTube)</li>
+                        <li class="flex items-center"><i class="fa-solid fa-check text-coopRed mr-2.5 text-xs"></i> TikTok Ads Manager</li>
+                        <li class="flex items-center"><i class="fa-solid fa-check text-coopRed mr-2.5 text-xs"></i> LinkedIn Campaign Mgr</li>
+                        <li class="flex items-center"><i class="fa-solid fa-check text-coopRed mr-2.5 text-xs"></i> Affiliate & 10-aftaler</li>
                     </ul>
                 </div>
 
-                <div class="p-6 bg-coopGray rounded-xl border border-gray-100">
-                    <div class="w-10 h-10 bg-coopRed text-white flex items-center justify-center rounded-lg mb-4 text-lg">
+                <!-- Skill 2 -->
+                <div class="bg-coopGrayLight p-6 rounded-2xl border border-gray-200/60 shadow-sm hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 rounded-xl bg-coopRed text-white flex items-center justify-center text-lg mb-6">
                         <i class="fa-solid fa-robot"></i>
                     </div>
-                    <h3 class="text-lg font-bold text-coopDark mb-3">AI & Automation</h3>
-                    <ul class="text-sm text-gray-600 space-y-2">
-                        <li><i class="fa-solid fa-check text-coopRed mr-2"></i>AI-drevne CRM-flows</li>
-                        <li><i class="fa-solid fa-check text-coopRed mr-2"></i>Zapier Automations</li>
-                        <li><i class="fa-solid fa-check text-coopRed mr-2"></i>Prompt Engineering</li>
-                        <li><i class="fa-solid fa-check text-coopRed mr-2"></i>ChatGPT / Claude API</li>
-                        <li><i class="fa-solid fa-check text-coopRed mr-2"></i>Klaviyo & SMS-flows</li>
+                    <h3 class="font-black text-coopDark text-base mb-4">AI & Automation</h3>
+                    <ul class="text-sm text-coopTextMuted space-y-2.5">
+                        <li class="flex items-center"><i class="fa-solid fa-check text-coopRed mr-2.5 text-xs"></i> AI CRM-flows & SMS</li>
+                        <li class="flex items-center"><i class="fa-solid fa-check text-coopRed mr-2.5 text-xs"></i> LLM integration i kampagner</li>
+                        <li class="flex items-center"><i class="fa-solid fa-check text-coopRed mr-2.5 text-xs"></i> Zapier & Make</li>
+                        <li class="flex items-center"><i class="fa-solid fa-check text-coopRed mr-2.5 text-xs"></i> ChatGPT & Prompt Eng.</li>
+                        <li class="flex items-center"><i class="fa-solid fa-check text-coopRed mr-2.5 text-xs"></i> Klaviyo / Mailchimp</li>
                     </ul>
                 </div>
 
-                <div class="p-6 bg-coopGray rounded-xl border border-gray-100">
-                    <div class="w-10 h-10 bg-coopRed text-white flex items-center justify-center rounded-lg mb-4 text-lg">
-                        <i class="fa-solid fa-chart-pie"></i>
+                <!-- Skill 3 -->
+                <div class="bg-coopGrayLight p-6 rounded-2xl border border-gray-200/60 shadow-sm hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 rounded-xl bg-coopRed text-white flex items-center justify-center text-lg mb-6">
+                        <i class="fa-solid fa-magnifying-glass-chart"></i>
                     </div>
-                    <h3 class="text-lg font-bold text-coopDark mb-3">Analytics & Tracking</h3>
-                    <ul class="text-sm text-gray-600 space-y-2">
-                        <li><i class="fa-solid fa-check text-coopRed mr-2"></i>Google Analytics 4 (GA4)</li>
-                        <li><i class="fa-solid fa-check text-coopRed mr-2"></i>Google Tag Manager (GTM)</li>
-                        <li><i class="fa-solid fa-check text-coopRed mr-2"></i>Looker Studio Reporting</li>
-                        <li><i class="fa-solid fa-check text-coopRed mr-2"></i>Attribution Modellering</li>
-                        <li><i class="fa-solid fa-check text-coopRed mr-2"></i>Metorik & Datamodeller</li>
+                    <h3 class="font-black text-coopDark text-base mb-4">Data & Analytics</h3>
+                    <ul class="text-sm text-coopTextMuted space-y-2.5">
+                        <li class="flex items-center"><i class="fa-solid fa-check text-coopRed mr-2.5 text-xs"></i> Google Analytics 4 (GA4)</li>
+                        <li class="flex items-center"><i class="fa-solid fa-check text-coopRed mr-2.5 text-xs"></i> Google Tag Manager (GTM)</li>
+                        <li class="flex items-center"><i class="fa-solid fa-check text-coopRed mr-2.5 text-xs"></i> Looker Studio dashboards</li>
+                        <li class="flex items-center"><i class="fa-solid fa-check text-coopRed mr-2.5 text-xs"></i> Attribution modellering</li>
+                        <li class="flex items-center"><i class="fa-solid fa-check text-coopRed mr-2.5 text-xs"></i> Metorik & Excel</li>
                     </ul>
                 </div>
 
-                <div class="p-6 bg-coopGray rounded-xl border border-gray-100">
-                    <div class="w-10 h-10 bg-coopRed text-white flex items-center justify-center rounded-lg mb-4 text-lg">
+                <!-- Skill 4 -->
+                <div class="bg-coopGrayLight p-6 rounded-2xl border border-gray-200/60 shadow-sm hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 rounded-xl bg-coopRed text-white flex items-center justify-center text-lg mb-6">
                         <i class="fa-solid fa-wand-magic-sparkles"></i>
                     </div>
-                    <h3 class="text-lg font-bold text-coopDark mb-3">CRO & Webudvikling</h3>
-                    <ul class="text-sm text-gray-600 space-y-2">
-                        <li><i class="fa-solid fa-check text-coopRed mr-2"></i>A/B-testning funnels</li>
-                        <li><i class="fa-solid fa-check text-coopRed mr-2"></i>Hotjar Brugeranalyse</li>
-                        <li><i class="fa-solid fa-check text-coopRed mr-2"></i>Landingsside-optimering</li>
-                        <li><i class="fa-solid fa-check text-coopRed mr-2"></i>WordPress / Shopify</li>
-                        <li><i class="fa-solid fa-check text-coopRed mr-2"></i>Teknisk SEO (Ahrefs/SEMrush)</li>
+                    <h3 class="font-black text-coopDark text-base mb-4">Webudvikling & CRO</h3>
+                    <ul class="text-sm text-coopTextMuted space-y-2.5">
+                        <li class="flex items-center"><i class="fa-solid fa-check text-coopRed mr-2.5 text-xs"></i> WordPress & WooCommerce</li>
+                        <li class="flex items-center"><i class="fa-solid fa-check text-coopRed mr-2.5 text-xs"></i> Shopify / Wix</li>
+                        <li class="flex items-center"><i class="fa-solid fa-check text-coopRed mr-2.5 text-xs"></i> Hotjar (Brugeradfærd)</li>
+                        <li class="flex items-center"><i class="fa-solid fa-check text-coopRed mr-2.5 text-xs"></i> A/B-testning & UX design</li>
+                        <li class="flex items-center"><i class="fa-solid fa-check text-coopRed mr-2.5 text-xs"></i> Teknisk SEO</li>
                     </ul>
                 </div>
+
             </div>
         </div>
     </section>
 
-    <section class="py-16 bg-coopGray border-t border-b border-gray-200">
-        <div class="max-w-2xl mx-auto px-4 text-center">
-            <div class="bg-white rounded-2xl shadow-xl p-6 md:p-8 border border-gray-100">
-                <div class="w-12 h-12 bg-coopRed text-white rounded-full flex items-center justify-center mx-auto text-xl shadow-md mb-3">
-                    <i class="fa-solid fa-comment-dots"></i>
-                </div>
-                <h3 class="text-xl font-bold text-coopDark">Spørg Mikkels AI-assistent</h3>
-                <p class="text-sm text-gray-500 mt-1 mb-6">Stil et hurtigt spørgsmål om min baggrund eller egnethed til Coop Bank.</p>
-                
-                <div class="space-y-4 text-left max-h-60 overflow-y-auto mb-4 p-2 bg-gray-50 rounded-lg text-sm" id="chat-box">
-                    <div class="bg-gray-100 text-gray-700 p-3 rounded-lg max-w-[85%]">
-                        Hej! Jeg svarer på vegne af Mikkel. Hvad vil du gerne vide om hans erfaring med vækst, Meta Ads eller AI integration?
-                    </div>
-                </div>
-
-                <div class="flex gap-2">
-                    <input type="text" id="chat-input" placeholder="F.eks. Har du erfaring med Google Ads og bankvirksomhed?" class="flex-1 border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-coopRed">
-                    <button id="chat-send" class="bg-coopRed hover:bg-coopRedDark text-white font-medium px-4 py-2 rounded-lg text-sm transition-colors">Spørg</button>
-                </div>
-            </div>
-        </div>
-    </section>
-
+    <!-- CONTACT SECTION (KONTAKT) -->
     <section id="kontakt" class="py-20 bg-white">
         <div class="max-w-4xl mx-auto px-4 text-center">
-            <h2 class="text-3xl font-bold text-coopDark mb-4">Lad os tage en snak</h2>
-            <p class="text-gray-600 max-w-xl mx-auto mb-12">
-                Er I nysgerrige på, hvordan min performance- og automationserfaring kan omsættes til nye bankkunder? Ræk ud direkte via kanalerne nedenfor.
+            
+            <div class="mb-12">
+                <span class="text-coopRed text-xs font-extrabold uppercase tracking-widest">DRIVE VÆKST SAMMEN</span>
+                <h2 class="text-3xl md:text-4xl font-black text-coopDark mt-2">Lad os tage en snak</h2>
+                <div class="w-16 h-1 bg-coopRed mx-auto mt-4"></div>
+            </div>
+
+            <p class="text-coopTextMuted max-w-xl mx-auto mb-12">
+                Er I klar til en kaffeaftale for at drøfte, hvordan min performance- og automationserfaring kan omsættes til nye, loyale kunder hos Coop Bank?
             </p>
 
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-2xl mx-auto">
-                <a href="tel:+4541826799" class="p-6 bg-coopGray rounded-xl border border-gray-100 hover:shadow-md transition-shadow group">
-                    <div class="text-2xl text-coopRed mb-2 group-hover:scale-110 transition-transform"><i class="fa-solid fa-phone"></i></div>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-3xl mx-auto">
+                
+                <!-- Phone card -->
+                <a href="tel:+4541826799" class="p-6 bg-coopGrayLight rounded-2xl border border-gray-200 hover:border-coopRed/40 hover:shadow-lg transition-all duration-300 group flex flex-col items-center">
+                    <div class="w-12 h-12 rounded-xl bg-coopRed/10 text-coopRed flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-phone"></i>
+                    </div>
                     <div class="font-bold text-coopDark text-sm">Ring direkte</div>
-                    <div class="text-xs text-gray-500 mt-1">(+45) 41 82 67 99</div>
+                    <div class="text-xs text-coopTextMuted mt-1">(+45) 41 82 67 99</div>
                 </a>
-                <a href="mailto:mikkelemilfrost@gmail.com" class="p-6 bg-coopGray rounded-xl border border-gray-100 hover:shadow-md transition-shadow group">
-                    <div class="text-2xl text-coopRed mb-2 group-hover:scale-110 transition-transform"><i class="fa-solid fa-envelope"></i></div>
-                    <div class="font-bold text-coopDark text-sm">Send en e-mail</div>
-                    <div class="text-xs text-gray-500 mt-1">mikkelemilfrost@gmail.com</div>
+
+                <!-- Email card -->
+                <a href="mailto:mikkelemilfrost@gmail.com" class="p-6 bg-coopGrayLight rounded-2xl border border-gray-200 hover:border-coopRed/40 hover:shadow-lg transition-all duration-300 group flex flex-col items-center">
+                    <div class="w-12 h-12 rounded-xl bg-coopRed/10 text-coopRed flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-envelope"></i>
+                    </div>
+                    <div class="font-bold text-coopDark text-sm">Send e-mail</div>
+                    <div class="text-xs text-coopTextMuted mt-1">mikkelemilfrost@gmail.com</div>
                 </a>
-                <a href="https://linkedin.com" target="_blank" class="p-6 bg-coopGray rounded-xl border border-gray-100 hover:shadow-md transition-shadow group">
-                    <div class="text-2xl text-coopRed mb-2 group-hover:scale-110 transition-transform"><i class="fa-brands fa-linkedin"></i></div>
+
+                <!-- LinkedIn card -->
+                <a href="https://www.linkedin.com/in/mikkel-e-frost-311509226/" target="_blank" class="p-6 bg-coopGrayLight rounded-2xl border border-gray-200 hover:border-coopRed/40 hover:shadow-lg transition-all duration-300 group flex flex-col items-center">
+                    <div class="w-12 h-12 rounded-xl bg-coopRed/10 text-coopRed flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fa-brands fa-linkedin"></i>
+                    </div>
                     <div class="font-bold text-coopDark text-sm">LinkedIn</div>
-                    <div class="text-xs text-gray-500 mt-1">Forbind med mig</div>
+                    <div class="text-xs text-coopTextMuted mt-1">Forbind & skriv</div>
                 </a>
+
             </div>
         </div>
     </section>
 
-    <footer class="bg-coopDark text-gray-400 py-8 border-t border-gray-800 text-center text-xs">
-        <div class="max-w-6xl mx-auto px-4 space-y-2">
+    <!-- FOOTER -->
+    <footer class="bg-coopDark text-gray-400 py-10 border-t border-gray-800 text-center text-xs">
+        <div class="max-w-6xl mx-auto px-4 space-y-3">
             <p>&copy; 2026 Mikkel E. Frost. Udviklet specifikt til ansøgningsprocessen hos Coop Bank A/S.</p>
-            <p class="text-gray-600">100% digital & 100% menneskelig.</p>
+            <p class="text-gray-500 font-bold uppercase tracking-widest text-[10px]">
+                <a href="https://www.linkedin.com/in/mikkel-e-frost-311509226/" target="_blank" class="hover:text-coopRed transition-colors">100% digital · 100% menneskelig</a>
+            </p>
         </div>
     </footer>
 
+    <!-- INTERACTIVE NAVIGATION SCRIPT -->
     <script>
-        // Mobil menu toggler
+        // Mobile Navigation Toggle
         const menuBtn = document.getElementById('menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
         const mobileLinks = document.querySelectorAll('.mobile-link');
@@ -378,49 +589,6 @@
             link.addEventListener('click', () => {
                 mobileMenu.classList.add('hidden');
             });
-        });
-
-        // Simuleret Klient-side AI Assistent Svar (Trænet på dit CV)
-        const chatBox = document.getElementById('chat-box');
-        const chatInput = document.getElementById('chat-input');
-        const chatSend = document.getElementById('chat-send');
-
-        const aiDatabase = [
-            { keywords: ['budget', 'penge', 'kr'], answer: "Mikkel forvalter i sit nuværende job hos Adentify ApS annoncebudgetter for ca. 500.000 kr. om måneden med stærkt fokus på bundlinjevækst og ROAS." },
-            { keywords: ['ai', 'automation', 'crm', 'automatisering'], answer: "Mikkel har solid erfaring med at bygge intelligente AI CRM-arkitekturer og automatiserede flows. Hos en murer/maler-case firdoblede han lukkeraten fra 10% til 40% udelukkende med smarte automationsløsninger." },
-            { keywords: ['google', 'meta', 'ads', 'annonce'], answer: "Han har dybdegående operationel erfaring med opsætning, optimering og skalering af betalte annoncer i Google Ads, Meta Ads Manager, LinkedIn Campaign Manager og TikTok Ads." },
-            { keywords: ['resultat', 'ayava', 'vækst'], answer: "Blandt Mikkels topresultater er skaleringen af webshoppen AYAVA fra 190.000 kr. til en månedlig omsætning på 1.000.000 kr. på under to måneder." },
-            { keywords: ['uddannelse', 'skole', 'karakter'], answer: "Mikkel er uddannet Markedsføringsøkonom fra CPH Business Academy (Roskilde/København) og afsluttede sit hovedprojekt med karakteren 12." }
-        ];
-
-        function handleSearch() {
-            const query = chatInput.value.toLowerCase().trim();
-            if(!query) return;
-
-            // Tilføj bruger besked
-            chatBox.innerHTML += `<div class="bg-coopRed text-white p-3 rounded-lg max-w-[85%] ml-auto text-right">${chatInput.value}</div>`;
-            
-            let reply = "Det er et godt spørgsmål! Mikkel har stærke kompetencer inden for performance marketing, CRO og AI-automatisering. Du kan finde specifikke eksempler på dette i hans resultat-sektion ovenfor, eller række ud til ham direkte på (+45) 41 82 67 99.";
-            
-            for(let item of aiDatabase) {
-                if(item.keywords.some(keyword => query.includes(keyword))) {
-                    reply = item.answer;
-                    break;
-                }
-            }
-
-            // Forsink AI svar en smule for realisme
-            setTimeout(() => {
-                chatBox.innerHTML += `<div class="bg-gray-100 text-gray-700 p-3 rounded-lg max-w-[85%]">${reply}</div>`;
-                chatBox.scrollTop = chatBox.scrollHeight;
-            }, 400);
-
-            chatInput.value = '';
-        }
-
-        chatSend.addEventListener('click', handleSearch);
-        chatInput.addEventListener('keypress', (e) => {
-            if(e.key === 'Enter') handleSearch();
         });
     </script>
 </body>
