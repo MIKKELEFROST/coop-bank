@@ -37,7 +37,7 @@
         }
     </script>
     <style>
-        /* Custom scrollbar to look extremely premium */
+        /* Custom scrollbar */
         ::-webkit-scrollbar {
             width: 8px;
         }
@@ -65,7 +65,7 @@
 <body class="bg-white text-coopText font-sans antialiased selection:bg-coopRed selection:text-white">
 
     <!-- STICKY TOP NAVIGATION -->
-    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-200">
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-gray-200">
         <div class="max-w-6xl mx-auto px-4 h-20 flex items-center justify-between">
             <!-- Brand Logo -->
             <a href="#" class="flex items-center space-x-2 transition-transform active:scale-95">
@@ -121,9 +121,8 @@
                     <span class="w-2 h-2 rounded-full bg-coopRed animate-pulse"></span>
                     <span>Growth Marketing Ansøgning</span>
                 </div>
-                <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-coopDark leading-none mb-6">
-                    Skal vi accelerere <br class="hidden sm:inline">
-                    <span class="text-coopRed">Coop Banks</span> digitale kundetilgang?
+                <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-black text-coopDark leading-tight mb-6">
+                    Ansøgning til <span class="text-coopRed">Growth marketing specialist</span> for Coop Bank
                 </h1>
                 <p class="text-md sm:text-lg text-coopTextMuted mb-8 max-w-2xl leading-relaxed">
                     I søger en skarp, selvkørende digital profil, der trives med performance, data, AI og eksperimenterende markedsføring. Med en solid baggrund fra bureauverdenen og som selvstændig, overtager jeg det fulde ejerskab over jeres marketingkanaler fra dag ét.
@@ -154,9 +153,10 @@
                                 <h3 class="font-extrabold text-coopDark text-base">Growth Specialist</h3>
                                 <p class="text-xs text-coopTextMuted">27 år · Vanløse</p>
                             </div>
-                            <span class="bg-emerald-100 text-emerald-800 text-[10px] font-extrabold px-2.5 py-1 rounded-full uppercase tracking-wider">
-                                Aktiv jobsøgende
-                            </span>
+                            <!-- Fun Fact Button Trigger -->
+                            <button onclick="openModal()" class="bg-coopRed/10 text-coopRed border border-coopRed/20 hover:bg-coopRed hover:text-white text-[10px] font-extrabold px-3 py-1.5 rounded-full uppercase tracking-wider transition-all active:scale-95 cursor-pointer">
+                                klik her for fun fact
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -165,7 +165,25 @@
         </div>
     </section>
 
-    <!-- RESULTS / STATS GRID SECTION (DANSKE SPIL INSPIRERET) -->
+    <!-- FUN FACT POPUP MODAL -->
+    <div id="funfact-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 hidden backdrop-blur-sm opacity-0 transition-opacity duration-300">
+        <div id="modal-container" class="bg-white rounded-3xl p-6 sm:p-8 max-w-sm w-full shadow-2xl border border-gray-100 transform scale-95 transition-transform duration-300">
+            <div class="text-center">
+                <div class="w-12 h-12 rounded-full bg-coopRed/10 text-coopRed flex items-center justify-center text-xl mx-auto mb-4">
+                    <i class="fa-solid fa-sparkles"></i>
+                </div>
+                <h3 class="text-xl font-black text-coopDark mb-2">Fun Fact! 💆‍♂️</h3>
+                <p class="text-sm text-coopTextMuted mb-6 leading-relaxed">
+                    Vidste du, at Mikkel som <strong class="text-coopRed">19-årig</strong> allerede var fuldt færdiguddannet massør? Det giver en helt særlig mental ballast til at holde hovedet koldt under pres – og en solid forståelse for personlige behandlingsrejser!
+                </p>
+                <button onclick="closeModal()" class="w-full bg-coopRed hover:bg-coopRedDark text-white font-bold text-xs uppercase tracking-wider py-3.5 rounded-xl transition-all cursor-pointer">
+                    Det er sejt!
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- RESULTS / STATS GRID SECTION -->
     <section id="resultater" class="py-20 bg-coopDark text-white relative">
         <div class="absolute inset-0 bg-[radial-gradient(#b71a21_1px,transparent_1px)] [background-size:16px_16px] opacity-10"></div>
         <div class="max-w-6xl mx-auto px-4 relative z-10">
@@ -312,7 +330,6 @@
                 <div class="w-16 h-1 bg-coopRed mx-auto mt-4"></div>
             </div>
 
-            <!-- Crisp Prose Styling for easy reading -->
             <div class="bg-coopGrayLight p-8 sm:p-12 rounded-3xl border border-gray-200/60 shadow-sm text-coopText leading-relaxed space-y-6">
                 
                 <p class="font-bold text-lg text-coopDark">Kære Coop Bank,</p>
@@ -374,12 +391,18 @@
                 <!-- Position 1 -->
                 <div class="relative pl-8 md:pl-10 group">
                     <div class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-coopRed border-4 border-white group-hover:bg-coopRedDark transition-colors"></div>
-                    <span class="inline-block bg-coopRed/10 text-coopRed text-[10px] font-extrabold uppercase tracking-widest px-3 py-1 rounded-md mb-2">
+                    <span class="inline-block bg-coopRed/10 text-coopRed text-[10px] font-extrabold uppercase tracking-widest px-3 py-1 rounded-md mb-1">
                         MAJ 2025 – I DAG
                     </span>
                     <h3 class="text-xl font-extrabold text-coopDark">Marketingspecialist</h3>
-                    <h4 class="text-sm font-semibold text-coopRed uppercase tracking-wide">Adentify ApS, Brøndby (Marketing Bureau)</h4>
-                    <p class="text-sm text-coopTextMuted mt-3 leading-relaxed">
+                    <h4 class="text-sm font-semibold text-coopRed uppercase tracking-wide">
+                        Adentify ApS, Brøndby (Marketing Bureau)
+                    </h4>
+                    <!-- Added label requested by user -->
+                    <span class="inline-block bg-coopRed text-white text-[10px] font-extrabold px-2.5 py-1 rounded-md uppercase tracking-wide mt-1 mb-2">
+                        +25 aktive kunder af gangen
+                    </span>
+                    <p class="text-sm text-coopTextMuted leading-relaxed">
                         Fungerer som fast strategisk og operationel partner for en bred portefølje af B2B- og B2C-kunder. Administrerer samlede månedlige annoncebudgetter på ca. 500.000 kr. 
                     </p>
                     <div class="flex flex-wrap gap-2 mt-3">
@@ -397,8 +420,9 @@
                     </span>
                     <h3 class="text-xl font-extrabold text-coopDark">Selvstændig Marketing Specialist</h3>
                     <h4 class="text-sm font-semibold text-coopRed uppercase tracking-wide">Online Marketing Nu, Hvidovre</h4>
+                    <!-- Updated intro subtext as requested by user -->
                     <p class="text-sm text-coopTextMuted mt-3 leading-relaxed">
-                        Konsulentbistand for ambitiøse brands og tech-startups. Udvalgte partnerskaber inkluderer:
+                        Marketingkonsulent for mindre håndværkervirksomheder og webshop:
                     </p>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4 bg-white p-5 rounded-2xl border border-gray-200/60 shadow-sm">
                         <div>
@@ -409,7 +433,8 @@
                         <div>
                             <span class="text-[10px] font-bold text-coopRed">BY MINELLA APS (JUN 2023 – MAJ 2025)</span>
                             <h5 class="font-bold text-xs text-coopDark mt-0.5">Marketingkonsulent</h5>
-                            <p class="text-xs text-coopTextMuted mt-1">Udvikling af optimeret platform, der firdoblede konverteringsraten til 5,5% gennem fokuseret UX.</p>
+                            <!-- Updated as requested by user -->
+                            <p class="text-xs text-coopTextMuted mt-1">Helt ny hjemmeside, der firdoblede konverteringsraten til 5,5% gennem fokuseret UX i webdesign.</p>
                         </div>
                         <div>
                             <span class="text-[10px] font-bold text-coopRed">NUTTET BABY (DEC 2022 – MAJ 2025)</span>
@@ -451,9 +476,10 @@
                 <div class="w-16 h-1 bg-coopRed mx-auto mt-4"></div>
             </div>
 
+            <!-- Completely updated lists based on user specification -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                 
-                <!-- Skill 1 -->
+                <!-- Performance Marketing -->
                 <div class="bg-coopGrayLight p-6 rounded-2xl border border-gray-200/60 shadow-sm hover:shadow-md transition-shadow">
                     <div class="w-12 h-12 rounded-xl bg-coopRed text-white flex items-center justify-center text-lg mb-6">
                         <i class="fa-solid fa-rectangle-ad"></i>
@@ -461,14 +487,14 @@
                     <h3 class="font-black text-coopDark text-base mb-4">Performance Marketing</h3>
                     <ul class="text-sm text-coopTextMuted space-y-2.5">
                         <li class="flex items-center"><i class="fa-solid fa-check text-coopRed mr-2.5 text-xs"></i> Meta Ads Manager</li>
-                        <li class="flex items-center"><i class="fa-solid fa-check text-coopRed mr-2.5 text-xs"></i> Google Ads (Search/YouTube)</li>
+                        <li class="flex items-center"><i class="fa-solid fa-check text-coopRed mr-2.5 text-xs"></i> Google Ads (Search/YouTube/Shop)</li>
                         <li class="flex items-center"><i class="fa-solid fa-check text-coopRed mr-2.5 text-xs"></i> TikTok Ads Manager</li>
-                        <li class="flex items-center"><i class="fa-solid fa-check text-coopRed mr-2.5 text-xs"></i> LinkedIn Campaign Mgr</li>
-                        <li class="flex items-center"><i class="fa-solid fa-check text-coopRed mr-2.5 text-xs"></i> Affiliate & 10-aftaler</li>
+                        <li class="flex items-center"><i class="fa-solid fa-check text-coopRed mr-2.5 text-xs"></i> LinkedIn Ads</li>
+                        <li class="flex items-center"><i class="fa-solid fa-check text-coopRed mr-2.5 text-xs"></i> Affiliate</li>
                     </ul>
                 </div>
 
-                <!-- Skill 2 -->
+                <!-- AI & Automation -->
                 <div class="bg-coopGrayLight p-6 rounded-2xl border border-gray-200/60 shadow-sm hover:shadow-md transition-shadow">
                     <div class="w-12 h-12 rounded-xl bg-coopRed text-white flex items-center justify-center text-lg mb-6">
                         <i class="fa-solid fa-robot"></i>
@@ -476,14 +502,14 @@
                     <h3 class="font-black text-coopDark text-base mb-4">AI & Automation</h3>
                     <ul class="text-sm text-coopTextMuted space-y-2.5">
                         <li class="flex items-center"><i class="fa-solid fa-check text-coopRed mr-2.5 text-xs"></i> AI CRM-flows & SMS</li>
-                        <li class="flex items-center"><i class="fa-solid fa-check text-coopRed mr-2.5 text-xs"></i> LLM integration i kampagner</li>
-                        <li class="flex items-center"><i class="fa-solid fa-check text-coopRed mr-2.5 text-xs"></i> Zapier & Make</li>
-                        <li class="flex items-center"><i class="fa-solid fa-check text-coopRed mr-2.5 text-xs"></i> ChatGPT & Prompt Eng.</li>
-                        <li class="flex items-center"><i class="fa-solid fa-check text-coopRed mr-2.5 text-xs"></i> Klaviyo / Mailchimp</li>
+                        <li class="flex items-center"><i class="fa-solid fa-check text-coopRed mr-2.5 text-xs"></i> LLM automation integration</li>
+                        <li class="flex items-center"><i class="fa-solid fa-check text-coopRed mr-2.5 text-xs"></i> Zapier & MakeChat</li>
+                        <li class="flex items-center"><i class="fa-solid fa-check text-coopRed mr-2.5 text-xs"></i> AI Agents (Manus)</li>
+                        <li class="flex items-center"><i class="fa-solid fa-check text-coopRed mr-2.5 text-xs"></i> Klaviyo / Mailchimp / Flow</li>
                     </ul>
                 </div>
 
-                <!-- Skill 3 -->
+                <!-- Data & Analytics -->
                 <div class="bg-coopGrayLight p-6 rounded-2xl border border-gray-200/60 shadow-sm hover:shadow-md transition-shadow">
                     <div class="w-12 h-12 rounded-xl bg-coopRed text-white flex items-center justify-center text-lg mb-6">
                         <i class="fa-solid fa-magnifying-glass-chart"></i>
@@ -492,13 +518,14 @@
                     <ul class="text-sm text-coopTextMuted space-y-2.5">
                         <li class="flex items-center"><i class="fa-solid fa-check text-coopRed mr-2.5 text-xs"></i> Google Analytics 4 (GA4)</li>
                         <li class="flex items-center"><i class="fa-solid fa-check text-coopRed mr-2.5 text-xs"></i> Google Tag Manager (GTM)</li>
-                        <li class="flex items-center"><i class="fa-solid fa-check text-coopRed mr-2.5 text-xs"></i> Looker Studio dashboards</li>
-                        <li class="flex items-center"><i class="fa-solid fa-check text-coopRed mr-2.5 text-xs"></i> Attribution modellering</li>
-                        <li class="flex items-center"><i class="fa-solid fa-check text-coopRed mr-2.5 text-xs"></i> Metorik & Excel</li>
+                        <li class="flex items-center"><i class="fa-solid fa-check text-coopRed mr-2.5 text-xs"></i> Metorik & Reaktion</li>
+                        <li class="flex items-center"><i class="fa-solid fa-check text-coopRed mr-2.5 text-xs"></i> Hotjar</li>
+                        <li class="flex items-center"><i class="fa-solid fa-check text-coopRed mr-2.5 text-xs"></i> Airtable</li>
+                        <li class="flex items-center"><i class="fa-solid fa-check text-coopRed mr-2.5 text-xs"></i> Andre store CRM systemer</li>
                     </ul>
                 </div>
 
-                <!-- Skill 4 -->
+                <!-- Webudvikling & CRO -->
                 <div class="bg-coopGrayLight p-6 rounded-2xl border border-gray-200/60 shadow-sm hover:shadow-md transition-shadow">
                     <div class="w-12 h-12 rounded-xl bg-coopRed text-white flex items-center justify-center text-lg mb-6">
                         <i class="fa-solid fa-wand-magic-sparkles"></i>
@@ -506,9 +533,10 @@
                     <h3 class="font-black text-coopDark text-base mb-4">Webudvikling & CRO</h3>
                     <ul class="text-sm text-coopTextMuted space-y-2.5">
                         <li class="flex items-center"><i class="fa-solid fa-check text-coopRed mr-2.5 text-xs"></i> WordPress & WooCommerce</li>
-                        <li class="flex items-center"><i class="fa-solid fa-check text-coopRed mr-2.5 text-xs"></i> Shopify / Wix</li>
-                        <li class="flex items-center"><i class="fa-solid fa-check text-coopRed mr-2.5 text-xs"></i> Hotjar (Brugeradfærd)</li>
-                        <li class="flex items-center"><i class="fa-solid fa-check text-coopRed mr-2.5 text-xs"></i> A/B-testning & UX design</li>
+                        <li class="flex items-center"><i class="fa-solid fa-check text-coopRed mr-2.5 text-xs"></i> Shopify</li>
+                        <li class="flex items-center"><i class="fa-solid fa-check text-coopRed mr-2.5 text-xs"></i> Headless</li>
+                        <li class="flex items-center"><i class="fa-solid fa-check text-coopRed mr-2.5 text-xs"></i> Full stack hjemmesider</li>
+                        <li class="flex items-center"><i class="fa-solid fa-check text-coopRed mr-2.5 text-xs"></i> CRO & UX</li>
                         <li class="flex items-center"><i class="fa-solid fa-check text-coopRed mr-2.5 text-xs"></i> Teknisk SEO</li>
                     </ul>
                 </div>
@@ -574,7 +602,7 @@
         </div>
     </footer>
 
-    <!-- INTERACTIVE NAVIGATION SCRIPT -->
+    <!-- INTERACTIVE NAVIGATION & POPUP SCRIPT -->
     <script>
         // Mobile Navigation Toggle
         const menuBtn = document.getElementById('menu-btn');
@@ -589,6 +617,34 @@
             link.addEventListener('click', () => {
                 mobileMenu.classList.add('hidden');
             });
+        });
+
+        // Fun Fact Modal Functionality
+        const modal = document.getElementById('funfact-modal');
+        const modalContainer = document.getElementById('modal-container');
+
+        function openModal() {
+            modal.classList.remove('hidden');
+            // Give layout a cycle to register show states before transitions
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                modalContainer.classList.remove('scale-95');
+            }, 10);
+        }
+
+        function closeModal() {
+            modal.classList.add('opacity-0');
+            modalContainer.classList.add('scale-95');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+
+        // Close modal when clicking outside content box
+        modal.addEventListener('click', (e) => {
+            if(e.target === modal) {
+                closeModal();
+            }
         });
     </script>
 </body>
