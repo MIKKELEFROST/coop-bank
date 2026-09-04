@@ -250,10 +250,10 @@ export default {
 
     r.ripples.forEach((node, i) => {
       const m = MODS[i];
-      const p = seg(t, m.at + 0.06, 0.68, easeOutQuint);
+      const p = seg(t, m.at + 0.06, 0.50, easeOutQuint);
       const on = smoothstep(m.at + 0.02, m.at + 0.10, t);
-      node.setAttribute('r', lerp(AURA[i + 1], AURA[i + 1] + 58, p).toFixed(2));
-      node.setAttribute('opacity', (0.34 * (1 - p) * on).toFixed(4));
+      node.setAttribute('r', lerp(AURA[i + 1], AURA[i + 1] + 54, p).toFixed(2));
+      node.setAttribute('opacity', (0.30 * (1 - p) * on).toFixed(4));
     });
 
     /* ---------------- arcs draw, then modules travel out ------------------ */
