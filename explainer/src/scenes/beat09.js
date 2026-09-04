@@ -149,16 +149,21 @@ export default {
     const bd = D.el('div', 'backdrop', root);
     bd.style.background = D.C.darkBg;
     r.bd = bd;
+    root.style.background = D.C.darkBg;   // TEST
 
     const cam = D.el('div', '', root);
-    cam.style.cssText = 'position:absolute;inset:0;transform-origin:960px 540px';
+    cam.style.cssText = 'position:absolute;inset:0;transform-origin:960px 540px;' +
+      `background:${D.C.darkBg}`;
     r.cam = cam;
 
-    /* ---- a very quiet red pool behind the shield ---- */
+    /* ---- a very quiet red pool behind the shield ----
+       Deliberately confined to the right half: a full-bleed gradient layer
+       behind the headline makes Chromium re-decide the text's antialiasing
+       between renders, which breaks byte-identical out-of-order frames. ---- */
     const vig = D.el('div', '', cam);
     vig.style.cssText =
-      'position:absolute;inset:0;' +
-      'background:none';
+      'position:absolute;left:980px;right:0;top:0;bottom:0;' +
+      'background:radial-gradient(640px 560px at 320px 500px, rgba(227,6,19,.07) 0%, rgba(227,6,19,0) 70%)';
     r.vig = vig;
 
     /* ---- shield + connector layer (below the DOM furniture) ---- */
@@ -195,7 +200,7 @@ export default {
     const coreGlow = D.el('div', '', cam);
     D.place(coreGlow, CORE.x, CORE.y, 250, 250);
     coreGlow.style.background =
-      'none';
+      'radial-gradient(circle, rgba(227,6,19,.085) 0%, rgba(227,6,19,0) 62%)';
     coreGlow.style.borderRadius = '50%';
     r.coreGlow = coreGlow;
 

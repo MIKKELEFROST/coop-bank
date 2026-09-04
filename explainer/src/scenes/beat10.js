@@ -5,14 +5,16 @@
  * Cues (local t): 0.20 "Og det er ikke kun fremtid."
  *                 1.90 "Vi arbejder allerede sådan i dag."
  *
- * The dark beat 9 wipes upward and uncovers this frame, so the composition is
- * bright and settled from the first frame. A thin Coop-red streak rises through
- * the frame with the uncover and condenses into the short rule above the
- * headline. The two-line headline then builds word by word out of a per-line
- * mask — this is the beat's kinetic-typography moment. On the second spoken
- * line four small tinted chips snap into a single centred row, pre-announcing
- * the four agents of beat 11. From local t ≈ 2.72 to the end nothing moves at
- * all: a completely still, fully readable frame hands over to beat 11's pushUp.
+ * The dark beat 9 wipes upward and uncovers a bright, empty frame. This scene
+ * deliberately owns no backdrop, so that wipe stays a real uncover rather than
+ * a cut, and everything it draws is timed to appear just behind the receding
+ * dark edge: the Coop-red rule rises the last 34 px and opens from its centre
+ * at t = 0.28, the brandmark takes over the corner at t = 0.36, and the
+ * two-line headline then builds word by word out of a per-line mask — the
+ * beat's kinetic-typography moment. On the second spoken line four small tinted
+ * chips snap into one centred row, pre-announcing the four agents of beat 11.
+ * From local t ≈ 2.77 to the end nothing moves at all: a completely still,
+ * fully readable frame hands over to beat 11's pushUp.
  *
  * Determinism: every value is a pure function of `t`; no DOM is created in
  * render(); every property this scene owns is written on every call.
@@ -41,7 +43,7 @@ const MASK_DROP = 136;       // travel that hides a word completely in its mask
 const L1 = 'Sådan bruger vi';
 const L2 = 'AI-agenter i dag';
 
-const WORD_AT = 0.32;        // first word — the frame is fully uncovered at ≈0.36
+const WORD_AT = 0.30;        // first word — the headline band is uncovered at ≈0.27
 const WORD_PER = 0.145;      // ≈ 4.4 frames between words
 const WORD_DUR = 0.50;
 
@@ -53,7 +55,7 @@ const CHIPS = [
   { text: 'Strategi',      icon: 'target', tone: 'yellow', ink: '#8A6410' },
 ];
 
-const CHIP_AT = 1.80;        // first chip lands just inside "Vi arbejder …"
+const CHIP_AT = 1.86;        // first chip lands on "Vi arbejder …" (cue 1.90)
 const CHIP_PER = 0.135;      // ≈ 4 frames
 const CHIP_DUR = 0.50;
 
@@ -122,7 +124,7 @@ export default {
     cam.style.cssText = 'position:absolute;inset:0;transform-origin:960px 500px';
     r.cam = cam;
 
-    /* ---- the rising streak that becomes the rule ------------------- */
+    /* ---- the red rule above the headline --------------------------- */
     const rule = D.el('div', '', cam);
     D.place(rule, 960, RULE_Y, 140, 6);
     rule.style.background = D.C.red;
@@ -136,11 +138,9 @@ export default {
     title.style.textAlign = 'center';
     r.title = title;
 
-    const a = headLine(title, L1, D.C.ink, 0);
-    const b = headLine(title, L2, D.C.red, -HEAD_OVERLAP);
-    r.words = a.words.concat(b.words);
-    r.lineA = a.line;
-    r.lineB = b.line;
+    // Six word spans, line 1 then line 2, driven as one staggered sequence.
+    r.words = headLine(title, L1, D.C.ink, 0).words
+      .concat(headLine(title, L2, D.C.red, -HEAD_OVERLAP).words);
 
     /* ---- chip row --------------------------------------------------- */
     const row = D.el('div', '', cam);
