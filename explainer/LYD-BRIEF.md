@@ -127,10 +127,13 @@ Læg filen som **`assets/audio/music.wav`** (eller `.mp3`). Er den længere end
 
 ## 3. Lydeffekter (valgfrit)
 
-`dist/voiceover-timing.json` indeholder 30 cues med præcise tider — whooshes
-ved overgangene, interface-klik når kort lander, ét kort glitch ved 41,6 s.
+Lydeffekter skal komme fra et lydbibliotek — de kan ikke laves i dette
+projekt. Jeg forsøgte at syntetisere dem med ffmpeg's oscillatorer og
+støjkilder; resultatet lød som støj og er kasseret. Whooshes, klik og
+impacts skal være rigtige optagelser.
 
-**Brug 8–10 af dem, ikke alle 30.** De vigtigste:
+`dist/voiceover-timing.json` indeholder 30 cues med præcise tider. **Brug
+8-10 af dem, ikke alle 30.** De vigtigste:
 
 | Tid | Effekt |
 | --- | --- |
@@ -143,11 +146,11 @@ ved overgangene, interface-klik når kort lander, ét kort glitch ved 41,6 s.
 | 50,4 s | Marketing-hub stiger op nedefra |
 | 66,0 s | Ordskiftet "genererer" → "arbejder sammen med os" |
 
-Alle 30 gør det travlt og trækker filmen mod reklamefilm.
+Alle 30 gør det travlt og trækker filmen mod reklamefilm. Læg **ikke** klik
+på hvert kort — der er over 20 kort i filmen.
 
-Samles til ét spor og lægges som **`assets/audio/sfx.wav`**.
-
----
+Samles til ét spor og lægges som **`assets/audio/sfx.wav`**. Mix-trinnet
+tager det derfra.
 
 ## 4. Sådan lægges lyden på
 
