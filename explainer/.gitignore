@@ -1,13 +1,12 @@
 node_modules/
-dist/frames/
-dist/preview-frames/
-dist/beats/
-dist/check-*.png
-dist/.verify-*/
-dist/.sheet.html
-dist/preview-lowres.mp4
 .DS_Store
-dist/b*/
-dist/det*/
-dist/.verify*/
-dist/check*/
+
+# dist/ holds rendered output. Only the actual deliverables are tracked;
+# everything else (frame sequences, scratch renders, check sheets) is
+# reproducible from `npm run render`.
+dist/*
+!dist/voiceover-manus.txt
+!dist/voiceover-timing.json
+!dist/voiceover-da.srt
+!dist/storyboard-contact-sheet.png
+!dist/coop-bank-ai-agenter-preview.mp4
