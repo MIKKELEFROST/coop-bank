@@ -90,10 +90,11 @@ const CHIPS = [
  * ------------------------------------------------------------------ */
 
 /** One copy of the two-line headline. Six identical copies drive the glitch. */
-function headCopy(parent, cA, cB) {
+function headCopy(parent, cA, cB, bg) {
   const root = D.el('div', '', parent);
   root.style.cssText =
-    'position:absolute;left:0;top:0;width:900px;height:190px;will-change:transform,opacity';
+    'position:absolute;left:0;top:0;width:640px;height:194px;will-change:transform,opacity' +
+    (bg ? `;background:${bg}` : '');
   const base =
     'font-size:84px;font-weight:800;letter-spacing:-.030em;line-height:1.0;white-space:nowrap;';
   const l1 = D.el('div', '', root, 'Høj tillid kræver');
@@ -200,7 +201,7 @@ export default {
     const coreGlow = D.el('div', '', cam);
     D.place(coreGlow, CORE.x, CORE.y, 250, 250);
     coreGlow.style.background =
-      'radial-gradient(circle, rgba(227,6,19,.085) 0%, rgba(227,6,19,0) 62%)';
+      'none';  /* TESTNOGLOW */
     coreGlow.style.borderRadius = '50%';
     r.coreGlow = coreGlow;
 
@@ -211,13 +212,17 @@ export default {
     /* ---- headline: base + 2 channel ghosts + 3 glitch slices ---- */
     const hlWrap = D.el('div', '', cam);
     hlWrap.style.cssText =
-      `position:absolute;left:${LEFT_X}px;top:${HEAD_Y}px;width:900px;height:190px;` +
+      `position:absolute;left:${LEFT_X}px;top:${HEAD_Y}px;width:640px;height:194px;` +
       'will-change:transform,opacity';
     r.hlWrap = hlWrap;
 
+    // The base copy carries an opaque (dark-on-dark, so invisible) background:
+    // text over a transparent composited layer makes Chromium re-decide its
+    // antialiasing between renders, which breaks byte-identical out-of-order
+    // frames. The glitch copies sit ABOVE it so the channel split still shows.
+    r.base = headCopy(hlWrap, D.C.darkInk, D.C.red, D.C.darkBg);
     r.gR = headCopy(hlWrap, D.C.red, D.C.red);
     r.gB = headCopy(hlWrap, D.C.blue, D.C.blue);
-    r.base = headCopy(hlWrap, D.C.darkInk, D.C.red);
 
     const SLICE = ['inset(0 0 63% 0)', 'inset(33% 0 31% 0)', 'inset(67% 0 0 0)'];
     r.slices = SLICE.map((clip) => {
