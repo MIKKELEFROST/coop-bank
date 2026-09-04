@@ -14,6 +14,7 @@
     "voiceover": "node scripts/voiceover.mjs",
     "preview": "node scripts/render-preview.mjs",
     "encode": "bash scripts/encode-video.sh",
+    "sfx": "node scripts/build-sfx.mjs",
     "mix": "bash scripts/mix-audio.sh",
     "render": "node scripts/render-all.mjs",
     "verify": "node scripts/verify.mjs"
