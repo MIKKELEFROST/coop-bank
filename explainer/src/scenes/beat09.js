@@ -9,7 +9,7 @@
  * The film's only dark sequence. A full-bleed #0B0B0C backdrop with a low
  * scanline overlay takes the frame on the darkDrop. The headline lands on the
  * left and is hit by one short, deterministic glitch (offset slices + a faint
- * red/blue channel split) between local t 0.10 and 0.30 — after 0.32 it is gone
+ * red/blue channel split) between local t 0.10 and 0.33 — after that it is gone
  * and never returns. On the right a large Coop-red shield draws itself in two
  * symmetric halves around the agent core, then five dark chips snap in one at a
  * time, each with a short connector tick to the shield outline. The beat ends
@@ -40,7 +40,7 @@ const SUP_LH = 46;           // one supporting line box
 const SH = {                 // shield
   cx: 1300, top: 300, bottom: 730, left: 1140, right: 1460, midY: 500,
 };
-const CORE = { x: SH.cx, y: 498, size: 114 };
+const CORE = { x: SH.cx, y: 498, size: 120 };
 
 /** The supporting line, split so each half is revealed by its own mask. */
 const SUP = [
@@ -77,7 +77,7 @@ const CHIPS = [
   { text: 'Kvalitetskontrol',      ic: 'target', x: 1040, y: 782, at: 1.74,
     dx: -50, dy:  26, accent: D.C.red,   base: 0,    hit: 0,
     ln: 'M 1168 746 L 1200 671', dot: [1200, 671] },
-  { text: 'Menneskelig vurdering', ic: 'people', x: 1490, y: 782, at: 2.08,
+  { text: 'Menneskelig vurdering', ic: 'people', x: 1486, y: 782, at: 2.08,
     dx:  50, dy:  26, accent: D.C.red,   base: 0,    hit: 0,
     ln: 'M 1432 746 L 1400 671', dot: [1400, 671] },
   { text: 'Godkendelse krævet',    ic: 'check',  x: 1300, y: 886, at: 3.00,
@@ -150,7 +150,10 @@ export default {
     const bd = D.el('div', 'backdrop', root);
     bd.style.background = D.C.darkBg;
     r.bd = bd;
-    root.style.background = D.C.darkBg;   // TEST
+    // Also paint the scene wrapper: text sitting over a transparent composited
+    // layer makes Chromium re-decide its antialiasing between renders, and the
+    // film's frames must be byte-identical whatever order they are rendered in.
+    root.style.background = D.C.darkBg;
 
     const cam = D.el('div', '', root);
     cam.style.cssText = 'position:absolute;inset:0;transform-origin:960px 540px;' +
@@ -163,14 +166,16 @@ export default {
        between renders, which breaks byte-identical out-of-order frames. ---- */
     const vig = D.el('div', '', cam);
     vig.style.cssText =
-      'position:absolute;left:980px;right:0;top:0;bottom:0;' +
-      'background:radial-gradient(640px 560px at 320px 500px, rgba(227,6,19,.07) 0%, rgba(227,6,19,0) 70%)';
+      'position:absolute;left:968px;right:0;top:0;bottom:0;' +
+      'background:radial-gradient(332px 420px at 332px 500px,' +
+      ' rgba(227,6,19,.09) 0%, rgba(227,6,19,0) 100%)';
     r.vig = vig;
 
     /* ---- shield + connector layer (below the DOM furniture) ---- */
     const gfx = D.svgLayer(cam);
 
-    r.fill = D.svg('path', { d: D_FILL, fill: '#16161A', stroke: 'none' }, gfx);
+    r.fill = D.svg('path', { d: D_FILL, fill: '#181419', stroke: 'none' }, gfx);
+
     r.glow = D.svg('path', {
       d: D_FILL, fill: 'none', stroke: D.C.red, 'stroke-width': 14,
       'stroke-linejoin': 'round', opacity: 0,
@@ -198,13 +203,6 @@ export default {
     }, gfx));
 
     /* ---- agent core inside the shield ---- */
-    const coreGlow = D.el('div', '', cam);
-    D.place(coreGlow, CORE.x, CORE.y, 250, 250);
-    coreGlow.style.background =
-      'none';  /* TESTNOGLOW */
-    coreGlow.style.borderRadius = '50%';
-    r.coreGlow = coreGlow;
-
     const core = D.agentCore(cam, CORE.size);
     D.place(core.root, CORE.x, CORE.y);
     r.core = core;
@@ -245,7 +243,7 @@ export default {
       const clip = D.el('div', '', cam);
       clip.style.cssText =
         `position:absolute;left:${LEFT_X}px;top:${SUP_Y + i * SUP_LH}px;` +
-        `width:560px;height:${SUP_LH}px;overflow:hidden`;
+        `width:520px;height:${SUP_LH}px;overflow:hidden`;
       const txt = D.el('div', '', clip, ln.text);
       txt.style.cssText =
         `font-size:34px;font-weight:500;line-height:${SUP_LH}px;letter-spacing:-.012em;` +
@@ -289,7 +287,7 @@ export default {
     /* ---- dark furniture ---- */
     r.bd.style.opacity = '1';
     r.scan.style.opacity = clamp(0.42 * seg(t, 0, 0.26, easeOutCubic) + 0.30 * g).toFixed(4);
-    r.vig.style.opacity = '1';   // static: the dark ground arrives whole
+    r.vig.style.opacity = '1';   // static on purpose — see build()
 
     /* ------------------------------------------------------------------ *
      * Headline — one shared entrance written into all six copies.
@@ -344,7 +342,9 @@ export default {
     const complete = seg(t, 0.90, 0.30, easeOutCubic);
     const flare = pulse(t, 0.92, 0.46, easeOutCubic);
     const trust = pulse(t, 3.52, 0.56, easeOutCubic);   // "tillid"
-    const ctrl  = pulse(t, 3.96, 0.58, easeOutCubic);   // "kontrol"
+    const ctrl  = pulse(t, 3.82, 0.50, easeOutCubic);   // "kontrol"
+    // Everything above settles by local t 4.32, so the beat hands over on a
+    // completely still frame while beat 10's wipeUp lifts it out.
     const lift  = clamp(flare + trust * 0.9 + ctrl);
 
     r.shR.set(draw);
@@ -391,10 +391,6 @@ export default {
       `scale(${(1 + 0.62 * ringOpen + 0.16 * trust + 0.20 * ctrl).toFixed(4)})`;
     r.core.ring.style.opacity =
       clamp(0.60 * (1 - 0.42 * ringOpen) + 0.40 * trust + 0.45 * ctrl).toFixed(4);
-    D.setT(r.coreGlow, {
-      x: 0, y: 0, s: lerp(0.7, 1, coreIn) * (1 + 0.10 * lift),
-      o: clamp(0.62 * seg(t, 0.34, 0.6, easeOutCubic) + 0.30 * lift),
-    });
 
     /* ------------------------------------------------------------------ *
      * Supporting line — a clip-height reveal, not a fade
