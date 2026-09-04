@@ -5,12 +5,16 @@
  *      mange vi skal være."
  *
  * Motion: a horizontal consequence chain is typeset word by word —
- * Værktøjer → Arbejdsgange → Roller → Bemanding. The first three are quiet
+ * Værktøjer → Arbejdsgange → Roller → Bemanding. The row reserves its full
+ * width from the start and glides left as each link joins, so the part of the
+ * chain that is actually on screen stays centred. The first three are quiet
  * white chips; the last one is solid Coop red and lands on "hvor mange vi skal
- * være". A very light ghost wordmark ("marketing i bevægelse") wipes up behind
- * the row as texture. From local t 4.2 the whole row re-centres on "Bemanding"
- * and accelerates toward the camera with velocity-derived blur, so that chip is
- * the object beat 4's scaleThrough cut takes over.
+ * være", after which the other three dim away under it. A very light ghost
+ * wordmark ("marketing i bevægelse") wipes up behind the row as texture.
+ * From local t 4.2 one continuous accelerating gesture carries the row onto
+ * "Bemanding" and runs it at the camera with a horizontal velocity smear, so
+ * that chip is the object beat 4's scaleThrough cut takes over — the curve is
+ * deliberately unclamped so it is still gaining speed at the cut frame.
  *
  * Every animated property is written on every call; nothing reads a clock.
  */
@@ -172,7 +176,10 @@ export default {
      * travel and the scale, so speed and size grow together and the beat is
      * still gaining on the cut into beat 4 (which takes over with scaleThrough).
      */
-    const accFn = (u) => Math.pow(clamp((u - PUSH_T) / 0.95), 2.4);
+    // Never clamped at the top: the beat is handed over mid-gesture, so the
+    // curve has to keep gaining across the cut instead of parking on 1 and
+    // popping the velocity (and the motion blur) to zero.
+    const accFn = (u) => Math.pow(Math.max(0, (u - PUSH_T) / 0.95), 2.4);
     const acc = accFn(t);
     const rowScale = 1 + 2.20 * acc;
 
@@ -218,15 +225,17 @@ export default {
       }
       return v;
     };
-    // 1.5× the measured distance so the chip is still travelling, not parking,
-    // at the exact frame beat 4 takes the cut.
-    const rowXFn = (u) => shiftFn(u) + r.pushDX * 1.5 * accFn(u);
+    // The sideways travel saturates on the red chip's centre while the scale
+    // keeps accelerating, so the gesture reads as "toward the viewer" rather
+    // than "off to the left" once the chip has arrived.
+    const travel = (a) => (1 - Math.exp(-2.2 * a)) / (1 - Math.exp(-2.2));
+    const rowXFn = (u) => shiftFn(u) + r.pushDX * travel(accFn(u));
     const rx = rowXFn(t);
-    const ry = r.pushDY * 1.5 * acc;
+    const ry = r.pushDY * travel(acc);
     const vx = M.velocity(rowXFn, t);
     const vs = M.velocity((u) => 1 + 2.20 * accFn(u), t);
     D.setT(r.row, { x: rx, y: ry, s: rowScale, o: 1 });
-    const blur = clamp(Math.abs(vx) * 0.0026 + Math.abs(vs) * 340 * 0.0022, 0, 9);
+    const blur = clamp(Math.abs(vx) * 0.0032 + Math.abs(vs) * 340 * 0.0026, 0, 9);
     r.rowBlur.set(r.pushWrap, blur, blur * 0.20);
 
     /* ---- the three quiet links dim once the punchline lands -------------- */

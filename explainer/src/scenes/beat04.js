@@ -18,8 +18,7 @@ import * as M from '../motion.js';
 import * as D from '../design.js';
 import { brandmark } from '../assets.js';
 
-const { seg, spring, clamp, lerp, easeOutQuint, easeOutCubic, easeInCubic,
-        smoothstep, pulse } = M;
+const { seg, spring, clamp, lerp, easeOutQuint, easeOutCubic, smoothstep, pulse } = M;
 
 /* ------------------------------------------------------------------ *
  * Layout constants — all stage coordinates
@@ -113,11 +112,11 @@ export default {
       cx: CX, cy: CY, r: AURA[0], fill: 'rgba(227,6,19,.045)',
     }, mid);
 
-    r.guide = D.revealPath(D.svg('path', {
-      d: `M ${CX} ${CY - RING} A ${RING} ${RING} 0 1 1 ${CX} ${CY + RING} ` +
-         `A ${RING} ${RING} 0 1 1 ${CX} ${CY - RING}`,
-      stroke: '#DCDCD4', 'stroke-width': 2, fill: 'none',
-    }, mid));
+    r.guide = D.svg('circle', {
+      cx: CX, cy: CY, r: RING, fill: 'none',
+      stroke: '#C3C3B9', 'stroke-width': 2.4,
+      'stroke-dasharray': '2 11', 'stroke-linecap': 'round',
+    }, mid);
 
     r.auraRing = D.svg('circle', {
       cx: CX, cy: CY, r: AURA[0], fill: 'none',
@@ -198,7 +197,7 @@ export default {
     D.setT(r.brand, { x: 0, y: 0, s: 1, o: 1, centered: false });
 
     /* ---------------- the larger players establish first ------------------ */
-    const dim = seg(t, 5.05, 0.75, easeOutCubic);
+    const dim = seg(t, 5.02, 0.70, easeOutCubic);
     r.slabs.forEach((node, i) => {
       const s = SLABS[i];
       const p = spring(clamp((t - s.at) / 0.62), { freq: 1.05, damping: 0.7 });
@@ -230,14 +229,16 @@ export default {
     });
 
     /* ---------------- ring guide behind the modules ----------------------- */
-    r.guide.set(seg(t, 1.10, 0.62, easeOutQuint));
+    const guideIn = seg(t, 1.10, 0.58, easeOutQuint);
+    r.guide.setAttribute('r', lerp(RING * 0.84, RING, guideIn).toFixed(2));
+    r.guide.setAttribute('opacity', (0.95 * seg(t, 1.10, 0.34, easeOutCubic)).toFixed(4));
 
     /* ---------------- reach grows one step per connection ----------------- */
     let R = AURA[0];
     for (let i = 0; i < MODS.length; i++) {
       R += (AURA[i + 1] - AURA[i]) * seg(t, MODS[i].at + 0.04, 0.46, easeOutQuint);
     }
-    const claim = pulse(t, 5.15, 0.8, easeOutCubic);      // "langt større spillere"
+    const claim = pulse(t, 5.02, 0.72, easeOutCubic);     // "langt større spillere"
     const Rr = R * (1 + 0.026 * claim);
     const auraOn = seg(t, 1.22, 0.42, easeOutCubic);
     const reached = (R - AURA[0]) / (AURA[4] - AURA[0]);
@@ -264,14 +265,14 @@ export default {
       const inFn = (u) => spring(clamp((u - m.at + 0.30) / 0.64), { freq: 1.1, damping: 0.64 });
       const p = inFn(t);
       const say = clamp(pulse(t, m.at, 0.55, easeOutCubic)
-        + 0.85 * pulse(t, 5.18 + i * 0.13, 0.46, easeOutCubic), 0, 1);
+        + 0.85 * pulse(t, 5.05 + i * 0.12, 0.44, easeOutCubic), 0, 1);
       const v = Math.abs(M.velocity((u) => lerp(-0.42 * m.dy, 0, inFn(u)), t));
       D.setT(mod.root, {
         x: lerp(-0.42 * m.dx, 0, p),
         y: lerp(-0.42 * m.dy, 0, p),
         s: lerp(0.76, 1, p) * (1 + 0.05 * say),
         o: seg(t, m.at - 0.30, 0.2, easeOutCubic),
-        blur: clamp(v * 0.0038, 0, 9),
+        blur: clamp(v * 0.012, 0, 9),
       });
       mod.root.style.boxShadow = say > 0.05 ? D.SHADOW[3] : D.SHADOW[2];
       mod.ring.style.opacity = (say * 0.85).toFixed(3);
@@ -284,17 +285,17 @@ export default {
     const kickP = seg(t, 3.02, 0.4, easeOutQuint);
     D.setT(r.kick.inner, { x: 0, y: lerp(30, 0, kickP), s: 1, o: 1, centered: false });
 
-    const line = (ref, at) => {
-      const fn = (u) => lerp(ref.h + 10, 0, spring(clamp((u - at) / 0.64), { freq: 1.05, damping: 0.7 }));
+    const line = (ref, at, dur, damping, k) => {
+      const fn = (u) => lerp(ref.h + 10, 0, spring(clamp((u - at) / dur), { freq: 1.05, damping }));
       D.setT(ref.inner, {
         x: 0, y: fn(t), s: 1, o: 1,
-        blur: clamp(Math.abs(M.velocity(fn, t)) * 0.0055, 0, 8),
+        blur: clamp(Math.abs(M.velocity(fn, t)) * k, 0, 8),
         centered: false,
       });
     };
-    line(r.hl1, 3.30);   // "Coop Bank kan"
-    line(r.hl2, 3.85);   // "stå stærkere"
-    line(r.ld1, 4.58);
-    line(r.ld2, 4.76);
+    line(r.hl1, 3.30, 0.64, 0.70, 0.008);   // "at Coop Bank kan"
+    line(r.hl2, 3.85, 0.64, 0.70, 0.008);   // "stå stærkere"
+    line(r.ld1, 4.52, 0.52, 0.80, 0.005);
+    line(r.ld2, 4.70, 0.52, 0.80, 0.005);
   },
 };
