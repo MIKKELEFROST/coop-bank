@@ -88,7 +88,7 @@ export default {
 
     /* ---- ghost wordmark, furthest back: texture, never a headline -------- */
     const ghostClip = D.el('div', '', cam);
-    D.place(ghostClip, 960, 800, 1580, 184);
+    D.place(ghostClip, 960, 768, 1580, 184);
     ghostClip.style.cssText +=
       'overflow:hidden;display:flex;align-items:center;justify-content:center';
     const ghost = D.el('div', '', ghostClip, 'marketing i bevægelse');
@@ -101,14 +101,21 @@ export default {
     /* ---- quiet headline, upper left --------------------------------------- */
     const head = D.el('div', '', cam);
     head.style.cssText =
-      'position:absolute;left:302px;top:216px;will-change:transform,opacity';
+      'position:absolute;left:302px;top:232px;will-change:transform,opacity';
     const rule = D.el('div', '', head);
     rule.style.cssText =
-      `width:78px;height:6px;border-radius:3px;background:${D.C.red};` +
-      'margin-bottom:24px;transform-origin:0 50%';
-    const h = D.el('div', 'h3', head);
-    h.style.cssText += 'white-space:nowrap';
-    r.headWords = D.words(h, 'AI ændrer mere end vores værktøjer');
+      `width:86px;height:6px;border-radius:3px;background:${D.C.red};` +
+      'margin-bottom:26px;transform-origin:0 50%';
+    const headLine = 'font-size:54px;font-weight:700;letter-spacing:-.024em;' +
+      `line-height:1.15;color:${D.C.ink};white-space:nowrap`;
+    const l1 = D.el('div', '', head);
+    l1.style.cssText = headLine;
+    const l2 = D.el('div', '', head);
+    l2.style.cssText = headLine;
+    r.headWords = [
+      ...D.words(l1, 'AI ændrer mere end'),
+      ...D.words(l2, 'vores værktøjer'),
+    ];
     r.head = head;
     r.rule = rule;
 
@@ -136,14 +143,21 @@ export default {
     r.shadowRest = [D.SHADOW[2], D.SHADOW[2], D.SHADOW[2], D.SHADOW[3]];
     r.shadowLift = [D.SHADOW[3], D.SHADOW[3], D.SHADOW[3], D.SHADOW[4]];
 
-    /* ---- measured geometry: where "Bemanding" sits inside the row --------- */
+    /* ---- measured geometry ------------------------------------------------ */
     const rowC = D.stageCenter(row);
-    const lastC = D.stageCenter(r.chips[3]);
+    const edges = r.chips.map((c) => {
+      const b = D.stageCenter(c);
+      return { l: b.x - b.w / 2, r: b.x + b.w / 2, y: b.y };
+    });
+    // The row reserves its full width from the start, so it glides left as each
+    // link joins — the chain that is actually on screen stays centred.
+    r.shift = edges.map((e, k) => 960 - (edges[0].l + edges[k].r) / 2);
     // Scale the run about the red chip so it stays put while the rest sweeps by.
     row.style.transformOrigin =
-      `${(lastC.x - (rowC.x - rowC.w / 2)).toFixed(2)}px ${(rowC.h / 2).toFixed(2)}px`;
-    r.pushDX = 960 - lastC.x;
-    r.pushDY = 524 - lastC.y;
+      `${(edges[3].l + (edges[3].r - edges[3].l) / 2 - (rowC.x - rowC.w / 2)).toFixed(2)}px ` +
+      `${(rowC.h / 2).toFixed(2)}px`;
+    r.pushDX = 960 - (edges[3].l + edges[3].r) / 2;
+    r.pushDY = 522 - edges[3].y;
 
     return r;
   },
@@ -181,7 +195,7 @@ export default {
     });
 
     /* ---- ghost wordmark wipes up from its own clip ------------------------ */
-    const ghostP = seg(t, 1.52, 0.62, easeOutQuint);
+    const ghostP = seg(t, 1.20, 0.62, easeOutQuint);
     const ghostOut = seg(t, PUSH_T + 0.10, 0.48, easeOutCubic);
     D.setT(r.ghostClip, { x: 0, y: 0, s: 1, o: 1 });
     D.setT(r.ghost, {
@@ -190,18 +204,26 @@ export default {
       centered: false,
     });
 
-    /* ---- the row: transform + screen-space blur --------------------------- */
-    const rx = r.pushDX * centre;
+    /* ---- the row: glide while it builds, then run at the camera ----------- */
+    const shiftFn = (u) => {
+      let v = r.shift[0];
+      for (let k = 1; k < STEPS.length; k++) {
+        v += (r.shift[k] - r.shift[k - 1]) * seg(u, ARROW_AT[k - 1] + 0.02, 0.52, easeInOutCubic);
+      }
+      return v;
+    };
+    const rowXFn = (u) => shiftFn(u) + r.pushDX * centreFn(u);
+    const rx = rowXFn(t);
     const ry = r.pushDY * centre;
-    const vx = M.velocity((u) => r.pushDX * centreFn(u), t);
+    const vx = M.velocity(rowXFn, t);
     const vs = M.velocity((u) => 1 + 2.35 * zoomFn(u), t);
     D.setT(r.row, { x: rx, y: ry, s: rowScale, o: 1 });
     const blur = clamp(Math.abs(vx) * 0.0042 + Math.abs(vs) * 360 * 0.0034, 0, 12);
     r.pushWrap.style.filter = blur > 0.06 ? `blur(${blur.toFixed(2)}px)` : 'none';
 
     /* ---- the three quiet links dim once the punchline lands -------------- */
-    const dim = lerp(1, 0.55, seg(t, 3.68, 0.52, easeOutCubic));
-    const dimArrow = lerp(1, 0.42, seg(t, 3.68, 0.52, easeOutCubic));
+    const dim = lerp(1, 0.66, seg(t, 3.68, 0.52, easeOutCubic));
+    const dimArrow = lerp(1, 0.48, seg(t, 3.68, 0.52, easeOutCubic));
 
     r.arrows.forEach((a, i) => {
       const drawn = seg(t, ARROW_AT[i], 0.28, easeOutQuint);
