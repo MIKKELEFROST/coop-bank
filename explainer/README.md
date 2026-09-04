@@ -75,11 +75,23 @@ npm run assets                 # rescan assets/, rewrite asset-report.md
 npm run encode                 # frames -> MP4
 npm run verify                 # prove the render is order-independent
 npm run render                 # the whole production run, end to end
+
+npm run motion                 # where the film is moving, and where it rests
+npm run match -- cut.mp4       # measure what an editor did to a re-cut
+npm run retime -- --curve dist/measured-warp.json   # re-render it smoothly
 ```
 
 `npm run render` does all six steps: assets → voiceover deliverables → 2250
 frames → encode → contact sheet → ffprobe verification of resolution, frame
 rate, pixel format and duration.
+
+### Retiming
+
+Because `seekToTime()` takes any fractional second, the film can be made longer
+by rendering frames at instants between the master's own — the movement runs
+slower instead of stopping. That is the one thing a normal edit cannot do: an
+NLE can only hold a frame, and a held frame in a film that moves this
+continuously reads as judder. See [RETIMING.md](RETIMING.md).
 
 ### Interactive preview
 

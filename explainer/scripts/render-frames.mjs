@@ -101,12 +101,18 @@ export async function renderFrames(opts = {}) {
     for (let i = from; i <= to; i++) list.push(i);
   }
 
+  // Two ways to name a capture. A bare integer is a frame on the master
+  // timeline. `{ i, t }` is an output frame index `i` captured at master time
+  // `t` seconds — that is what a retimed render needs, because its frames sit
+  // *between* master frames and there is no integer that names them.
+  const items = list.map((x) => (typeof x === 'number' ? { i: x, t: null } : x));
+
   const t0 = Date.now();
   const written = [];
-  for (let n = 0; n < list.length; n++) {
-    const i = list[n];
+  for (let n = 0; n < items.length; n++) {
+    const { i, t } = items[n];
     // 1. set the exact frame  2. wait for the frame-ready signal  3. capture
-    await page.evaluate((f) => {
+    await page.evaluate(({ f, sec }) => {
       // Detach the stage before seeking and re-attach after. This tears down
       // every compositor layer, so the frame is rasterised from nothing but its
       // own state — no tile or raster-scale carried over from whichever frame
@@ -115,7 +121,7 @@ export async function renderFrames(opts = {}) {
       const parent = stage.parentNode;
       const anchor = stage.nextSibling;
       parent.removeChild(stage);
-      window.seekToFrame(f);
+      if (sec == null) window.seekToFrame(f); else window.seekToTime(sec);
       parent.insertBefore(stage, anchor);
       void stage.offsetWidth;
 
@@ -124,7 +130,7 @@ export async function renderFrames(opts = {}) {
         document.documentElement.dataset.frameReady = String(f);
         res();
       })));
-    }, i);
+    }, { f: i, sec: t });
     await page.waitForFunction(
       (f) => document.documentElement.dataset.frameReady === String(f),
       i, { timeout: 20000 }
@@ -139,12 +145,12 @@ export async function renderFrames(opts = {}) {
     await page.screenshot(shot);
     written.push(file);
 
-    if (!o.quiet && (n % 50 === 0 || n === list.length - 1)) {
+    if (!o.quiet && (n % 50 === 0 || n === items.length - 1)) {
       const done = n + 1;
       const rate = done / ((Date.now() - t0) / 1000);
-      const eta = (list.length - done) / Math.max(rate, 0.001);
+      const eta = (items.length - done) / Math.max(rate, 0.001);
       process.stdout.write(
-        `  frame ${String(i).padStart(5, '0')}  ${done}/${list.length}  ` +
+        `  frame ${String(i).padStart(5, '0')}  ${done}/${items.length}  ` +
         `${rate.toFixed(1)} fps  eta ${(eta / 60).toFixed(1)} min\n`
       );
     }

@@ -11,6 +11,7 @@
 # Usage:
 #   bash scripts/encode-video.sh
 #   FRAMES_DIR=dist/preview-frames OUT=dist/preview.mp4 bash scripts/encode-video.sh
+#   SILENT=1 bash scripts/encode-video.sh        # never mux audio, whatever exists
 # ==============================================================================
 set -euo pipefail
 
@@ -36,18 +37,20 @@ echo "[encode] $COUNT frames from $FRAMES_DIR at ${FPS} fps"
 mkdir -p "$(dirname "$OUT")"
 
 # ---- locate optional audio -------------------------------------------------
-VO=""
-for f in assets/audio/voiceover-da.wav assets/audio/voiceover-da.mp3; do
-  [ -f "$f" ] && VO="$f" && break
-done
-MUSIC=""
-for f in assets/audio/music.wav assets/audio/music.mp3; do
-  [ -f "$f" ] && MUSIC="$f" && break
-done
-SFX=""
-for f in assets/audio/sfx.wav assets/audio/sfx.mp3; do
-  [ -f "$f" ] && SFX="$f" && break
-done
+# SILENT=1 skips the search entirely. A deliverable the editor will lay their own
+# audio onto must be silent even if a stray voiceover file turns up in the tree.
+VO=""; MUSIC=""; SFX=""
+if [ -z "${SILENT:-}" ]; then
+  for f in assets/audio/voiceover-da.wav assets/audio/voiceover-da.mp3; do
+    [ -f "$f" ] && VO="$f" && break
+  done
+  for f in assets/audio/music.wav assets/audio/music.mp3; do
+    [ -f "$f" ] && MUSIC="$f" && break
+  done
+  for f in assets/audio/sfx.wav assets/audio/sfx.mp3; do
+    [ -f "$f" ] && SFX="$f" && break
+  done
+fi
 
 VIDEO_ARGS=(
   -framerate "$FPS"
@@ -98,7 +101,8 @@ if [ -n "$VO" ]; then
     "${COMMON_V[@]}" -c:a aac -b:a 192k -ar 48000 -ac 2 -shortest \
     "$OUT"
 else
-  echo "[encode] no voiceover found — rendering a silent visual preview"
+  [ -n "${SILENT:-}" ] && echo "[encode] SILENT=1 — no audio track" \
+                       || echo "[encode] no voiceover found — rendering a silent visual preview"
   "$FFMPEG" -y -hide_banner -loglevel warning -stats \
     "${VIDEO_ARGS[@]}" "${COMMON_V[@]}" -an "$OUT"
 fi

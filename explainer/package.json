@@ -16,7 +16,10 @@
     "encode": "bash scripts/encode-video.sh",
     "mix": "bash scripts/mix-audio.sh",
     "render": "node scripts/render-all.mjs",
-    "verify": "node scripts/verify.mjs"
+    "verify": "node scripts/verify.mjs",
+    "motion": "node scripts/motion-energy.mjs",
+    "match": "node scripts/match-cut.mjs",
+    "retime": "node scripts/retime.mjs"
   },
   "devDependencies": {
     "@ffmpeg-installer/ffmpeg": "^1.1.0",

@@ -10,3 +10,6 @@ dist/*
 !dist/voiceover-da.srt
 !dist/storyboard-contact-sheet.png
 !dist/coop-bank-ai-agenter-preview.mp4
+!dist/coop-bank-ai-agenter-retimet.mp4
+!dist/coop-bank-ai-agenter-retimet-2997.mp4
+!dist/retime-map.json
