@@ -95,11 +95,16 @@ if [ -n "$VO" ]; then
   FILTER="${FILTER}[${IDX}:a]aformat=sample_fmts=fltp:sample_rates=48000:channel_layouts=stereo,"
   FILTER="${FILTER}highpass=f=80,acompressor=threshold=0.08:ratio=3:attack=15:release=250:makeup=1.6,"
   FILTER="${FILTER}apad,atrim=0:${DURATION},asetpts=N/SR/TB[vo];"
-  # A second copy drives the sidechain that ducks the music.
-  # The key branch is re-formatted explicitly: a mono recording would otherwise
-  # reach sidechaincompress without a channel layout.
-  FILTER="${FILTER}[vo]asplit=2[vo_out][vo_key_raw];"
-  FILTER="${FILTER}[vo_key_raw]aformat=sample_fmts=fltp:sample_rates=48000:channel_layouts=stereo[vo_key];"
+  if [ -n "$MUSIC" ]; then
+    # A second copy drives the sidechain that ducks the music. Only split when
+    # there IS music — an unused branch leaves the graph with a dangling output.
+    # The key branch is re-formatted explicitly: a mono recording would
+    # otherwise reach sidechaincompress without a channel layout.
+    FILTER="${FILTER}[vo]asplit=2[vo_out][vo_key_raw];"
+    FILTER="${FILTER}[vo_key_raw]aformat=sample_fmts=fltp:sample_rates=48000:channel_layouts=stereo[vo_key];"
+  else
+    FILTER="${FILTER}[vo]anull[vo_out];"
+  fi
   STEMS="${STEMS}[vo_out]"; N=$((N + 1))
 fi
 
