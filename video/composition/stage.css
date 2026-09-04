@@ -1,0 +1,282 @@
+/* ---------------------------------------------------------------------------
+   stage.css — layout and element styling for the 1920x1080 composition.
+
+   Nothing in here may animate. Every moving property is owned by GSAP so the
+   rendered pixels are a pure function of t. The reset at the top enforces it.
+   --------------------------------------------------------------------------- */
+
+*,
+*::before,
+*::after {
+  /* Non-negotiable: a CSS transition or keyframe would tie pixels to
+     wall-clock time and break frame reproducibility. */
+  transition: none !important;
+  animation: none !important;
+  /* No will-change anywhere either. It is a hint for real-time compositing;
+     offline it only promotes layers, and composited layers rasterise from
+     history instead of deterministically. */
+  will-change: auto !important;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: #000;
+  overflow: hidden;
+}
+
+#stage {
+  position: relative;
+  width: var(--stage-w);
+  height: var(--stage-h);
+  overflow: hidden;
+  font-family: var(--font);
+  color: var(--ink);
+  /* No perspective / preserve-3d here on purpose. Putting a 3D context on the
+     stage promotes EVERY descendant into a composited 3D layer, including
+     plain text, and composited glyphs rasterise from layer history rather
+     than deterministically. The 3D context belongs on the three layers that
+     actually rotate in depth, and nowhere else. */
+  -webkit-font-smoothing: antialiased;
+  text-rendering: geometricPrecision;
+}
+
+#bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.layer {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  visibility: hidden;
+  opacity: 0;
+}
+
+/* Only these three move in depth. Everything else stays on the 2D path. */
+.layer.swarm,
+.layer.cardlayer,
+.layer.panellayer {
+  perspective: var(--perspective);
+  transform-style: preserve-3d;
+}
+
+/* -- Typography ------------------------------------------------------------ */
+.line {
+  max-width: 1420px;
+  text-align: center;
+  letter-spacing: var(--tracking);
+  font-weight: 700;
+  line-height: 1.06;
+}
+
+.line .w {
+  display: inline-block;
+  margin: 0 0.22em 0 0;
+}
+
+.line .w.accent {
+  color: var(--accent);
+}
+
+.size-hook .line {
+  font-size: var(--type-hook);
+  font-weight: 600;
+}
+.size-line .line {
+  font-size: var(--type-line);
+}
+.size-payoff .line {
+  font-size: var(--type-payoff);
+  font-weight: 800;
+}
+
+.still .line {
+  font-size: var(--type-line);
+  font-weight: 700;
+  color: #fff;
+  /* Measured: the dark punctuation beat carries a soft glow, not flat white. */
+  text-shadow: 0 0 60px rgba(255, 255, 255, 0.35);
+}
+
+/* -- Swarm tiles ----------------------------------------------------------- */
+.swarm {
+  transform-style: preserve-3d;
+}
+
+.tile {
+  position: absolute;
+  translate: -50% -50%;
+  background: var(--card-bg);
+  border-radius: 14px;
+  box-shadow: var(--card-shadow);
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 9px;
+  visibility: hidden;
+}
+
+.tile .row {
+  display: block;
+  height: 7px;
+  border-radius: 4px;
+  background: #e6e6ea;
+}
+.tile .row:nth-child(1) {
+  width: 72%;
+}
+.tile .row:nth-child(2) {
+  width: 92%;
+}
+.tile .row:nth-child(3) {
+  width: 54%;
+}
+
+/* -- Cards ----------------------------------------------------------------- */
+.card {
+  width: 720px;
+  background: var(--card-bg);
+  border-radius: var(--card-radius);
+  box-shadow: var(--card-shadow);
+  padding: 34px 38px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.card-head {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.card-dot {
+  width: 58px;
+  height: 58px;
+  border-radius: 16px;
+  background: var(--accent);
+  flex: 0 0 auto;
+}
+
+.card-title {
+  font-size: 34px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.card-cap {
+  font-size: var(--type-caption);
+  color: var(--ink-soft);
+  margin-top: 4px;
+}
+
+.card-row {
+  display: block;
+  height: 14px;
+  border-radius: 7px;
+  background: #ebebef;
+}
+.card-row:nth-child(even) {
+  width: 78%;
+}
+
+.card-dark {
+  background: #17171a;
+  color: #fff;
+}
+.card-dark .card-row {
+  background: #2a2a30;
+}
+.card-dark .card-cap {
+  color: #8a8a95;
+}
+
+/* -- Panel reveal ---------------------------------------------------------- */
+.panel-wrap {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  transform-style: preserve-3d;
+}
+
+.panel {
+  width: 330px;
+  margin-left: -70px;
+  margin-top: 54px;
+  background: rgba(38, 38, 44, 0.92);
+  border-radius: 20px;
+  padding: 24px 26px;
+  color: #fff;
+  box-shadow: var(--card-shadow);
+}
+
+.panel-title {
+  font-size: 30px;
+  font-weight: 600;
+  margin-bottom: 18px;
+  letter-spacing: -0.02em;
+}
+
+.panel-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 24px;
+  color: #d6d6de;
+  padding: 9px 0;
+}
+
+.panel-ico {
+  width: 20px;
+  height: 20px;
+  border-radius: 6px;
+  background: #55555f;
+  flex: 0 0 auto;
+}
+
+/* -- Mark and outro -------------------------------------------------------- */
+.mark-row {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+}
+
+.glyph {
+  width: 88px;
+  height: 88px;
+  border-radius: 24px;
+  background: var(--accent);
+  flex: 0 0 auto;
+}
+
+.mark-label {
+  font-size: 76px;
+  font-weight: 700;
+  letter-spacing: var(--tracking);
+}
+
+.outro {
+  flex-direction: column;
+  gap: 26px;
+}
+
+.tagline {
+  font-size: 34px;
+  color: var(--ink-soft);
+  letter-spacing: -0.01em;
+}
+
+/* Punctuation attached to an accent word keeps the ink colour: the accent
+   marks the word, not the full stop. */
+.line .w.accent .tail {
+  color: var(--ink);
+}

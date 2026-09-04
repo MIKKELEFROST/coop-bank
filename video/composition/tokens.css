@@ -1,0 +1,86 @@
+/* ---------------------------------------------------------------------------
+   tokens.css — style system measured from the four reference films.
+
+   Every value with a "measured" comment was sampled from the reference MP4s
+   (corner-pixel background sampling + saturated-pixel histogram per frame),
+   not chosen by eye. Swap the palette block when the project brand is known;
+   leave the structural rules alone.
+   --------------------------------------------------------------------------- */
+
+@font-face {
+  font-family: "InterVar";
+  src: url("../vendor/inter-latin.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: block; /* block, not swap: a swap would change pixels mid-render */
+}
+
+:root {
+  /* -- Canvas ------------------------------------------------------------- */
+  --stage-w: 1920px;
+  --stage-h: 1080px;
+
+  /* -- Palette ------------------------------------------------------------
+     Rule measured across all four references: the background colour is
+     CONSTANT for the whole film. Notion held #F3F3F3 and Airbnb #FDFBF2
+     unchanged end to end. Only Apple Stocks swaps, and there the swap IS
+     the narrative. Do not animate --bg unless the story turns on it.       */
+  --bg: #f3f3f3;              /* measured: Notion reference */
+  --ink: #0b0b0c;
+  --ink-soft: #6b6b70;
+
+  /* Exactly ONE accent colour, used on exactly ONE word in the payoff line.
+     Never two. Measured: Notion #273DFF, Airbnb #F22161, Whop #E93F25.     */
+  --accent: #273dff;
+
+  /* The dark punctuation beat. Measured: Notion #0A0A0A, Whop #2D1412,
+     Apple #181813. Never pure black.                                       */
+  --ink-bg: #0a0a0a;
+
+  /* -- Surfaces -----------------------------------------------------------
+     UI cards float free of any chrome. Soft, wide, low-opacity shadows —
+     the references never use a hard drop shadow.                           */
+  --card-bg: #ffffff;
+  --card-radius: 22px;
+  --card-shadow:
+    0 2px 6px rgba(16, 16, 20, 0.04),
+    0 14px 40px rgba(16, 16, 20, 0.08),
+    0 40px 90px rgba(16, 16, 20, 0.06);
+
+  /* -- Type ---------------------------------------------------------------
+     Modern grotesk, tight tracking, heavy weight, 2-7 words on screen.     */
+  --font: "InterVar", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Helvetica, Arial, sans-serif;
+  --type-hook: 92px;
+  --type-line: 108px;
+  --type-payoff: 124px;
+  --type-caption: 30px;
+  --tracking: -0.035em;
+
+  /* -- Depth --------------------------------------------------------------
+     2.5D: real perspective, modest translateZ. The references stay under
+     roughly 25 degrees of rotation — beyond that it reads as 3D software.  */
+  --perspective: 2400px;
+}
+
+/* The background is never flat: every reference carries a soft radial lift
+   toward the centre. Measured as a ~4% luminance delta centre-to-corner. */
+.stage-bg {
+  background:
+    radial-gradient(
+      120% 90% at 50% 45%,
+      rgba(255, 255, 255, 0.85) 0%,
+      rgba(255, 255, 255, 0) 60%
+    ),
+    var(--bg);
+}
+
+.stage-bg[data-mode="ink"] {
+  background:
+    radial-gradient(
+      100% 80% at 50% 50%,
+      rgba(255, 255, 255, 0.10) 0%,
+      rgba(255, 255, 255, 0) 55%
+    ),
+    var(--ink-bg);
+}

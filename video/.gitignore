@@ -1,0 +1,6 @@
+# Render artefacts. A full render is ~2,500 PNGs at 1920x1080; regenerate it
+# with `node scripts/capture.mjs && node scripts/assemble.mjs` rather than
+# committing it. vendor/ is deliberately NOT ignored — GSAP and Inter have to
+# be local for the render to be reproducible offline.
+node_modules/
+out/
