@@ -14,6 +14,7 @@ Genereret af `npm run assets` (`scripts/scan-assets.mjs`). Rapporten beskriver h
 | `assets/brand/fonts/inter-latin-700-normal.woff2` | 23.8 kB |
 | `assets/brand/fonts/inter-latin-800-normal.woff2` | 23.8 kB |
 | `assets/brand/fonts/inter-latin-900-normal.woff2` | 23.3 kB |
+| `assets/manifest.json` | 0.6 kB |
 
 ## 2. Assets brugt i videoen
 

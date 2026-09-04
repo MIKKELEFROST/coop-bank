@@ -13,7 +13,7 @@
  *   2.0 – 3.3   kinetisk typografi bygger "AI genererer ikke bare."
  *   3.3 – 4.4   SIGNATURTRÆKKET: "genererer" / "ikke bare." skydes ud til højre,
  *               "arbejder" / "sammen med os." kommer ind fra venstre bag en maske
- *   4.8 – 5.5   navets fire bjælker bliver grønne — "udfører opgaver"
+ *   4.8 – 5.6   navets fire agent-felter vender til grønne flueben — "udfører opgaver"
  *   5.6 – 6.3   navet folder sig ud til et agentkontrolpanel
  *   6.5 – 8.4   en menneskestyret markør tænder, slukker og prioriterer
  *   8.5 – 9.3   alt kører ud af billedet; slutspørgsmålet lander
@@ -46,16 +46,21 @@ function mix(a, b, p) {
   return `rgb(${r}, ${g}, ${l})`;
 }
 
-/* The four agents, echoing beat 11's cluster: same titles, same hub. */
+/* The hub sits low in stage 1 so it lands on top of the Marketing hub beat 11
+   hands over, then rides up to the frame centre as it travels right. */
+const HUB_Y = 566;
+
+/* The four agents, echoing beat 11's cluster: same titles, same quadrants. */
+
 const AGENTS = [
-  { title: 'Webudvikling',           icon: 'code',  color: C.blue,    tint: C.cardBlue,   x: 516,  y: 318, link: [858, 446, 560, 376] },
-  { title: 'Idéudvikling & content', icon: 'spark', color: '#A9740B', tint: C.cardYellow, x: 1404, y: 318, link: [1062, 446, 1360, 376] },
-  { title: 'Tone of Voice',          icon: 'voice', color: '#1E8A4E', tint: C.cardGreen,  x: 516,  y: 762, link: [858, 634, 560, 704] },
-  { title: 'Strategi & analyse',     icon: 'chart', color: C.red,     tint: C.cardRed,    x: 1404, y: 762, link: [1062, 634, 1360, 704] },
+  { title: 'Webudvikling',           icon: 'code',  color: C.blue,    tint: C.cardBlue,   x: 516,  y: 318, link: [858, 472, 560, 376] },
+  { title: 'Idéudvikling & content', icon: 'spark', color: '#A9740B', tint: C.cardYellow, x: 1404, y: 318, link: [1062, 472, 1360, 376] },
+  { title: 'Tone of Voice',          icon: 'voice', color: '#1E8A4E', tint: C.cardGreen,  x: 516,  y: 776, link: [858, 660, 560, 718] },
+  { title: 'Strategi & analyse',     icon: 'chart', color: C.red,     tint: C.cardRed,    x: 1404, y: 776, link: [1062, 660, 1360, 718] },
 ];
 AGENTS.forEach((a) => {
   a.dirX = a.x < 960 ? -1 : 1;
-  a.dirY = a.y < 540 ? -1 : 1;
+  a.dirY = a.y < HUB_Y ? -1 : 1;
 });
 
 /* Control-panel rows. onAt/offAt drive the knob purely from t. */
@@ -133,7 +138,7 @@ export default {
 
     /* ---------------- the Marketing hub plate ---------------- */
     const plate = D.el('div', '', cam);
-    D.place(plate, 960, 540, 340, 196);
+    D.place(plate, 960, HUB_Y, 340, 196);
     plate.style.cssText +=
       'background:#fff;border:1px solid ' + C.line + ';border-radius:30px;box-shadow:' + D.SHADOW[3] + ';';
     r.plate = plate;
@@ -336,12 +341,12 @@ export default {
       const posX = (u) => {
         const inP = spring(clamp((u + 0.16 - i * 0.07) / 0.72), { freq: 1.05, damping: 0.66 });
         const outP = seg(u, 1.48 + i * 0.05, 0.46, easeInCubic);
-        return lerp(a.dirX * 176, 0, inP) + (960 - a.x) * outP;
+        return lerp(a.dirX * 190, 0, inP) + (960 - a.x) * outP;
       };
       const posY = (u) => {
         const inP = spring(clamp((u + 0.16 - i * 0.07) / 0.72), { freq: 1.05, damping: 0.66 });
         const outP = seg(u, 1.48 + i * 0.05, 0.46, easeInCubic);
-        return lerp(a.dirY * 128, 0, inP) + (540 - a.y) * outP;
+        return lerp(a.dirY * 74, 0, inP) + (HUB_Y - a.y) * outP;
       };
       const inP = spring(clamp((t + 0.16 - i * 0.07) / 0.72), { freq: 1.05, damping: 0.66 });
       const outP = seg(t, 1.48 + i * 0.05, 0.46, easeInCubic);
@@ -360,15 +365,16 @@ export default {
     /* ================= 2 · the hub travels right ===================== */
 
     const plateX = (u) => 370 * seg(u, 1.98, 0.62, easeInOutCubic);
+    const plateY = (u) => (PANEL.cy - HUB_Y) * seg(u, 1.98, 0.62, easeInOutCubic);
     const plateIn = spring(clamp(t / 0.66), { freq: 1.10, damping: 0.66 });
     const plateOut = seg(t, 5.62, 0.42, easeInCubic);           // folds out into the panel
     const plateS = lerp(0.88, 1, plateIn) * lerp(1, 0.90, seg(t, 1.98, 0.62, easeInOutCubic))
                  * lerp(1, 1.22, plateOut);
     D.setT(r.plate, {
-      x: plateX(t), y: 0,
+      x: plateX(t), y: plateY(t),
       s: plateS,
       o: (1 - seg(t, 5.70, 0.30, easeOutCubic)),
-      blur: clamp(Math.abs(M.velocity(plateX, t)) * 0.0030, 0, 9),
+      blur: clamp(Math.hypot(M.velocity(plateX, t), M.velocity(plateY, t)) * 0.0030, 0, 9),
     });
 
     // The core breathes open exactly once as the cluster lands.
@@ -381,11 +387,11 @@ export default {
     // one by one on "…og udfører opgaver".
     r.slots.forEach((s, i) => {
       const a = AGENTS[i];
-      const born = spring(clamp((t - (0.56 + i * 0.11)) / 0.50), { freq: 1.10, damping: 0.64 });
+      const born = spring(clamp((t - (0.22 + i * 0.09)) / 0.50), { freq: 1.10, damping: 0.64 });
       const done = seg(t, 4.86 + i * 0.18, 0.28, easeOutCubic);
       const kick = pulse(t, 4.86 + i * 0.18, 0.46, easeOutCubic);
       s.sq.style.background = mix(a.tint, C.cardGreen, done);
-      s.sq.style.opacity = seg(t, 0.56 + i * 0.11, 0.18, easeOutCubic).toFixed(4);
+      s.sq.style.opacity = seg(t, 0.22 + i * 0.09, 0.18, easeOutCubic).toFixed(4);
       s.sq.style.transform = `scale(${(lerp(0.55, 1, born) * (1 + 0.11 * kick)).toFixed(4)})`;
       s.ic.style.opacity = (1 - done).toFixed(4);
       s.ic.style.color = a.color;
@@ -402,12 +408,13 @@ export default {
 
     /* ================= 3 · kinetic typography ======================== */
 
-    // The whole left column leaves to the left at the end of the beat.
-    const typeX = (u) => -900 * seg(u, 8.52, 0.44, easeInCubic);
+    // The whole left column leaves the frame to the left — it travels out at
+    // full opacity and is only switched off once it is genuinely off-screen.
+    const typeX = (u) => -1900 * seg(u, 8.44, 0.46, easeInCubic);
     D.setT(r.typeWrap, {
       x: typeX(t), y: 0, s: 1,
-      o: 1 - seg(t, 8.72, 0.20, easeOutCubic),
-      blur: clamp(Math.abs(M.velocity(typeX, t)) * 0.0026, 0, 12),
+      o: 1 - seg(t, 8.83, 0.06, M.linear),
+      blur: clamp(Math.abs(M.velocity(typeX, t)) * 0.0022, 0, 13),
       centered: false,
     });
 
@@ -465,12 +472,12 @@ export default {
     /* ================= 4 · the agent control panel =================== */
 
     const panelIn = spring(clamp((t - 5.66) / 0.62), { freq: 1.05, damping: 0.66 });
-    const panelX = (u) => 840 * seg(u, 8.56, 0.44, easeInCubic);
+    const panelX = (u) => 1800 * seg(u, 8.48, 0.46, easeInCubic);
     D.setT(r.panel, {
       x: panelX(t), y: 0,
       s: lerp(0.52, 1, panelIn),
-      o: seg(t, 5.66, 0.22, easeOutCubic) * (1 - seg(t, 8.76, 0.20, easeOutCubic)),
-      blur: clamp(Math.abs(M.velocity(panelX, t)) * 0.0026, 0, 12),
+      o: seg(t, 5.66, 0.22, easeOutCubic) * (1 - seg(t, 8.86, 0.06, M.linear)),
+      blur: clamp(Math.abs(M.velocity(panelX, t)) * 0.0022, 0, 13),
     });
 
     const headIn = seg(t, 5.78, 0.30, easeOutQuint);
@@ -522,19 +529,21 @@ export default {
     D.setT(r.cursor, {
       x: cp.x, y: cp.y,
       s: 1 - 0.16 * clamp(clickDip),
-      o: seg(t, 6.16, 0.16, easeOutCubic) * (1 - seg(t, 8.44, 0.22, easeOutCubic)),
+      o: seg(t, 6.16, 0.16, easeOutCubic) * (1 - seg(t, 8.56, 0.14, M.linear)),
       blur: clamp(Math.hypot(cvx, cvy) * 0.0022, 0, 10),
     });
 
     /* ================= 5 · the closing question ====================== */
+    /* Everything below settles by t = 9.26 and is written as an exact constant
+       afterwards, so frames from 9.3 s to the end of the film are identical.  */
 
-    const q1In = spring(clamp((t - 8.92) / 0.32), { freq: 0.95, damping: 0.72 });
-    D.setT(r.q1, { x: 0, y: lerp(54, 0, q1In), s: 1, o: seg(t, 8.92, 0.22, easeOutCubic) });
+    const q1In = spring(clamp((t - 8.88) / 0.32), { freq: 0.95, damping: 0.74 });
+    D.setT(r.q1, { x: 0, y: lerp(52, 0, q1In), s: 1, o: seg(t, 8.88, 0.22, easeOutCubic) });
 
-    const q2In = spring(clamp((t - 8.98) / 0.32), { freq: 0.95, damping: 0.72 });
-    D.setT(r.q2, { x: 0, y: lerp(54, 0, q2In), s: 1, o: seg(t, 8.98, 0.22, easeOutCubic) });
+    const q2In = spring(clamp((t - 8.94) / 0.32), { freq: 0.95, damping: 0.74 });
+    D.setT(r.q2, { x: 0, y: lerp(52, 0, q2In), s: 1, o: seg(t, 8.94, 0.22, easeOutCubic) });
 
-    const sgIn = spring(clamp((t - 9.08) / 0.20), { freq: 1.0, damping: 0.75 });
-    D.setT(r.sign, { x: 0, y: lerp(14, 0, sgIn), s: 1, o: seg(t, 9.08, 0.20, easeOutCubic) });
+    const sgIn = spring(clamp((t - 9.04) / 0.20), { freq: 1.0, damping: 0.78 });
+    D.setT(r.sign, { x: 0, y: lerp(14, 0, sgIn), s: 1, o: seg(t, 9.04, 0.20, easeOutCubic) });
   },
 };

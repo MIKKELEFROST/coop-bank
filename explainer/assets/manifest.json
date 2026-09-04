@@ -24,6 +24,7 @@
     "brand/fonts/inter-latin-600-normal.woff2",
     "brand/fonts/inter-latin-700-normal.woff2",
     "brand/fonts/inter-latin-800-normal.woff2",
-    "brand/fonts/inter-latin-900-normal.woff2"
+    "brand/fonts/inter-latin-900-normal.woff2",
+    "manifest.json"
   ]
 }

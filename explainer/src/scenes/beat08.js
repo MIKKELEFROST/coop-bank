@@ -305,6 +305,15 @@ export default {
 
     /* ---------------- the three travelling tokens ---------------- */
     r.tokens = XF.map((x) => taskToken(cam, TASKS[x.src], AGENTS[x.dst].color));
+    // Stacking order. Without this the tokens are created last and therefore
+    // paint over everything, so a token in the final third of its flight sat on
+    // top of the agent row above its destination and clipped the human card's
+    // edge. Tokens now travel *behind* both columns — which is what the route
+    // was designed for — and only read in the open gap between them.
+    r.tokens.forEach((tok) => { tok.root.style.zIndex = '2'; });
+    r.lcard.style.zIndex = '4';
+    r.slots.forEach((s) => { s.style.zIndex = '4'; });
+    r.destRows.forEach((d) => { d.root.style.zIndex = '5'; });
     r.tokenBlur = XF.map((_, i) => D.makeDirBlur('b8tok' + i));
     // A token starts life sitting exactly on its source row — its own label
     // over the row's label — so the departure reads as the row lifting out of
@@ -318,7 +327,7 @@ export default {
     hc.style.cssText +=
       `border-radius:28px;background:#fff;border:2px solid ${D.C.red};` +
       `box-shadow:${D.SHADOW[4]};display:flex;flex-direction:column;align-items:center;` +
-      'padding:26px 20px';
+      'padding:26px 20px;z-index:6';
     r.hc = hc;
 
     const hring = D.el('div', '', hc);
