@@ -45,13 +45,14 @@ const BTN = [
 ];
 const BTN_R = 27;
 
-const CARD_TOP = CARD_Y - CARD_H / 2;        // 457
 const CARD_BOT = CARD_Y + CARD_H / 2;        // 783
 
-/** The loop line that runs back from card 3 to card 1. */
+/** The loop line that runs back from card 3 to card 1, ending in an arrowhead. */
 const LOOP_D =
   `M ${CX[2]} ${CARD_BOT + 12} C ${CX[2]} 892, 1230 886, 960 886 ` +
-  `C 690 886, ${CX[0]} 892, ${CX[0]} ${CARD_BOT + 12}`;
+  `C 690 886, ${CX[0]} 892, ${CX[0]} ${CARD_BOT + 27}`;
+const LOOP_HEAD_D =
+  `M ${CX[0]} ${CARD_BOT + 9} L ${CX[0] + 10} ${CARD_BOT + 27} L ${CX[0] - 10} ${CARD_BOT + 27} Z`;
 
 /* ------------------------------------------------------------------ *
  * The loop schedule. c = [card1, card2, card3] tick times, local seconds.
@@ -71,29 +72,31 @@ const STEPS = [
   {
     over: '01 · ANALYSÉR', title: 'Find mønstret',
     body: 'Agenten opdager afvigelser og potentiale.',
-    color: D.C.blue, tint: D.C.cardBlue, at: 0.36,
+    color: D.C.blue, at: 0.24,
   },
   {
     over: '02 · TEST', title: 'Sammenlign',
     body: 'Variationer testes mod det samme mål.',
-    color: '#C08A15', tint: D.C.cardYellow, at: 0.48,
+    color: '#C08A15', at: 0.33,
   },
   {
     over: '03 · FORBEDR', title: 'Vinderen skaleres',
     body: 'Anbefalingen er klar til godkendelse.',
-    color: '#2FA55F', tint: D.C.cardGreen, at: 0.60,
+    color: '#2FA55F', at: 0.42,
   },
 ];
 
 /** Bar-chart states: resting, then one per pass. The outlier walks right. */
 const BARS = [
-  [18, 26, 22, 30, 24, 20],
-  [22, 30, 18, 44, 26, 21],
-  [24, 20, 34, 29, 46, 25],
-  [21, 33, 25, 20, 28, 48],
+  [16, 24, 19, 27, 21, 30, 18, 23],
+  [20, 27, 15, 24, 46, 26, 22, 19],
+  [23, 18, 30, 21, 28, 49, 20, 25],
+  [19, 29, 22, 17, 26, 24, 31, 52],
 ];
-const BAR_HL = [3, 4, 5];
-const BAR_GREY = '#CFCFC7';
+const BAR_HL = [4, 5, 7];
+const BAR_GREY = '#D3D3CB';
+const BAR_W = 28;
+const BAR_STEP = 45.15;
 
 /* ------------------------------------------------------------------ *
  * Small pure helpers
@@ -232,6 +235,9 @@ export default {
     D.place(slider, 960, 300, 10, 6);
     slider.style.cssText += `background:${D.C.red};border-radius:3px`;
     r.slider = slider;
+    // A horizontal-only smear: the bar travels sideways, so an isotropic blur
+    // would just dissolve it into a stain.
+    r.sliderBlur = D.makeDirBlur('b6slider');
 
     /* ---------------- sub-line ---------------- */
     const subWrap = D.el('div', '', cam);
@@ -239,8 +245,8 @@ export default {
     subWrap.style.cssText += 'overflow:hidden;padding:5px 6px';
     const sub = D.el('div', '', subWrap, 'Løbende optimering – hurtigere og mere ensartet.');
     sub.style.cssText =
-      'font-size:30px;font-weight:500;color:#5A5A57;letter-spacing:-.012em;' +
-      'white-space:nowrap;line-height:42px';
+      'font-size:32px;font-weight:500;color:#5A5A57;letter-spacing:-.012em;' +
+      'white-space:nowrap;line-height:44px';
     r.subWrap = subWrap; r.sub = sub;
 
     /* ---------------- connector layer, behind the cards ---------------- */
@@ -258,9 +264,7 @@ export default {
       d: LOOP_D, stroke: D.C.red, 'stroke-width': 4.5, fill: 'none', 'stroke-linecap': 'round',
     }, layer));
     r.loopHead = D.svg('path', {
-      d: `M ${CX[0] - 11} ${CARD_BOT + 27} L ${CX[0]} ${CARD_BOT + 12} L ${CX[0] + 11} ${CARD_BOT + 27}`,
-      stroke: '#C4C4BB', 'stroke-width': 3.4, fill: 'none',
-      'stroke-linecap': 'round', 'stroke-linejoin': 'round',
+      d: LOOP_HEAD_D, fill: '#C9C9C0', stroke: 'none',
     }, layer);
 
     /* ---------------- three cards ---------------- */
@@ -272,15 +276,18 @@ export default {
 
     /* card 1 — bar chart */
     const chart = D.svg('svg', {
-      viewBox: '0 0 250 52', width: 250, height: 52, fill: 'none',
+      viewBox: '0 0 344 55', width: 344, height: 55, fill: 'none',
     }, r.cards[0].foot);
-    chart.style.cssText = 'position:absolute;left:0;bottom:0;overflow:visible';
+    chart.style.cssText = 'position:absolute;left:0;bottom:-2px;overflow:visible';
     r.bars = BARS[0].map((_, i) => D.svg('rect', {
-      x: i * 44, y: 0, width: 30, height: 10, rx: 5, fill: BAR_GREY,
+      x: (i * BAR_STEP).toFixed(2), y: 0, width: BAR_W, height: 10, rx: 5, fill: BAR_GREY,
     }, chart));
+    r.chartBase = D.svg('rect', {
+      x: 0, y: 52.5, width: 344, height: 2, fill: D.C.line,
+    }, chart);
 
     /* card 2 — A/B status chip */
-    r.abChip = statusChip(r.cards[1].foot, 320, [
+    r.abChip = statusChip(r.cards[1].foot, 296, [
       { text: 'A / B · klar',      color: '#C9C9C1', ink: '#8A8A84' },
       { text: 'A / B · kører',     color: D.C.yellow, ink: '#8A6410' },
       { text: 'A / B · afsluttet', color: D.C.green,  ink: '#1E8A4E' },
@@ -353,10 +360,10 @@ export default {
     });
 
     /* ---------------- sub-line: a clip reveal, not a fade ---------------- */
-    const subP = seg(t, 0.30, 0.44, easeOutQuint);
-    r.subWrap.style.height = (subP * 52).toFixed(2) + 'px';
+    const subP = seg(t, 0.26, 0.44, easeOutQuint);
+    r.subWrap.style.height = (subP * 54).toFixed(2) + 'px';
     D.setT(r.subWrap, { x: 0, y: 0, s: 1, o: subP > 0.02 ? 1 : 0 });
-    D.setT(r.sub, { x: 0, y: lerp(44, 0, subP), s: 1, o: 1, centered: false });
+    D.setT(r.sub, { x: 0, y: lerp(46, 0, subP), s: 1, o: 1, centered: false });
 
     /* ---------------- which step is current, right now ------------------- */
     const act = [0, 1, 2].map((i) => clamp(
@@ -383,19 +390,21 @@ export default {
       const s = Math.max(a[0] + a[1] + a[2], 1e-4);
       return (r.wordBox[0].x * a[0] + r.wordBox[1].x * a[1] + r.wordBox[2].x * a[2]) / s;
     };
-    D.setT(r.slider, {
-      x: sxSafe - 960, y: 0, s: 1, o: sliderOn,
-      blur: clamp(Math.abs(M.velocity(slideFn, t)) * 0.004, 0, 9),
-    });
+    D.setT(r.slider, { x: sxSafe - 960, y: 0, s: 1, o: sliderOn, blur: 0 });
+    r.sliderBlur.set(r.slider, clamp(Math.abs(M.velocity(slideFn, t)) * 0.0026, 0, 11), 0);
 
     /* ---------------- connector stubs + loop line ------------------------ */
-    const stubOn = seg(t, 0.64, 0.34, easeOutCubic);
+    const stubOn = seg(t, 0.52, 0.32, easeOutCubic);
     r.stubs.forEach((s) => s.setAttribute('opacity', stubOn.toFixed(4)));
 
     const loopP = seg(t, 2.10, 0.44, easeOutQuint);
     r.loopBase.set(loopP);
     r.loopBase.node.style.opacity = (loopP > 0.004 ? 0.95 : 0).toFixed(3);
+    // The arrowhead flashes as the returning sweep lands and the next pass starts.
+    const headHit = clamp(RETURNS.reduce((s, ret) =>
+      s + pulse(t, ret[0] + ret[1] - 0.07, 0.30, easeOutCubic), 0), 0, 1);
     r.loopHead.setAttribute('opacity', (0.95 * seg(t, 2.46, 0.24, easeOutCubic)).toFixed(4));
+    r.loopHead.setAttribute('fill', mix('#C9C9C0', D.C.red, headHit));
 
     // Travelling highlight on the loop line, once between each pair of passes.
     // One monotone progress value, reset to zero in the quiet gap at t = 3.00.
@@ -406,7 +415,7 @@ export default {
     );
     const retOn = clamp(RETURNS.reduce((s, ret) =>
       s + band(t, ret[0] - 0.02, ret[0] + ret[1] + 0.04, 0.045), 0), 0, 1);
-    const WIN = 0.30;
+    const WIN = 0.24;
     const u = clamp(retU) * (1 + WIN);
     r.loopChase.set(clamp(u), clamp(u - WIN));
     r.loopChase.node.style.opacity = (retOn * 0.95).toFixed(3);
@@ -427,8 +436,8 @@ export default {
         blur: clamp(Math.abs(M.velocity(inFn, t)) * 0.005, 0, 7),
       });
       c.body.style.boxShadow = a > 0.30 ? D.SHADOW[4] : D.SHADOW[2];
-      c.ring.style.opacity = clamp(0.75 * a + 0.35 * k, 0, 1).toFixed(3);
-      c.ring.style.transform = `scale(${(1 + 0.010 * (1 - clamp(a + k, 0, 1))).toFixed(4)})`;
+      c.ring.style.opacity = clamp(0.26 * a + 0.80 * k, 0, 1).toFixed(3);
+      c.ring.style.transform = `scale(${(1 + 0.012 * (1 - clamp(a + k, 0, 1))).toFixed(4)})`;
 
       // Top accent bar: fills on the tick, snaps back as the next card takes over.
       const fill = clamp(r.win[i].reduce((s, w) => s
@@ -436,11 +445,12 @@ export default {
         - (w[1] === Infinity ? 0 : seg(t, w[1] + 0.02, 0.10, easeOutCubic)), 0), 0, 1);
       c.accent.style.transform = `scaleX(${fill.toFixed(5)})`;
       c.accent.style.opacity = clamp(0.25 + 0.75 * a, 0, 1).toFixed(3);
-      c.over.style.opacity = (0.62 + 0.38 * clamp(a + 0.5 * k, 0, 1)).toFixed(3);
+      c.over.style.opacity = (0.74 + 0.26 * clamp(a + 0.5 * k, 0, 1)).toFixed(3);
     });
 
     /* ---------------- card 1: the bar chart finds the outlier ------------ */
     const stepAt = PASSES.map((p) => p.c[0]);
+    r.chartBase.setAttribute('opacity', seg(t, STEPS[0].at + 0.06, 0.24, easeOutCubic).toFixed(4));
     r.bars.forEach((bar, i) => {
       let hgt = BARS[0][i];
       for (let k = 0; k < PASSES.length; k++) {
@@ -500,11 +510,12 @@ export default {
     r.btns.forEach((b, j) => {
       const target = j === 0 ? 1 : 2;
       const flash = clamp(PASSES.reduce((s, p) => s + pulse(t, p.c[target] - 0.15, 0.34, easeOutCubic), 0), 0, 1);
-      const inP = spring(clamp((t - (0.68 + j * 0.10)) / 0.52), { freq: 1.15, damping: 0.64 });
+      const bAt = 0.56 + j * 0.10;
+      const inP = spring(clamp((t - bAt) / 0.52), { freq: 1.15, damping: 0.64 });
       D.setT(b.root, {
         x: 0, y: 0,
         s: lerp(0.35, 1, inP) * (1 + 0.12 * flash),
-        o: seg(t, 0.68 + j * 0.10, 0.16, easeOutCubic),
+        o: seg(t, bAt, 0.16, easeOutCubic),
       });
       b.root.style.background = mix(D.C.ink, D.C.red, flash);
       b.root.style.boxShadow = flash > 0.25 ? D.SHADOW[3] : D.SHADOW[2];

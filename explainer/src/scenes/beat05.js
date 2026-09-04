@@ -36,12 +36,11 @@ const { seg, spring, clamp, lerp, easeOutQuint, easeOutCubic, easeInOutCubic,
 const LEFT_X = 348;          // left edge of the text column
 const LEFT_W = 552;
 
+// Card box: x 900..1520, y 320..760.
 const CARD_CX = 1210, CARD_CY = 540, CARD_W = 620, CARD_H = 440;
-const CARD_L = CARD_CX - CARD_W / 2;   // 900
-const CARD_R = CARD_CX + CARD_W / 2;   // 1520
 
 const PX0 = 936, PX1 = 1484;           // chart plot area
-const PY_TOP = 482, PY_BOT = 706;
+const PY_TOP = 492, PY_BOT = 716;
 
 /** The trend: a believable series that dips twice and ends high. */
 const VALUES = [0.16, 0.30, 0.22, 0.44, 0.36, 0.58, 0.70, 0.90];
@@ -51,13 +50,13 @@ const NODES = VALUES.map((v, k) => ({
 }));
 const LAST = NODES[NODES.length - 1];
 
-const GRID_Y = [660, 604, 548, 492];
+const GRID_Y = [670, 614, 558, 502];
 
 const PILL_X = 1344, PILL_Y = 457;
 
 const N_DOTS = 210;                    // swarm size
 const CLOUD_L = 915, CLOUD_R = 1505;   // unorganised cloud extent
-const CLOUD_T = 468, CLOUD_B = 716;
+const CLOUD_T = 478, CLOUD_B = 726;
 
 const TOTAL = 42680;
 
@@ -137,7 +136,7 @@ export default {
     r.card = card;
 
     const header = D.el('div', '', cam);
-    D.place(header, CARD_CX, 372, PX1 - PX0);
+    D.place(header, CARD_CX, 374, PX1 - PX0);
     header.style.cssText +=
       'display:flex;align-items:flex-end;justify-content:space-between';
     const lbl = D.el('div', '', header, 'Marketingdata');
@@ -205,10 +204,10 @@ export default {
         ex = 2000 + h2 * 190;
         ey = lerp(150, 930, h3);
       } else if (h1 < 0.71) {               // top
-        ex = lerp(700, 1780, h2);
+        ex = lerp(400, 1810, h2);
         ey = -70 - h3 * 190;
       } else {                              // bottom
-        ex = lerp(700, 1780, h2);
+        ex = lerp(400, 1810, h2);
         ey = 1150 + h3 * 190;
       }
 
@@ -317,7 +316,7 @@ export default {
 
     /* ---------------- the blue rule under "indsigter" ---------------- */
     const m = D.stageCenter(r.hl2.span);
-    const ulW = Math.max(60, m.w);
+    const ulW = Math.max(60, m.w - 5);   // trim the trailing side bearing
     const ul = D.el('div', '', cam);
     ul.style.cssText =
       `position:absolute;left:${LEFT_X}px;top:${(m.y + m.h / 2 + 6).toFixed(1)}px;` +
@@ -351,13 +350,13 @@ export default {
       o: seg(t, 0.16, 0.20, easeOutCubic), centered: false,
     });
 
-    const countP = seg(t, 0.52, 0.80, easeOutQuint);
+    const countP = seg(t, 0.38, 0.92, easeOutQuint);
     r.num.textContent = daNum(Math.round(TOTAL * countP));
-    const numSay = pulse(t, 1.34, 0.46, easeOutCubic);
+    const numSay = pulse(t, 1.38, 0.46, easeOutCubic);
     D.setT(r.num, {
-      x: 0, y: lerp(18, 0, spring(clamp((t - 0.42) / 0.5), { freq: 1.1, damping: 0.7 })),
+      x: 0, y: lerp(18, 0, spring(clamp((t - 0.38) / 0.5), { freq: 1.1, damping: 0.7 })),
       s: 1 + 0.035 * numSay,
-      o: seg(t, 0.42, 0.20, easeOutCubic), centered: false, origin: '100% 50%',
+      o: seg(t, 0.38, 0.18, easeOutCubic), centered: false, origin: '100% 50%',
     });
 
     /* ---------------- grid + baseline: the empty dashboard --------------- */
@@ -369,8 +368,8 @@ export default {
     const flyFn = (u) => 760 * seg(u, 0.30, 0.44, easeOutCubic);
     const snapFn = (u) => 190 * seg(u, 1.28, 0.44, easeInOutCubic);
     const swarmBlur =
-      clamp(Math.abs(M.velocity(flyFn, t)) * 0.0068, 0, 9) +
-      clamp(Math.abs(M.velocity(snapFn, t)) * 0.0068, 0, 3.5);
+      clamp(Math.abs(M.velocity(flyFn, t)) * 0.0042, 0, 5.5) +
+      clamp(Math.abs(M.velocity(snapFn, t)) * 0.0042, 0, 1.8);
     r.dotsG.style.filter = swarmBlur > 0.05 ? `blur(${swarmBlur.toFixed(2)}px)` : 'none';
 
     for (let i = 0; i < r.dots.length; i++) {
@@ -429,7 +428,7 @@ export default {
     D.setT(r.block, { x: 0, y: 0, s: 1, o: 1 });
 
     // The headline opens a gap between the kicker and the supporting line.
-    const open = spring(clamp((t - 2.80) / 0.74), { freq: 1.0, damping: 0.70 });
+    const open = spring(clamp((t - 2.92) / 0.72), { freq: 1.0, damping: 0.70 });
     D.setT(r.kick.wrap, { x: 0, y: lerp(138, 0, open), s: 1, o: 1, centered: false });
     D.setT(r.supWrap, { x: 0, y: lerp(-138, 0, open), s: 1, o: 1, centered: false });
 
@@ -445,17 +444,17 @@ export default {
         centered: false,
       });
     };
-    supLine(r.sup1, 0.54);          // "store datamængder"
-    supLine(r.sup2, 1.80);          // "finde mønstre"
-    supLine(r.hl1, 3.00, 0.52);     // "bedre"
-    supLine(r.hl2, 3.22, 0.52);     // "indsigter"
+    supLine(r.sup1, 0.80);          // "store datamængder"
+    supLine(r.sup2, 2.00);          // "finde mønstre"
+    supLine(r.hl1, 3.16, 0.52);     // "bedre"
+    supLine(r.hl2, 3.42, 0.52);     // "indsigter"
 
     // "indsigter" turns blue as it is spoken, with the rule sweeping under it.
-    const blueP = seg(t, 3.58, 0.36, easeOutCubic);
+    const blueP = seg(t, 3.74, 0.34, easeOutCubic);
     r.hl1.span.style.color = '#151515';
     r.hl2.span.style.color = inkToBlue(blueP);
 
-    const sweep = seg(t, 3.62, 0.40, easeOutQuint);
+    const sweep = seg(t, 3.78, 0.38, easeOutQuint);
     D.setT(r.ul, {
       x: 0, y: 0, sx: sweep, sy: 1,
       o: Math.min(1, sweep * 26), centered: false,
