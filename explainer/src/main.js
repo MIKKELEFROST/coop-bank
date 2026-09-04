@@ -47,7 +47,11 @@ async function boot() {
 
   // Public, deterministic API — the only entry points the renderer uses.
   window.seekToFrame = (i) => seekToFrame(i);
-  window.seekToTime = (s) => seekToTime(s);
+  // The second argument is the playback speed at this instant, which
+  // velocity-derived motion blur needs; a retimed render passes it per frame.
+  // Forwarding it matters — an arrow that only took `s` would silently drop it
+  // and every retimed frame would come out with full-speed blur.
+  window.seekToTime = (s, timeScale) => seekToTime(s, timeScale);
   window.getDuration = () => DURATION;
   window.getFrameCount = () => FRAME_COUNT;
   window.getFps = () => FPS;
