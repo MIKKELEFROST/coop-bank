@@ -1,0 +1,9 @@
+node_modules/
+dist/frames/
+dist/preview-frames/
+dist/beats/
+dist/check-*.png
+dist/.verify-*/
+dist/.sheet.html
+dist/preview-lowres.mp4
+.DS_Store

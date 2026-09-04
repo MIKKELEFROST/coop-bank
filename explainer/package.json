@@ -1,0 +1,25 @@
+{
+  "name": "coop-bank-ai-agenter-explainer",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Deterministic frame-by-frame SaaS explainer video: Coop Bank Marketing og AI-agenter",
+  "scripts": {
+    "dev": "node scripts/serve.mjs 5178",
+    "assets": "node scripts/scan-assets.mjs",
+    "frame": "node scripts/render-frames.mjs",
+    "frames": "node scripts/render-frames.mjs",
+    "beats": "node scripts/render-frames.mjs --beats",
+    "sheet": "node scripts/contact-sheet.mjs",
+    "voiceover": "node scripts/voiceover.mjs",
+    "preview": "node scripts/render-preview.mjs",
+    "encode": "bash scripts/encode-video.sh",
+    "render": "node scripts/render-all.mjs",
+    "verify": "node scripts/verify.mjs"
+  },
+  "devDependencies": {
+    "@ffmpeg-installer/ffmpeg": "^1.1.0",
+    "@fontsource/inter": "^5.2.8",
+    "playwright": "^1.56.0"
+  }
+}

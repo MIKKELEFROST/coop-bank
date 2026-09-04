@@ -1,0 +1,267 @@
+/* ==================================================================
+   styles.css — Coop Bank AI-agenter explainer
+   Static appearance only. Every animated property is written per frame
+   from JavaScript, so this file must never contain @keyframes or
+   transition declarations.
+   ================================================================== */
+
+@font-face { font-family: 'Inter'; font-style: normal; font-weight: 400; font-display: block;
+  src: url('../assets/brand/fonts/inter-latin-400-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Inter'; font-style: normal; font-weight: 500; font-display: block;
+  src: url('../assets/brand/fonts/inter-latin-500-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Inter'; font-style: normal; font-weight: 600; font-display: block;
+  src: url('../assets/brand/fonts/inter-latin-600-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Inter'; font-style: normal; font-weight: 700; font-display: block;
+  src: url('../assets/brand/fonts/inter-latin-700-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Inter'; font-style: normal; font-weight: 800; font-display: block;
+  src: url('../assets/brand/fonts/inter-latin-800-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Inter'; font-style: normal; font-weight: 900; font-display: block;
+  src: url('../assets/brand/fonts/inter-latin-900-normal.woff2') format('woff2'); }
+
+:root {
+  --bg: #F6F6F3;
+  --bg-deep: #EFEFEA;
+  --ink: #151515;
+  --ink-soft: #5A5A57;
+  --ink-faint: #9A9A95;
+  --red: #E30613;
+  --red-deep: #B00410;
+  --blue: #315BFF;
+  --green: #48C77A;
+  --yellow: #FFC84A;
+  --card-red: #FFD9DC;
+  --card-blue: #DCE7FF;
+  --card-green: #DDF7E5;
+  --card-yellow: #FFEFC9;
+  --line: #E4E4DE;
+  --line-soft: #EDEDE8;
+  --dark-bg: #0B0B0C;
+  --dark-panel: #141416;
+  --dark-line: #2A2A2E;
+  --dark-ink: #F4F4F1;
+  --dark-ink-soft: #8E8E93;
+  --sh1: 0 1px 2px rgba(21,21,21,.05), 0 2px 6px rgba(21,21,21,.04);
+  --sh2: 0 2px 6px rgba(21,21,21,.06), 0 8px 20px rgba(21,21,21,.06);
+  --sh3: 0 6px 16px rgba(21,21,21,.08), 0 20px 44px rgba(21,21,21,.09);
+  --sh4: 0 12px 30px rgba(21,21,21,.10), 0 38px 80px rgba(21,21,21,.12);
+}
+
+/* Determinism guard: nothing may animate itself. */
+*, *::before, *::after {
+  animation: none !important;
+  transition: none !important;
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0; padding: 0; background: #1b1b1b;
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: geometricPrecision;
+  overflow: hidden;
+}
+
+/* ---------------- Stage ---------------- */
+
+#stage-wrap { position: fixed; inset: 0; display: block; }
+#stage {
+  position: absolute; top: 0; left: 0;
+  width: 1920px; height: 1080px;
+  background: var(--bg);
+  overflow: hidden;
+  transform-origin: 0 0;
+  color: var(--ink);
+}
+body.render #stage-wrap { position: static; }
+body.render #stage { position: absolute; top: 0; left: 0; transform: none !important; }
+
+.scene {
+  position: absolute; inset: 0;
+  transform-origin: 960px 540px;
+  will-change: transform, opacity, filter;
+  backface-visibility: hidden;
+}
+.scene-inner { position: absolute; inset: 0; }
+
+/* Full-bleed backdrop a scene can own (beat 9 goes dark). */
+.backdrop { position: absolute; inset: 0; }
+
+.layer { position: absolute; top: 0; left: 0; pointer-events: none; overflow: visible; }
+
+/* ---------------- Brand mark ---------------- */
+
+.brandmark {
+  position: absolute; left: 88px; top: 62px;
+  display: flex; align-items: center; gap: 12px;
+  font-size: 19px; font-weight: 700; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--ink-soft);
+}
+.brandmark .bm-dot { width: 13px; height: 13px; border-radius: 50%; background: var(--red); }
+.brandmark.on-dark { color: var(--dark-ink-soft); }
+
+/* ---------------- Typography ---------------- */
+
+.h1 { font-size: 104px; font-weight: 800; letter-spacing: -.035em; line-height: .98; margin: 0; }
+.h1-xl { font-size: 118px; font-weight: 800; letter-spacing: -.038em; line-height: .96; margin: 0; }
+.h2 { font-size: 68px; font-weight: 800; letter-spacing: -.028em; line-height: 1.03; margin: 0; }
+.h3 { font-size: 46px; font-weight: 700; letter-spacing: -.02em; line-height: 1.12; margin: 0; }
+.lead { font-size: 38px; font-weight: 500; letter-spacing: -.012em; line-height: 1.32; color: var(--ink-soft); margin: 0; }
+.kicker {
+  font-size: 22px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--ink-faint); margin: 0;
+}
+.accent-red { color: var(--red); }
+.accent-blue { color: var(--blue); }
+.accent-green { color: var(--green); }
+.on-dark { color: var(--dark-ink); }
+.on-dark .lead, .lead.on-dark { color: var(--dark-ink-soft); }
+
+.w-outer { display: inline-block; overflow: hidden; padding: 0 .04em; margin: 0 -.04em; vertical-align: bottom; }
+.w { display: inline-block; will-change: transform, opacity; }
+
+/* ---------------- Cards ---------------- */
+
+.card {
+  background: #fff; border: 1px solid var(--line);
+  box-shadow: var(--sh2);
+  position: relative;
+}
+.card.tone-red    { background: var(--card-red);    border-color: #F7C3C8; }
+.card.tone-blue   { background: var(--card-blue);   border-color: #C6D6FF; }
+.card.tone-green  { background: var(--card-green);  border-color: #BFEACF; }
+.card.tone-yellow { background: var(--card-yellow); border-color: #F5DEA8; }
+.card.tone-ink    { background: var(--ink); border-color: #000; color: #fff; }
+.card.tone-dark   { background: var(--dark-panel); border-color: var(--dark-line); color: var(--dark-ink); }
+
+.card-head { display: flex; align-items: center; gap: 14px; }
+.card-icon { display: flex; align-items: center; justify-content: center; flex: none; }
+.card-title { font-size: 32px; font-weight: 700; letter-spacing: -.018em; line-height: 1.15; }
+.card-sub { font-size: 22px; font-weight: 600; color: var(--ink-soft); margin-top: 8px; letter-spacing: -.005em; }
+.card-body { font-size: 24px; font-weight: 500; color: var(--ink-soft); margin-top: 12px; line-height: 1.35; }
+.card-badge {
+  display: inline-flex; align-items: center; gap: 8px; margin-top: 16px;
+  font-size: 19px; font-weight: 700; color: #1E8A4E;
+  background: var(--card-green); border: 1px solid #BFEACF;
+  padding: 6px 14px; border-radius: 999px;
+}
+.card.tone-dark .card-sub, .card.tone-dark .card-body { color: var(--dark-ink-soft); }
+
+/* ---------------- Chips ---------------- */
+
+.chip {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 16px 28px; border-radius: 16px;
+  font-size: 30px; font-weight: 700; letter-spacing: -.015em;
+  background: #fff; border: 1px solid var(--line); box-shadow: var(--sh2);
+  white-space: nowrap; color: var(--ink);
+}
+.chip.tone-red    { background: var(--card-red);    border-color: #F7C3C8; }
+.chip.tone-blue   { background: var(--card-blue);   border-color: #C6D6FF; }
+.chip.tone-green  { background: var(--card-green);  border-color: #BFEACF; }
+.chip.tone-yellow { background: var(--card-yellow); border-color: #F5DEA8; }
+.chip.tone-solid  { background: var(--red); border-color: var(--red); color: #fff; }
+.chip.tone-ink    { background: var(--ink); border-color: var(--ink); color: #fff; }
+.chip.tone-outline{ background: transparent; border: 2px solid var(--ink); box-shadow: none; }
+.chip.tone-dark   { background: var(--dark-panel); border-color: var(--dark-line); color: var(--dark-ink); }
+.chip.sm { padding: 10px 20px; font-size: 22px; border-radius: 12px; }
+
+/* ---------------- App window ---------------- */
+
+.appwin {
+  background: #fff; border: 1px solid var(--line);
+  box-shadow: var(--sh4); overflow: hidden; position: relative;
+}
+.appwin-bar {
+  height: 52px; background: #FBFBF9; border-bottom: 1px solid var(--line-soft);
+  display: flex; align-items: center; gap: 16px; padding: 0 20px;
+}
+.appwin-dots { display: flex; gap: 8px; }
+.appwin-dots .dot { width: 11px; height: 11px; border-radius: 50%; background: #DFDFD8; display: block; }
+.appwin-title { font-size: 19px; font-weight: 600; color: var(--ink-faint); letter-spacing: -.005em; }
+.appwin-body { position: relative; width: 100%; height: calc(100% - 52px); }
+.appwin.dark { background: var(--dark-panel); border-color: var(--dark-line); }
+.appwin.dark .appwin-bar { background: #17171A; border-bottom-color: var(--dark-line); }
+
+/* ---------------- Agent core ---------------- */
+
+.agent-core { position: relative; display: block; }
+.agent-core .agent-ring {
+  position: absolute; inset: 0; border-radius: 50%;
+  border: 2px solid rgba(227,6,19,.28);
+}
+.agent-core .agent-dot {
+  position: absolute; inset: 18%; border-radius: 50%;
+  background: radial-gradient(circle at 34% 30%, #FF4C58 0%, var(--red) 46%, var(--red-deep) 100%);
+  box-shadow: 0 8px 24px rgba(227,6,19,.30), inset 0 -3px 10px rgba(0,0,0,.18);
+}
+
+/* Rounded "device" plate the core sits on in beat 2. */
+.core-plate {
+  position: absolute; border-radius: 34px; background: #fff;
+  border: 1px solid var(--line); box-shadow: var(--sh4);
+}
+
+/* ---------------- Misc scene furniture ---------------- */
+
+.rule { position: absolute; background: var(--line); }
+.dotgrid { position: absolute; }
+.tick {
+  width: 30px; height: 30px; border-radius: 50%; background: var(--green);
+  display: flex; align-items: center; justify-content: center; color: #fff;
+}
+.statusdot { width: 12px; height: 12px; border-radius: 50%; background: var(--green); }
+.toggle {
+  width: 66px; height: 36px; border-radius: 999px; background: #DEDED7; position: relative;
+}
+.toggle .knob {
+  position: absolute; top: 4px; left: 4px; width: 28px; height: 28px;
+  border-radius: 50%; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,.2);
+}
+.cursor-arrow { position: absolute; width: 34px; height: 34px; }
+
+/* Beat 9 dark treatment */
+.scanlines {
+  position: absolute; inset: 0;
+  background-image: repeating-linear-gradient(
+    to bottom, rgba(255,255,255,.030) 0px, rgba(255,255,255,.030) 1px,
+    rgba(255,255,255,0) 1px, rgba(255,255,255,0) 4px);
+}
+
+/* ==================================================================
+   Preview chrome — never present in render mode
+   ================================================================== */
+
+#preview-ui {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 50;
+  background: rgba(16,16,18,.94); color: #EDEDE8; padding: 12px 20px 16px;
+  font-size: 13px; font-family: 'Inter', system-ui, sans-serif;
+  border-top: 1px solid #2b2b2e;
+}
+body.render #preview-ui { display: none !important; }
+#preview-ui .row { display: flex; align-items: center; gap: 14px; }
+#preview-ui button {
+  background: #2a2a2e; color: #EDEDE8; border: 1px solid #3a3a40;
+  border-radius: 8px; padding: 7px 13px; font: inherit; font-weight: 600; cursor: pointer;
+}
+#preview-ui button:hover { background: #35353b; }
+#preview-ui .mono { font-variant-numeric: tabular-nums; font-weight: 600; letter-spacing: .02em; }
+#scrub { flex: 1; accent-color: #E30613; height: 22px; }
+#markers { position: relative; height: 30px; margin-top: 8px; }
+#markers .mk {
+  position: absolute; top: 0; height: 30px; border-left: 1px solid #45454c;
+  padding-left: 5px; font-size: 10px; color: #9a9aa2; cursor: pointer; white-space: nowrap;
+  overflow: hidden;
+}
+#markers .mk:hover { color: #fff; }
+#markers .mk.active { color: #fff; border-left-color: #E30613; }
+#markers .mk b { display: block; font-size: 11px; }
+#safe-guides { position: absolute; inset: 0; pointer-events: none; display: none; }
+body.guides #safe-guides { display: block; }
+#safe-guides .g916 {
+  position: absolute; top: 0; bottom: 0; left: 656px; width: 608px;
+  border-left: 1px dashed rgba(227,6,19,.5); border-right: 1px dashed rgba(227,6,19,.5);
+}
+#safe-guides .gtitle {
+  position: absolute; left: 96px; right: 96px; top: 54px; bottom: 54px;
+  border: 1px dashed rgba(49,91,255,.4);
+}

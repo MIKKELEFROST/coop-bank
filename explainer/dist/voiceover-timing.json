@@ -1,0 +1,670 @@
+{
+  "project": "Coop Bank · Marketing og AI-agenter",
+  "language": "da-DK",
+  "fps": 30,
+  "duration": 75,
+  "frameCount": 2250,
+  "targetWpm": 163,
+  "measuredAverageWpm": 167.2,
+  "totalWords": 209,
+  "direction": {
+    "language": "Dansk (rigsdansk, neutral)",
+    "tone": "Rolig, troværdig, intelligent og fremadskuende. Ledelsesniveau — ikke reklamestemme.",
+    "pace": "Ca. 160–165 ord i minuttet som gennemsnit.",
+    "notes": [
+      "Læg et lille ophold efter hvert punktum – billedet skifter dér.",
+      "Beat 3, 4, 8 og 9 er tætpakkede: lever dem let komprimeret (ca. 175–190 ord/min) eller lad linjen glide få tiendedele ind over næste klip.",
+      "Beat 11 og 12 har luft: tal roligt og lad navnene stå tydeligt.",
+      "Det afsluttende spørgsmål siges roligt og lukkes ikke af – det skal stå åbent.",
+      "Produktnavne udtales som på engelsk: Claude, Webflow, MCP, TonePilot, CMO Copilot."
+    ]
+  },
+  "audioPresent": false,
+  "beats": [
+    {
+      "beat": 1,
+      "id": "beat-01",
+      "title": "Åbning — Marketing og AI-agenter",
+      "start": 0,
+      "end": 4.5,
+      "duration": 4.5,
+      "startFrame": 0,
+      "endFrame": 134,
+      "words": 14,
+      "naturalDurationSec": 5.15,
+      "requiredWpm": 187,
+      "delivery": "let komprimeret",
+      "vo": "Marketing er ved at ændre sig. Ikke kun gennem nye værktøjer, men gennem AI-agenter.",
+      "onScreen": [
+        "Marketing og AI-agenter"
+      ]
+    },
+    {
+      "beat": 2,
+      "id": "beat-02",
+      "title": "Hvad er en AI-agent",
+      "start": 4.5,
+      "end": 10.5,
+      "duration": 6,
+      "startFrame": 135,
+      "endFrame": 314,
+      "words": 17,
+      "naturalDurationSec": 6.26,
+      "requiredWpm": 170,
+      "delivery": "let komprimeret",
+      "vo": "En AI-agent kan selv planlægge, søge information, træffe beslutninger og udføre handlinger for at nå et mål.",
+      "onScreen": [
+        "En AI-agent kan selv …",
+        "Planlæg",
+        "Søg",
+        "Beslut",
+        "Udfør"
+      ]
+    },
+    {
+      "beat": 3,
+      "id": "beat-03",
+      "title": "Organisatorisk konsekvens",
+      "start": 10.5,
+      "end": 15.5,
+      "duration": 5,
+      "startFrame": 315,
+      "endFrame": 464,
+      "words": 17,
+      "naturalDurationSec": 6.26,
+      "requiredWpm": 204,
+      "delivery": "komprimeret",
+      "vo": "Det ændrer vores arbejdsgange – og på sigt også vores roller og hvor mange vi skal være.",
+      "onScreen": [
+        "Værktøjer",
+        "Arbejdsgange",
+        "Roller",
+        "Bemanding"
+      ]
+    },
+    {
+      "beat": 4,
+      "id": "beat-04",
+      "title": "Konkurrencefordel for en mindre afdeling",
+      "start": 15.5,
+      "end": 21.5,
+      "duration": 6,
+      "startFrame": 465,
+      "endFrame": 644,
+      "words": 19,
+      "naturalDurationSec": 6.99,
+      "requiredWpm": 190,
+      "delivery": "let komprimeret",
+      "vo": "For en mindre marketingafdeling som vores betyder det, at Coop Bank kan stå stærkere over for langt større spillere.",
+      "onScreen": [
+        "Mindre afdeling.",
+        "Større slagkraft."
+      ]
+    },
+    {
+      "beat": 5,
+      "id": "beat-05",
+      "title": "Bedre indsigter",
+      "start": 21.5,
+      "end": 26,
+      "duration": 4.5,
+      "startFrame": 645,
+      "endFrame": 779,
+      "words": 12,
+      "naturalDurationSec": 4.42,
+      "requiredWpm": 160,
+      "delivery": "normal",
+      "vo": "Agenter kan analysere store datamængder, finde mønstre og give os bedre indsigter.",
+      "onScreen": [
+        "Bedre indsigter",
+        "Store datamængder bliver til tydelige mønstre."
+      ]
+    },
+    {
+      "beat": 6,
+      "id": "beat-06",
+      "title": "Løbende optimering",
+      "start": 26,
+      "end": 30.5,
+      "duration": 4.5,
+      "startFrame": 780,
+      "endFrame": 914,
+      "words": 13,
+      "naturalDurationSec": 4.79,
+      "requiredWpm": 173,
+      "delivery": "let komprimeret",
+      "vo": "De kan løbende analysere, teste og anbefale forbedringer – hurtigere og mere ensartet.",
+      "onScreen": [
+        "Analysér · Test · Forbedr"
+      ]
+    },
+    {
+      "beat": 7,
+      "id": "beat-07",
+      "title": "Digital synlighed",
+      "start": 30.5,
+      "end": 35.5,
+      "duration": 5,
+      "startFrame": 915,
+      "endFrame": 1064,
+      "words": 12,
+      "naturalDurationSec": 4.42,
+      "requiredWpm": 144,
+      "delivery": "normal",
+      "vo": "Når AI-agenter søger nettet efter svar, bliver vores digitale synlighed endnu vigtigere.",
+      "onScreen": [
+        "AI søger.",
+        "Bliver vi fundet?"
+      ]
+    },
+    {
+      "beat": 8,
+      "id": "beat-08",
+      "title": "Ny rolle: lede frem for at udføre",
+      "start": 35.5,
+      "end": 41.5,
+      "duration": 6,
+      "startFrame": 1065,
+      "endFrame": 1244,
+      "words": 19,
+      "naturalDurationSec": 6.99,
+      "requiredWpm": 190,
+      "delivery": "let komprimeret",
+      "vo": "Vores rolle flytter sig fra at udføre alt selv til i højere grad at lede, kontrollere og prioritere AI-agenter.",
+      "onScreen": [
+        "Fra selv at udføre – til at lede arbejdet",
+        "Lede · Kontrollere · Prioritere"
+      ]
+    },
+    {
+      "beat": 9,
+      "id": "beat-09",
+      "title": "Tillid og kontrol (mørk sekvens)",
+      "start": 41.5,
+      "end": 46,
+      "duration": 4.5,
+      "startFrame": 1245,
+      "endFrame": 1379,
+      "words": 14,
+      "naturalDurationSec": 5.15,
+      "requiredWpm": 187,
+      "delivery": "let komprimeret",
+      "vo": "Jo mere vi overlader til AI, desto vigtigere bliver spørgsmålet om tillid og kontrol.",
+      "onScreen": [
+        "Høj tillid kræver høj kontrol"
+      ]
+    },
+    {
+      "beat": 10,
+      "id": "beat-10",
+      "title": "Overgang til nutid",
+      "start": 46,
+      "end": 50,
+      "duration": 4,
+      "startFrame": 1380,
+      "endFrame": 1499,
+      "words": 12,
+      "naturalDurationSec": 4.42,
+      "requiredWpm": 180,
+      "delivery": "let komprimeret",
+      "vo": "Og det er ikke kun fremtid. Vi arbejder allerede sådan i dag.",
+      "onScreen": [
+        "Sådan bruger vi AI-agenter i dag"
+      ]
+    },
+    {
+      "beat": 11,
+      "id": "beat-11",
+      "title": "Fire agenter i drift",
+      "start": 50,
+      "end": 62.5,
+      "duration": 12.5,
+      "startFrame": 1500,
+      "endFrame": 1874,
+      "words": 30,
+      "naturalDurationSec": 11.04,
+      "requiredWpm": 144,
+      "delivery": "normal",
+      "vo": "Mikkel udvikler i Webflow med Claude og MCP. Nicole bruger en agent til idéer og content. TonePilot sikrer vores tone of voice. CMO Copilot sparrer om strategi, analyse og beslutninger.",
+      "onScreen": [
+        "Fire agenter. Ét samlet marketingsystem.",
+        "Webudvikling",
+        "Idéudvikling & content",
+        "Tone of Voice",
+        "Strategi & analyse"
+      ]
+    },
+    {
+      "beat": 12,
+      "id": "beat-12",
+      "title": "Konklusion og ledelsesspørgsmål",
+      "start": 62.5,
+      "end": 75,
+      "duration": 12.5,
+      "startFrame": 1875,
+      "endFrame": 2249,
+      "words": 30,
+      "naturalDurationSec": 11.04,
+      "requiredWpm": 144,
+      "delivery": "normal",
+      "vo": "Fælles for dem er, at AI ikke bare genererer. AI arbejder sammen med os og udfører opgaver. Er fremtidens marketingchef den, der beslutter, hvilke agenter der skal tændes og slukkes?",
+      "onScreen": [
+        "AI genererer ikke bare.",
+        "AI arbejder sammen med os.",
+        "Er fremtidens marketingchef den, der tænder og slukker agenter?"
+      ]
+    }
+  ],
+  "lines": [
+    {
+      "index": 1,
+      "start": 0.25,
+      "end": 2.17,
+      "startFrame": 8,
+      "words": 6,
+      "text": "Marketing er ved at ændre sig."
+    },
+    {
+      "index": 2,
+      "start": 2.25,
+      "end": 4.62,
+      "startFrame": 68,
+      "words": 8,
+      "text": "Ikke kun gennem nye værktøjer, men gennem AI-agenter."
+    },
+    {
+      "index": 3,
+      "start": 4.7,
+      "end": 7.52,
+      "startFrame": 141,
+      "words": 7,
+      "text": "En AI-agent kan selv planlægge, søge information,"
+    },
+    {
+      "index": 4,
+      "start": 7.6,
+      "end": 10.62,
+      "startFrame": 228,
+      "words": 10,
+      "text": "træffe beslutninger og udføre handlinger for at nå et mål."
+    },
+    {
+      "index": 5,
+      "start": 10.7,
+      "end": 13.32,
+      "startFrame": 321,
+      "words": 11,
+      "text": "Det ændrer vores arbejdsgange – og på sigt også vores roller"
+    },
+    {
+      "index": 6,
+      "start": 13.4,
+      "end": 15.62,
+      "startFrame": 402,
+      "words": 6,
+      "text": "og hvor mange vi skal være."
+    },
+    {
+      "index": 7,
+      "start": 15.7,
+      "end": 18.42,
+      "startFrame": 471,
+      "words": 8,
+      "text": "For en mindre marketingafdeling som vores betyder det,"
+    },
+    {
+      "index": 8,
+      "start": 18.5,
+      "end": 21.62,
+      "startFrame": 555,
+      "words": 11,
+      "text": "at Coop Bank kan stå stærkere over for langt større spillere."
+    },
+    {
+      "index": 9,
+      "start": 21.7,
+      "end": 24.12,
+      "startFrame": 651,
+      "words": 7,
+      "text": "Agenter kan analysere store datamængder, finde mønstre"
+    },
+    {
+      "index": 10,
+      "start": 24.2,
+      "end": 26.12,
+      "startFrame": 726,
+      "words": 5,
+      "text": "og give os bedre indsigter."
+    },
+    {
+      "index": 11,
+      "start": 26.2,
+      "end": 28.82,
+      "startFrame": 786,
+      "words": 8,
+      "text": "De kan løbende analysere, teste og anbefale forbedringer"
+    },
+    {
+      "index": 12,
+      "start": 28.9,
+      "end": 30.62,
+      "startFrame": 867,
+      "words": 5,
+      "text": "– hurtigere og mere ensartet."
+    },
+    {
+      "index": 13,
+      "start": 30.7,
+      "end": 32.92,
+      "startFrame": 921,
+      "words": 6,
+      "text": "Når AI-agenter søger nettet efter svar,"
+    },
+    {
+      "index": 14,
+      "start": 33,
+      "end": 35.56,
+      "startFrame": 990,
+      "words": 6,
+      "text": "bliver vores digitale synlighed endnu vigtigere."
+    },
+    {
+      "index": 15,
+      "start": 35.7,
+      "end": 38.32,
+      "startFrame": 1071,
+      "words": 9,
+      "text": "Vores rolle flytter sig fra at udføre alt selv"
+    },
+    {
+      "index": 16,
+      "start": 38.4,
+      "end": 41.62,
+      "startFrame": 1152,
+      "words": 10,
+      "text": "til i højere grad at lede, kontrollere og prioritere AI-agenter."
+    },
+    {
+      "index": 17,
+      "start": 41.7,
+      "end": 43.22,
+      "startFrame": 1251,
+      "words": 6,
+      "text": "Jo mere vi overlader til AI,"
+    },
+    {
+      "index": 18,
+      "start": 43.3,
+      "end": 46.12,
+      "startFrame": 1299,
+      "words": 8,
+      "text": "desto vigtigere bliver spørgsmålet om tillid og kontrol."
+    },
+    {
+      "index": 19,
+      "start": 46.2,
+      "end": 47.82,
+      "startFrame": 1386,
+      "words": 6,
+      "text": "Og det er ikke kun fremtid."
+    },
+    {
+      "index": 20,
+      "start": 47.9,
+      "end": 50.22,
+      "startFrame": 1437,
+      "words": 6,
+      "text": "Vi arbejder allerede sådan i dag."
+    },
+    {
+      "index": 21,
+      "start": 50.3,
+      "end": 53.32,
+      "startFrame": 1509,
+      "words": 8,
+      "text": "Mikkel udvikler i Webflow med Claude og MCP."
+    },
+    {
+      "index": 22,
+      "start": 53.4,
+      "end": 56.32,
+      "startFrame": 1602,
+      "words": 8,
+      "text": "Nicole bruger en agent til idéer og content."
+    },
+    {
+      "index": 23,
+      "start": 56.4,
+      "end": 58.92,
+      "startFrame": 1692,
+      "words": 6,
+      "text": "TonePilot sikrer vores tone of voice."
+    },
+    {
+      "index": 24,
+      "start": 59,
+      "end": 62.29,
+      "startFrame": 1770,
+      "words": 8,
+      "text": "CMO Copilot sparrer om strategi, analyse og beslutninger."
+    },
+    {
+      "index": 25,
+      "start": 62.8,
+      "end": 65.52,
+      "startFrame": 1884,
+      "words": 9,
+      "text": "Fælles for dem er, at AI ikke bare genererer."
+    },
+    {
+      "index": 26,
+      "start": 65.6,
+      "end": 68.52,
+      "startFrame": 1968,
+      "words": 8,
+      "text": "AI arbejder sammen med os og udfører opgaver."
+    },
+    {
+      "index": 27,
+      "start": 68.6,
+      "end": 70.72,
+      "startFrame": 2058,
+      "words": 6,
+      "text": "Er fremtidens marketingchef den, der beslutter,"
+    },
+    {
+      "index": 28,
+      "start": 70.8,
+      "end": 73.73,
+      "startFrame": 2124,
+      "words": 7,
+      "text": "hvilke agenter der skal tændes og slukkes?"
+    }
+  ],
+  "soundDesign": {
+    "note": "Valgfrit lag. Musik og effekter må aldrig konkurrere med speaken — hold dem mindst 12 dB under.",
+    "music": "Diskret elektronisk SaaS-underlægning, uden melodi i forgrunden. Dæmp 3 dB under hver replik.",
+    "cues": [
+      {
+        "t": 0.72,
+        "type": "impact",
+        "note": "Den røde cirkel lander (beat 1)"
+      },
+      {
+        "t": 4.5,
+        "type": "whoosh",
+        "note": "Overgang til beat 2 — kort, blød, lavt niveau"
+      },
+      {
+        "t": 6,
+        "type": "click",
+        "note": "Funktionskort 1 aktiveres (beat 2)"
+      },
+      {
+        "t": 6.9,
+        "type": "click",
+        "note": "Funktionskort 2 aktiveres (beat 2)"
+      },
+      {
+        "t": 7.9,
+        "type": "click",
+        "note": "Funktionskort 3 aktiveres (beat 2)"
+      },
+      {
+        "t": 8.9,
+        "type": "click",
+        "note": "Funktionskort 4 aktiveres (beat 2)"
+      },
+      {
+        "t": 10.5,
+        "type": "whoosh",
+        "note": "Overgang til beat 3 — kort, blød, lavt niveau"
+      },
+      {
+        "t": 15.1,
+        "type": "impact",
+        "note": "\"Bemanding\" accelererer mod kameraet (beat 3)"
+      },
+      {
+        "t": 15.5,
+        "type": "whoosh",
+        "note": "Overgang til beat 4 — kort, blød, lavt niveau"
+      },
+      {
+        "t": 21.5,
+        "type": "whoosh",
+        "note": "Overgang til beat 5 — kort, blød, lavt niveau"
+      },
+      {
+        "t": 24.4,
+        "type": "click",
+        "note": "\"Mønster fundet\" lander (beat 5)"
+      },
+      {
+        "t": 26,
+        "type": "whoosh",
+        "note": "Overgang til beat 6 — kort, blød, lavt niveau"
+      },
+      {
+        "t": 27.2,
+        "type": "click",
+        "note": "Optimeringsgennemløb 1 (beat 6)"
+      },
+      {
+        "t": 28.4,
+        "type": "click",
+        "note": "Optimeringsgennemløb 2 (beat 6)"
+      },
+      {
+        "t": 29.6,
+        "type": "click",
+        "note": "Optimeringsgennemløb 3 (beat 6)"
+      },
+      {
+        "t": 30.5,
+        "type": "whoosh",
+        "note": "Overgang til beat 7 — kort, blød, lavt niveau"
+      },
+      {
+        "t": 33.4,
+        "type": "click",
+        "note": "Coop Bank-resultatet træder frem (beat 7)"
+      },
+      {
+        "t": 35.5,
+        "type": "whoosh",
+        "note": "Overgang til beat 8 — kort, blød, lavt niveau"
+      },
+      {
+        "t": 37,
+        "type": "click",
+        "note": "Opgave 1 overdrages til agent (beat 8)"
+      },
+      {
+        "t": 38,
+        "type": "click",
+        "note": "Opgave 2 overdrages til agent (beat 8)"
+      },
+      {
+        "t": 39,
+        "type": "click",
+        "note": "Opgave 3 overdrages til agent (beat 8)"
+      },
+      {
+        "t": 41.5,
+        "type": "whoosh",
+        "note": "Overgang til beat 9 — kort, blød, lavt niveau"
+      },
+      {
+        "t": 41.62,
+        "type": "glitch",
+        "note": "ÉT kort glitch-impact ved skiftet til den mørke sekvens (beat 9) — filmens eneste"
+      },
+      {
+        "t": 46,
+        "type": "whoosh",
+        "note": "Overgang til beat 10 — kort, blød, lavt niveau"
+      },
+      {
+        "t": 46,
+        "type": "whoosh",
+        "note": "Vertikal wipe op — den mørke scene forlader billedet (beat 10)"
+      },
+      {
+        "t": 50,
+        "type": "whoosh",
+        "note": "Overgang til beat 11 — kort, blød, lavt niveau"
+      },
+      {
+        "t": 50.4,
+        "type": "impact",
+        "note": "Marketing-hub stiger op nedefra (beat 11)"
+      },
+      {
+        "t": 53.4,
+        "type": "click",
+        "note": "Agentkort 2 lander (beat 11)"
+      },
+      {
+        "t": 56.4,
+        "type": "click",
+        "note": "Agentkort 3 lander (beat 11)"
+      },
+      {
+        "t": 59,
+        "type": "click",
+        "note": "Agentkort 4 lander (beat 11)"
+      },
+      {
+        "t": 62.5,
+        "type": "whoosh",
+        "note": "Overgang til beat 12 — kort, blød, lavt niveau"
+      },
+      {
+        "t": 66,
+        "type": "click",
+        "note": "Ordskift \"genererer\" → \"arbejder sammen med os\" (beat 12)"
+      },
+      {
+        "t": 67.2,
+        "type": "click",
+        "note": "Ordskift \"genererer\" → \"arbejder sammen med os\" (beat 12)"
+      },
+      {
+        "t": 69,
+        "type": "click",
+        "note": "Kontakt slås til/fra i agentkontrolpanelet (beat 12)"
+      },
+      {
+        "t": 69.8,
+        "type": "click",
+        "note": "Kontakt slås til/fra i agentkontrolpanelet (beat 12)"
+      },
+      {
+        "t": 70.6,
+        "type": "click",
+        "note": "Kontakt slås til/fra i agentkontrolpanelet (beat 12)"
+      }
+    ]
+  }
+}
