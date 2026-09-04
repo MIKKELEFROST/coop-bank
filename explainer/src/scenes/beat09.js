@@ -195,7 +195,7 @@ export default {
     const coreGlow = D.el('div', '', cam);
     D.place(coreGlow, CORE.x, CORE.y, 250, 250);
     coreGlow.style.background =
-      'radial-gradient(circle, rgba(227,6,19,.085) 0%, rgba(227,6,19,0) 62%)';
+      'none';
     coreGlow.style.borderRadius = '50%';
     r.coreGlow = coreGlow;
 
