@@ -125,32 +125,55 @@ Læg filen som **`assets/audio/music.wav`** (eller `.mp3`). Er den længere end
 
 ---
 
-## 3. Lydeffekter (valgfrit)
+## 3. Lydeffekter
 
 Lydeffekter skal komme fra et lydbibliotek — de kan ikke laves i dette
 projekt. Jeg forsøgte at syntetisere dem med ffmpeg's oscillatorer og
-støjkilder; resultatet lød som støj og er kasseret. Whooshes, klik og
-impacts skal være rigtige optagelser.
+støjkilder; resultatet lød som støj og er kasseret.
 
-`dist/voiceover-timing.json` indeholder 30 cues med præcise tider. **Brug
-8-10 af dem, ikke alle 30.** De vigtigste:
+### Hvad referencevideoen faktisk gør
 
-| Tid | Effekt |
-| --- | --- |
-| 0,72 s | Den røde cirkel lander |
-| 15,1 s | "Bemanding" accelererer mod kameraet |
-| 24,4 s | "Mønster fundet" lander |
-| 33,4 s | Coop Bank-resultatet træder frem |
-| 41,62 s | Glitch-impact — filmens eneste |
-| 46,0 s | Vertikal wipe op, den mørke scene forlader billedet |
-| 50,4 s | Marketing-hub stiger op nedefra |
-| 66,0 s | Ordskiftet "genererer" → "arbejder sammen med os" |
+Målt på `snaptik_7638517755234225415_v3.mp4` (18,65 s). Billedklip blev
+fundet med scene-detektion, lyd-begivenheder ved at isolere båndet over
+9 kHz — dér ligger hverken tale eller basgang, så effekter træder frem.
 
-Alle 30 gør det travlt og trækker filmen mod reklamefilm. Læg **ikke** klik
-på hvert kort — der er over 20 kort i filmen.
+**Der er kun fire hørbare lydbegivenheder på 18,6 sekunder.** Ikke fyrre.
 
-Samles til ét spor og lægges som **`assets/audio/sfx.wav`**. Mix-trinnet
-tager det derfra.
+| Tid | >9 kHz | Attack | Decay | Type |
+| --- | --- | --- | --- | --- |
+| 1,67 s | −21,7 dBFS | 10 ms | 40 ms | kort lys tik |
+| 7,78 s | −15,2 dBFS | 10 ms | 5 ms | kort lys tik |
+| 11,61 s | −23,1 dBFS | — | — | kort lys tik |
+| 17,76 s | −18,3 dBFS | 150 ms | 490 ms | riser + bas-impact |
+
+To ting er værd at bemærke:
+
+**Tikkene har ingen bas.** De ligger udelukkende i det høje bånd og varer
+15–50 millisekunder. Det er ikke whooshes — det er små, tørre markeringer.
+
+**Kun ét klip har lyd på.** Videoen har tre billedklip (1,95 s, 9,95 s,
+17,62 s), men kun det sidste er markeret. Tikket ved 1,67 s ligger 0,28
+sekunder *før* klippet, ikke på det. To af de fire begivenheder falder
+slet ikke sammen med et klip — de markerer bevægelse inde i billedet.
+
+**Finalen er den eneste store lyd.** Ved 17,76 s kommer et lyst riser-lag,
+og 140 millisekunder senere rammer bassen −4,6 dBFS — det højeste niveau i
+hele filen. Samlet varighed omkring 640 ms.
+
+**Niveauet er lavt.** Tikkene ligger kun 3–9 dB over talens egen sibilans.
+De registreres, de dominerer ikke.
+
+### Hvad du skal bede om
+
+- 3–5 begivenheder i alt over de 75 sekunder. Ikke ét lyd pr. klip.
+- Korte, tørre, lyse tik uden bas til de vigtigste markeringer:
+  cirklen der lander (0,72 s), "Mønster fundet" (24,4 s), Coop
+  Bank-resultatet (33,4 s).
+- Ét riser + bas-impact til glitchet ved 41,62 s eller til
+  Marketing-hub'ens opstigning ved 50,42 s — ikke begge.
+- Søgeord: *UI tick*, *subtle transition tick*, *minimal riser impact*.
+
+Samles til ét spor og lægges som **`assets/audio/sfx.wav`**.
 
 ## 4. Sådan lægges lyden på
 
