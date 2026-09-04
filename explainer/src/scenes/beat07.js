@@ -66,8 +66,8 @@ const RESULTS = [
 ];
 
 /** Set-back and forward states of a result row. Identical for the two others. */
-const BACK = { s: 0.945, x: 18, o: 0.45 };
-const FRONT = { s: 1.035, x: -10, o: 1 };
+const BACK = { s: 0.94, x: 18, o: 0.40 };
+const FRONT = { s: 1.045, x: -6, o: 1 };
 const STILL = { s: 1, x: 0, o: 1 };
 
 /* ------------------------------------------------------------------ *
@@ -79,27 +79,39 @@ const T = {
   line1: 0.10,
   line2: 0.46,
   rule: 0.98,
-  card: 0.16,
-  input: 0.62,
-  query: 0.86,
-  rows: [1.06, 1.20, 1.34],
-  scan: 1.60, scanRun: 1.00,   // band hits rows at 1.86 / 2.10 / 2.34
+  card: 0.20,
+  input: 0.40,
+  query: 0.66,
+  rows: [1.00, 1.13, 1.26],
+  scan: 1.56, scanRun: 0.90,   // band hits rows at 1.80 / 2.01 / 2.23
   fwd: 2.52, fwdRun: 0.64,     // second cue: the Coop row comes forward
-  sup: 3.02,
-  pill: 3.86,
+  sup: 3.06,
+  pill: 3.72,
 };
 
 /* ------------------------------------------------------------------ *
- * Pure helpers
+ * Pure colour helpers. Colours travel as [r,g,b] triples so blends can be
+ * nested; only the final value is turned into a CSS string.
  * ------------------------------------------------------------------ */
 
 const rgbOf = (h) => [
   parseInt(h.slice(1, 3), 16), parseInt(h.slice(3, 5), 16), parseInt(h.slice(5, 7), 16),
 ];
-function mix(a, b, k) {
-  const A = rgbOf(a), B = rgbOf(b), q = clamp(k);
-  return `rgb(${Math.round(lerp(A[0], B[0], q))},${Math.round(lerp(A[1], B[1], q))},${Math.round(lerp(A[2], B[2], q))})`;
-}
+const mix3 = (A, B, k) => {
+  const q = clamp(k);
+  return [lerp(A[0], B[0], q), lerp(A[1], B[1], q), lerp(A[2], B[2], q)];
+};
+const css = (A) => `rgb(${Math.round(A[0])},${Math.round(A[1])},${Math.round(A[2])})`;
+
+const CLR = {
+  rowLine: rgbOf('#E6E6E0'),
+  rowBg: rgbOf('#FBFBF8'),
+  scanLine: rgbOf(D.C.blue),
+  scanBg: rgbOf('#EDF1FF'),
+  red: rgbOf(D.C.red),
+  white: rgbOf('#FFFFFF'),
+  faint: rgbOf(D.C.inkFaint),
+};
 
 /* ------------------------------------------------------------------ *
  * Scene
@@ -142,8 +154,8 @@ export default {
     const sup = D.el('div', '', cam);
     D.place(sup, LEFT_CX, SUP_Y, LEFT_W);
     sup.style.cssText +=
-      'text-align:left;font-size:34px;font-weight:500;color:#5A5A57;' +
-      'letter-spacing:-.012em;line-height:46px';
+      'text-align:left;font-size:36px;font-weight:500;color:#5A5A57;' +
+      'letter-spacing:-.012em;line-height:48px';
     r.supW = D.words(sup, 'En stærk digital tilstedeværelse bliver endnu vigtigere.');
 
     /* ---------------- right column: label over the surface ---------------- */
@@ -191,12 +203,12 @@ export default {
 
       const box = D.el('div', '', wrap);
       box.style.cssText =
-        `position:absolute;inset:0;border-radius:20px;border:2px solid ${D.C.lineSoft};` +
-        `background:#FCFCFA;padding:20px 24px;overflow:hidden`;
+        `position:absolute;inset:0;border-radius:20px;border:2px solid ${css(CLR.rowLine)};` +
+        `background:${css(CLR.rowBg)};padding:19px 24px;overflow:hidden`;
 
       const title = D.el('div', '', box, res.title);
       title.style.cssText =
-        'font-size:31px;font-weight:700;letter-spacing:-.018em;line-height:36px;' +
+        'font-size:33px;font-weight:700;letter-spacing:-.02em;line-height:38px;' +
         'color:#151515;white-space:nowrap';
 
       const desc = D.el('div', '', box, res.desc);
@@ -227,7 +239,7 @@ export default {
     const bandLine = D.el('div', '', band);
     bandLine.style.cssText =
       `position:absolute;left:0;right:0;top:${Math.round(BAND_H * 0.52)}px;` +
-      `height:2px;background:rgba(49,91,255,.42)`;
+      `height:2px;background:rgba(49,91,255,.30)`;
     r.band = band;
 
     /* the status pill, bottom right */
@@ -236,7 +248,7 @@ export default {
       `position:absolute;right:${PAD}px;top:${PILL_Y}px;height:48px;display:flex;` +
       `align-items:center;gap:10px;padding:0 22px;border-radius:999px;` +
       `background:${D.C.red};color:#fff;white-space:nowrap;` +
-      `box-shadow:0 6px 18px rgba(227,6,19,.28)`;
+      `box-shadow:0 4px 14px rgba(227,6,19,.22)`;
     const pIco = D.el('span', '', pill);
     pIco.style.cssText = 'display:flex;align-items:center';
     pIco.appendChild(D.icon('check', 22, 2.8));
@@ -311,7 +323,7 @@ export default {
       o: seg(t, T.input + 0.10, 0.14, easeOutCubic), centered: false,
     });
 
-    const qp = seg(t, T.query, 0.44, easeOutQuint);
+    const qp = seg(t, T.query, 0.42, easeOutQuint);
     r.q.style.clipPath = `inset(0 ${(100 * (1 - qp)).toFixed(3)}% 0 0)`;
     r.q.style.opacity = clamp(qp * 24).toFixed(4);
 
@@ -344,19 +356,25 @@ export default {
         x: xFn(t), y: enterFn(t),
         s: lerp(B.s, F.s, res.ours ? fwdSpring(t) : 1)
            * lerp(0.94, 1, enterP) * (1 + 0.014 * prox),
-        o: seg(t, at, 0.18, easeOutCubic) * lerp(B.o, F.o, res.ours ? fwd : 1),
+        // The set-back row flickers up a little as the scanner passes over it,
+        // then holds its faint state again until the second cue lands.
+        o: seg(t, at, 0.18, easeOutCubic)
+           * clamp(lerp(B.o, F.o, res.ours ? fwd : 1) + (res.ours ? 0.22 * prox : 0), 0, 1),
         blur: clamp((Math.abs(vx) + Math.abs(vy)) * 0.004, 0, 9),
         centered: false,
       });
 
-      row.box.style.borderColor = mix(mix(D.C.lineSoft, D.C.blue, prox * 0.85), D.C.red, fwd);
-      row.box.style.background = mix(mix('#FCFCFA', '#F0F4FF', prox * 0.85), '#FFFFFF', fwd);
+      row.box.style.borderColor =
+        css(mix3(mix3(CLR.rowLine, CLR.scanLine, prox * 0.72), CLR.red, fwd));
+      row.box.style.background =
+        css(mix3(mix3(CLR.rowBg, CLR.scanBg, prox * 0.8), CLR.white, fwd));
       row.box.style.boxShadow =
         `0 ${(6 * fwd + 2 * prox).toFixed(2)}px ${(16 * fwd + 7 * prox).toFixed(2)}px ` +
         `rgba(21,21,21,${(0.08 * fwd + 0.05 * prox).toFixed(4)}), ` +
         `0 ${(20 * fwd).toFixed(2)}px ${(44 * fwd).toFixed(2)}px ` +
         `rgba(21,21,21,${(0.09 * fwd).toFixed(4)})`;
-      row.rank.style.color = mix(mix(D.C.inkFaint, D.C.blue, prox * 0.7), D.C.red, fwd);
+      row.rank.style.color =
+        css(mix3(mix3(CLR.faint, CLR.scanLine, prox * 0.7), CLR.red, fwd));
     });
 
     /* ---------------- the status pill snaps in last ---------------------- */
