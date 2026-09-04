@@ -235,7 +235,7 @@ export default {
 
     /* ---------------- sub-line ---------------- */
     const subWrap = D.el('div', '', cam);
-    D.place(subWrap, 960, 340);
+    D.place(subWrap, 960, 348);
     subWrap.style.cssText += 'overflow:hidden;padding:5px 6px';
     const sub = D.el('div', '', subWrap, 'Løbende optimering – hurtigere og mere ensartet.');
     sub.style.cssText =
@@ -398,9 +398,12 @@ export default {
     r.loopHead.setAttribute('opacity', (0.95 * seg(t, 2.46, 0.24, easeOutCubic)).toFixed(4));
 
     // Travelling highlight on the loop line, once between each pair of passes.
-    const retU = RETURNS.reduce((s, ret, i) =>
-      s + seg(t, ret[0], ret[1], easeInOutCubic) * band(t, ret[0] - 0.04, ret[0] + ret[1] + 0.05, 0.05)
-        * (i === 0 ? 1 : 1), 0);
+    // One monotone progress value, reset to zero in the quiet gap at t = 3.00.
+    const retU = clamp(
+      seg(t, RETURNS[0][0], RETURNS[0][1], easeInOutCubic)
+      - seg(t, 3.00, 0.02, easeInOutCubic)
+      + seg(t, RETURNS[1][0], RETURNS[1][1], easeInOutCubic)
+    );
     const retOn = clamp(RETURNS.reduce((s, ret) =>
       s + band(t, ret[0] - 0.02, ret[0] + ret[1] + 0.04, 0.045), 0), 0, 1);
     const WIN = 0.30;
