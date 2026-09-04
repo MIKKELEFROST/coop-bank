@@ -51,15 +51,13 @@ run('node scripts/contact-sheet.mjs');
 step(6, 'Verifikation');
 const ffmpeg = execFileSync('node', ['-e', "process.stdout.write(require('@ffmpeg-installer/ffmpeg').path)"], { cwd: ROOT }).toString();
 const out = path.join(ROOT, 'dist/coop-bank-ai-agenter-preview.mp4');
-const probe = execFileSync(ffmpeg, ['-hide_banner', '-i', out], { stdio: ['ignore', 'pipe', 'pipe'] , encoding: 'utf8'})
-  .concat('');
-const info = (() => {
+// `ffmpeg -i <file>` with no output exits non-zero by design and prints the
+// stream summary on stderr, so read it from the thrown result.
+const text = (() => {
   try {
-    execFileSync(ffmpeg, ['-hide_banner', '-i', out], { stdio: ['ignore', 'pipe', 'pipe'] });
-    return '';
-  } catch (e) { return String(e.stderr || ''); }
+    return execFileSync(ffmpeg, ['-hide_banner', '-i', out], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] });
+  } catch (e) { return String(e.stderr || e.stdout || ''); }
 })();
-const text = probe + info;
 
 const checks = [
   ['1920x1080', /1920x1080/.test(text)],
