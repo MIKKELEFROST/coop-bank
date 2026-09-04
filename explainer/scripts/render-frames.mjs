@@ -58,6 +58,17 @@ export async function renderFrames(opts = {}) {
       '--disable-background-timer-throttling',
       '--force-color-profile=srgb',
       '--deterministic-mode',
+      // Reproducibility across frame order. Chromium reuses previously
+      // rasterised tile content and picks a layer's raster scale from the
+      // transform it first saw, so a frame could come out a few hundredths of
+      // a percent different depending on which frame preceded it. These force
+      // every frame to rasterise from scratch, on the CPU, at its own scale.
+      '--disable-partial-raster',
+      '--disable-gpu',
+      '--disable-gpu-compositing',
+      '--disable-checker-imaging',
+      '--disable-image-animation-resync',
+      '--disable-composited-antialiasing',
     ],
   });
 
@@ -96,7 +107,18 @@ export async function renderFrames(opts = {}) {
     const i = list[n];
     // 1. set the exact frame  2. wait for the frame-ready signal  3. capture
     await page.evaluate((f) => {
+      // Detach the stage before seeking and re-attach after. This tears down
+      // every compositor layer, so the frame is rasterised from nothing but its
+      // own state — no tile or raster-scale carried over from whichever frame
+      // happened to be rendered before it.
+      const stage = document.getElementById('stage');
+      const parent = stage.parentNode;
+      const anchor = stage.nextSibling;
+      parent.removeChild(stage);
       window.seekToFrame(f);
+      parent.insertBefore(stage, anchor);
+      void stage.offsetWidth;
+
       document.documentElement.dataset.frameReady = '0';
       return new Promise((res) => requestAnimationFrame(() => requestAnimationFrame(() => {
         document.documentElement.dataset.frameReady = String(f);

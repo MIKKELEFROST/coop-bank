@@ -53,6 +53,23 @@
   box-sizing: border-box;
 }
 
+/* Second determinism guard, for capture only.
+ *
+ * `will-change` promotes an element to its own compositor layer, and Chromium
+ * then pins that layer's raster scale to whatever transform it first saw. Text
+ * inside a scaling element therefore rasterises slightly differently depending
+ * on which frame was rendered before it — a few tenths of a percent of pixels,
+ * invisible to the eye but enough to make frame 1400-before-frame-20 produce a
+ * different file. Dropping the hint during capture forces every frame to
+ * rasterise from the transform it actually has.
+ *
+ * The preview keeps `will-change` (it wants the compositor fast path); only the
+ * render path, which is what produces the film, turns it off. */
+body.render *, body.render *::before, body.render *::after {
+  will-change: auto !important;
+  backface-visibility: visible !important;
+}
+
 html, body {
   margin: 0; padding: 0; background: #1b1b1b;
   font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
@@ -79,7 +96,6 @@ body.render #stage { position: absolute; top: 0; left: 0; transform: none !impor
   position: absolute; inset: 0;
   transform-origin: 960px 540px;
   will-change: transform, opacity, filter;
-  backface-visibility: hidden;
 }
 .scene-inner { position: absolute; inset: 0; }
 

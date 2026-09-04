@@ -48,10 +48,10 @@ function mix(a, b, p) {
 
 /* The four agents, echoing beat 11's cluster: same titles, same hub. */
 const AGENTS = [
-  { title: 'Webudvikling',           icon: 'code',  color: C.blue,    tint: C.cardBlue,   x: 516,  y: 318, link: [860, 422, 560, 376] },
-  { title: 'Idéudvikling & content', icon: 'spark', color: '#A9740B', tint: C.cardYellow, x: 1404, y: 318, link: [1060, 422, 1360, 376] },
-  { title: 'Tone of Voice',          icon: 'voice', color: '#1E8A4E', tint: C.cardGreen,  x: 516,  y: 762, link: [860, 658, 560, 704] },
-  { title: 'Strategi & analyse',     icon: 'chart', color: C.red,     tint: C.cardRed,    x: 1404, y: 762, link: [1060, 658, 1360, 704] },
+  { title: 'Webudvikling',           icon: 'code',  color: C.blue,    tint: C.cardBlue,   x: 516,  y: 318, link: [858, 446, 560, 376] },
+  { title: 'Idéudvikling & content', icon: 'spark', color: '#A9740B', tint: C.cardYellow, x: 1404, y: 318, link: [1062, 446, 1360, 376] },
+  { title: 'Tone of Voice',          icon: 'voice', color: '#1E8A4E', tint: C.cardGreen,  x: 516,  y: 762, link: [858, 634, 560, 704] },
+  { title: 'Strategi & analyse',     icon: 'chart', color: C.red,     tint: C.cardRed,    x: 1404, y: 762, link: [1062, 634, 1360, 704] },
 ];
 AGENTS.forEach((a) => {
   a.dirX = a.x < 960 ? -1 : 1;
@@ -75,14 +75,14 @@ const rowCY = (i) => PANEL_TOP + PANEL.rowTop + i * PANEL.rowStep + PANEL.rowH /
 /* Human cursor path — keyframed, interpolated, a pure function of t. */
 const CURSOR_KEYS = [
   { t: 6.16, x: 1860, y: 1030 },
-  { t: 6.54, x: TOGGLE_CX + 14, y: rowCY(1) + 17 },
-  { t: 6.92, x: TOGGLE_CX + 14, y: rowCY(1) + 17 },
-  { t: 7.16, x: TOGGLE_CX + 14, y: rowCY(2) + 17 },
-  { t: 7.50, x: TOGGLE_CX + 14, y: rowCY(2) + 17 },
-  { t: 7.72, x: TOGGLE_CX + 14, y: rowCY(3) + 17 },
-  { t: 7.92, x: TOGGLE_CX + 14, y: rowCY(3) + 17 },
-  { t: 8.04, x: 1252, y: rowCY(3) + 17 },
-  { t: 8.34, x: 1252, y: rowCY(2) + 17 },
+  { t: 6.54, x: TOGGLE_CX + 19, y: rowCY(1) + 24 },
+  { t: 6.92, x: TOGGLE_CX + 19, y: rowCY(1) + 24 },
+  { t: 7.16, x: TOGGLE_CX + 19, y: rowCY(2) + 24 },
+  { t: 7.50, x: TOGGLE_CX + 19, y: rowCY(2) + 24 },
+  { t: 7.72, x: TOGGLE_CX + 19, y: rowCY(3) + 24 },
+  { t: 7.92, x: TOGGLE_CX + 19, y: rowCY(3) + 24 },
+  { t: 8.04, x: 1452, y: rowCY(3) + 24 },
+  { t: 8.34, x: 1452, y: rowCY(2) + 24 },
   { t: 8.70, x: 1940, y: 1070 },
 ];
 
@@ -133,36 +133,42 @@ export default {
 
     /* ---------------- the Marketing hub plate ---------------- */
     const plate = D.el('div', '', cam);
-    D.place(plate, 960, 540, 320, 240);
+    D.place(plate, 960, 540, 340, 196);
     plate.style.cssText +=
       'background:#fff;border:1px solid ' + C.line + ';border-radius:30px;box-shadow:' + D.SHADOW[3] + ';';
     r.plate = plate;
 
     const hubTop = D.el('div', '', plate);
     hubTop.style.cssText =
-      'position:absolute;left:0;top:30px;width:100%;height:58px;display:flex;align-items:center;justify-content:center;gap:16px';
-    const core = D.agentCore(hubTop, 56);
+      'position:absolute;left:0;top:26px;width:100%;height:56px;display:flex;align-items:center;justify-content:center;gap:15px';
+    const core = D.agentCore(hubTop, 54);
     core.root.style.flex = 'none';
     r.core = core;
     const hubLabel = D.el('div', '', hubTop, 'Marketing');
     hubLabel.style.cssText = 'font-size:34px;font-weight:800;letter-spacing:-.024em';
     r.hubLabel = hubLabel;
 
-    r.bars = AGENTS.map((a, i) => {
-      const track = D.el('div', '', plate);
-      track.style.cssText =
-        `position:absolute;left:52px;top:${112 + i * 26}px;width:216px;height:13px;` +
-        `border-radius:7px;background:#EAEAE4;overflow:hidden`;
-      const fill = D.el('div', '', track);
-      fill.style.cssText =
-        `position:absolute;left:0;top:0;width:100%;height:100%;border-radius:7px;` +
-        `background:${a.color};transform-origin:0% 50%`;
-      return { track, fill };
+    // Four agent slots. Each holds its own icon AND a check mark; the beat
+    // cross-fades one into the other as the agents finish their tasks.
+    r.slots = AGENTS.map((a, i) => {
+      const sq = D.el('div', '', plate);
+      sq.style.cssText =
+        `position:absolute;left:${42 + i * 68}px;top:100px;width:52px;height:52px;border-radius:15px;` +
+        `background:${a.tint}`;
+      const ic = D.el('div', '', sq);
+      ic.style.cssText =
+        'position:absolute;inset:0;display:flex;align-items:center;justify-content:center';
+      ic.appendChild(D.icon(a.icon, 27, 2.1));
+      const ck = D.el('div', '', sq);
+      ck.style.cssText =
+        'position:absolute;inset:0;display:flex;align-items:center;justify-content:center';
+      ck.appendChild(D.icon('check', 27, 2.8));
+      return { sq, ic, ck };
     });
 
     /* ---------------- status pill under the hub ---------------- */
     const pill = D.el('div', 'chip tone-green', cam);
-    D.place(pill, 1330, 702);
+    D.place(pill, 1330, 684);
     const pdot = D.el('div', 'statusdot', pill);
     pdot.style.flex = 'none';
     D.el('span', '', pill, 'Udfører opgaver');
@@ -177,7 +183,7 @@ export default {
 
     /* ---------------- left kinetic type block ---------------- */
     const typeWrap = D.el('div', '', cam);
-    typeWrap.style.cssText = 'position:absolute;left:236px;top:348px;width:760px;height:360px';
+    typeWrap.style.cssText = 'position:absolute;left:236px;top:358px;width:760px;height:340px';
     r.typeWrap = typeWrap;
 
     const kick = D.el('div', 'kicker', typeWrap, 'FÆLLES FOR ALLE FIRE AGENTER');
@@ -185,28 +191,33 @@ export default {
     r.kick = kick;
 
     const clip = D.el('div', '', typeWrap);
-    clip.style.cssText = 'position:absolute;left:0;top:46px;width:760px;height:300px;overflow:hidden';
+    clip.style.cssText = 'position:absolute;left:0;top:46px;width:760px;height:288px;overflow:hidden';
     r.clip = clip;
 
     const TYPE = 'font-size:92px;font-weight:800;letter-spacing:-.030em;line-height:1.12;' +
                  'white-space:nowrap;position:absolute;color:' + C.ink + ';';
 
     const wAI = D.el('div', '', clip, 'AI');
-    wAI.style.cssText = TYPE + 'left:0;top:26px';
-    const wGen = D.el('div', '', clip, 'genererer');
-    const wArb = D.el('div', '', clip, 'arbejder');
+    wAI.style.cssText = TYPE + 'left:0;top:24px';
     const wIkke = D.el('div', '', clip, 'ikke bare.');
-    wIkke.style.cssText = TYPE + 'left:0;top:142px';
+    wIkke.style.cssText = TYPE + 'left:0;top:130px';
     const wSam = D.el('div', '', clip, 'sammen med os.');
-    wSam.style.cssText = TYPE + 'left:0;top:142px';
+    wSam.style.cssText = TYPE + 'left:0;top:130px';
 
-    // "AI" is measured once so the swap slot starts exactly after it.
-    wGen.style.cssText = TYPE + 'left:0;top:26px';
-    wArb.style.cssText = TYPE + 'left:0;top:26px';
+    // "AI" is measured once: the swap slot is its own mask that starts exactly
+    // after it, so the replacement word slides in from behind "AI" instead of
+    // travelling across it.
     const aiW = Math.round(D.stageCenter(wAI).w);
-    const slotL = aiW + 28;
-    wGen.style.left = slotL + 'px';
-    wArb.style.left = slotL + 'px';
+    const slotL = aiW + 22;
+    const slot = D.el('div', '', clip);
+    slot.style.cssText =
+      `position:absolute;left:${slotL}px;top:0;width:${760 - slotL}px;height:288px;overflow:hidden`;
+    r.slot = slot;
+
+    const wGen = D.el('div', '', slot, 'genererer');
+    wGen.style.cssText = TYPE + 'left:0;top:24px';
+    const wArb = D.el('div', '', slot, 'arbejder');
+    wArb.style.cssText = TYPE + 'left:0;top:24px';
 
     r.wAI = wAI; r.wGen = wGen; r.wArb = wArb; r.wIkke = wIkke; r.wSam = wSam;
 
@@ -251,8 +262,8 @@ export default {
       const mark = D.el('div', '', row);
       mark.style.cssText =
         'position:absolute;top:50%;display:flex;align-items:center;gap:8px;' +
-        'padding:7px 16px;border-radius:999px;background:' + C.cardRed + ';border:1px solid #F7C3C8;' +
-        'font-size:28px;font-weight:700;letter-spacing:-.01em;color:' + C.redDeep + ';white-space:nowrap;' +
+        'padding:7px 18px;border-radius:999px;background:' + C.red + ';border:1px solid ' + C.red + ';' +
+        'font-size:28px;font-weight:700;letter-spacing:-.01em;color:#FFFFFF;white-space:nowrap;' +
         'transform-origin:0% 50%';
       D.el('span', '', mark, 'Prioriteret');
 
@@ -273,11 +284,11 @@ export default {
     /* ---------------- the human cursor ---------------- */
     const cur = D.el('div', '', cam);
     D.place(cur, 0, 0);
-    const curIcon = D.icon('cursor', 46, 3);
+    const curIcon = D.icon('cursor', 62, 3);
     const curPath = curIcon.querySelector('path');
     curPath.setAttribute('fill', C.ink);
     curPath.setAttribute('stroke', '#FFFFFF');
-    curPath.setAttribute('stroke-width', '2.4');
+    curPath.setAttribute('stroke-width', '2.2');
     cur.appendChild(curIcon);
     cur.style.filter = 'drop-shadow(0 4px 10px rgba(21,21,21,.28))';
     r.cursor = cur;
@@ -324,22 +335,23 @@ export default {
       const a = AGENTS[i];
       const posX = (u) => {
         const inP = spring(clamp((u + 0.16 - i * 0.07) / 0.72), { freq: 1.05, damping: 0.66 });
-        const outP = seg(u, 1.52 + i * 0.05, 0.44, easeInCubic);
+        const outP = seg(u, 1.48 + i * 0.05, 0.46, easeInCubic);
         return lerp(a.dirX * 176, 0, inP) + (960 - a.x) * outP;
       };
       const posY = (u) => {
         const inP = spring(clamp((u + 0.16 - i * 0.07) / 0.72), { freq: 1.05, damping: 0.66 });
-        const outP = seg(u, 1.52 + i * 0.05, 0.44, easeInCubic);
+        const outP = seg(u, 1.48 + i * 0.05, 0.46, easeInCubic);
         return lerp(a.dirY * 128, 0, inP) + (540 - a.y) * outP;
       };
       const inP = spring(clamp((t + 0.16 - i * 0.07) / 0.72), { freq: 1.05, damping: 0.66 });
-      const outP = seg(t, 1.52 + i * 0.05, 0.44, easeInCubic);
+      const outP = seg(t, 1.48 + i * 0.05, 0.46, easeInCubic);
       const vx = M.velocity(posX, t);
       const vy = M.velocity(posY, t);
       D.setT(c.root, {
         x: posX(t), y: posY(t),
-        s: lerp(0.84, 1, inP) * lerp(1, 0.30, outP),
-        o: 1 - seg(t, 1.62 + i * 0.05, 0.34, easeOutCubic),
+        s: lerp(0.84, 1, inP) * lerp(1, 0.24, outP),
+        // Stays opaque while it is genuinely travelling; only the last frames fade.
+        o: 1 - seg(t, 1.76 + i * 0.05, 0.20, easeInCubic),
         blur: clamp(Math.hypot(vx, vy) * 0.0035, 0, 12),
       });
       c.root.style.boxShadow = D.SHADOW[2];
@@ -365,14 +377,20 @@ export default {
     r.core.ring.style.opacity = (0.55 * (1 - 0.5 * ringOpen)).toFixed(3);
     r.core.root.style.transform = `scale(${(1 + 0.06 * pulse(t, 1.98, 0.5, easeOutCubic)).toFixed(4)})`;
 
-    // Hub bars: fill in agent colour, then turn green as tasks complete.
-    r.bars.forEach((b, i) => {
-      const fill = seg(t, 0.60 + i * 0.12, 0.44, easeOutQuint);
-      const done = seg(t, 4.86 + i * 0.18, 0.26, easeOutCubic);
-      const kick = pulse(t, 4.86 + i * 0.18, 0.42, easeOutCubic);
-      b.fill.style.transform = `scale(${fill.toFixed(4)}, ${(1 + 0.30 * kick).toFixed(4)})`;
-      b.fill.style.background = mix(AGENTS[i].color, C.green, done);
-      b.fill.style.opacity = (0.35 + 0.65 * Math.max(fill > 0 ? 1 : 0, done)).toFixed(3);
+    // The four agent slots: they seat themselves, then flip to a green check
+    // one by one on "…og udfører opgaver".
+    r.slots.forEach((s, i) => {
+      const a = AGENTS[i];
+      const born = spring(clamp((t - (0.56 + i * 0.11)) / 0.50), { freq: 1.10, damping: 0.64 });
+      const done = seg(t, 4.86 + i * 0.18, 0.28, easeOutCubic);
+      const kick = pulse(t, 4.86 + i * 0.18, 0.46, easeOutCubic);
+      s.sq.style.background = mix(a.tint, C.cardGreen, done);
+      s.sq.style.opacity = seg(t, 0.56 + i * 0.11, 0.18, easeOutCubic).toFixed(4);
+      s.sq.style.transform = `scale(${(lerp(0.55, 1, born) * (1 + 0.11 * kick)).toFixed(4)})`;
+      s.ic.style.opacity = (1 - done).toFixed(4);
+      s.ic.style.color = a.color;
+      s.ck.style.opacity = done.toFixed(4);
+      s.ck.style.color = '#1E8A4E';
     });
 
     // "Udfører opgaver" pill.
@@ -428,19 +446,19 @@ export default {
     });
 
     // Statement B words — they arrive from the left, behind the mask.
-    const arbX = (u) => lerp(-620, 0, spring(clamp((u - 3.50) / 0.60), { freq: 1.00, damping: 0.68 }));
+    const arbX = (u) => lerp(-440, 0, spring(clamp((u - 3.50) / 0.62), { freq: 0.95, damping: 0.70 }));
     D.setT(r.wArb, {
       x: arbX(t), y: 0, s: 1,
       o: seg(t, 3.50, 0.12, easeOutCubic),
-      blur: clamp(Math.abs(M.velocity(arbX, t)) * 0.0030, 0, 13),
+      blur: clamp(Math.abs(M.velocity(arbX, t)) * 0.0024, 0, 9),
       centered: false,
     });
 
-    const samX = (u) => lerp(-800, 0, spring(clamp((u - 3.76) / 0.64), { freq: 1.00, damping: 0.68 }));
+    const samX = (u) => lerp(-700, 0, spring(clamp((u - 3.76) / 0.66), { freq: 0.95, damping: 0.70 }));
     D.setT(r.wSam, {
       x: samX(t), y: 0, s: 1,
       o: seg(t, 3.76, 0.12, easeOutCubic),
-      blur: clamp(Math.abs(M.velocity(samX, t)) * 0.0030, 0, 13),
+      blur: clamp(Math.abs(M.velocity(samX, t)) * 0.0024, 0, 9),
       centered: false,
     });
 
@@ -485,7 +503,7 @@ export default {
       row.label.style.color = mix(C.inkFaint, C.ink, 0.25 + 0.75 * st);
 
       // Row highlight: a tint flash on interaction, held on the prioritised row.
-      row.hl.style.opacity = clamp(0.85 * say + (i === 3 ? 0.55 * seg(t, 8.14, 0.26, easeOutCubic) : 0)).toFixed(4);
+      row.hl.style.opacity = clamp(0.85 * say + (i === 3 ? 0.34 * seg(t, 8.14, 0.26, easeOutCubic) : 0)).toFixed(4);
 
       // "Prioriteret" marker.
       const markIn = spring(clamp((t - 8.14) / 0.34), { freq: 1.05, damping: 0.66 });

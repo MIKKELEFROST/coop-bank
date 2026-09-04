@@ -119,8 +119,12 @@ export function setT(n, t = {}) {
   const scale = sx != null || sy != null
     ? `scale(${(sx != null ? sx : s).toFixed(5)},${(sy != null ? sy : s).toFixed(5)})`
     : `scale(${s.toFixed(5)})`;
+  // translate() rather than translate3d(): a 3D transform force-promotes the
+  // node to its own compositor layer, which pins the layer's raster scale and
+  // makes text rasterise differently depending on the previously rendered
+  // frame. 2D keeps rendering a pure function of the current frame.
   n.style.transform =
-    `${base}translate3d(${x.toFixed(3)}px,${y.toFixed(3)}px,0) ` +
+    `${base}translate(${x.toFixed(3)}px,${y.toFixed(3)}px) ` +
     (r ? `rotate(${r.toFixed(4)}deg) ` : '') +
     (skew ? `skewX(${skew.toFixed(4)}deg) ` : '') +
     scale;

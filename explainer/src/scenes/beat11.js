@@ -7,7 +7,7 @@
  *   6.40 "TonePilot sikrer vores tone of voice."
  *   9.00 "CMO Copilot sparrer om strategi, analyse og beslutninger."
  *
- * Composition: a centred constellation. The "Marketing" hub sits at (960, 560)
+ * Composition: a centred constellation. The "Marketing" hub sits at (960, 594)
  * with four agent cards in the corners of the cluster, each joined to the hub by
  * a short curved connector. The headline holds the top of the frame.
  *
@@ -47,18 +47,18 @@ const C = D.C;
  * Layout — stage coordinates
  * ------------------------------------------------------------------ */
 
-const HEAD_Y = 150;
+const HEAD_Y = 146;
 
 const CARD = { w: 444, h: 308, pad: 26 };
-const HUB = { cx: 960, cy: 580, w: 392, h: 200 };   // 764..1156 · 480..680
-const WIN = { cx: 960, cy: 570, w: 880, h: 486 };   // 520..1400 · 327..813
+const HUB = { cx: 960, cy: 594, w: 392, h: 200 };   // 764..1156 · 494..694
+const WIN = { cx: 960, cy: 604, w: 880, h: 486 };   // 520..1400 · 361..847
 
 /* Hub ports and card attachment points for the four connectors. */
 const PORT = [
-  { hx: 764,  hy: 520, ax: 682,  ay: 442 },
-  { hx: 1156, hy: 520, ax: 1238, ay: 442 },
-  { hx: 764,  hy: 640, ax: 682,  ay: 768 },
-  { hx: 1156, hy: 640, ax: 1238, ay: 768 },
+  { hx: 764,  hy: 534, ax: 682,  ay: 456 },
+  { hx: 1156, hy: 534, ax: 1238, ay: 456 },
+  { hx: 764,  hy: 654, ax: 682,  ay: 782 },
+  { hx: 1156, hy: 654, ax: 1238, ay: 782 },
 ];
 
 /* ------------------------------------------------------------------ *
@@ -75,7 +75,7 @@ const AGENTS = [
     icon: 'code', color: C.blue, tint: C.cardBlue, edge: '#C6D6FF',
     person: { key: 'personMikkel', initials: 'MF' },
     asset: 'wfWebflow', winTitle: 'Webflow · Claude · MCP',
-    cx: 460, cy: 418,
+    cx: 460, cy: 432,
     tIn: 0.88, tOpen: 1.66, tClose: 2.90, tChip: 3.16,
   },
   {
@@ -87,7 +87,7 @@ const AGENTS = [
     icon: 'pen', color: C.red, tint: C.cardRed, edge: '#F7C3C8',
     person: { key: 'personNicole', initials: 'N' },
     asset: 'wfContent', winTitle: 'Idé- og contentagent',
-    cx: 1460, cy: 418,
+    cx: 1460, cy: 432,
     tIn: 3.50, tOpen: 4.28, tClose: 5.52, tChip: 5.78,
   },
   {
@@ -99,7 +99,7 @@ const AGENTS = [
     icon: 'voice', color: '#2FA55F', tint: C.cardGreen, edge: '#BFEACF',
     person: null,
     asset: 'wfTone', winTitle: 'TonePilot',
-    cx: 460, cy: 792,
+    cx: 460, cy: 806,
     tIn: 6.42, tOpen: 7.20, tClose: 8.44, tChip: 8.70,
   },
   {
@@ -111,7 +111,7 @@ const AGENTS = [
     icon: 'target', color: '#B98505', tint: C.cardYellow, edge: '#F5DEA8',
     person: null,
     asset: 'wfCmo', winTitle: 'CMO Copilot',
-    cx: 1460, cy: 792,
+    cx: 1460, cy: 806,
     tIn: 9.00, tOpen: 9.70, tClose: 10.66, tChip: 11.00,
   },
 ];
@@ -201,7 +201,7 @@ export default {
     r.brand = brandmark(root);
 
     const cam = D.el('div', '', root);
-    cam.style.cssText = 'position:absolute;inset:0;transform-origin:960px 540px';
+    cam.style.cssText = 'position:absolute;inset:0;transform-origin:960px 560px';
     r.cam = cam;
 
     /* ---------------- headline ---------------- */
@@ -219,7 +219,7 @@ export default {
 
     /* ---------------- the constellation ---------------- */
     const cluster = D.el('div', '', cam);
-    cluster.style.cssText = 'position:absolute;inset:0;transform-origin:960px 560px';
+    cluster.style.cssText = 'position:absolute;inset:0;transform-origin:960px 600px';
     r.cluster = cluster;
 
     // connectors, behind everything in the cluster
@@ -245,7 +245,7 @@ export default {
 
     const hring = D.el('div', '', hub);
     hring.style.cssText =
-      `position:absolute;inset:-10px;border-radius:40px;border:2.5px solid ${C.red};` +
+      `position:absolute;inset:-12px;border-radius:42px;border:2px solid ${C.red};` +
       'pointer-events:none';
     r.hring = hring;
 
@@ -349,8 +349,10 @@ export default {
     r.hubBlur.set(r.hub, 0, clamp(Math.abs(M.velocity(hubY, t)) * 0.0050, 0, 14));
     r.hub.style.boxShadow = D.SHADOW[4];
 
-    r.hring.style.opacity = clamp(0.85 * send).toFixed(4);
-    r.hring.style.transform = `scale(${(1 + 0.030 * send).toFixed(4)})`;
+    // A single radiating ring when the hub dispatches the four tasks.
+    const ringOut = seg(t, TOK_DEP - 0.06, 0.66, easeOutQuint);
+    r.hring.style.opacity = clamp(0.72 * send).toFixed(4);
+    r.hring.style.transform = `scale(${(1 + 0.055 * ringOut).toFixed(4)})`;
 
     D.setT(r.hdisc, { x: 0, y: 0, s: 1 + 0.10 * send, o: 1, centered: false });
     D.setT(r.htitle, { x: 0, y: 0, s: 1, o: 1, centered: false });
@@ -397,18 +399,20 @@ export default {
       card.root.style.boxShadow = D.SHADOW[(land > 0.18 || say > 0.30) ? 3 : 2];
       card.root.style.borderColor = mix(C.line, a.edge, clamp(0.35 * say + 0.75 * land));
 
-      const iconP = spring(clamp((t - (a.tIn + 0.10)) / 0.46), { freq: 1.22, damping: 0.60 });
+      // The contents ride in with the card itself — a card that is briefly an
+      // empty white rectangle reads as a rendering fault, not as an entrance.
+      const iconP = spring(clamp((t - (a.tIn + 0.02)) / 0.44), { freq: 1.22, damping: 0.60 });
       D.setT(card.iconBox, {
         x: 0, y: 0, s: lerp(0.45, 1, iconP) * (1 + 0.07 * land), o: 1, centered: false,
       });
       D.setT(card.disc, {
-        x: 0, y: 0, s: lerp(0.5, 1, spring(clamp((t - (a.tIn + 0.16)) / 0.46), { freq: 1.2, damping: 0.62 })),
-        o: seg(t, a.tIn + 0.16, 0.16, easeOutCubic), centered: false,
+        x: 0, y: 0, s: lerp(0.5, 1, spring(clamp((t - (a.tIn + 0.06)) / 0.44), { freq: 1.2, damping: 0.62 })),
+        o: seg(t, a.tIn + 0.04, 0.14, easeOutCubic), centered: false,
       });
-      const subP = seg(t, a.tIn + 0.20, 0.30, easeOutCubic);
-      D.setT(card.title, { x: 0, y: 0, s: 1, o: seg(t, a.tIn + 0.12, 0.22, easeOutCubic), centered: false });
+      const subP = seg(t, a.tIn + 0.06, 0.20, easeOutCubic);
+      D.setT(card.title, { x: 0, y: 0, s: 1, o: seg(t, a.tIn + 0.01, 0.13, easeOutCubic), centered: false });
       D.setT(card.sub, { x: lerp(-14, 0, subP), y: 0, s: 1, o: subP, centered: false });
-      const bodyP = seg(t, a.tIn + 0.30, 0.32, easeOutCubic);
+      const bodyP = seg(t, a.tIn + 0.11, 0.22, easeOutCubic);
       D.setT(card.body, { x: 0, y: lerp(10, 0, bodyP), s: 1, o: bodyP, centered: false });
 
       /* status chip: appears neutral, turns green when its token lands */
@@ -449,8 +453,10 @@ export default {
 
       const cxF = (u) => lerp(a.cx, WIN.cx, winP(u, a));
       const cyF = (u) => lerp(a.cy, WIN.cy, winP(u, a));
-      const bx = clamp(Math.abs(M.velocity(cxF, t)) * 0.0038, 0, 10);
-      const by = clamp(Math.abs(M.velocity(cyF, t)) * 0.0038, 0, 8);
+      // Smear only while the window genuinely travels, and gently — it carries
+      // readable Danish interface text for most of the move.
+      const bx = clamp(Math.abs(M.velocity(cxF, t)) * 0.0030, 0, 7);
+      const by = clamp(Math.abs(M.velocity(cyF, t)) * 0.0030, 0, 6);
 
       w.root.style.width = lerp(CARD.w, WIN.w, p).toFixed(2) + 'px';
       w.root.style.height = lerp(CARD.h, WIN.h, p).toFixed(2) + 'px';
@@ -624,7 +630,7 @@ function winWebflow(w) {
     abs(page, `left:${28 + i * 177}px;top:228px;width:164px;height:92px;border-radius:10px;` +
       'background:#F4F4F0;border:1px solid #E7E7E0'));
 
-  const pill = abs(b, 'left:584px;top:352px;height:46px;border-radius:999px;background:#fff;' +
+  const pill = abs(b, 'left:534px;top:352px;height:46px;border-radius:999px;background:#fff;' +
     `border:1px solid ${C.line};box-shadow:${D.SHADOW[2]};display:flex;align-items:center;` +
     'gap:10px;padding:0 20px');
   const pdot = D.el('div', '', pill);
@@ -787,7 +793,7 @@ function winCmo(w) {
 
   absT(b, 'Effekt pr. uge', `left:28px;top:158px;font-size:22px;font-weight:700;letter-spacing:.02em;color:${C.inkSoft}`);
   const chart = abs(b, 'left:28px;top:196px;width:500px;height:132px');
-  abs(chart, `left:0;top:131px;width:500px;height:1px;background:${C.line}`);
+  abs(chart, 'left:0;top:130px;width:500px;height:2px;border-radius:1px;background:#DEDED7');
   BARS.forEach((hgt, i) => {
     const bar = abs(chart, `left:${i * 76}px;top:${131 - hgt}px;width:44px;height:${hgt}px;` +
       `border-radius:8px 8px 3px 3px;background:${i >= 5 ? C.blue : '#DEDED7'};transform-origin:50% 100%`);
@@ -812,6 +818,7 @@ function winCmo(w) {
   dot.style.cssText = `width:13px;height:13px;border-radius:50%;flex:none;background:${C.green}`;
   const btx = D.el('div', '', bar, 'Indsigt klar til beslutning');
   btx.style.cssText = `font-size:25px;font-weight:700;letter-spacing:-.014em;color:${C.ink}`;
+  items.push({ node: bar, at: 0.68, dy: 14, s0: 0.96 });
 
   return { root: w.root, body: b, items, tick: () => {} };
 }

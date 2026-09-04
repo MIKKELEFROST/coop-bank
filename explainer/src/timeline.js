@@ -108,8 +108,9 @@ const state = {
 };
 
 function applyContainer(node, s) {
+  // 2D transform only — see the note in design.setT about raster-scale pinning.
   node.style.transform =
-    `translate3d(${s.x.toFixed(3)}px, ${s.y.toFixed(3)}px, 0) scale(${s.s.toFixed(5)})`;
+    `translate(${s.x.toFixed(3)}px, ${s.y.toFixed(3)}px) scale(${s.s.toFixed(5)})`;
   node.style.opacity = s.o.toFixed(4);
   node.style.filter = s.blur > 0.05 ? `blur(${s.blur.toFixed(2)}px)` : 'none';
 }
