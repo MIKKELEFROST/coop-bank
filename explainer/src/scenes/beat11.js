@@ -47,18 +47,18 @@ const C = D.C;
  * Layout — stage coordinates
  * ------------------------------------------------------------------ */
 
-const HEAD_Y = 158;
+const HEAD_Y = 150;
 
-const CARD = { w: 430, h: 308, pad: 26 };
-const HUB = { cx: 960, cy: 560, w: 392, h: 194 };   // 764..1156 · 463..657
-const WIN = { cx: 960, cy: 556, w: 880, h: 486 };   // 520..1400 · 313..799
+const CARD = { w: 444, h: 308, pad: 26 };
+const HUB = { cx: 960, cy: 580, w: 392, h: 200 };   // 764..1156 · 480..680
+const WIN = { cx: 960, cy: 570, w: 880, h: 486 };   // 520..1400 · 327..813
 
 /* Hub ports and card attachment points for the four connectors. */
 const PORT = [
-  { hx: 764,  hy: 502, ax: 671,  ay: 424 },
-  { hx: 1156, hy: 502, ax: 1249, ay: 424 },
-  { hx: 764,  hy: 618, ax: 671,  ay: 756 },
-  { hx: 1156, hy: 618, ax: 1249, ay: 756 },
+  { hx: 764,  hy: 520, ax: 682,  ay: 442 },
+  { hx: 1156, hy: 520, ax: 1238, ay: 442 },
+  { hx: 764,  hy: 640, ax: 682,  ay: 768 },
+  { hx: 1156, hy: 640, ax: 1238, ay: 768 },
 ];
 
 /* ------------------------------------------------------------------ *
@@ -75,8 +75,8 @@ const AGENTS = [
     icon: 'code', color: C.blue, tint: C.cardBlue, edge: '#C6D6FF',
     person: { key: 'personMikkel', initials: 'MF' },
     asset: 'wfWebflow', winTitle: 'Webflow · Claude · MCP',
-    cx: 456, cy: 400,
-    tIn: 0.88, tOpen: 1.66, tClose: 2.90, tChip: 3.18,
+    cx: 460, cy: 418,
+    tIn: 0.88, tOpen: 1.66, tClose: 2.90, tChip: 3.16,
   },
   {
     key: 'content',
@@ -87,8 +87,8 @@ const AGENTS = [
     icon: 'pen', color: C.red, tint: C.cardRed, edge: '#F7C3C8',
     person: { key: 'personNicole', initials: 'N' },
     asset: 'wfContent', winTitle: 'Idé- og contentagent',
-    cx: 1464, cy: 400,
-    tIn: 3.50, tOpen: 4.28, tClose: 5.52, tChip: 5.80,
+    cx: 1460, cy: 418,
+    tIn: 3.50, tOpen: 4.28, tClose: 5.52, tChip: 5.78,
   },
   {
     key: 'tone',
@@ -99,8 +99,8 @@ const AGENTS = [
     icon: 'voice', color: '#2FA55F', tint: C.cardGreen, edge: '#BFEACF',
     person: null,
     asset: 'wfTone', winTitle: 'TonePilot',
-    cx: 456, cy: 780,
-    tIn: 6.42, tOpen: 7.20, tClose: 8.44, tChip: 8.72,
+    cx: 460, cy: 792,
+    tIn: 6.42, tOpen: 7.20, tClose: 8.44, tChip: 8.70,
   },
   {
     key: 'cmo',
@@ -111,8 +111,8 @@ const AGENTS = [
     icon: 'target', color: '#B98505', tint: C.cardYellow, edge: '#F5DEA8',
     person: null,
     asset: 'wfCmo', winTitle: 'CMO Copilot',
-    cx: 1464, cy: 780,
-    tIn: 9.00, tOpen: 9.78, tClose: 10.82, tChip: 11.10,
+    cx: 1460, cy: 792,
+    tIn: 9.00, tOpen: 9.70, tClose: 10.66, tChip: 11.00,
   },
 ];
 
@@ -120,7 +120,7 @@ const OPEN_DUR = 0.40;
 const CLOSE_DUR = 0.34;
 
 /* Finale — the four task tokens leaving the hub. */
-const TOK_DEP = 11.28;
+const TOK_DEP = 11.24;
 const TOK_PER = 0.07;
 const TOK_DUR = 0.50;
 const tokDep = (i) => TOK_DEP + i * TOK_PER;
@@ -237,7 +237,7 @@ export default {
     const hub = D.el('div', '', cluster);
     D.place(hub, HUB.cx, HUB.cy, HUB.w, HUB.h);
     hub.style.cssText +=
-      `border-radius:30px;background:#fff;border:1px solid ${C.line};` +
+      `border-radius:32px;background:#fff;border:2px solid ${C.red};` +
       `box-shadow:${D.SHADOW[4]};display:flex;flex-direction:column;` +
       'align-items:center;justify-content:center;padding:22px';
     r.hub = hub;
@@ -259,8 +259,8 @@ export default {
 
     const htitle = D.el('div', '', hub, 'Marketing');
     htitle.style.cssText =
-      'margin-top:12px;font-size:46px;font-weight:800;letter-spacing:-.028em;' +
-      `line-height:52px;color:${C.ink};white-space:nowrap`;
+      'margin-top:12px;font-size:50px;font-weight:800;letter-spacing:-.030em;' +
+      `line-height:56px;color:${C.ink};white-space:nowrap`;
     r.htitle = htitle;
 
     const hsub = D.el('div', '', hub, 'Retning · kontrol · prioritering');
@@ -349,7 +349,7 @@ export default {
     r.hubBlur.set(r.hub, 0, clamp(Math.abs(M.velocity(hubY, t)) * 0.0050, 0, 14));
     r.hub.style.boxShadow = D.SHADOW[4];
 
-    r.hring.style.opacity = clamp(0.10 * seg(t, 0.70, 0.40, easeOutCubic) + 0.85 * send).toFixed(4);
+    r.hring.style.opacity = clamp(0.85 * send).toFixed(4);
     r.hring.style.transform = `scale(${(1 + 0.030 * send).toFixed(4)})`;
 
     D.setT(r.hdisc, { x: 0, y: 0, s: 1 + 0.10 * send, o: 1, centered: false });
@@ -518,14 +518,16 @@ function buildCard(parent, a) {
     disc = D.el('div', '', head);
     disc.style.cssText =
       'width:44px;height:44px;border-radius:50%;flex:none;background:#fff;' +
-      `border:1px solid ${C.line};display:flex;align-items:center;justify-content:center`;
+      'border:2px solid rgba(227,6,19,.28);display:flex;align-items:center;justify-content:center';
     const dot = D.el('div', '', disc);
-    dot.style.cssText = `width:16px;height:16px;border-radius:50%;background:${C.red}`;
+    dot.style.cssText =
+      `width:18px;height:18px;border-radius:50%;background:${C.red};` +
+      'box-shadow:0 2px 6px rgba(227,6,19,.30)';
   }
 
   const sub = D.el('div', '', root, a.sub);
   sub.style.cssText =
-    `margin-top:14px;height:32px;font-size:25px;font-weight:600;line-height:32px;` +
+    `margin-top:14px;height:32px;font-size:24px;font-weight:600;line-height:32px;` +
     `letter-spacing:-.010em;color:${C.inkSoft};white-space:nowrap;overflow:hidden`;
 
   const body = D.el('div', '', root, a.body);
@@ -616,7 +618,7 @@ function winWebflow(w) {
 
   const hero = abs(page, 'left:348px;top:76px;width:198px;height:118px;border-radius:10px;' +
     `background:${C.cardBlue};border:1px solid #C6D6FF`);
-  items.push({ node: hero, at: 0.44, s0: 0.62 });
+  items.push({ node: hero, at: 0.10, s0: 0.62 });
 
   const blocks = [0, 1, 2].map((i) =>
     abs(page, `left:${28 + i * 177}px;top:228px;width:164px;height:92px;border-radius:10px;` +
@@ -629,7 +631,7 @@ function winWebflow(w) {
   pdot.style.cssText = `width:13px;height:13px;border-radius:50%;flex:none;background:${C.green}`;
   const ptx = D.el('div', '', pill, 'Ændringer udgivet');
   ptx.style.cssText = `font-size:24px;font-weight:700;letter-spacing:-.012em;color:${C.ink};white-space:nowrap`;
-  items.push({ node: pill, at: 0.76, dy: 14, s0: 0.92 });
+  items.push({ node: pill, at: 0.58, dy: 14, s0: 0.92 });
 
   const cur = abs(b, 'left:0;top:0;width:30px;height:30px;display:flex');
   const curIcon = D.icon('cursor', 30, 2);
@@ -637,24 +639,24 @@ function winWebflow(w) {
   cur.appendChild(curIcon);
 
   const tick = (t, open) => {
-    const cp = seg(t, open + 0.26, 0.32, easeInOutCubic);
-    const flash = pulse(t, open + 0.60, 0.40, easeOutCubic);
+    const cp = seg(t, open + 0.12, 0.30, easeInOutCubic);
+    const flash = pulse(t, open + 0.46, 0.40, easeOutCubic);
     cur.style.left = lerp(486, 118, cp).toFixed(2) + 'px';
     cur.style.top = lerp(206, 358, cp).toFixed(2) + 'px';
     D.setT(cur, {
       x: 0, y: 0, s: 1 - 0.16 * flash,
-      o: seg(t, open + 0.20, 0.14, easeOutCubic) * (1 - seg(t, open + 0.86, 0.20, easeOutCubic)),
+      o: seg(t, open + 0.08, 0.14, easeOutCubic) * (1 - seg(t, open + 0.74, 0.20, easeOutCubic)),
       centered: false,
     });
     pub.style.background = mix(C.blue, '#1E3BC9', flash);
     D.setT(pub, { x: 0, y: 0, s: 1 - 0.035 * flash, o: 1, centered: false });
 
-    const tint = smoothstep(open + 0.90, open + 1.04, t);
+    const tint = smoothstep(open + 0.68, open + 0.82, t);
     blocks.forEach((bl, i) => {
       const q = i === 2 ? tint : 0;
       bl.style.background = mix('#F4F4F0', C.cardBlue, q);
       bl.style.borderColor = mix('#E7E7E0', '#C6D6FF', q);
-      D.setT(bl, { x: 0, y: 0, s: 1 + 0.035 * pulse(t, open + 0.92, 0.36, easeOutCubic) * (i === 2 ? 1 : 0), o: 1, centered: false });
+      D.setT(bl, { x: 0, y: 0, s: 1 + 0.035 * pulse(t, open + 0.70, 0.36, easeOutCubic) * (i === 2 ? 1 : 0), o: 1, centered: false });
     });
   };
 
@@ -690,7 +692,7 @@ function winContent(w) {
     tag.style.cssText =
       'flex:none;padding:7px 16px;border-radius:999px;background:#EFEFEA;' +
       `font-size:21px;font-weight:700;color:${C.inkSoft}`;
-    items.push({ node: row, at: 0.34 + i * 0.16, dx: -26, s0: 0.97 });
+    items.push({ node: row, at: 0.06 + i * 0.14, dx: -26, s0: 0.97 });
   });
 
   const bar = abs(b, `left:34px;top:356px;width:812px;height:54px;border-radius:14px;` +
@@ -699,7 +701,7 @@ function winContent(w) {
   tickDisc(bar, 32);
   const btx = D.el('div', '', bar, 'Udkast klar – følger brandretningen');
   btx.style.cssText = `font-size:26px;font-weight:700;letter-spacing:-.014em;color:#186B3E`;
-  items.push({ node: bar, at: 0.90, dy: 16, s0: 0.96 });
+  items.push({ node: bar, at: 0.58, dy: 16, s0: 0.96 });
 
   return { root: w.root, body: b, items, tick: () => {} };
 }
@@ -732,9 +734,9 @@ function winTone(w) {
   const after = panel(466, 'EFTER', 'Din opsparing vokser – enkelt og trygt.',
     { bg: C.cardGreen, edge: '#BFEACF', label: '#4E8F6C', ink: C.ink, meter: C.green }, 3);
 
-  items.push({ node: before.tx, at: 0.38, dy: 12 });
-  items.push({ node: after.tx, at: 0.70, dx: 22 });
-  items.push({ node: after.meter, at: 0.82, dx: -14 });
+  items.push({ node: before.tx, at: 0.06, dy: 12 });
+  items.push({ node: after.tx, at: 0.40, dx: 22 });
+  items.push({ node: after.meter, at: 0.52, dx: -14 });
 
   const arrow = abs(b, 'left:414px;top:172px;width:52px;height:44px;display:flex;' +
     `align-items:center;justify-content:center;color:${C.ink}`);
@@ -745,17 +747,17 @@ function winTone(w) {
   tickDisc(bar, 32);
   const btx = D.el('div', '', bar, 'Tone justeret til Coop Banks stemme');
   btx.style.cssText = `font-size:26px;font-weight:700;letter-spacing:-.014em;color:${C.ink}`;
-  items.push({ node: bar, at: 0.94, dy: 16, s0: 0.96 });
+  items.push({ node: bar, at: 0.68, dy: 16, s0: 0.96 });
 
   const tick = (t, open) => {
-    const move = pulse(t, open + 0.56, 0.44, easeOutCubic);
+    const move = pulse(t, open + 0.28, 0.44, easeOutCubic);
     D.setT(arrow, {
       x: 14 * move, y: 0, s: 1 + 0.10 * move,
-      o: seg(t, open + 0.52, 0.16, easeOutCubic), centered: false,
+      o: seg(t, open + 0.24, 0.16, easeOutCubic), centered: false,
     });
-    const glow = smoothstep(open + 0.66, open + 0.82, t);
+    const glow = smoothstep(open + 0.38, open + 0.54, t);
     after.p.style.borderColor = mix('#BFEACF', C.green, glow * 0.7);
-    D.setT(after.p, { x: 0, y: 0, s: 1 + 0.012 * pulse(t, open + 0.70, 0.40, easeOutCubic), o: 1, centered: false });
+    D.setT(after.p, { x: 0, y: 0, s: 1 + 0.012 * pulse(t, open + 0.42, 0.40, easeOutCubic), o: 1, centered: false });
     D.setT(before.p, { x: 0, y: 0, s: 1, o: lerp(1, 0.72, glow), centered: false });
   };
 
@@ -780,7 +782,7 @@ function winCmo(w) {
       `background:${k.tone};border:1px solid ${k.edge}`);
     absT(tile, k.v, `left:20px;top:14px;font-size:40px;font-weight:800;letter-spacing:-.028em;color:${k.ink}`);
     absT(tile, k.l, `left:20px;top:70px;font-size:23px;font-weight:600;letter-spacing:-.010em;color:${C.inkSoft}`);
-    items.push({ node: tile, at: 0.34 + i * 0.12, dy: 18, s0: 0.94 });
+    items.push({ node: tile, at: 0.06 + i * 0.10, dy: 18, s0: 0.94 });
   });
 
   absT(b, 'Effekt pr. uge', `left:28px;top:158px;font-size:22px;font-weight:700;letter-spacing:.02em;color:${C.inkSoft}`);
@@ -789,7 +791,7 @@ function winCmo(w) {
   BARS.forEach((hgt, i) => {
     const bar = abs(chart, `left:${i * 76}px;top:${131 - hgt}px;width:44px;height:${hgt}px;` +
       `border-radius:8px 8px 3px 3px;background:${i >= 5 ? C.blue : '#DEDED7'};transform-origin:50% 100%`);
-    items.push({ node: bar, at: 0.62 + i * 0.035, sy0: 0.06 });
+    items.push({ node: bar, at: 0.34 + i * 0.035, sy0: 0.06 });
   });
 
   const ins = abs(b, `left:552px;top:196px;width:300px;height:132px;border-radius:16px;` +
@@ -802,7 +804,7 @@ function winCmo(w) {
   const insTx = D.el('div', '', ins, 'Flyt budget til opsparing.');
   insTx.style.cssText =
     `margin-top:12px;font-size:26px;font-weight:700;line-height:32px;letter-spacing:-.014em;color:${C.ink}`;
-  items.push({ node: ins, at: 0.90, dx: 22, s0: 0.95 });
+  items.push({ node: ins, at: 0.56, dx: 22, s0: 0.95 });
 
   const bar = abs(b, 'left:28px;top:352px;width:824px;height:52px;border-radius:14px;' +
     `background:#fff;border:1px solid ${C.line};display:flex;align-items:center;padding:0 18px;gap:14px`);
