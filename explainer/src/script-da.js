@@ -7,8 +7,6 @@
  */
 
 export const FPS = 30;
-export const DURATION = 75;
-export const FRAME_COUNT = DURATION * FPS; // 2250
 
 export const BEATS = [
   {
@@ -83,6 +81,18 @@ export const BEATS = [
     onScreen: ['AI genererer ikke bare.', 'AI arbejder sammen med os.', 'Er fremtidens marketingchef den, der tænder og slukker agenter?'],
   },
 ];
+
+/**
+ * Derived from the beats rather than written down beside them. As a literal
+ * these could disagree with the table above, and the failure would be silent:
+ * seekToTime() clamps to DURATION, so a film whose beats ran past it would
+ * simply stop early with nothing reported.
+ */
+export const DURATION = BEATS[BEATS.length - 1].end; // 75
+export const FRAME_COUNT = Math.round(DURATION * FPS); // 2250
+if (Math.abs(DURATION * FPS - FRAME_COUNT) > 1e-9) {
+  throw new Error(`beat timings must land on whole frames: ${DURATION}s x ${FPS}fps = ${DURATION * FPS}`);
+}
 
 /**
  * Sub-cues inside a beat, used for the SRT and for syncing card pulses to the
