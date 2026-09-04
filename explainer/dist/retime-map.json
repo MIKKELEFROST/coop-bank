@@ -171,6 +171,148 @@
       ]
     }
   ],
+  "cues": [
+    {
+      "master": 0.25,
+      "output": 0.25,
+      "text": "Marketing er ved at ændre sig."
+    },
+    {
+      "master": 2.25,
+      "output": 2.25,
+      "text": "Ikke kun gennem nye værktøjer, men gennem AI-agenter."
+    },
+    {
+      "master": 4.7,
+      "output": 4.7,
+      "text": "En AI-agent kan selv planlægge, søge information,"
+    },
+    {
+      "master": 7.6,
+      "output": 7.6,
+      "text": "træffe beslutninger og udføre handlinger for at nå et mål."
+    },
+    {
+      "master": 10.7,
+      "output": 10.7,
+      "text": "Det ændrer vores arbejdsgange – og på sigt også vores roller"
+    },
+    {
+      "master": 13.4,
+      "output": 13.4,
+      "text": "og hvor mange vi skal være."
+    },
+    {
+      "master": 15.7,
+      "output": 15.7,
+      "text": "For en mindre marketingafdeling som vores betyder det,"
+    },
+    {
+      "master": 18.5,
+      "output": 18.5,
+      "text": "at Coop Bank kan stå stærkere over for langt større spillere."
+    },
+    {
+      "master": 21.7,
+      "output": 21.7,
+      "text": "Agenter kan analysere store datamængder, finde mønstre"
+    },
+    {
+      "master": 24.2,
+      "output": 24.2,
+      "text": "og give os bedre indsigter."
+    },
+    {
+      "master": 26.2,
+      "output": 26.2,
+      "text": "De kan løbende analysere, teste og anbefale forbedringer"
+    },
+    {
+      "master": 28.9,
+      "output": 28.9,
+      "text": "– hurtigere og mere ensartet."
+    },
+    {
+      "master": 30.7,
+      "output": 30.7,
+      "text": "Når AI-agenter søger nettet efter svar,"
+    },
+    {
+      "master": 33,
+      "output": 33,
+      "text": "bliver vores digitale synlighed endnu vigtigere."
+    },
+    {
+      "master": 35.7,
+      "output": 35.7,
+      "text": "Vores rolle flytter sig fra at udføre alt selv"
+    },
+    {
+      "master": 38.4,
+      "output": 38.4,
+      "text": "til i højere grad at lede, kontrollere og prioritere AI-agenter."
+    },
+    {
+      "master": 41.7,
+      "output": 41.9627,
+      "text": "Jo mere vi overlader til AI,"
+    },
+    {
+      "master": 43.3,
+      "output": 44.5206,
+      "text": "desto vigtigere bliver spørgsmålet om tillid og kontrol."
+    },
+    {
+      "master": 46.2,
+      "output": 48.8992,
+      "text": "Og det er ikke kun fremtid."
+    },
+    {
+      "master": 47.9,
+      "output": 50.6333,
+      "text": "Vi arbejder allerede sådan i dag."
+    },
+    {
+      "master": 50.3,
+      "output": 53.0333,
+      "text": "Mikkel udvikler i Webflow med Claude og MCP."
+    },
+    {
+      "master": 53.4,
+      "output": 56.1333,
+      "text": "Nicole bruger en agent til idéer og content."
+    },
+    {
+      "master": 56.4,
+      "output": 59.1333,
+      "text": "TonePilot sikrer vores tone of voice."
+    },
+    {
+      "master": 59,
+      "output": 61.7333,
+      "text": "CMO Copilot sparrer om strategi, analyse og beslutninger."
+    },
+    {
+      "master": 62.8,
+      "output": 65.5333,
+      "text": "Fælles for dem er, at AI ikke bare genererer."
+    },
+    {
+      "master": 65.6,
+      "output": 68.3333,
+      "text": "AI arbejder sammen med os og udfører opgaver."
+    },
+    {
+      "master": 68.6,
+      "output": 71.3333,
+      "text": "Er fremtidens marketingchef den, der beslutter,"
+    },
+    {
+      "master": 70.8,
+      "output": 73.5333,
+      "text": "hvilke agenter der skal tændes og slukkes?"
+    }
+  ],
   "masterTimeByFrame": [
     0,
     0.03333,

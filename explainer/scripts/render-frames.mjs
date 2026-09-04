@@ -102,26 +102,38 @@ export async function renderFrames(opts = {}) {
   }
 
   // Two ways to name a capture. A bare integer is a frame on the master
-  // timeline. `{ i, t }` is an output frame index `i` captured at master time
-  // `t` seconds — that is what a retimed render needs, because its frames sit
-  // *between* master frames and there is no integer that names them.
-  const items = list.map((x) => (typeof x === 'number' ? { i: x, t: null } : x));
+  // timeline. `{ i, t, scale }` is an output frame index `i` captured at master
+  // time `t` seconds — that is what a retimed render needs, because its frames
+  // sit *between* master frames and there is no integer that names them.
+  // `scale` is the playback speed there, which velocity-derived motion blur
+  // needs; it defaults to normal speed.
+  const items = list.map((x) => (typeof x === 'number'
+    ? { i: x, t: null, scale: 1 }
+    : { scale: 1, ...x }));
 
   const t0 = Date.now();
   const written = [];
   for (let n = 0; n < items.length; n++) {
-    const { i, t } = items[n];
+    const { i, t, scale } = items[n];
     // 1. set the exact frame  2. wait for the frame-ready signal  3. capture
-    await page.evaluate(({ f, sec }) => {
+    await page.evaluate(({ f, sec, spd }) => {
       // Detach the stage before seeking and re-attach after. This tears down
       // every compositor layer, so the frame is rasterised from nothing but its
       // own state — no tile or raster-scale carried over from whichever frame
       // happened to be rendered before it.
+      //
+      // LOAD-BEARING. It looks like belt and braces next to the `body.render`
+      // guard in styles.css, but that guard only resets will-change and
+      // backface-visibility. Two scenes still use real 3D transforms —
+      // beat07.js:333 translate3d, and beat11.js:297/464 perspective + rotateY
+      // for the window unfold, which is a deliberate part of the design — and
+      // those force layer promotion on their own, where no CSS reset reaches
+      // them. Remove these six lines and frame order starts to matter again.
       const stage = document.getElementById('stage');
       const parent = stage.parentNode;
       const anchor = stage.nextSibling;
       parent.removeChild(stage);
-      if (sec == null) window.seekToFrame(f); else window.seekToTime(sec);
+      if (sec == null) window.seekToFrame(f); else window.seekToTime(sec, spd);
       parent.insertBefore(stage, anchor);
       void stage.offsetWidth;
 
@@ -130,7 +142,7 @@ export async function renderFrames(opts = {}) {
         document.documentElement.dataset.frameReady = String(f);
         res();
       })));
-    }, { f: i, sec: t });
+    }, { f: i, sec: t, spd: scale });
     await page.waitForFunction(
       (f) => document.documentElement.dataset.frameReady === String(f),
       i, { timeout: 20000 }

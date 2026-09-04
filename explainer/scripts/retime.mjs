@@ -51,7 +51,7 @@ import path from 'node:path';
 import crypto from 'node:crypto';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
-import { DURATION, FPS, BEATS } from '../src/script-da.js';
+import { DURATION, FPS, BEATS, CUES } from '../src/script-da.js';
 import { renderFrames } from './render-frames.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -446,7 +446,11 @@ export function planFrames(w, outFps = FPS) {
 
     if (!(m > prev)) throw new Error(`frame ${j}: master time ${m} did not advance past ${prev}`);
     prev = m;
-    times.push({ i: j, t: m, identity: identity ? near : null });
+    // Playback speed here, for velocity-derived motion blur. Where the warp is
+    // the identity this is exactly 1, so those frames render precisely as the
+    // master did — which is what makes the byte-identity check below meaningful.
+    const scale = identity ? 1 : 1 / w.dW(m);
+    times.push({ i: j, t: m, scale, identity: identity ? near : null });
   }
   return times;
 }
@@ -525,18 +529,41 @@ async function main() {
       master: [b.start, b.end],
       output: [+w.W(b.start).toFixed(4), +w.W(b.end).toFixed(4)],
     })),
+    // The spoken cues moved with the picture. Without this the timing JSON and
+    // the SRT still describe the 75 s master, and every line after the inserted
+    // time would be read off in the wrong place.
+    cues: CUES.map((c) => ({ master: c.t, output: +w.W(c.t).toFixed(4), text: c.text })),
     // Full frame -> master-time map, so any later sync question can be answered
     // without re-deriving the warp.
     masterTimeByFrame: times.map((x) => +x.t.toFixed(5)),
   }, null, 2));
   console.log(`\n[retime] skrev ${path.relative(ROOT, mapFile)}`);
 
+  // Subtitles on the retimed timeline. Each cue's end is carried through the
+  // warp too rather than being start + a fixed duration: inside the ramp a line
+  // occupies more output time than master time, and a subtitle that vanished
+  // early would be the one visible sign of that.
+  const tc = (sec) => {
+    const h = Math.floor(sec / 3600), m = Math.floor((sec % 3600) / 60), s = Math.floor(sec % 60);
+    const ms = Math.round((sec - Math.floor(sec)) * 1000);
+    return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')},${String(ms).padStart(3, '0')}`;
+  };
+  const srt = CUES.map((c, i) => {
+    const nextMaster = CUES[i + 1] ? CUES[i + 1].t : w.master;
+    const words = c.text.trim().split(/\s+/).length;
+    const endMaster = Math.min(nextMaster - 0.08, c.t + (words / 167) * 60 + 0.35);
+    return `${i + 1}\n${tc(w.W(c.t))} --> ${tc(w.W(endMaster))}\n${c.text}\n`;
+  }).join('\n');
+  const srtFile = path.join(ROOT, 'dist/voiceover-da-retimet.srt');
+  fs.writeFileSync(srtFile, srt);
+  console.log(`[retime] skrev ${path.relative(ROOT, srtFile)} (${CUES.length} replikker på den nye tidslinje)`);
+
   if (o.plan) { console.log('[retime] --plan: intet renderet'); return; }
 
   const outDir = path.join(ROOT, o.out);
   fs.rmSync(outDir, { recursive: true, force: true });
   console.log(`\n[retime] renderer ${times.length} frames -> ${o.out}`);
-  const r = await renderFrames({ list: times.map(({ i, t }) => ({ i, t })), out: o.out, quiet: o.quiet });
+  const r = await renderFrames({ list: times.map(({ i, t, scale }) => ({ i, t, scale })), out: o.out, quiet: o.quiet });
   if (r.errors.length) { console.error('[retime] page errors — stopper'); process.exit(1); }
 
   // Verification: every output frame that landed exactly on a master frame must

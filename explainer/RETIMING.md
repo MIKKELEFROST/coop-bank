@@ -79,6 +79,40 @@ node scripts/retime.mjs --hold 43.5:2.74:7.0 --fit 77.74 --plan
 — læg 2,74 s til omkring master 43,5 s, fordelt over en rampe på 7 s. `--plan`
 regner og rapporterer uden at rendere.
 
+## Bevægelsesuskarphed skal følge med ned i tempo
+
+Filmen har uskarphed afledt af hastighed: `motion.js` differentierer en
+positionsfunktion og bruger resultatet som slørings-bredde. Alle tolv beats
+bruger det, og beat 8, 9 og 10 — dem der ligger i det langsomme stykke —
+bruger det meget.
+
+Den afledede er i **pixels pr. sekund af filmtid**. Det er kun det samme som
+pixels pr. frame, når filmen kører i normal hastighed. Renderes det samme
+øjeblik ved 0,35×, kryber elementet hen over skærmen, men den afledede er
+uændret — så det ville blive sløret cirka tre gange mere end der er dækning
+for. Slow motion ville se grødet ud, præcis dér hvor billedet skulle blive
+*tydeligere*.
+
+`seekToTime(sec, timeScale)` tager derfor afspilningshastigheden med, og
+`retime.mjs` sender `1 / W'(m)` for hvert frame. Hvor warpen er identiteten,
+er den præcis 1 — så de frames renderer nøjagtig som masteren gjorde, hvilket
+er dét, der gør identitetstjekket nedenfor meningsfuldt.
+
+Hastigheden skrives ved hvert eneste kald, aldrig arvet fra forrige frame, så
+et frame renderet ved 0,35× ikke kan efterlade sin sløring på det næste.
+
+## Underteksterne flytter med
+
+Warpen rykker hvert øjeblik efter rampen med de fulde +2,733 s. `retime.mjs`
+skriver derfor `dist/voiceover-da-retimet.srt` og lægger cue-tiderne ind i
+`dist/retime-map.json` — begge på den nye tidslinje. Både start og slut føres
+gennem warpen, ikke bare starten: inde i rampen fylder en replik mere
+output-tid end master-tid, og en undertekst der forsvandt for tidligt ville
+være det eneste synlige tegn på det.
+
+`dist/voiceover-da.srt` beskriver stadig 75-sekunders-masteren. De to er
+bevidst adskilt.
+
 ## Hvad du får at vide, før der renderes
 
 ```
@@ -117,7 +151,8 @@ transform over en grænse, så ét bogstav rasteriseres anderledes.
 | `scripts/motion-energy.mjs` | måler hvor filmen er i bevægelse (`dist/motion-energy.json`) |
 | `scripts/match-cut.mjs` | udleder indgrebet fra et omklip (`dist/measured-warp.json`) |
 | `scripts/retime.mjs` | renderer den blødt igen + `dist/retime-map.json` |
-| `dist/retime-map.json` | master-tid for hvert eneste output-frame, og beats i ny tid |
+| `dist/retime-map.json` | master-tid for hvert output-frame, beats og replikker i ny tid |
+| `dist/voiceover-da-retimet.srt` | underteksterne på den nye tidslinje |
 
 Output er **stumt** (`SILENT=1`), 1920×1080, 30 fps, yuv420p, H.264 — klar til
 at lægge lyd på.

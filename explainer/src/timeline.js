@@ -152,9 +152,19 @@ function indexAt(t) {
   return k;
 }
 
-/** Render the whole page for an absolute time in seconds. Pure w.r.t. `sec`. */
-export function seekToTime(sec) {
+/**
+ * Render the whole page for an absolute time in seconds. Pure w.r.t. its
+ * arguments.
+ *
+ * `timeScale` is the playback speed at this instant, 1 for normal playback. It
+ * only reaches velocity-derived motion blur, which has to know how far a thing
+ * moves per displayed frame rather than per second of film time. It is written
+ * on every call, never left over from the previous one, so a frame rendered at
+ * 0.35x cannot leave its blur behind on the next frame rendered at 1x.
+ */
+export function seekToTime(sec, timeScale = 1) {
   if (!state.built) return;
+  M.setTimeScale(timeScale);
   const t = clamp(sec, 0, DURATION - 1e-6);
   const k = indexAt(t);
   const cur = state.scenes[k];

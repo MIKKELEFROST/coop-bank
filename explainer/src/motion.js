@@ -128,10 +128,27 @@ export const window_ = (t, start, end, fade = 0.16) =>
   smoothstep(start, start + fade, t) * (1 - smoothstep(end - fade, end, t));
 
 /**
+ * How fast the film is playing at the instant being rendered, as a fraction of
+ * normal speed. Always 1 for the master; a retimed render sets it per frame.
+ *
+ * Motion blur stands in for the smear a shutter leaves while a thing moves
+ * across ONE DISPLAYED FRAME. The derivative below is in px per second of film
+ * time, which only equals px per frame while the film runs at normal speed.
+ * Render the same instant at 0.35x and the object crawls across the screen but
+ * the derivative is unchanged, so it would be smeared roughly three times more
+ * than it has any business being. Scaling by the playback speed is what keeps
+ * blur tied to what the viewer actually sees.
+ */
+let TIME_SCALE = 1;
+export const setTimeScale = (s) => { TIME_SCALE = Number.isFinite(s) && s > 0 ? s : 1; };
+export const getTimeScale = () => TIME_SCALE;
+
+/**
  * Numeric derivative of any deterministic value function — the basis of
  * velocity-driven motion blur. Central difference over one frame.
  */
-export const velocity = (fn, t, dt = f(1)) => (fn(t + dt) - fn(t - dt)) / (2 * dt);
+export const velocity = (fn, t, dt = f(1)) =>
+  ((fn(t + dt) - fn(t - dt)) / (2 * dt)) * TIME_SCALE;
 
 /**
  * Motion blur in px from a position function, in px/second.
