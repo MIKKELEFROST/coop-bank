@@ -83,17 +83,17 @@ export default {
     r.brand = brandmark(root);
 
     const cam = D.el('div', '', root);
-    cam.style.cssText = 'position:absolute;inset:0;transform-origin:960px 552px';
+    cam.style.cssText = 'position:absolute;inset:0;transform-origin:960px 566px';
     r.cam = cam;
 
     /* ---- ghost wordmark, furthest back: texture, never a headline -------- */
     const ghostClip = D.el('div', '', cam);
-    D.place(ghostClip, 960, 768, 1580, 184);
+    D.place(ghostClip, 960, 792, 1580, 196);
     ghostClip.style.cssText +=
       'overflow:hidden;display:flex;align-items:center;justify-content:center';
     const ghost = D.el('div', '', ghostClip, 'marketing i bevægelse');
     ghost.style.cssText =
-      'font-size:110px;font-weight:800;letter-spacing:-.038em;line-height:1.2;' +
+      'font-size:118px;font-weight:800;letter-spacing:-.038em;line-height:1.2;' +
       'color:#E8E8E2;white-space:nowrap;will-change:transform,opacity';
     r.ghostClip = ghostClip;
     r.ghost = ghost;
@@ -101,7 +101,7 @@ export default {
     /* ---- quiet headline, upper left --------------------------------------- */
     const head = D.el('div', '', cam);
     head.style.cssText =
-      'position:absolute;left:302px;top:232px;will-change:transform,opacity';
+      'position:absolute;left:302px;top:254px;will-change:transform,opacity';
     const rule = D.el('div', '', head);
     rule.style.cssText =
       `width:86px;height:6px;border-radius:3px;background:${D.C.red};` +
@@ -125,9 +125,13 @@ export default {
     const pushWrap = D.el('div', '', cam);
     pushWrap.style.cssText = 'position:absolute;inset:0;will-change:filter';
     r.pushWrap = pushWrap;
+    // Directional smear: the run is horizontal, so blurring it isotropically
+    // would just make the type mushy. pushWrap itself never transforms, so the
+    // filter is applied in screen space and never scales with the row.
+    r.rowBlur = D.makeDirBlur('b3row');
 
     const row = D.el('div', '', pushWrap);
-    D.place(row, 960, 552);
+    D.place(row, 960, 574);
     row.style.cssText += 'display:flex;align-items:center;white-space:nowrap';
     r.row = row;
 
@@ -157,18 +161,20 @@ export default {
       `${(edges[3].l + (edges[3].r - edges[3].l) / 2 - (rowC.x - rowC.w / 2)).toFixed(2)}px ` +
       `${(rowC.h / 2).toFixed(2)}px`;
     r.pushDX = 960 - (edges[3].l + edges[3].r) / 2;
-    r.pushDY = 522 - edges[3].y;
+    r.pushDY = 528 - edges[3].y;
 
     return r;
   },
 
   render(t, r) {
-    /* ---- the run at the camera: one re-centre, then pure acceleration ---- */
-    const centreFn = (u) => seg(u, PUSH_T, 0.52, easeInOutCubic);
-    const zoomFn = (u) => seg(u, PUSH_T + 0.18, 1.00, easeInCubic);
-    const centre = centreFn(t);
-    const zoom = zoomFn(t);
-    const rowScale = 1 + 2.35 * zoom;
+    /* ---- the run at the camera ------------------------------------------
+     * One continuous accelerating gesture: the same curve drives the sideways
+     * travel and the scale, so speed and size grow together and the beat is
+     * still gaining on the cut into beat 4 (which takes over with scaleThrough).
+     */
+    const accFn = (u) => Math.pow(clamp((u - PUSH_T) / 0.95), 2.4);
+    const acc = accFn(t);
+    const rowScale = 1 + 2.20 * acc;
 
     /* ---- camera: still for the whole beat, a small lean at the end ------- */
     r.cam.style.transform = `scale(${(1 + 0.055 * seg(t, PUSH_T, 0.9, easeInCubic)).toFixed(5)})`;
@@ -181,7 +187,7 @@ export default {
     r.rule.style.transform = `scaleX(${ruleP.toFixed(5)})`;
     r.rule.style.opacity = ruleP > 0.02 ? '1' : '0';
 
-    const headOut = seg(t, PUSH_T + 0.05, 0.42, easeOutCubic);
+    const headOut = seg(t, PUSH_T + 0.34, 0.40, easeOutCubic);
     r.headWords.forEach((w, i) => {
       const p = spring(clamp((t - (0.18 + i * 0.05)) / 0.52), { freq: 1.05, damping: 0.70 });
       D.setT(w, {
@@ -191,15 +197,15 @@ export default {
       });
     });
     D.setT(r.head, {
-      x: -110 * headOut, y: 0, s: 1, o: 1 - headOut, centered: false,
+      x: -280 * headOut, y: 0, s: 1, o: 1 - headOut, centered: false,
     });
 
     /* ---- ghost wordmark wipes up from its own clip ------------------------ */
     const ghostP = seg(t, 1.20, 0.62, easeOutQuint);
-    const ghostOut = seg(t, PUSH_T + 0.10, 0.48, easeOutCubic);
+    const ghostOut = seg(t, PUSH_T + 0.40, 0.40, easeOutCubic);
     D.setT(r.ghostClip, { x: 0, y: 0, s: 1, o: 1 });
     D.setT(r.ghost, {
-      x: 0, y: lerp(150, 0, ghostP), s: 1,
+      x: 0, y: lerp(150, 0, ghostP) + 70 * ghostOut, s: 1,
       o: (ghostP > 0.01 ? 1 : 0) * (1 - ghostOut),
       centered: false,
     });
@@ -212,14 +218,16 @@ export default {
       }
       return v;
     };
-    const rowXFn = (u) => shiftFn(u) + r.pushDX * centreFn(u);
+    // 1.5× the measured distance so the chip is still travelling, not parking,
+    // at the exact frame beat 4 takes the cut.
+    const rowXFn = (u) => shiftFn(u) + r.pushDX * 1.5 * accFn(u);
     const rx = rowXFn(t);
-    const ry = r.pushDY * centre;
+    const ry = r.pushDY * 1.5 * acc;
     const vx = M.velocity(rowXFn, t);
-    const vs = M.velocity((u) => 1 + 2.35 * zoomFn(u), t);
+    const vs = M.velocity((u) => 1 + 2.20 * accFn(u), t);
     D.setT(r.row, { x: rx, y: ry, s: rowScale, o: 1 });
-    const blur = clamp(Math.abs(vx) * 0.0042 + Math.abs(vs) * 360 * 0.0034, 0, 12);
-    r.pushWrap.style.filter = blur > 0.06 ? `blur(${blur.toFixed(2)}px)` : 'none';
+    const blur = clamp(Math.abs(vx) * 0.0026 + Math.abs(vs) * 340 * 0.0022, 0, 9);
+    r.rowBlur.set(r.pushWrap, blur, blur * 0.20);
 
     /* ---- the three quiet links dim once the punchline lands -------------- */
     const dim = lerp(1, 0.66, seg(t, 3.68, 0.52, easeOutCubic));

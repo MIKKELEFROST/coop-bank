@@ -7,3 +7,7 @@ dist/.verify-*/
 dist/.sheet.html
 dist/preview-lowres.mp4
 .DS_Store
+dist/b*/
+dist/det*/
+dist/.verify*/
+dist/check*/
