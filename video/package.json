@@ -1,0 +1,17 @@
+{
+  "name": "ui-motion-explainer",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Deterministic frame renderer for UI-driven product motion explainers.",
+  "scripts": {
+    "capture": "node scripts/capture.mjs",
+    "assemble": "node scripts/assemble.mjs",
+    "verify": "node scripts/verify.mjs",
+    "render": "node scripts/capture.mjs && node scripts/assemble.mjs"
+  },
+  "dependencies": {
+    "gsap": "^3.13.0",
+    "pngjs": "^7.0.0"
+  }
+}
