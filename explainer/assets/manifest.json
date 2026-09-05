@@ -1,0 +1,30 @@
+{
+  "found": {
+    "fontsDir": "assets/brand/fonts"
+  },
+  "missing": [
+    "reference",
+    "logoSvg",
+    "logoPng",
+    "guidelines",
+    "wfWebflow",
+    "wfContent",
+    "wfTone",
+    "wfCmo",
+    "personMikkel",
+    "personNicole",
+    "audioWav",
+    "audioMp3",
+    "music",
+    "sfx"
+  ],
+  "files": [
+    "brand/fonts/inter-latin-400-normal.woff2",
+    "brand/fonts/inter-latin-500-normal.woff2",
+    "brand/fonts/inter-latin-600-normal.woff2",
+    "brand/fonts/inter-latin-700-normal.woff2",
+    "brand/fonts/inter-latin-800-normal.woff2",
+    "brand/fonts/inter-latin-900-normal.woff2",
+    "manifest.json"
+  ]
+}

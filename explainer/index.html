@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=1920, initial-scale=1">
+<title>Coop Bank · Marketing og AI-agenter</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='11' fill='%23E30613'/%3E%3C/svg%3E">
+<meta name="color-scheme" content="light">
+<link rel="stylesheet" href="./src/styles.css">
+</head>
+<body>
+
+<div id="stage-wrap">
+  <div id="stage">
+    <!-- Scenes are appended here by src/timeline.js -->
+    <div id="safe-guides">
+      <div class="g916"></div>
+      <div class="gtitle"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Filter definitions for directional (velocity) motion blur. Populated at
+     build time by design.makeDirBlur(); stdDeviation is written per frame. -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs id="global-defs"></defs>
+</svg>
+
+<div id="preview-ui">
+  <div class="row">
+    <button id="btn-play">Afspil</button>
+    <button id="btn-back">−1 f</button>
+    <button id="btn-fwd">+1 f</button>
+    <input id="scrub" type="range" min="0" max="2249" step="1" value="0">
+    <span class="mono" id="readout">00:00.00 · frame 0000 / 2250 · beat 1</span>
+    <button id="btn-guides">Hjælpelinjer</button>
+  </div>
+  <div id="markers"></div>
+</div>
+
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>

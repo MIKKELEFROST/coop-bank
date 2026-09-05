@@ -1,0 +1,103 @@
+{
+  "source": "6f1e3189-Infographic_Sound_Pack__Royalty_Free_Sound.mp3",
+  "duration": 23.64,
+  "count": 12,
+  "sounds": [
+    {
+      "name": "riser-01.wav",
+      "kind": "riser",
+      "atInPack": 1.447,
+      "length": 1.129,
+      "subRel": -15.3,
+      "airRel": -20.7
+    },
+    {
+      "name": "impact-01.wav",
+      "kind": "impact",
+      "atInPack": 3.173,
+      "length": 1.077,
+      "subRel": -2.8,
+      "airRel": -42.6
+    },
+    {
+      "name": "whoosh-01.wav",
+      "kind": "whoosh",
+      "atInPack": 4.859,
+      "length": 1.055,
+      "subRel": -20.5,
+      "airRel": -3.6
+    },
+    {
+      "name": "whoosh-02.wav",
+      "kind": "whoosh",
+      "atInPack": 6.92,
+      "length": 1.867,
+      "subRel": -9.3,
+      "airRel": -3.2
+    },
+    {
+      "name": "click-01.wav",
+      "kind": "click",
+      "atInPack": 9.596,
+      "length": 0.292,
+      "subRel": -17.8,
+      "airRel": -14.2
+    },
+    {
+      "name": "click-02.wav",
+      "kind": "click",
+      "atInPack": 11.126,
+      "length": 0.394,
+      "subRel": -15,
+      "airRel": -15.6
+    },
+    {
+      "name": "whoosh-03.wav",
+      "kind": "whoosh",
+      "atInPack": 12.578,
+      "length": 0.718,
+      "subRel": -39.2,
+      "airRel": -9.6
+    },
+    {
+      "name": "whoosh-04.wav",
+      "kind": "whoosh",
+      "atInPack": 13.742,
+      "length": 1.921,
+      "subRel": -48,
+      "airRel": -1
+    },
+    {
+      "name": "hit-01.wav",
+      "kind": "hit",
+      "atInPack": 16.659,
+      "length": 0.805,
+      "subRel": -28.2,
+      "airRel": -21.2
+    },
+    {
+      "name": "whoosh-05.wav",
+      "kind": "whoosh",
+      "atInPack": 18.98,
+      "length": 0.859,
+      "subRel": -18.6,
+      "airRel": -19
+    },
+    {
+      "name": "hit-02.wav",
+      "kind": "hit",
+      "atInPack": 21.547,
+      "length": 0.474,
+      "subRel": -20.1,
+      "airRel": -27.9
+    },
+    {
+      "name": "hit-03.wav",
+      "kind": "hit",
+      "atInPack": 22.621,
+      "length": 0.249,
+      "subRel": -21.8,
+      "airRel": -21.8
+    }
+  ]
+}
