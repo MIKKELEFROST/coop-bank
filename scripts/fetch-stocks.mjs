@@ -1,0 +1,159 @@
+// Build-time fetch of Danish stock quotes.
+//
+// Runs in GitHub Actions, not in a browser, so there is no CORS restriction and
+// no API key: Yahoo's chart endpoint answers plain HTTP requests from a server.
+// The result is committed as data/aktier.json and the page reads that file, so
+// the site stays a static deploy with nothing secret in it.
+//
+// Run locally with:  node scripts/fetch-stocks.mjs
+
+import { writeFile, mkdir, readFile } from 'node:fs/promises';
+import { dirname, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
+const OUT = resolve(ROOT, 'data/aktier.json');
+
+// Nasdaq Copenhagen large caps, as Yahoo ticker → display name. Yahoo's own
+// shortName is used when it has one; these are the fallback and the ordering.
+const TICKERS = [
+  ['NOVO-B.CO',   'Novo Nordisk B'],
+  ['MAERSK-B.CO', 'A.P. Møller - Mærsk B'],
+  ['MAERSK-A.CO', 'A.P. Møller - Mærsk A'],
+  ['DSV.CO',      'DSV'],
+  ['NSIS-B.CO',   'Novonesis B'],
+  ['VWS.CO',      'Vestas Wind Systems'],
+  ['ORSTED.CO',   'Ørsted'],
+  ['DANSKE.CO',   'Danske Bank'],
+  ['COLO-B.CO',   'Coloplast B'],
+  ['GMAB.CO',     'Genmab'],
+  ['CARL-B.CO',   'Carlsberg B'],
+  ['PNDORA.CO',   'Pandora'],
+  ['TRYG.CO',     'Tryg'],
+  ['DEMANT.CO',   'Demant'],
+  ['ROCK-B.CO',   'Rockwool B'],
+  ['AMBU-B.CO',   'Ambu B'],
+  ['ZEAL.CO',     'Zealand Pharma'],
+  ['GN.CO',       'GN Store Nord'],
+  ['JYSK.CO',     'Jyske Bank'],
+  ['ISS.CO',      'ISS'],
+  ['NKT.CO',      'NKT'],
+  ['BAVA.CO',     'Bavarian Nordic'],
+  ['RBREW.CO',    'Royal Unibrew'],
+  ['NETC.CO',     'Netcompany Group'],
+];
+
+// Refuse to overwrite a good file with a mostly-broken one: a Yahoo-side
+// hiccup should leave yesterday's data in place rather than gut the page.
+const MIN_OK_RATIO = 0.7;
+
+const SPARK_POINTS = 30;
+const RETRIES = 3;
+
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+const round = (n, d = 2) => (n == null || !Number.isFinite(n) ? null : Number(n.toFixed(d)));
+
+async function fetchTicker(symbol) {
+  const url = 'https://query1.finance.yahoo.com/v8/finance/chart/'
+    + encodeURIComponent(symbol) + '?interval=1d&range=3mo';
+
+  let lastErr;
+  for (let attempt = 1; attempt <= RETRIES; attempt++) {
+    try {
+      const res = await fetch(url, {
+        headers: { 'user-agent': 'Mozilla/5.0 (compatible; coop-bank-kursliste/1.0)', accept: 'application/json' },
+      });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+
+      const json = await res.json();
+      if (json?.chart?.error) throw new Error(json.chart.error.description || 'chart error');
+
+      const result = json?.chart?.result?.[0];
+      if (!result) throw new Error('tomt svar');
+      return result;
+    } catch (err) {
+      lastErr = err;
+      if (attempt < RETRIES) await sleep(attempt * 800);
+    }
+  }
+  throw lastErr;
+}
+
+function normalise(result, fallbackName) {
+  const meta = result.meta || {};
+  const quote = result.indicators?.quote?.[0] || {};
+
+  // Keep only sessions that actually have a close; Yahoo pads holidays with null.
+  const closes = (quote.close || []).filter((c) => c != null);
+  if (closes.length < 2) throw new Error('for få lukkekurser');
+
+  const price = meta.regularMarketPrice ?? closes[closes.length - 1];
+
+  // The day's move is measured against the previous session's close. Yahoo's
+  // chartPreviousClose is the close before the whole 3-month range starts, so
+  // using it here would label a quarterly move as "i dag".
+  const previousClose = closes[closes.length - 2];
+  const change = price - previousClose;
+
+  return {
+    symbol:   meta.symbol || '',
+    name:     meta.shortName || fallbackName,
+    exchange: meta.fullExchangeName || 'Copenhagen',
+    currency: meta.currency || 'DKK',
+    price:          round(price),
+    previous_close: round(previousClose),
+    change:         round(change),
+    percent_change: round(previousClose ? (change / previousClose) * 100 : null, 4),
+    high:        round(meta.regularMarketDayHigh),
+    low:         round(meta.regularMarketDayLow),
+    volume:      meta.regularMarketVolume ?? null,
+    week52_low:  round(meta.fiftyTwoWeekLow),
+    week52_high: round(meta.fiftyTwoWeekHigh),
+    // Daily closes, cheap here because this runs at build time rather than per
+    // page view. Enough points for a sparkline, not so many that the JSON bloats.
+    spark: closes.slice(-SPARK_POINTS).map((c) => round(c)),
+    quote_time: meta.regularMarketTime ? new Date(meta.regularMarketTime * 1000).toISOString() : null,
+  };
+}
+
+async function main() {
+  const stocks = [];
+  const failed = [];
+
+  for (const [symbol, name] of TICKERS) {
+    try {
+      stocks.push(normalise(await fetchTicker(symbol), name));
+      process.stdout.write('  ✓ ' + symbol + '\n');
+    } catch (err) {
+      failed.push(symbol);
+      process.stdout.write('  ✗ ' + symbol + ' — ' + err.message + '\n');
+    }
+    await sleep(250); // be a polite client
+  }
+
+  const ratio = stocks.length / TICKERS.length;
+  console.log(`\n${stocks.length}/${TICKERS.length} hentet (${(ratio * 100).toFixed(0)}%)`);
+
+  if (ratio < MIN_OK_RATIO) {
+    let existing = false;
+    try { await readFile(OUT); existing = true; } catch { /* ingen tidligere fil */ }
+    console.error(`For mange fejlede (kræver ${MIN_OK_RATIO * 100}%).`
+      + (existing ? ' Beholder den eksisterende data/aktier.json.' : ''));
+    process.exit(1);
+  }
+
+  const payload = {
+    updated_at: new Date().toISOString(),
+    source: 'Yahoo Finance',
+    market: 'Nasdaq København',
+    currency: 'DKK',
+    failed,
+    stocks,
+  };
+
+  await mkdir(dirname(OUT), { recursive: true });
+  await writeFile(OUT, JSON.stringify(payload, null, 2) + '\n', 'utf8');
+  console.log('Skrev ' + OUT);
+}
+
+main().catch((err) => { console.error(err); process.exit(1); });
