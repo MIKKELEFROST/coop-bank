@@ -142,17 +142,25 @@ async function main() {
     process.exit(1);
   }
 
-  const payload = {
-    updated_at: new Date().toISOString(),
-    source: 'Yahoo Finance',
-    market: 'Nasdaq København',
-    currency: 'DKK',
-    failed,
-    stocks,
-  };
+  // Leave the file alone when no price moved. updated_at is a timestamp, so
+  // rewriting unconditionally would dirty the file on every run and commit
+  // three times a day forever — including holidays, when the exchange is shut
+  // and every quote is identical. Comparing the payload minus the timestamp
+  // means updated_at reads as "when the data last changed", which is what the
+  // page's "opdateret for N siden" is actually claiming.
+  const body = { source: 'Yahoo Finance', market: 'Nasdaq København', currency: 'DKK', failed, stocks };
+
+  try {
+    const previous = JSON.parse(await readFile(OUT, 'utf8'));
+    const { updated_at, ...previousBody } = previous;
+    if (JSON.stringify(previousBody) === JSON.stringify(body)) {
+      console.log('Ingen kursændringer — ' + OUT + ' er urørt.');
+      return;
+    }
+  } catch { /* ingen brugbar tidligere fil; skriv en ny */ }
 
   await mkdir(dirname(OUT), { recursive: true });
-  await writeFile(OUT, JSON.stringify(payload, null, 2) + '\n', 'utf8');
+  await writeFile(OUT, JSON.stringify({ updated_at: new Date().toISOString(), ...body }, null, 2) + '\n', 'utf8');
   console.log('Skrev ' + OUT);
 }
 
