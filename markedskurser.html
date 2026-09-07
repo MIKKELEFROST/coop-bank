@@ -1,11 +1,11 @@
-<!-- Title: Markedskurser – live kursdata -->
+<!-- Title: Aktiekurser – live kursdata -->
 <!-- filepath: markedskurser.html -->
 <!DOCTYPE html>
 <html lang="da" class="scroll-smooth">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Markedskurser – live kursdata</title>
+<title>Aktiekurser – live kursdata</title>
 
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -37,6 +37,7 @@ tailwind.config = {
     --hairline:       rgba(11, 11, 11, 0.10);
     --delta-up:       #006300;
     --delta-down:     #d03b3b;
+    --status-good:    #0ca30c;
     --accent:         #b71a21;
   }
   @media (prefers-color-scheme: dark) {
@@ -94,7 +95,6 @@ tailwind.config = {
   .skeleton { background: linear-gradient(90deg, var(--gridline) 25%, transparent 37%, var(--gridline) 63%);
               background-size: 400% 100%; animation: sk 1.4s ease infinite; }
   @keyframes sk { 0% { background-position: 100% 50% } 100% { background-position: 0 50% } }
-
   @media (prefers-reduced-motion: reduce) { .skeleton { animation: none } }
 </style>
 </head>
@@ -107,11 +107,11 @@ tailwind.config = {
   <div class="flex items-start justify-between gap-4 mb-6 flex-wrap">
     <div>
       <h1 class="text-2xl md:text-3xl font-extrabold tracking-tight">
-        Markedskurser – se live kursdata
+        Aktiekurser – se live kursdata
       </h1>
       <p class="text-sm mt-1" style="color: var(--text-secondary)">
-        Live kurser i danske kroner. Sammenlign aktiver via filtre, og sortér efter kurs,
-        omsætning og markedsværdi.
+        Aktuelle kurser fra amerikanske børser. Sortér efter kurs, ændring og omsætning,
+        og filtrér med de hurtige filtre.
       </p>
     </div>
     <a href="#kilde"
@@ -135,22 +135,18 @@ tailwind.config = {
 
       <select id="sortField" class="rounded-lg px-3 py-2 text-sm bg-transparent"
               style="border: 1px solid var(--hairline); color: var(--text-primary)">
-        <option value="market_cap">Markedsværdi</option>
-        <option value="current_price">Seneste kurs</option>
-        <option value="price_change_percentage_24h">Ændring 24t</option>
-        <option value="change7d">Ændring 7 dage</option>
-        <option value="total_volume">Omsætning 24t</option>
+        <option value="percent_change">Ændring i dag</option>
+        <option value="price">Seneste kurs</option>
+        <option value="volume">Omsætning</option>
+        <option value="week52pos">Placering i 52-ugers interval</option>
+        <option value="name">Navn</option>
       </select>
 
-      <select id="limit" class="rounded-lg px-3 py-2 text-sm bg-transparent"
-              style="border: 1px solid var(--hairline); color: var(--text-primary)">
-        <option value="25">25 rækker</option>
-        <option value="50" selected>50 rækker</option>
-        <option value="100">100 rækker</option>
-      </select>
+      <span id="marketState" class="inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-bold"
+            style="border: 1px solid var(--hairline); color: var(--text-secondary)"></span>
 
       <button id="refresh" type="button"
-              class="ml-auto inline-flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-semibold transition-opacity"
+              class="ml-auto inline-flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-semibold"
               style="border: 1px solid var(--hairline); color: var(--text-secondary)">
         <span id="refreshIcon" aria-hidden="true">⟳</span> Opdatér
       </button>
@@ -159,11 +155,10 @@ tailwind.config = {
     <!-- ─── Quick filter chips ───────────────────────────────────────────── -->
     <div class="flex flex-wrap items-center gap-2 mb-4">
       <span class="text-xs font-bold mr-1" style="color: var(--text-secondary)">Populære filtre</span>
-      <button class="chip rounded-full px-3 py-1 text-xs font-semibold" data-chip="gainers"  aria-pressed="false">Vindere 24t</button>
-      <button class="chip rounded-full px-3 py-1 text-xs font-semibold" data-chip="losers"   aria-pressed="false">Tabere 24t</button>
-      <button class="chip rounded-full px-3 py-1 text-xs font-semibold" data-chip="week"     aria-pressed="false">Vindere 7 dage</button>
-      <button class="chip rounded-full px-3 py-1 text-xs font-semibold" data-chip="volume"   aria-pressed="false">Størst omsætning</button>
-      <button class="chip rounded-full px-3 py-1 text-xs font-semibold" data-chip="top10"    aria-pressed="false">Top 10</button>
+      <button class="chip rounded-full px-3 py-1 text-xs font-semibold" data-chip="gainers" aria-pressed="false">Vindere i dag</button>
+      <button class="chip rounded-full px-3 py-1 text-xs font-semibold" data-chip="losers"  aria-pressed="false">Tabere i dag</button>
+      <button class="chip rounded-full px-3 py-1 text-xs font-semibold" data-chip="highvol" aria-pressed="false">Over gns. omsætning</button>
+      <button class="chip rounded-full px-3 py-1 text-xs font-semibold" data-chip="near52"  aria-pressed="false">Nær 52-ugers top</button>
       <span id="count" class="ml-auto text-xs num" style="color: var(--text-secondary)"></span>
     </div>
 
@@ -171,11 +166,11 @@ tailwind.config = {
     <div id="risk" class="rounded-xl p-4 mb-4 flex gap-3" style="background: var(--page-plane); border: 1px solid var(--hairline)">
       <span aria-hidden="true" style="color: var(--text-muted)">ⓘ</span>
       <div class="flex-1">
-        <p class="text-sm font-bold">Risikooplysning</p>
+        <p class="text-sm font-bold">Risikooplysning vedrørende aktiehandel</p>
         <p class="text-xs mt-1" style="color: var(--text-secondary)">
-          Kurserne er vejledende markedsdata og udgør ikke investeringsrådgivning. En investering
-          kan både stige og falde i værdi, og historiske afkast er ingen garanti for fremtidige
-          afkast. Der er risiko for, at du ikke får det investerede beløb tilbage.
+          Kurserne er vejledende markedsdata og udgør ikke investeringsrådgivning. En investeret
+          opsparing kan både stige og falde i værdi, og historiske afkast er ingen garanti for
+          fremtidige afkast. Der er risiko for, at du ikke får de investerede penge tilbage.
         </p>
       </div>
       <button type="button" id="riskClose" aria-label="Luk risikooplysning"
@@ -184,9 +179,9 @@ tailwind.config = {
 
     <!-- ─── Tabs ─────────────────────────────────────────────────────────── -->
     <div class="flex gap-6 mb-2 border-b divider overflow-x-auto" role="tablist">
-      <button class="tab pb-2 text-sm whitespace-nowrap" role="tab" data-tab="oversigt"  aria-selected="true">Oversigt</button>
-      <button class="tab pb-2 text-sm whitespace-nowrap" role="tab" data-tab="kurser"    aria-selected="false">Kurser</button>
-      <button class="tab pb-2 text-sm whitespace-nowrap" role="tab" data-tab="nogletal"  aria-selected="false">Nøgletal</button>
+      <button class="tab pb-2 text-sm whitespace-nowrap" role="tab" data-tab="oversigt" aria-selected="true">Oversigt</button>
+      <button class="tab pb-2 text-sm whitespace-nowrap" role="tab" data-tab="kurser"   aria-selected="false">Kurser</button>
+      <button class="tab pb-2 text-sm whitespace-nowrap" role="tab" data-tab="nogletal" aria-selected="false">Nøgletal</button>
     </div>
 
     <!-- ─── Table ────────────────────────────────────────────────────────── -->
@@ -194,43 +189,27 @@ tailwind.config = {
       <table class="w-full text-sm border-collapse min-w-[900px]">
         <thead>
           <tr class="text-xs" style="color: var(--text-muted)">
-            <th class="text-left font-semibold py-3 pr-3 whitespace-nowrap" data-sort="name" aria-sort="none">
-              Navn <span class="caret"></span>
-            </th>
-            <th class="text-left font-semibold py-3 px-3 whitespace-nowrap" data-col="oversigt kurser">Udv. 7 dage</th>
-            <th class="text-right font-semibold py-3 px-3 whitespace-nowrap" data-sort="price_change_percentage_24h" aria-sort="descending">
-              I dag % <span class="caret"></span>
-            </th>
-            <th class="text-right font-semibold py-3 px-3 whitespace-nowrap" data-sort="current_price" aria-sort="none">
-              Seneste <span class="caret"></span>
-            </th>
+            <th class="text-left  font-semibold py-3 pr-3 whitespace-nowrap" data-sort="name" aria-sort="none">Navn <span class="caret"></span></th>
+            <th class="text-left  font-semibold py-3 px-3 whitespace-nowrap" data-sort="week52pos" aria-sort="none" data-col="oversigt kurser">52 ugers interval <span class="caret"></span></th>
+            <th class="text-right font-semibold py-3 px-3 whitespace-nowrap" data-sort="percent_change" aria-sort="descending">I dag % <span class="caret"></span></th>
+            <th class="text-right font-semibold py-3 px-3 whitespace-nowrap" data-sort="price" aria-sort="none">Seneste <span class="caret"></span></th>
             <th class="text-right font-semibold py-3 px-3 whitespace-nowrap" data-col="oversigt kurser">I dag +/-</th>
-            <th class="text-right font-semibold py-3 px-3 whitespace-nowrap" data-col="kurser">Høj 24t</th>
-            <th class="text-right font-semibold py-3 px-3 whitespace-nowrap" data-col="kurser">Lav 24t</th>
-            <th class="text-right font-semibold py-3 px-3 whitespace-nowrap" data-sort="change7d" aria-sort="none" data-col="nogletal">
-              7 dage % <span class="caret"></span>
-            </th>
-            <th class="text-right font-semibold py-3 px-3 whitespace-nowrap" data-sort="change30d" aria-sort="none" data-col="nogletal">
-              30 dage % <span class="caret"></span>
-            </th>
-            <th class="text-left font-semibold py-3 px-3 whitespace-nowrap" data-col="oversigt">Valuta</th>
-            <th class="text-right font-semibold py-3 px-3 whitespace-nowrap" data-sort="total_volume" aria-sort="none" data-col="oversigt nogletal">
-              Omsætning 24t <span class="caret"></span>
-            </th>
-            <th class="text-right font-semibold py-3 px-3 whitespace-nowrap" data-sort="market_cap" aria-sort="none">
-              Markedsværdi <span class="caret"></span>
-            </th>
-            <th class="text-right font-semibold py-3 pl-3 whitespace-nowrap" data-sort="market_cap_rank" aria-sort="none" data-col="oversigt nogletal">
-              Rang <span class="caret"></span>
-            </th>
+            <th class="text-right font-semibold py-3 px-3 whitespace-nowrap" data-col="kurser">Åbning</th>
+            <th class="text-right font-semibold py-3 px-3 whitespace-nowrap" data-col="kurser">Høj</th>
+            <th class="text-right font-semibold py-3 px-3 whitespace-nowrap" data-col="kurser">Lav</th>
+            <th class="text-right font-semibold py-3 px-3 whitespace-nowrap" data-col="kurser">Forrige luk</th>
+            <th class="text-right font-semibold py-3 px-3 whitespace-nowrap" data-col="nogletal">52 ugers lav</th>
+            <th class="text-right font-semibold py-3 px-3 whitespace-nowrap" data-col="nogletal">52 ugers høj</th>
+            <th class="text-right font-semibold py-3 px-3 whitespace-nowrap" data-col="nogletal">Gns. omsætning</th>
+            <th class="text-left  font-semibold py-3 px-3 whitespace-nowrap" data-col="oversigt">Valuta</th>
+            <th class="text-right font-semibold py-3 px-3 whitespace-nowrap" data-sort="volume" aria-sort="none" data-col="oversigt nogletal">Omsætning <span class="caret"></span></th>
+            <th class="text-left  font-semibold py-3 pl-3 whitespace-nowrap" data-col="oversigt">Børs</th>
           </tr>
         </thead>
         <tbody id="rows"></tbody>
       </table>
     </div>
 
-    <!-- Table view doubles as the chart's accessible fallback; the sparkline
-         is decorative relief on top of the numeric columns. -->
     <p id="status" class="text-xs mt-4" style="color: var(--text-secondary)" role="status" aria-live="polite"></p>
   </div>
 
@@ -238,14 +217,23 @@ tailwind.config = {
   <div id="kilde" class="card rounded-2xl p-5 mt-6 text-xs leading-relaxed" style="color: var(--text-secondary)">
     <p class="font-bold mb-1" style="color: var(--text-primary)">Om datakilden</p>
     <p>
-      Kurserne hentes live fra <a href="https://www.coingecko.com/api" class="underline" style="color: var(--accent)">CoinGecko</a>
-      – et offentligt API uden nøglekrav, som sender <code>access-control-allow-origin: *</code> og derfor
-      kan kaldes direkte fra en statisk side uden backend eller proxy. Alle kolonner er rigtige API-felter;
-      der er ingen beregnede eller opdigtede tal.
+      Kurserne hentes fra <a href="https://twelvedata.com" class="underline" style="color: var(--accent)">Twelve Data</a>
+      gennem <code>/api/quote</code> — en serverless-funktion i dette repo. API-nøglen ligger som
+      miljøvariabel på serveren og sendes aldrig til browseren.
     </p>
     <p class="mt-2">
-      Skal siden vise <strong>aktier</strong> i stedet, udskiftes kun funktionen <code>fetchMarket()</code>
-      i <code>ADAPTERS</code>. Resten af siden – sortering, filtre, faner, formatering – er datakilde-agnostisk.
+      <strong>Kun amerikanske børser.</strong> Twelve Datas gratisplan dækker US-markeder, forex og krypto.
+      Nasdaq København og øvrige europæiske børser kræver et betalt abonnement, så danske aktier
+      kan ikke vises på den gratis nøgle.
+    </p>
+    <p class="mt-2">
+      Gratisplanen giver 8 credits i minuttet og 800 om dagen, og hvert symbol koster én credit.
+      Derfor hentes højst 8 aktier ad gangen, svar caches i et minut på serveren, og siden
+      opdaterer kun automatisk mens markedet er åbent — lukkede markeder har ingen nye kurser.
+    </p>
+    <p class="mt-2">
+      Alle kolonner er rigtige API-felter. Børsværdi vises ikke, fordi det ikke indgår i
+      quote-svaret, og et beregnet gæt ville være misvisende.
     </p>
   </div>
 </div>
@@ -255,91 +243,78 @@ tailwind.config = {
   'use strict';
 
   // ── Formatters ─────────────────────────────────────────────────────────
-  const daCur = new Intl.NumberFormat('da-DK', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-  const daInt = new Intl.NumberFormat('da-DK', { maximumFractionDigits: 0 });
-  const daPct = new Intl.NumberFormat('da-DK', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  const da2  = new Intl.NumberFormat('da-DK', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  const da0  = new Intl.NumberFormat('da-DK', { maximumFractionDigits: 0 });
 
-  const fmtPrice = (n) => n == null ? '–' : (n >= 1000 ? daInt.format(n) : daCur.format(n));
-  const fmtPct   = (n) => n == null ? '–' : (n > 0 ? '+' : '') + daPct.format(n) + '%';
-  const fmtDelta = (n) => n == null ? '–' : (n > 0 ? '+' : '') + fmtPrice(n);
+  const fmtPrice = (n) => n == null ? '–' : da2.format(n);
+  const fmtPct   = (n) => n == null ? '–' : (n > 0 ? '+' : '') + da2.format(n) + '%';
+  const fmtDelta = (n) => n == null ? '–' : (n > 0 ? '+' : '') + da2.format(n);
 
-  // Large sums as millions/billions, the way a kursliste shows them.
   function fmtBig(n) {
     if (n == null) return '–';
-    if (n >= 1e9) return daInt.format(n / 1e9) + ' mia.';
-    if (n >= 1e6) return daInt.format(n / 1e6) + ' mio.';
-    return daInt.format(n);
+    if (n >= 1e9) return da0.format(n / 1e9) + ' mia.';
+    if (n >= 1e6) return da0.format(n / 1e6) + ' mio.';
+    if (n >= 1e3) return da0.format(n / 1e3) + ' t.';
+    return da0.format(n);
   }
 
   const dirClass = (n) => n == null ? '' : n > 0 ? 'up' : n < 0 ? 'down' : '';
 
   // ── Data adapter ───────────────────────────────────────────────────────
-  // Swap this one object to change data source. Everything downstream reads
-  // the normalised shape returned by fetchMarket().
+  // Swap this object to change data source. Everything downstream reads the
+  // normalised shape it returns. The endpoint is same-origin, so no CORS.
   const ADAPTERS = {
-    coingecko: {
-      label: 'CoinGecko',
-      currency: 'DKK',
-      async fetchMarket(limit) {
-        const url = 'https://api.coingecko.com/api/v3/coins/markets'
-          + '?vs_currency=dkk&order=market_cap_desc'
-          + '&per_page=' + limit + '&page=1&sparkline=true'
-          + '&price_change_percentage=24h,7d,30d';
+    twelvedata: {
+      label: 'Twelve Data',
+      async fetchMarket() {
+        const res = await fetch('/api/quote', { headers: { accept: 'application/json' } });
+        const body = await res.json().catch(() => null);
 
-        const res = await fetch(url, { headers: { accept: 'application/json' } });
-        if (!res.ok) throw new Error('HTTP ' + res.status + (res.status === 429 ? ' – for mange kald, prøv igen om lidt' : ''));
-        const raw = await res.json();
+        if (!res.ok) {
+          const err = new Error((body && body.message) || ('HTTP ' + res.status));
+          err.code = (body && body.error) || 'http_' + res.status;
+          throw err;
+        }
 
-        return raw.map((r) => ({
-          id:      r.id,
-          name:    r.name,
-          symbol:  (r.symbol || '').toUpperCase(),
-          image:   r.image,
-          current_price: r.current_price,
-          price_change_24h: r.price_change_24h,
-          price_change_percentage_24h: r.price_change_percentage_24h,
-          change7d:  r.price_change_percentage_7d_in_currency,
-          change30d: r.price_change_percentage_30d_in_currency,
-          high_24h: r.high_24h,
-          low_24h:  r.low_24h,
-          total_volume: r.total_volume,
-          market_cap: r.market_cap,
-          market_cap_rank: r.market_cap_rank,
-          spark: (r.sparkline_in_7d && r.sparkline_in_7d.price) || [],
-          currency: 'DKK',
-          link: 'https://www.coingecko.com/en/coins/' + r.id,
-        }));
+        return {
+          rows: (body.quotes || []).map((q) => ({
+            ...q,
+            // Where the price sits in the 52-week band, 0–1. Drives the range
+            // bar and makes the column sortable.
+            week52pos: (q.week52_low != null && q.week52_high != null && q.week52_high > q.week52_low)
+              ? Math.min(1, Math.max(0, (q.price - q.week52_low) / (q.week52_high - q.week52_low)))
+              : null,
+          })),
+          marketOpen: (body.quotes || []).some((q) => q.is_market_open),
+          fetchedAt: body.fetched_at,
+        };
       },
     },
   };
 
-  const adapter = ADAPTERS.coingecko;
+  const adapter = ADAPTERS.twelvedata;
 
-  // ── Sparkline ──────────────────────────────────────────────────────────
-  // 2px line, no markers, no axis. Direction colour repeats what the sign in
-  // the "I dag %" column already says, so colour never carries meaning alone.
-  function sparkline(points, direction) {
-    if (!points || points.length < 2) return '';
-    const w = 88, h = 26, pad = 2;
-    const min = Math.min(...points), max = Math.max(...points);
-    const span = (max - min) || 1;
-    const step = (w - pad * 2) / (points.length - 1);
+  // ── 52-week range bar ──────────────────────────────────────────────────
+  // A position mark, not a polarity one, so it wears neutral ink rather than a
+  // delta colour. The underlying numbers are in the Nøgletal tab, which is the
+  // accessible fallback for this mark.
+  function rangeBar(row) {
+    if (row.week52pos == null) return '<span style="color: var(--text-muted)">–</span>';
+    const w = 96, h = 20, pad = 1, trackY = h / 2;
+    const x = pad + (w - pad * 2) * row.week52pos;
+    const title = 'Lav ' + fmtPrice(row.week52_low) + ' · Nu ' + fmtPrice(row.price)
+                + ' · Høj ' + fmtPrice(row.week52_high);
 
-    const d = points.map((p, i) => {
-      const x = pad + i * step;
-      const y = pad + (h - pad * 2) * (1 - (p - min) / span);
-      return (i ? 'L' : 'M') + x.toFixed(1) + ' ' + y.toFixed(1);
-    }).join(' ');
-
-    const stroke = direction > 0 ? 'var(--delta-up)' : direction < 0 ? 'var(--delta-down)' : 'var(--text-muted)';
     return '<svg width="' + w + '" height="' + h + '" viewBox="0 0 ' + w + ' ' + h + '" '
-         + 'role="img" aria-hidden="true" focusable="false" style="display:block">'
-         + '<path d="' + d + '" fill="none" stroke="' + stroke + '" stroke-width="2" '
-         + 'stroke-linecap="round" stroke-linejoin="round"/></svg>';
+      + 'role="img" aria-label="' + title + '" style="display:block"><title>' + title + '</title>'
+      + '<line x1="' + pad + '" y1="' + trackY + '" x2="' + (w - pad) + '" y2="' + trackY + '" '
+      + 'stroke="var(--gridline)" stroke-width="4" stroke-linecap="round"/>'
+      + '<circle cx="' + x.toFixed(1) + '" cy="' + trackY + '" r="4.5" '
+      + 'fill="var(--text-primary)" stroke="var(--surface-1)" stroke-width="2"/></svg>';
   }
 
   // ── State ──────────────────────────────────────────────────────────────
-  const state = { all: [], sort: 'price_change_percentage_24h', dir: -1, q: '', chip: null, tab: 'oversigt' };
+  const state = { all: [], marketOpen: false, sort: 'percent_change', dir: -1, q: '', chip: null, tab: 'oversigt' };
 
   const $  = (s) => document.querySelector(s);
   const $$ = (s) => Array.from(document.querySelectorAll(s));
@@ -353,17 +328,15 @@ tailwind.config = {
     }
 
     switch (state.chip) {
-      case 'gainers': out = out.filter((r) => (r.price_change_percentage_24h ?? 0) > 0); break;
-      case 'losers':  out = out.filter((r) => (r.price_change_percentage_24h ?? 0) < 0); break;
-      case 'week':    out = out.filter((r) => (r.change7d ?? 0) > 0); break;
-      case 'volume':  out = [...out].sort((a, b) => (b.total_volume ?? 0) - (a.total_volume ?? 0)).slice(0, 20); break;
-      case 'top10':   out = out.filter((r) => (r.market_cap_rank ?? 999) <= 10); break;
+      case 'gainers': out = out.filter((r) => (r.percent_change ?? 0) > 0); break;
+      case 'losers':  out = out.filter((r) => (r.percent_change ?? 0) < 0); break;
+      case 'highvol': out = out.filter((r) => r.volume != null && r.average_volume != null && r.volume > r.average_volume); break;
+      case 'near52':  out = out.filter((r) => (r.week52pos ?? 0) >= 0.9); break;
     }
 
-    // Names sort under 'en', not 'da', on purpose: Danish collation folds "Aa"
-    // into "Å" and files it after Z, which sends Aave to the bottom of an A→Å
-    // sort. Asset names are international, so plain alphabetical is what a
-    // reader expects here. Numbers stay Danish-formatted (see Intl above).
+    // Names sort under 'en', not 'da': Danish collation folds "Aa" into "Å" and
+    // files it after Z. Company names here are international, so plain
+    // alphabetical is what a reader expects. Numbers stay Danish-formatted.
     const f = state.sort;
     return [...out].sort((a, b) => {
       const x = a[f], y = b[f];
@@ -374,31 +347,29 @@ tailwind.config = {
 
   function render() {
     const rows = visible(state.all);
-    $('#count').textContent = daInt.format(rows.length) + (rows.length === 1 ? ' resultat' : ' resultater');
+    $('#count').textContent = da0.format(rows.length) + (rows.length === 1 ? ' resultat' : ' resultater');
 
     $('#rows').innerHTML = rows.map((r) => {
-      const pct = r.price_change_percentage_24h;
-      return '<tr class="border-t divider hover:bg-black/[.02] dark:hover:bg-white/[.03]">'
-        + '<td class="py-3 pr-3">'
-          + '<div class="flex items-center gap-2.5">'
-            + '<img src="' + r.image + '" alt="" width="22" height="22" loading="lazy" class="rounded-full shrink-0">'
-            + '<div class="min-w-0">'
-              + '<a href="' + r.link + '" target="_blank" rel="noopener noreferrer" class="font-semibold hover:underline">' + r.name + '</a>'
-              + '<div class="text-xs" style="color: var(--text-muted)">' + r.symbol + '</div>'
-            + '</div>'
-          + '</div></td>'
-        + '<td class="px-3" data-col="oversigt kurser">' + sparkline(r.spark, r.change7d) + '</td>'
+      const pct = r.percent_change;
+      return '<tr class="border-t divider hover:bg-black/[.02]">'
+        + '<td class="py-3 pr-3"><div class="min-w-0">'
+          + '<div class="font-semibold">' + r.name + '</div>'
+          + '<div class="text-xs" style="color: var(--text-muted)">' + r.symbol + '</div>'
+        + '</div></td>'
+        + '<td class="px-3" data-col="oversigt kurser">' + rangeBar(r) + '</td>'
         + '<td class="px-3 text-right num font-semibold ' + dirClass(pct) + '">' + fmtPct(pct) + '</td>'
-        + '<td class="px-3 text-right num font-semibold">' + fmtPrice(r.current_price) + '</td>'
-        + '<td class="px-3 text-right num ' + dirClass(r.price_change_24h) + '" data-col="oversigt kurser">' + fmtDelta(r.price_change_24h) + '</td>'
-        + '<td class="px-3 text-right num" data-col="kurser">' + fmtPrice(r.high_24h) + '</td>'
-        + '<td class="px-3 text-right num" data-col="kurser">' + fmtPrice(r.low_24h) + '</td>'
-        + '<td class="px-3 text-right num ' + dirClass(r.change7d) + '" data-col="nogletal">' + fmtPct(r.change7d) + '</td>'
-        + '<td class="px-3 text-right num ' + dirClass(r.change30d) + '" data-col="nogletal">' + fmtPct(r.change30d) + '</td>'
+        + '<td class="px-3 text-right num font-semibold">' + fmtPrice(r.price) + '</td>'
+        + '<td class="px-3 text-right num ' + dirClass(r.change) + '" data-col="oversigt kurser">' + fmtDelta(r.change) + '</td>'
+        + '<td class="px-3 text-right num" data-col="kurser">' + fmtPrice(r.open) + '</td>'
+        + '<td class="px-3 text-right num" data-col="kurser">' + fmtPrice(r.high) + '</td>'
+        + '<td class="px-3 text-right num" data-col="kurser">' + fmtPrice(r.low) + '</td>'
+        + '<td class="px-3 text-right num" data-col="kurser">' + fmtPrice(r.previous_close) + '</td>'
+        + '<td class="px-3 text-right num" data-col="nogletal">' + fmtPrice(r.week52_low) + '</td>'
+        + '<td class="px-3 text-right num" data-col="nogletal">' + fmtPrice(r.week52_high) + '</td>'
+        + '<td class="px-3 text-right num" data-col="nogletal">' + fmtBig(r.average_volume) + '</td>'
         + '<td class="px-3" style="color: var(--text-secondary)" data-col="oversigt">' + r.currency + '</td>'
-        + '<td class="px-3 text-right num" data-col="oversigt nogletal">' + fmtBig(r.total_volume) + '</td>'
-        + '<td class="px-3 text-right num">' + fmtBig(r.market_cap) + '</td>'
-        + '<td class="pl-3 text-right num" style="color: var(--text-secondary)" data-col="oversigt nogletal">' + (r.market_cap_rank ?? '–') + '</td>'
+        + '<td class="px-3 text-right num" data-col="oversigt nogletal">' + fmtBig(r.volume) + '</td>'
+        + '<td class="pl-3" style="color: var(--text-secondary)" data-col="oversigt">' + (r.exchange || '–') + '</td>'
       + '</tr>';
     }).join('');
 
@@ -412,10 +383,31 @@ tailwind.config = {
     });
   }
 
+  function setMarketState() {
+    const el = $('#marketState');
+    const open = state.marketOpen;
+    el.innerHTML = '<span aria-hidden="true">' + (open ? '●' : '○') + '</span> Marked '
+      + (open ? 'åbent' : 'lukket');
+    el.style.color = open ? 'var(--status-good)' : 'var(--text-muted)';
+  }
+
   function skeleton() {
     $('#rows').innerHTML = Array.from({ length: 8 }, () =>
-      '<tr class="border-t divider"><td colspan="13" class="py-4">'
+      '<tr class="border-t divider"><td colspan="15" class="py-4">'
       + '<div class="skeleton h-4 rounded"></div></td></tr>').join('');
+  }
+
+  function showSetup(message) {
+    $('#rows').innerHTML = '<tr><td colspan="15" class="py-10">'
+      + '<div class="max-w-xl mx-auto text-center">'
+      + '<p class="font-bold text-sm mb-2">Datakilden er ikke konfigureret</p>'
+      + '<p class="text-xs mb-3" style="color: var(--text-secondary)">' + message + '</p>'
+      + '<ol class="text-xs text-left inline-block space-y-1" style="color: var(--text-secondary)">'
+      + '<li>1. Hent en gratis nøgle på <a href="https://twelvedata.com/pricing" class="underline" style="color: var(--accent)">twelvedata.com/pricing</a> (Basic).</li>'
+      + '<li>2. Vercel → Settings → Environment Variables.</li>'
+      + '<li>3. Tilføj <code>TWELVEDATA_API_KEY</code> med nøglen som værdi.</li>'
+      + '<li>4. Redeploy, og genindlæs denne side.</li>'
+      + '</ol></div></td></tr>';
   }
 
   // ── Load ───────────────────────────────────────────────────────────────
@@ -426,24 +418,33 @@ tailwind.config = {
     loading = true;
     $('#refreshIcon').style.opacity = '.4';
     if (!state.all.length) skeleton();
-    $('#status').textContent = 'Henter live kurser fra ' + adapter.label + '…';
+    $('#status').textContent = 'Henter kurser fra ' + adapter.label + '…';
 
     try {
-      const limit = Number($('#limit').value);
-      state.all = await adapter.fetchMarket(limit);
+      const { rows, marketOpen, fetchedAt } = await adapter.fetchMarket();
+      state.all = rows;
+      state.marketOpen = marketOpen;
+      setMarketState();
       render();
-      $('#status').textContent = 'Live data fra ' + adapter.label + ' · alle beløb i '
-        + adapter.currency + ' · senest opdateret kl. '
-        + new Date().toLocaleTimeString('da-DK', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+
+      const stamp = fetchedAt ? new Date(fetchedAt) : new Date();
+      $('#status').textContent = 'Live data fra ' + adapter.label + ' · '
+        + (marketOpen ? 'markedet er åbent, opdaterer hvert 5. minut'
+                      : 'markedet er lukket, ingen automatisk opdatering')
+        + ' · senest hentet kl. '
+        + stamp.toLocaleTimeString('da-DK', { hour: '2-digit', minute: '2-digit' });
     } catch (err) {
-      // Keep the last good table standing on a failed refresh — wiping live
-      // kurser because one poll timed out is worse than showing stale ones,
-      // as long as the staleness is stated.
-      if (state.all.length) {
+      if (err.code === 'not_configured') {
+        showSetup(err.message);
+        $('#status').textContent = '';
+      } else if (state.all.length) {
+        // Keep the last good table standing on a failed refresh — wiping live
+        // kurser because one poll failed is worse than showing stale ones, as
+        // long as the staleness is stated.
         $('#status').innerHTML = '<span style="color: var(--delta-down)">Kunne ikke opdatere ('
           + err.message + '). Viser sidst hentede kurser.</span>';
       } else {
-        $('#rows').innerHTML = '<tr><td colspan="13" class="py-8 text-center" style="color: var(--delta-down)">'
+        $('#rows').innerHTML = '<tr><td colspan="15" class="py-8 text-center" style="color: var(--delta-down)">'
           + 'Kunne ikke hente kurser: ' + err.message + '</td></tr>';
         $('#status').textContent = 'Forsøg igen med Opdatér-knappen.';
       }
@@ -461,10 +462,11 @@ tailwind.config = {
   });
 
   $('#sortField').addEventListener('change', (e) => {
-    state.sort = e.target.value; state.dir = -1; syncCarets(); render();
+    state.sort = e.target.value;
+    state.dir = e.target.value === 'name' ? 1 : -1;
+    syncCarets(); render();
   });
 
-  $('#limit').addEventListener('change', load);
   $('#refresh').addEventListener('click', load);
   $('#riskClose').addEventListener('click', () => { $('#risk').hidden = true; });
 
@@ -497,16 +499,20 @@ tailwind.config = {
       const f = th.dataset.sort;
       if (state.sort === f) state.dir = -state.dir;
       else { state.sort = f; state.dir = f === 'name' ? 1 : -1; }
-      $('#sortField').value = ['market_cap', 'current_price', 'price_change_percentage_24h', 'change7d', 'total_volume'].includes(state.sort)
-        ? state.sort : $('#sortField').value;
+      const opt = $('#sortField').querySelector('option[value="' + state.sort + '"]');
+      if (opt) $('#sortField').value = state.sort;
       syncCarets(); render();
     });
   });
 
-  // Refresh while the tab is visible; pause in the background so a parked tab
-  // doesn't burn through CoinGecko's rate limit.
-  setInterval(() => { if (!document.hidden) load(); }, 60_000);
+  // Only poll while the market is open and the tab is visible. A closed market
+  // has no new prices, and the free plan's 800 daily credits are worth more
+  // than a re-render of identical numbers.
+  setInterval(() => {
+    if (state.marketOpen && !document.hidden) load();
+  }, 300_000);
 
+  setMarketState();
   syncCarets();
   load();
 })();
