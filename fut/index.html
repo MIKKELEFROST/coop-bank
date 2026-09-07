@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>EA FC Card Explorer | Alle spillerkort med filtre</title>
-<meta name="description" content="Demo: bladr i og filtrér 17.873 EA SPORTS FC-spillerkort. Bygget på EA's åbne ratings-API, uden backend og uden API-nøgle.">
+<meta name="description" content="Demo: bladr i og filtrér alle 20.689 EA SPORTS FC 27-spillerkort. Bygget på EA's åbne ratings-API, uden backend og uden API-nøgle.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230a0b0f'/%3E%3Cpath d='M9 7h14v4h-9v4h8v4h-8v6H9z' fill='%23e8c96a'/%3E%3C/svg%3E">
 <style>
 :root{
@@ -155,6 +155,9 @@ select:focus,.btn:focus-visible{outline:2px solid var(--accent);outline-offset:1
   object-fit:contain;object-position:bottom right;z-index:1;
   filter:drop-shadow(0 6px 10px rgba(0,0,0,.35));
 }
+/* EA har kun renderet portrætter for en del af spillerne — resten falder
+   tilbage til en silhuet, så kortet ser bevidst ud frem for i stykker. */
+.c-portrait.ph{opacity:.28;filter:none;object-position:bottom center;right:6%}
 .c-name{
   position:absolute;left:0;right:0;bottom:33%;z-index:2;text-align:center;
   font-size:13px;font-weight:800;letter-spacing:-.01em;
@@ -206,6 +209,10 @@ dialog#detail::backdrop{background:rgba(5,6,9,.72);backdrop-filter:blur(3px)}
 .fact{background:var(--panel);border:1px solid var(--line);border-radius:7px;padding:4px 9px;font-size:12px}
 .fact b{color:var(--gold)}
 .d-body{padding:22px;display:grid;grid-template-columns:1fr 1fr;gap:22px}
+/* Uden PlayStyles-spalten fylder attributterne to kolonner i stedet. */
+.d-body.one-col{grid-template-columns:1fr}
+.d-body.one-col > div{columns:2;column-gap:26px}
+.d-body.one-col .sgroup{break-inside:avoid}
 .d-body h3{margin:0 0 9px;font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
 .sgroup{margin-bottom:16px}
 .sline{display:grid;grid-template-columns:1fr 30px;gap:8px;align-items:center;font-size:12.5px;padding:2px 0}
@@ -366,7 +373,7 @@ code{background:var(--panel);border:1px solid var(--line);border-radius:5px;padd
       <div id="statFilters"></div>
     </div>
 
-    <div class="fgroup">
+    <div class="fgroup" id="psGroup">
       <h3>PlayStyles</h3>
       <input type="text" id="psSearch" placeholder="Søg PlayStyle…" autocomplete="off"
              style="width:100%;background:var(--panel-2);border:1px solid var(--line);border-radius:8px;padding:7px 10px;outline:none">
@@ -398,6 +405,14 @@ code{background:var(--panel);border:1px solid var(--line);border-radius:5px;padd
     <code>drop-api.ea.com/rating/ea-sports-fc</code> — ingen API-nøgle, ingen login, ingen backend.
     Data er ratings-droppet til <strong>EA SPORTS FC 27</strong>; EA efterjusterer ratings i
     september efter transfervinduet, så kør en refresh hvis tallene skal være helt friske.</p>
+  <p><strong>Hvorfor FC 27 og ikke FC 26?</strong> Det samme endpoint svarer med to forskellige
+    databaser afhængigt af <code>drop-referrer</code>-headeren: uden den får man FC 26
+    (17.873 spillere), med den FC 27 (20.689). Der er ingen årgangsparameter — headeren er
+    hele forskellen.</p>
+  <p><strong>Manglende PlayStyles.</strong> EA har ikke udgivet PlayStyles sammen med
+    FC 27-ratings endnu — <code>playerAbilities</code> er tomt for alle spillere, både hos EA
+    og hos tredjeparter. Filteret er derfor skjult og dukker op af sig selv, når et
+    fremtidigt datasæt indeholder dem. Spillere uden portræt hos EA vises med en silhuet.</p>
   <p><strong>Hvorfor er data bundlet i stedet for hentet live?</strong> EA sender kun
     <code>access-control-allow-origin</code> tilbage til <code>https://www.ea.com</code>, så browseren blokerer
     direkte kald fra andre domæner. Datasættet er derfor hentet server-side én gang og lagt i
@@ -413,6 +428,10 @@ code{background:var(--panel);border:1px solid var(--line);border-radius:5px;padd
 <script>
 (function(){
 "use strict";
+
+/* Silhuet til spillere uden portræt hos EA. Global, fordi kortenes
+   onerror-attribut refererer den. */
+window.FUT_SILHOUETTE = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath fill='%23000' d='M50 14c9.4 0 17 7.6 17 17s-7.6 17-17 17-17-7.6-17-17 7.6-17 17-17zm0 42c18.8 0 34 9.6 34 21.4V92H16V77.4C16 65.6 31.2 56 50 56z'/%3E%3C/svg%3E";
 
 var D = window.FUT_DATA;
 if(!D){
@@ -569,6 +588,12 @@ function renderPsList(filter){
 renderPsList('');
 document.getElementById('psSearch').addEventListener('input',function(e){ renderPsList(e.target.value); });
 
+/* EA udgiver ikke altid PlayStyles sammen med ratings — i FC 27-droppet er
+   playerAbilities tomt for alle spillere. Skjul filteret helt frem for at vise
+   en tom liste; det dukker op af sig selv, når et datasæt igen har dem. */
+var HAS_PS = D.playstyles.length > 0;
+if(!HAS_PS) document.getElementById('psGroup').hidden = true;
+
 /* ---------- Simple bindings ---------- */
 function seg(id, prop){
   var el=document.getElementById(id);
@@ -684,7 +709,7 @@ function cardHTML(p){
         (c[1]?'<img class="club" src="'+esc(c[1])+'" alt="'+esc(c[0])+'" loading="lazy">':'')+
       '</span></div>'+
     '<img class="c-portrait" src="'+portrait(p[ID])+'" alt="" loading="lazy" '+
-      'onerror="this.style.visibility=\'hidden\'">'+
+      'onerror="this.onerror=null;this.src=FUT_SILHOUETTE;this.className+=\' ph\'">'+
     '<div class="c-name">'+esc(p[NAME])+'</div>'+
     '<div class="c-stats">'+s+'</div>'+
   '</button>';
@@ -818,16 +843,19 @@ function openDetail(id){
   var st=p[STATS], gk=p[POS]==='GK', lab=gk?FACE_LABEL_GK:FACE_LABEL;
   var n=nation(p), c=club(p), a=age(p);
 
+  /* EA udfylder ikke alle felter i hvert ratings-drop (højde og vægt er fx
+     tomme i hele FC 27-droppet). Udelad dem frem for at vise tomme streger. */
   var facts=[
     ['Position', p[POS]+(p[ALT].length?' ('+p[ALT].join(', ')+')':'')],
-    ['Alder', a!=null? a+' år':'—'],
-    ['Fod', p[FOOT]===1?'Højre':(p[FOOT]===2?'Venstre':'—')],
-    ['Tricks', '★'.repeat(p[SKILLS])],
-    ['Svag fod', '★'.repeat(p[WEAK])],
-    ['Højde', p[HEIGHT]?p[HEIGHT]+' cm':'—'],
-    ['Vægt', p[WEIGHT]?p[WEIGHT]+' kg':'—'],
+    ['Alder', a!=null ? a+' år' : null],
+    ['Fod', p[FOOT]===1?'Højre':(p[FOOT]===2?'Venstre':null)],
+    ['Tricks', p[SKILLS] ? '★'.repeat(p[SKILLS]) : null],
+    ['Svag fod', p[WEAK] ? '★'.repeat(p[WEAK]) : null],
+    ['Højde', p[HEIGHT] ? p[HEIGHT]+' cm' : null],
+    ['Vægt', p[WEIGHT] ? p[WEIGHT]+' kg' : null],
     ['EA-ID', p[ID]]
-  ].map(function(f){ return '<span class="fact">'+f[0]+' <b>'+esc(f[1])+'</b></span>'; }).join('');
+  ].filter(function(f){ return f[1] !== null && f[1] !== ''; })
+   .map(function(f){ return '<span class="fact">'+f[0]+' <b>'+esc(f[1])+'</b></span>'; }).join('');
 
   var face='';
   for(var i=0;i<6;i++){
@@ -846,6 +874,9 @@ function openDetail(id){
   p[PSP].forEach(function(i){ styles+=psHTML(i,true); });
   p[PS].forEach(function(i){ styles+=psHTML(i,false); });
   if(!styles) styles='<p style="color:var(--muted);font-size:13px">Ingen PlayStyles.</p>';
+  /* Uden PlayStyles i datasættet ville højre spalte være tom — så vis
+     attributterne i fuld bredde i stedet. */
+  var right = HAS_PS ? '<div><h3>PlayStyles</h3>'+styles+'</div>' : '';
 
   dlg.innerHTML=
     '<button class="d-close" aria-label="Luk">×</button>'+
@@ -864,9 +895,9 @@ function openDetail(id){
         '<div class="d-facts">'+facts+'</div>'+
       '</div>'+
     '</div>'+
-    '<div class="d-body">'+
+    '<div class="d-body'+(HAS_PS?'':' one-col')+'">'+
       '<div>'+groups+'</div>'+
-      '<div><h3>PlayStyles</h3>'+styles+'</div>'+
+      right+
     '</div>';
 
   dlg.querySelector('.d-close').addEventListener('click',function(){ dlg.close(); });
