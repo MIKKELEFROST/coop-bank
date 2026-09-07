@@ -1,0 +1,183 @@
+{
+  "source": "65358e7d-Sound_Effect_For_Video_Editing_No_Copyright__soundeffects.mp3",
+  "duration": 37.09,
+  "count": 22,
+  "sounds": [
+    {
+      "name": "hit-01.wav",
+      "kind": "hit",
+      "atInPack": 1.305,
+      "length": 0.644,
+      "subRel": -16.1,
+      "airRel": -32.9
+    },
+    {
+      "name": "click-01.wav",
+      "kind": "click",
+      "atInPack": 2.753,
+      "length": 0.32,
+      "subRel": -35.1,
+      "airRel": -1.7
+    },
+    {
+      "name": "hit-02.wav",
+      "kind": "hit",
+      "atInPack": 3.839,
+      "length": 0.385,
+      "subRel": -31.4,
+      "airRel": -27.7
+    },
+    {
+      "name": "whoosh-01.wav",
+      "kind": "whoosh",
+      "atInPack": 4.782,
+      "length": 1.194,
+      "subRel": -14.4,
+      "airRel": -11.1
+    },
+    {
+      "name": "whoosh-02.wav",
+      "kind": "whoosh",
+      "atInPack": 6.5,
+      "length": 0.998,
+      "subRel": -30.7,
+      "airRel": -5
+    },
+    {
+      "name": "riser-01.wav",
+      "kind": "riser",
+      "atInPack": 7.999,
+      "length": 1.587,
+      "subRel": -21.9,
+      "airRel": -29.4
+    },
+    {
+      "name": "whoosh-03.wav",
+      "kind": "whoosh",
+      "atInPack": 9.795,
+      "length": 0.956,
+      "subRel": -12.5,
+      "airRel": -10.7
+    },
+    {
+      "name": "impact-01.wav",
+      "kind": "impact",
+      "atInPack": 11.219,
+      "length": 1.648,
+      "subRel": -3.8,
+      "airRel": -18.2
+    },
+    {
+      "name": "hit-03.wav",
+      "kind": "hit",
+      "atInPack": 13.049,
+      "length": 0.631,
+      "subRel": -14.5,
+      "airRel": -30.7
+    },
+    {
+      "name": "riser-02.wav",
+      "kind": "riser",
+      "atInPack": 14.005,
+      "length": 0.908,
+      "subRel": -20.6,
+      "airRel": -33.2
+    },
+    {
+      "name": "hit-04.wav",
+      "kind": "hit",
+      "atInPack": 15.297,
+      "length": 0.644,
+      "subRel": -23.1,
+      "airRel": -20.6
+    },
+    {
+      "name": "whoosh-04.wav",
+      "kind": "whoosh",
+      "atInPack": 16.367,
+      "length": 2.496,
+      "subRel": -28.8,
+      "airRel": -19.5
+    },
+    {
+      "name": "swish-01.wav",
+      "kind": "swish",
+      "atInPack": 19.09,
+      "length": 0.55,
+      "subRel": -16.3,
+      "airRel": -8.6
+    },
+    {
+      "name": "hit-05.wav",
+      "kind": "hit",
+      "atInPack": 20.159,
+      "length": 0.273,
+      "subRel": -29.6,
+      "airRel": -21.4
+    },
+    {
+      "name": "click-02.wav",
+      "kind": "click",
+      "atInPack": 21.204,
+      "length": 0.448,
+      "subRel": -26.5,
+      "airRel": -3.1
+    },
+    {
+      "name": "impact-02.wav",
+      "kind": "impact",
+      "atInPack": 22.086,
+      "length": 3.954,
+      "subRel": -5.2,
+      "airRel": -7
+    },
+    {
+      "name": "whoosh-05.wav",
+      "kind": "whoosh",
+      "atInPack": 26.36,
+      "length": 0.644,
+      "subRel": -21.1,
+      "airRel": -5.2
+    },
+    {
+      "name": "hit-06.wav",
+      "kind": "hit",
+      "atInPack": 27.419,
+      "length": 0.847,
+      "subRel": -36.2,
+      "airRel": -32
+    },
+    {
+      "name": "click-03.wav",
+      "kind": "click",
+      "atInPack": 28.651,
+      "length": 0.291,
+      "subRel": -25.8,
+      "airRel": -3.5
+    },
+    {
+      "name": "whoosh-06.wav",
+      "kind": "whoosh",
+      "atInPack": 29.554,
+      "length": 1.098,
+      "subRel": -16.2,
+      "airRel": -3.4
+    },
+    {
+      "name": "impact-03.wav",
+      "kind": "impact",
+      "atInPack": 31.281,
+      "length": 0.762,
+      "subRel": -4.6,
+      "airRel": -6.1
+    },
+    {
+      "name": "whoosh-07.wav",
+      "kind": "whoosh",
+      "atInPack": 32.189,
+      "length": 0.984,
+      "subRel": -19.7,
+      "airRel": -3.8
+    }
+  ]
+}

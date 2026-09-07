@@ -1,0 +1,111 @@
+1
+00:00:00,250 --> 00:00:02,170
+Marketing er ved at ændre sig.
+
+2
+00:00:02,250 --> 00:00:04,620
+Ikke kun gennem nye værktøjer, men gennem AI-agenter.
+
+3
+00:00:04,700 --> 00:00:07,520
+En AI-agent kan selv planlægge, søge information,
+
+4
+00:00:07,600 --> 00:00:10,620
+træffe beslutninger og udføre handlinger for at nå et mål.
+
+5
+00:00:10,700 --> 00:00:13,320
+Det ændrer vores arbejdsgange – og på sigt også vores roller
+
+6
+00:00:13,400 --> 00:00:15,620
+og hvor mange vi skal være.
+
+7
+00:00:15,700 --> 00:00:18,420
+For en mindre marketingafdeling som vores betyder det,
+
+8
+00:00:18,500 --> 00:00:21,620
+at Coop Bank kan stå stærkere over for langt større spillere.
+
+9
+00:00:21,700 --> 00:00:24,120
+Agenter kan analysere store datamængder, finde mønstre
+
+10
+00:00:24,200 --> 00:00:26,120
+og give os bedre indsigter.
+
+11
+00:00:26,200 --> 00:00:28,820
+De kan løbende analysere, teste og anbefale forbedringer
+
+12
+00:00:28,900 --> 00:00:30,620
+– hurtigere og mere ensartet.
+
+13
+00:00:30,700 --> 00:00:32,920
+Når AI-agenter søger nettet efter svar,
+
+14
+00:00:33,000 --> 00:00:35,560
+bliver vores digitale synlighed endnu vigtigere.
+
+15
+00:00:35,700 --> 00:00:38,320
+Vores rolle flytter sig fra at udføre alt selv
+
+16
+00:00:38,400 --> 00:00:41,620
+til i højere grad at lede, kontrollere og prioritere AI-agenter.
+
+17
+00:00:41,700 --> 00:00:43,220
+Jo mere vi overlader til AI,
+
+18
+00:00:43,300 --> 00:00:46,120
+desto vigtigere bliver spørgsmålet om tillid og kontrol.
+
+19
+00:00:46,200 --> 00:00:47,820
+Og det er ikke kun fremtid.
+
+20
+00:00:47,900 --> 00:00:50,220
+Vi arbejder allerede sådan i dag.
+
+21
+00:00:50,300 --> 00:00:53,320
+Mikkel udvikler i Webflow med Claude og MCP.
+
+22
+00:00:53,400 --> 00:00:56,320
+Nicole bruger en agent til idéer og content.
+
+23
+00:00:56,400 --> 00:00:58,920
+TonePilot sikrer vores tone of voice.
+
+24
+00:00:59,000 --> 00:01:02,290
+CMO Copilot sparrer om strategi, analyse og beslutninger.
+
+25
+00:01:02,800 --> 00:01:05,520
+Fælles for dem er, at AI ikke bare genererer.
+
+26
+00:01:05,600 --> 00:01:08,520
+AI arbejder sammen med os og udfører opgaver.
+
+27
+00:01:08,600 --> 00:01:10,720
+Er fremtidens marketingchef den, der beslutter,
+
+28
+00:01:10,800 --> 00:01:13,730
+hvilke agenter der skal tændes og slukkes?
