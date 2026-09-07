@@ -14,33 +14,53 @@ import { fileURLToPath } from 'node:url';
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const OUT = resolve(ROOT, 'data/aktier.json');
 
-// Nasdaq Copenhagen large caps, as Yahoo ticker → display name. Yahoo's own
-// shortName is used when it has one; these are the fallback and the ordering.
+// Yahoo ticker → display name → market. Yahoo's own shortName wins when it has
+// one; these are the fallback and the ordering. The market code drives the
+// Danmark/USA filter on the page.
 const TICKERS = [
-  ['NOVO-B.CO',   'Novo Nordisk B'],
-  ['MAERSK-B.CO', 'A.P. Møller - Mærsk B'],
-  ['MAERSK-A.CO', 'A.P. Møller - Mærsk A'],
-  ['DSV.CO',      'DSV'],
-  ['NSIS-B.CO',   'Novonesis B'],
-  ['VWS.CO',      'Vestas Wind Systems'],
-  ['ORSTED.CO',   'Ørsted'],
-  ['DANSKE.CO',   'Danske Bank'],
-  ['COLO-B.CO',   'Coloplast B'],
-  ['GMAB.CO',     'Genmab'],
-  ['CARL-B.CO',   'Carlsberg B'],
-  ['PNDORA.CO',   'Pandora'],
-  ['TRYG.CO',     'Tryg'],
-  ['DEMANT.CO',   'Demant'],
-  ['ROCK-B.CO',   'Rockwool B'],
-  ['AMBU-B.CO',   'Ambu B'],
-  ['ZEAL.CO',     'Zealand Pharma'],
-  ['GN.CO',       'GN Store Nord'],
-  ['JYSK.CO',     'Jyske Bank'],
-  ['ISS.CO',      'ISS'],
-  ['NKT.CO',      'NKT'],
-  ['BAVA.CO',     'Bavarian Nordic'],
-  ['RBREW.CO',    'Royal Unibrew'],
-  ['NETC.CO',     'Netcompany Group'],
+  // ── Nasdaq København ──────────────────────────────────────────────────
+  ['NOVO-B.CO',   'Novo Nordisk B',         'DK'],
+  ['MAERSK-B.CO', 'A.P. Møller - Mærsk B',  'DK'],
+  ['MAERSK-A.CO', 'A.P. Møller - Mærsk A',  'DK'],
+  ['DSV.CO',      'DSV',                    'DK'],
+  ['NSIS-B.CO',   'Novonesis B',            'DK'],
+  ['VWS.CO',      'Vestas Wind Systems',    'DK'],
+  ['ORSTED.CO',   'Ørsted',                 'DK'],
+  ['DANSKE.CO',   'Danske Bank',            'DK'],
+  ['COLO-B.CO',   'Coloplast B',            'DK'],
+  ['GMAB.CO',     'Genmab',                 'DK'],
+  ['CARL-B.CO',   'Carlsberg B',            'DK'],
+  ['PNDORA.CO',   'Pandora',                'DK'],
+  ['TRYG.CO',     'Tryg',                   'DK'],
+  ['DEMANT.CO',   'Demant',                 'DK'],
+  ['ROCK-B.CO',   'Rockwool B',             'DK'],
+  ['AMBU-B.CO',   'Ambu B',                 'DK'],
+  ['ZEAL.CO',     'Zealand Pharma',         'DK'],
+  ['GN.CO',       'GN Store Nord',          'DK'],
+  ['JYSK.CO',     'Jyske Bank',             'DK'],
+  ['ISS.CO',      'ISS',                    'DK'],
+  ['NKT.CO',      'NKT',                    'DK'],
+  ['BAVA.CO',     'Bavarian Nordic',        'DK'],
+  ['RBREW.CO',    'Royal Unibrew',          'DK'],
+  ['NETC.CO',     'Netcompany Group',       'DK'],
+
+  // ── USA (NasdaqGS / NYSE) ─────────────────────────────────────────────
+  ['NVDA',  'NVIDIA',              'US'],
+  ['AAPL',  'Apple',               'US'],
+  ['MSFT',  'Microsoft',           'US'],
+  ['GOOGL', 'Alphabet A',          'US'],
+  ['GOOG',  'Alphabet C',          'US'],
+  ['AMZN',  'Amazon.com',          'US'],
+  ['META',  'Meta Platforms',      'US'],
+  ['AVGO',  'Broadcom',            'US'],
+  ['TSLA',  'Tesla',               'US'],
+  ['LLY',   'Eli Lilly',           'US'],
+  ['MU',    'Micron Technology',   'US'],
+  ['BRK-A', 'Berkshire Hathaway A', 'US'],
+  ['JPM',   'JPMorgan Chase',      'US'],
+  ['V',     'Visa',                'US'],
+  ['UNH',   'UnitedHealth Group',  'US'],
+  ['WMT',   'Walmart',             'US'],
 ];
 
 // Refuse to overwrite a good file with a mostly-broken one: a Yahoo-side
@@ -79,7 +99,7 @@ async function fetchTicker(symbol) {
   throw lastErr;
 }
 
-function normalise(result, fallbackName) {
+function normalise(result, fallbackName, market) {
   const meta = result.meta || {};
   const quote = result.indicators?.quote?.[0] || {};
 
@@ -98,6 +118,7 @@ function normalise(result, fallbackName) {
   return {
     symbol:   meta.symbol || '',
     name:     meta.shortName || fallbackName,
+    market,
     exchange: meta.fullExchangeName || 'Copenhagen',
     currency: meta.currency || 'DKK',
     price:          round(price),
@@ -120,9 +141,9 @@ async function main() {
   const stocks = [];
   const failed = [];
 
-  for (const [symbol, name] of TICKERS) {
+  for (const [symbol, name, market] of TICKERS) {
     try {
-      stocks.push(normalise(await fetchTicker(symbol), name));
+      stocks.push(normalise(await fetchTicker(symbol), name, market));
       process.stdout.write('  ✓ ' + symbol + '\n');
     } catch (err) {
       failed.push(symbol);
@@ -148,7 +169,15 @@ async function main() {
   // and every quote is identical. Comparing the payload minus the timestamp
   // means updated_at reads as "when the data last changed", which is what the
   // page's "opdateret for N siden" is actually claiming.
-  const body = { source: 'Yahoo Finance', market: 'Nasdaq København', currency: 'DKK', failed, stocks };
+  const body = {
+    source: 'Yahoo Finance',
+    markets: [
+      { code: 'DK', label: 'Danmark', exchange: 'Nasdaq København', currency: 'DKK' },
+      { code: 'US', label: 'USA',     exchange: 'NasdaqGS / NYSE',  currency: 'USD' },
+    ],
+    failed,
+    stocks,
+  };
 
   try {
     const previous = JSON.parse(await readFile(OUT, 'utf8'));

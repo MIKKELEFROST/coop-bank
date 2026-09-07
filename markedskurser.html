@@ -1,11 +1,11 @@
-<!-- Title: Aktiekurser – Nasdaq København -->
+<!-- Title: Aktiekurser – danske og amerikanske -->
 <!-- filepath: markedskurser.html -->
 <!DOCTYPE html>
 <html lang="da" class="scroll-smooth">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Aktiekurser – Nasdaq København</title>
+<title>Aktiekurser – danske og amerikanske</title>
 
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -106,11 +106,11 @@ tailwind.config = {
   <div class="flex items-start justify-between gap-4 mb-6 flex-wrap">
     <div>
       <h1 class="text-2xl md:text-3xl font-extrabold tracking-tight">
-        Aktiekurser – se danske aktier
+        Aktiekurser – se danske og amerikanske aktier
       </h1>
       <p class="text-sm mt-1" style="color: var(--text-secondary)">
-        Kurser fra Nasdaq København i danske kroner. Sortér efter kurs, ændring og
-        volumen, og filtrér med de hurtige filtre.
+        Kurser fra Nasdaq København og de amerikanske børser. Filtrér på marked, sortér
+        efter kurs, ændring og volumen.
       </p>
     </div>
     <a href="#kilde"
@@ -155,6 +155,11 @@ tailwind.config = {
     <!-- ─── Quick filter chips ───────────────────────────────────────────── -->
     <div class="flex flex-wrap items-center gap-2 mb-4">
       <span class="text-xs font-bold mr-1" style="color: var(--text-secondary)">Populære filtre</span>
+      <!-- Market is its own toggle group, so "Danmark" and "Vindere i dag" can
+           both be active at once. -->
+      <button class="chip rounded-full px-3 py-1 text-xs font-semibold" data-market="DK" aria-pressed="false">🇩🇰 Danmark</button>
+      <button class="chip rounded-full px-3 py-1 text-xs font-semibold" data-market="US" aria-pressed="false">🇺🇸 USA</button>
+      <span class="mx-1" style="color: var(--gridline)" aria-hidden="true">|</span>
       <button class="chip rounded-full px-3 py-1 text-xs font-semibold" data-chip="gainers" aria-pressed="false">Vindere i dag</button>
       <button class="chip rounded-full px-3 py-1 text-xs font-semibold" data-chip="losers"  aria-pressed="false">Tabere i dag</button>
       <button class="chip rounded-full px-3 py-1 text-xs font-semibold" data-chip="month"   aria-pressed="false">Vindere 30 dage</button>
@@ -219,7 +224,8 @@ tailwind.config = {
       Kurserne hentes fra Yahoo Finance af en GitHub Action, som committer dem til
       <code>data/aktier.json</code> i dette repo. Siden læser den fil. Hentningen sker altså
       på en server og ikke i din browser, hvilket er grunden til at der hverken er brug for
-      en API-nøgle eller for at datakilden tillader CORS.
+      en API-nøgle eller for at datakilden tillader CORS. Listen dækker 24 selskaber på
+      Nasdaq København og 16 på NasdaqGS og NYSE.
     </p>
     <p class="mt-2">
       <strong>Kurserne er forsinkede, ikke live.</strong> De opdateres tre gange på hverdage —
@@ -231,6 +237,12 @@ tailwind.config = {
       svaret, og et beregnet gæt ville være misvisende. Sparklinjen viser de seneste 30
       handelsdages lukkekurser. Volumen er antallet af handlede aktier, ikke omsætning i kroner —
       kilden opgiver kun stykantal, og volumen gange kurs ville være et skøn.
+    </p>
+    <p class="mt-2">
+      <strong>Kurserne står i deres egen valuta</strong> — DKK for danske og USD for amerikanske.
+      De er ikke omregnet, så en sortering på “Seneste” blander to valutaer og sammenligner
+      derfor ikke ens. Filtrér på Danmark eller USA først, hvis du vil sortere på kurs.
+      Ændring i procent er derimod sammenlignelig på tværs, da den er enhedsløs.
     </p>
   </div>
 </div>
@@ -296,7 +308,7 @@ tailwind.config = {
             };
           }),
           updatedAt: body.updated_at,
-          market: body.market,
+          markets: body.markets || [],
         };
       },
     },
@@ -347,13 +359,15 @@ tailwind.config = {
   }
 
   // ── State ──────────────────────────────────────────────────────────────
-  const state = { all: [], updatedAt: null, market: '', sort: 'percent_change', dir: -1, q: '', chip: null, tab: 'oversigt' };
+  const state = { all: [], updatedAt: null, markets: [], market: null, sort: 'percent_change', dir: -1, q: '', chip: null, tab: 'oversigt' };
 
   const $  = (s) => document.querySelector(s);
   const $$ = (s) => Array.from(document.querySelectorAll(s));
 
   function visible(rows) {
     let out = rows;
+
+    if (state.market) out = out.filter((r) => r.market === state.market);
 
     if (state.q) {
       const q = state.q.toLowerCase();
@@ -427,10 +441,10 @@ tailwind.config = {
     if (!state.all.length) skeleton();
 
     try {
-      const { rows, updatedAt, market } = await adapter.fetchMarket();
+      const { rows, updatedAt, markets } = await adapter.fetchMarket();
       state.all = rows;
       state.updatedAt = updatedAt;
-      state.market = market;
+      state.markets = markets;
       render();
 
       const when = updatedAt
@@ -438,7 +452,10 @@ tailwind.config = {
         : 'ukendt tidspunkt';
 
       $('#freshness').textContent = 'Opdateret ' + fmtAge(updatedAt);
-      $('#status').textContent = 'Forsinkede kurser fra ' + adapter.label + ' · ' + (market || 'Nasdaq København')
+      const where = state.markets.length
+        ? state.markets.map((m) => m.exchange).join(' + ')
+        : 'Nasdaq København';
+      $('#status').textContent = 'Forsinkede kurser fra ' + adapter.label + ' · ' + where
         + ' · hentet ' + when + ' · opdateres tre gange på hverdage';
     } catch (err) {
       if (state.all.length) {
@@ -475,6 +492,15 @@ tailwind.config = {
 
   $('#refresh').addEventListener('click', load);
   $('#riskClose').addEventListener('click', () => { $('#risk').hidden = true; });
+
+  $$('[data-market]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const m = btn.dataset.market;
+      state.market = state.market === m ? null : m;
+      $$('[data-market]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.market === state.market)));
+      render();
+    });
+  });
 
   $$('[data-chip]').forEach((btn) => {
     btn.addEventListener('click', () => {
