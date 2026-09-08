@@ -1,0 +1,49 @@
+SIDER: 418
+
+== Mulig formel tiltale (De/Dem/Deres): 46 forekomster paa 41 sider (kraever manuel kontrol, mange er 'De' i starten af saetning)
+    /bolig/laan-til-boligkoeb :: LI: De sidste 15 % kan du finansiere med et boliglån
+    /daglig-oekonomi :: LI: De vigtigste konti til din daglige bankforretning
+    /guider/coop-bank-hverdag :: LI: De konti, du har behov for
+    /guider/hvorfor-er-det-en-god-ide-at-investere :: P: De generelle oplysninger på denne side, skal ikke betra
+    /guider/investeringsguides :: P: De generelle oplysninger på denne side, skal ikke betra
+    /guider/omlaegning-af-laan :: P: De vigtigste tommelfingerregler for, hvornår det kan be
+    /guider/saadan-spreder-du-din-risiko :: P: De generelle oplysninger på denne side, skal ikke betra
+    /guider/testamente :: P: De resterende 75 % af arven kaldes friarv. Det er den d
+    /guider/tjekliste-til-konfirmation :: P: De indledende forberedelser
+    /hjaelpecenter :: P: De giver dig begge ekstra luft i økonomien. Kreditkorte
+    /hjaelpecenter/laan-og-kredit :: P: De giver dig begge ekstra luft i økonomien. Kreditkorte
+    /investering/aktiesparekonto :: P: De konkrete handelsomkostninger fremgår i appen, inden
+
+== Engelske/fremmede ord i den danske tekst (antal forekomster) ==
+    310  Pay
+     90  Auto-Invest
+     15  support
+     13  wallet
+      4  performance
+      3  Open Banking
+      1  fraud
+
+== Udraabstegn i overskrifter/CTA'er: 9 forekomster paa 9 sider ==
+     1  /guider/investering-af-boerneopsparing
+     1  /guider/naar-i-har-fundet-droemmeboligen
+     1  /guider/oekonomisikring-kredit
+     1  /guider/oekonomisikring-laan
+     1  /guider/paa-jagt-efter-droemmeboligen
+     1  
+     1  /konti/fuldmagtfaelleskonto
+     1  /laan/bedst-i-test
+     1  /ordbog/restgaeld
+
+== Fagbegreber: paa hvor mange sider optraeder de, og hvor mange af dem forklarer begrebet i samme tekst ==
+   bidragssats            paa  20 sider, forklaret paa   6
+   kurssikring            paa   0 sider, forklaret paa   0
+   refinansiering         paa  12 sider, forklaret paa   2
+   debitorrente           paa  60 sider, forklaret paa   4
+   nominel rente          paa   3 sider, forklaret paa   1
+   konvertering           paa   6 sider, forklaret paa   4
+   obligationsrestgæld    paa   2 sider, forklaret paa   0
+   kursskæring            paa   0 sider, forklaret paa   0
+   rentetilpasning        paa  15 sider, forklaret paa   7
+   afdragsfrihed          paa 125 sider, forklaret paa  11
+   ÅOP                    paa  71 sider, forklaret paa  45
+   tinglysning            paa  59 sider, forklaret paa   3

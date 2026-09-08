@@ -1,0 +1,1997 @@
+{
+ "home": {
+  "radii": {
+   "100%": 4,
+   "32px": 16,
+   "24px": 10,
+   "4px": 3,
+   "16px": 20,
+   "8px": 6,
+   "12px": 5
+  },
+  "textColors": {
+   "rgb(255, 255, 255)": 25,
+   "rgb(85, 37, 47)": 14,
+   "rgb(76, 77, 82)": 13,
+   "rgb(0, 0, 0)": 16,
+   "rgba(255, 255, 255, 0.7)": 2
+  },
+  "bgColors": {
+   "rgb(255, 255, 255)": 28,
+   "rgb(245, 245, 246)": 8,
+   "rgba(0, 0, 0, 0.5)": 1,
+   "rgba(0, 0, 0, 0.2)": 4,
+   "rgb(255, 225, 225)": 5,
+   "rgb(195, 20, 20)": 3,
+   "rgb(221, 219, 249)": 3,
+   "rgb(99, 215, 140)": 1,
+   "rgb(229, 229, 232)": 1,
+   "rgb(196, 190, 244)": 1,
+   "rgb(92, 40, 51)": 2,
+   "rgb(166, 153, 236)": 1,
+   "rgb(119, 159, 253)": 1
+  },
+  "fonts": {
+   "Porteron, Arial, sans-serif": 70
+  },
+  "weights": {
+   "400": 23,
+   "500": 16,
+   "600": 28,
+   "700": 3
+  },
+  "headings": [
+   {
+    "tag": "h1",
+    "text": "En bank du kan regne med",
+    "color": "rgb(255, 255, 255)",
+    "weight": "600",
+    "size": "48px",
+    "family": "Porteron",
+    "lh": "52.8px",
+    "transform": "none"
+   },
+   {
+    "tag": "h2",
+    "text": "CoopLån 20+ er bedst i test!",
+    "color": "rgb(255, 255, 255)",
+    "weight": "600",
+    "size": "48px",
+    "family": "Porteron",
+    "lh": "52.8px",
+    "transform": "none"
+   },
+   {
+    "tag": "h2",
+    "text": "Investér direkte fra din telefon",
+    "color": "rgb(255, 255, 255)",
+    "weight": "600",
+    "size": "48px",
+    "family": "Porteron",
+    "lh": "52.8px",
+    "transform": "none"
+   },
+   {
+    "tag": "h3",
+    "text": "Bliv kunde",
+    "color": "rgb(255, 255, 255)",
+    "weight": "600",
+    "size": "24px",
+    "family": "Porteron",
+    "lh": "25.92px",
+    "transform": "none"
+   },
+   {
+    "tag": "h3",
+    "text": "Ansøg om et lån",
+    "color": "rgb(255, 255, 255)",
+    "weight": "600",
+    "size": "24px",
+    "family": "Porteron",
+    "lh": "25.92px",
+    "transform": "none"
+   },
+   {
+    "tag": "h3",
+    "text": "Få et boliglån",
+    "color": "rgb(255, 255, 255)",
+    "weight": "600",
+    "size": "24px",
+    "family": "Porteron",
+    "lh": "25.92px",
+    "transform": "none"
+   },
+   {
+    "tag": "h2",
+    "text": "Investering",
+    "color": "rgb(0, 0, 0)",
+    "weight": "600",
+    "size": "24px",
+    "family": "Porteron",
+    "lh": "25.92px",
+    "transform": "none"
+   },
+   {
+    "tag": "h2",
+    "text": "Hæv kontanter i Coop butikker",
+    "color": "rgb(0, 0, 0)",
+    "weight": "600",
+    "size": "24px",
+    "family": "Porteron",
+    "lh": "25.92px",
+    "transform": "none"
+   },
+   {
+    "tag": "h2",
+    "text": "Det siger vores kunder",
+    "color": "rgb(0, 0, 0)",
+    "weight": "600",
+    "size": "36px",
+    "family": "Porteron",
+    "lh": "39.6px",
+    "transform": "none"
+   },
+   {
+    "tag": "h3",
+    "text": "Det var super nemt",
+    "color": "rgb(0, 0, 0)",
+    "weight": "600",
+    "size": "24px",
+    "family": "Porteron",
+    "lh": "25.92px",
+    "transform": "none"
+   },
+   {
+    "tag": "h2",
+    "text": "Find svar med det samme",
+    "color": "rgb(0, 0, 0)",
+    "weight": "600",
+    "size": "28px",
+    "family": "Porteron",
+    "lh": "30.24px",
+    "transform": "none"
+   },
+   {
+    "tag": "h2",
+    "text": "Nyheder",
+    "color": "rgb(0, 0, 0)",
+    "weight": "600",
+    "size": "36px",
+    "family": "Porteron",
+    "lh": "39.6px",
+    "transform": "none"
+   },
+   {
+    "tag": "h2",
+    "text": "Din opsparing har spurgt, om den må prøve noget nyt",
+    "color": "rgb(255, 255, 255)",
+    "weight": "600",
+    "size": "18px",
+    "family": "Porteron",
+    "lh": "19.8px",
+    "transform": "none"
+   },
+   {
+    "tag": "h2",
+    "text": "Det bliver billigere at vælge afdragsfrihed – og hos Coop Bank får du bonus oveni",
+    "color": "rgb(0, 0, 0)",
+    "weight": "600",
+    "size": "18px",
+    "family": "Porteron",
+    "lh": "19.8px",
+    "transform": "none"
+   },
+   {
+    "tag": "h2",
+    "text": "Pas på Wallet-svindel",
+    "color": "rgb(0, 0, 0)",
+    "weight": "600",
+    "size": "18px",
+    "family": "Porteron",
+    "lh": "19.8px",
+    "transform": "none"
+   },
+   {
+    "tag": "h2",
+    "text": "Derfor skal du vælge Coop Bank",
+    "color": "rgb(0, 0, 0)",
+    "weight": "600",
+    "size": "36px",
+    "family": "Porteron",
+    "lh": "39.6px",
+    "transform": "none"
+   },
+   {
+    "tag": "h3",
+    "text": "100% Digital",
+    "color": "rgb(0, 0, 0)",
+    "weight": "600",
+    "size": "20px",
+    "family": "Porteron",
+    "lh": "24px",
+    "transform": "none"
+   },
+   {
+    "tag": "h3",
+    "text": "Sikkert og trygt",
+    "color": "rgb(0, 0, 0)",
+    "weight": "600",
+    "size": "20px",
+    "family": "Porteron",
+    "lh": "24px",
+    "transform": "none"
+   },
+   {
+    "tag": "h3",
+    "text": "Bliv kunde på få minutter",
+    "color": "rgb(255, 255, 255)",
+    "weight": "600",
+    "size": "28px",
+    "family": "Porteron",
+    "lh": "30.24px",
+    "transform": "none"
+   },
+   {
+    "tag": "h3",
+    "text": "Coop Bonus",
+    "color": "rgb(0, 0, 0)",
+    "weight": "600",
+    "size": "20px",
+    "family": "Porteron",
+    "lh": "24px",
+    "transform": "none"
+   }
+  ],
+  "imgs": [
+   {
+    "src": "http://127.0.0.1:8899/a/9fcc340663c12573.avif",
+    "alt": "",
+    "radius": "0px",
+    "w": 390,
+    "h": 776
+   },
+   {
+    "src": "http://127.0.0.1:8899/a/e11420844372de2b.avif",
+    "alt": "",
+    "radius": "0px",
+    "w": 390,
+    "h": 776
+   },
+   {
+    "src": "http://127.0.0.1:8899/a/aed2a42269bf9de9.avif",
+    "alt": "",
+    "radius": "0px",
+    "w": 390,
+    "h": 776
+   },
+   {
+    "src": "http://127.0.0.1:8899/a/00222ca16dc217db.bin)-p-800.webp",
+    "alt": "",
+    "radius": "0px",
+    "w": 300,
+    "h": 377
+   },
+   {
+    "src": "http://127.0.0.1:8899/a/db4c257805fd25cd.bin)-p-800.webp",
+    "alt": "",
+    "radius": "0px",
+    "w": 300,
+    "h": 377
+   },
+   {
+    "src": "http://127.0.0.1:8899/a/b429d5ecaea390c9.bin)-p-800.webp",
+    "alt": "",
+    "radius": "0px",
+    "w": 300,
+    "h": 377
+   },
+   {
+    "src": "http://127.0.0.1:8899/a/a9d80dbc9ae7d008.avif",
+    "alt": "Person i rød sweater ser på en smartphone med en graf, mens de sidder på en sofa derhjemme.",
+    "radius": "0px",
+    "w": 358,
+    "h": 203
+   },
+   {
+    "src": "http://127.0.0.1:8899/a/cada0874fee875ca.avif",
+    "alt": "Mand med grøn jakke skubber indkøbsvogn i en frugt- og grøntafdeling i et supermarked.",
+    "radius": "0px",
+    "w": 358,
+    "h": 203
+   },
+   {
+    "src": "http://127.0.0.1:8899/a/1048572c22a98756.avif",
+    "alt": "Smilende kvinde med gul hue og denimjakke sidder på cykel på fortov med andre cyklister i baggrunden.",
+    "radius": "12px",
+    "w": 301,
+    "h": 190
+   },
+   {
+    "src": "http://127.0.0.1:8899/a/e035b004e7cfaf33.avif",
+    "alt": "To smilende personer iført frakker, en mand med rød tørklæde holder en kaffekop udenfor bygning.",
+    "radius": "0px",
+    "w": 358,
+    "h": 558
+   },
+   {
+    "src": "http://127.0.0.1:8899/a/ff594553afb0b95c.avif",
+    "alt": "Smilende kvinde i orange sweater ser på sin telefon og holder en kop ved et køkkenbord.",
+    "radius": "0px",
+    "w": 358,
+    "h": 360
+   },
+   {
+    "src": "http://127.0.0.1:8899/a/1f57d119cf6abb27.webp",
+    "alt": "",
+    "radius": "0px",
+    "w": 121,
+    "h": 74
+   },
+   {
+    "src": "http://127.0.0.1:8899/a/389e2fadcadafb7c.webp",
+    "alt": "",
+    "radius": "0px",
+    "w": 121,
+    "h": 74
+   },
+   {
+    "src": "http://127.0.0.1:8899/a/e1c2fadded0bf1b2.svg",
+    "alt": "",
+    "radius": "8px",
+    "w": 32,
+    "h": 32
+   },
+   {
+    "src": "http://127.0.0.1:8899/a/049636108d52d1ac.svg",
+    "alt": "",
+    "radius": "8px",
+    "w": 32,
+    "h": 32
+   },
+   {
+    "src": "http://127.0.0.1:8899/a/fde57a632be99dd8.svg",
+    "alt": "",
+    "radius": "8px",
+    "w": 32,
+    "h": 32
+   }
+  ],
+  "buttons": [
+   {
+    "text": "",
+    "bg": "rgb(245, 245, 246)",
+    "color": "rgb(0, 0, 0)",
+    "radius": "100%",
+    "border": "0px rgb(0, 0, 0)",
+    "weight": "400",
+    "transform": "none",
+    "family": "Porteron"
+   },
+   {
+    "text": "Netbank",
+    "bg": "rgb(245, 245, 246)",
+    "color": "rgb(0, 0, 0)",
+    "radius": "32px",
+    "border": "0px rgb(0, 0, 0)",
+    "weight": "500",
+    "transform": "none",
+    "family": "Porteron"
+   },
+   {
+    "text": "Bliv kunde",
+    "bg": "rgb(255, 255, 255)",
+    "color": "rgb(85, 37, 47)",
+    "radius": "32px",
+    "border": "0px rgb(255, 255, 255)",
+    "weight": "500",
+    "transform": "none",
+    "family": "Porteron"
+   },
+   {
+    "text": "Læs mere",
+    "bg": "rgb(255, 255, 255)",
+    "color": "rgb(85, 37, 47)",
+    "radius": "32px",
+    "border": "0px rgb(255, 255, 255)",
+    "weight": "500",
+    "transform": "none",
+    "family": "Porteron"
+   },
+   {
+    "text": "Start investering",
+    "bg": "rgb(255, 255, 255)",
+    "color": "rgb(85, 37, 47)",
+    "radius": "32px",
+    "border": "0px rgb(255, 255, 255)",
+    "weight": "500",
+    "transform": "none",
+    "family": "Porteron"
+   },
+   {
+    "text": "Bliv kunde",
+    "bg": "rgb(255, 255, 255)",
+    "color": "rgb(85, 37, 47)",
+    "radius": "32px",
+    "border": "0px rgb(255, 255, 255)",
+    "weight": "500",
+    "transform": "none",
+    "family": "Porteron"
+   },
+   {
+    "text": "Læs mere",
+    "bg": "rgba(0, 0, 0, 0)",
+    "color": "rgb(255, 255, 255)",
+    "radius": "0px",
+    "border": "0px rgb(255, 255, 255)",
+    "weight": "500",
+    "transform": "none",
+    "family": "Porteron"
+   },
+   {
+    "text": "Ansøg nu",
+    "bg": "rgb(255, 255, 255)",
+    "color": "rgb(85, 37, 47)",
+    "radius": "32px",
+    "border": "0px rgb(255, 255, 255)",
+    "weight": "500",
+    "transform": "none",
+    "family": "Porteron"
+   },
+   {
+    "text": "Læs mere",
+    "bg": "rgba(0, 0, 0, 0)",
+    "color": "rgb(255, 255, 255)",
+    "radius": "0px",
+    "border": "0px rgb(255, 255, 255)",
+    "weight": "500",
+    "transform": "none",
+    "family": "Porteron"
+   },
+   {
+    "text": "Skriv til os",
+    "bg": "rgb(255, 255, 255)",
+    "color": "rgb(85, 37, 47)",
+    "radius": "32px",
+    "border": "0px rgb(255, 255, 255)",
+    "weight": "500",
+    "transform": "none",
+    "family": "Porteron"
+   },
+   {
+    "text": "Læs mere",
+    "bg": "rgba(0, 0, 0, 0)",
+    "color": "rgb(255, 255, 255)",
+    "radius": "0px",
+    "border": "0px rgb(255, 255, 255)",
+    "weight": "500",
+    "transform": "none",
+    "family": "Porteron"
+   },
+   {
+    "text": "Download app",
+    "bg": "rgb(99, 215, 140)",
+    "color": "rgb(85, 37, 47)",
+    "radius": "32px",
+    "border": "1px rgb(99, 215, 140)",
+    "weight": "500",
+    "transform": "none",
+    "family": "Porteron"
+   },
+   {
+    "text": "Læs mere",
+    "bg": "rgb(255, 255, 255)",
+    "color": "rgb(85, 37, 47)",
+    "radius": "32px",
+    "border": "1px rgb(255, 255, 255)",
+    "weight": "500",
+    "transform": "none",
+    "family": "Porteron"
+   },
+   {
+    "text": "Læs mere",
+    "bg": "rgb(255, 255, 255)",
+    "color": "rgb(85, 37, 47)",
+    "radius": "32px",
+    "border": "1px rgb(255, 255, 255)",
+    "weight": "500",
+    "transform": "none",
+    "family": "Porteron"
+   },
+   {
+    "text": "Læs mere",
+    "bg": "rgb(255, 255, 255)",
+    "color": "rgb(85, 37, 47)",
+    "radius": "32px",
+    "border": "1px rgb(85, 37, 47)",
+    "weight": "500",
+    "transform": "none",
+    "family": "Porteron"
+   },
+   {
+    "text": "Gå til hjælpecentret",
+    "bg": "rgb(255, 255, 255)",
+    "color": "rgb(85, 37, 47)",
+    "radius": "32px",
+    "border": "1px rgb(85, 37, 47)",
+    "weight": "500",
+    "transform": "none",
+    "family": "Porteron"
+   },
+   {
+    "text": "Læs mere",
+    "bg": "rgb(255, 255, 255)",
+    "color": "rgb(85, 37, 47)",
+    "radius": "32px",
+    "border": "0px rgb(255, 255, 255)",
+    "weight": "500",
+    "transform": "none",
+    "family": "Porteron"
+   },
+   {
+    "text": "Se alle artikler",
+    "bg": "rgb(255, 255, 255)",
+    "color": "rgb(85, 37, 47)",
+    "radius": "32px",
+    "border": "1px rgb(85, 37, 47)",
+    "weight": "500",
+    "transform": "none",
+    "family": "Porteron"
+   },
+   {
+    "text": "Bliv kunde",
+    "bg": "rgb(255, 255, 255)",
+    "color": "rgb(85, 37, 47)",
+    "radius": "32px",
+    "border": "0px rgb(255, 255, 255)",
+    "weight": "500",
+    "transform": "none",
+    "family": "Porteron"
+   }
+  ],
+  "sizes": {
+   "48px": 3,
+   "18px": 11,
+   "16px": 8,
+   "12px": 11,
+   "24px": 6,
+   "14px": 23,
+   "36px": 3,
+   "28px": 2,
+   "20px": 3
+  },
+  "body": {
+   "color": "rgb(76, 77, 82)",
+   "bg": "rgb(255, 255, 255)",
+   "family": "Porteron, Arial, sans-serif",
+   "size": "14px",
+   "weight": "400"
+  },
+  "fontLoaded": [
+   "webflow-icons:400:unloaded",
+   "Porteron:700:loaded",
+   "Porteron:500:loaded",
+   "Porteron:600:loaded",
+   "Porteron:400:loaded",
+   "swiper-icons:400:unloaded"
+  ]
+ },
+ "bolig": {
+  "radii": {
+   "100%": 13,
+   "32px": 13,
+   "24px": 14,
+   "16px": 19,
+   "8px": 8,
+   "12px": 1
+  },
+  "textColors": {
+   "rgb(0, 0, 0)": 27,
+   "rgb(255, 255, 255)": 12,
+   "rgb(76, 77, 82)": 17,
+   "rgba(255, 255, 255, 0.7)": 2
+  },
+  "bgColors": {
+   "rgb(255, 255, 255)": 13,
+   "rgb(245, 245, 246)": 14,
+   "rgba(0, 0, 0, 0.5)": 1,
+   "rgba(190, 16, 17, 0.85)": 1,
+   "rgb(0, 0, 0)": 1,
+   "rgb(190, 16, 17)": 1,
+   "rgb(255, 225, 225)": 7,
+   "rgb(195, 20, 20)": 4,
+   "rgb(196, 190, 244)": 1,
+   "rgb(92, 40, 51)": 2,
+   "rgb(166, 153, 236)": 1,
+   "rgb(119, 159, 253)": 1
+  },
+  "fonts": {
+   "Porteron, Arial, sans-serif": 58
+  },
+  "weights": {
+   "400": 26,
+   "500": 6,
+   "600": 26
+  },
+  "headings": [
+   {
+    "tag": "h1",
+    "text": "Det skal være billigt at være boligejer",
+    "color": "rgb(255, 255, 255)",
+    "weight": "600",
+    "size": "28px",
+    "family": "Porteron",
+    "lh": "30.24px",
+    "transform": "none"
+   },
+   {
+    "tag": "h2",
+    "text": "Udforsk vores boligberegnere",
+    "color": "rgb(0, 0, 0)",
+    "weight": "600",
+    "size": "36px",
+    "family": "Porteron",
+    "lh": "39.6px",
+    "transform": "none"
+   },
+   {
+    "tag": "h2",
+    "text": "Hvad har du brug for?",
+    "color": "rgb(0, 0, 0)",
+    "weight": "600",
+    "size": "36px",
+    "family": "Porteron",
+    "lh": "39.6px",
+    "transform": "none"
+   },
+   {
+    "tag": "h3",
+    "text": "Lån til boligkøb",
+    "color": "rgb(0, 0, 0)",
+    "weight": "600",
+    "size": "20px",
+    "family": "Porteron",
+    "lh": "21.6px",
+    "transform": "none"
+   },
+   {
+    "tag": "h3",
+    "text": "Låneomlægning",
+    "color": "rgb(0, 0, 0)",
+    "weight": "600",
+    "size": "20px",
+    "family": "Porteron",
+    "lh": "21.6px",
+    "transform": "none"
+   },
+   {
+    "tag": "h3",
+    "text": "Frigør din friværdi",
+    "color": "rgb(0, 0, 0)",
+    "weight": "600",
+    "size": "20px",
+    "family": "Porteron",
+    "lh": "21.6px",
+    "transform": "none"
+   },
+   {
+    "tag": "h3",
+    "text": "Andelsboliglån",
+    "color": "rgb(0, 0, 0)",
+    "weight": "600",
+    "size": "20px",
+    "family": "Porteron",
+    "lh": "21.6px",
+    "transform": "none"
+   },
+   {
+    "tag": "h3",
+    "text": "Sommerhus lån",
+    "color": "rgb(0, 0, 0)",
+    "weight": "600",
+    "size": "20px",
+    "family": "Porteron",
+    "lh": "21.6px",
+    "transform": "none"
+   },
+   {
+    "tag": "h3",
+    "text": "Realkreditlån",
+    "color": "rgb(0, 0, 0)",
+    "weight": "600",
+    "size": "20px",
+    "family": "Porteron",
+    "lh": "21.6px",
+    "transform": "none"
+   },
+   {
+    "tag": "h3",
+    "text": "Energirenovering",
+    "color": "rgb(0, 0, 0)",
+    "weight": "600",
+    "size": "20px",
+    "family": "Porteron",
+    "lh": "21.6px",
+    "transform": "none"
+   },
+   {
+    "tag": "h3",
+    "text": "Boligberegnere",
+    "color": "rgb(0, 0, 0)",
+    "weight": "600",
+    "size": "20px",
+    "family": "Porteron",
+    "lh": "21.6px",
+    "transform": "none"
+   },
+   {
+    "tag": "h2",
+    "text": "Realkreditlån med bonus og KundeKroner",
+    "color": "rgb(0, 0, 0)",
+    "weight": "600",
+    "size": "36px",
+    "family": "Porteron",
+    "lh": "39.6px",
+    "transform": "none"
+   },
+   {
+    "tag": "h2",
+    "text": "Ekstra attraktive renter til boligkunder",
+    "color": "rgb(0, 0, 0)",
+    "weight": "600",
+    "size": "36px",
+    "family": "Porteron",
+    "lh": "39.6px",
+    "transform": "none"
+   },
+   {
+    "tag": "h2",
+    "text": "Certificerede rådgivere — hele vejen",
+    "color": "rgb(0, 0, 0)",
+    "weight": "600",
+    "size": "36px",
+    "family": "Porteron",
+    "lh": "39.6px",
+    "transform": "none"
+   },
+   {
+    "tag": "h2",
+    "text": "Lad os tale om din bolig",
+    "color": "rgb(255, 255, 255)",
+    "weight": "600",
+    "size": "36px",
+    "family": "Porteron",
+    "lh": "39.6px",
+    "transform": "none"
+   }
+  ],
+  "imgs": [
+   {
+    "src": "http://127.0.0.1:8899/a/aeae12987e27e949.avif",
+    "alt": "Et ungt par planter blomster på en altan med planter omkring dem i potter.",
+    "radius": "0px",
+    "w": 358,
+    "h": 690
+   },
+   {
+    "src": "http://127.0.0.1:8899/a/4b4299dd112f46c6.svg",
+    "alt": "",
+    "radius": "8px",
+    "w": 40,
+    "h": 40
+   },
+   {
+    "src": "http://127.0.0.1:8899/a/3c3e119c4dc22ec8.svg",
+    "alt": "grøn ikon boks om at gentage",
+    "radius": "8px",
+    "w": 40,
+    "h": 40
+   },
+   {
+    "src": "http://127.0.0.1:8899/a/e3b31bf47aaf6641.svg",
+    "alt": "",
+    "radius": "8px",
+    "w": 40,
+    "h": 40
+   },
+   {
+    "src": "http://127.0.0.1:8899/a/2380ca3602cd8bf5.svg",
+    "alt": "",
+    "radius": "8px",
+    "w": 40,
+    "h": 40
+   },
+   {
+    "src": "http://127.0.0.1:8899/a/7bd71d56abfc75e6.svg",
+    "alt": "",
+    "radius": "8px",
+    "w": 40,
+    "h": 40
+   },
+   {
+    "src": "http://127.0.0.1:8899/a/3cd4f270e159e47d.svg",
+    "alt": "",
+    "radius": "8px",
+    "w": 40,
+    "h": 40
+   },
+   {
+    "src": "http://127.0.0.1:8899/a/fb4b47a89b4c32fb.svg",
+    "alt": "rød ikon boks coop bank",
+    "radius": "8px",
+    "w": 40,
+    "h": 40
+   },
+   {
+    "src": "http://127.0.0.1:8899/a/abc49541a9357f16.svg",
+    "alt": "",
+    "radius": "8px",
+    "w": 40,
+    "h": 40
+   },
+   {
+    "src": "http://127.0.0.1:8899/a/0d729e65a3e26812.avif",
+    "alt": "Moderne træhus med store vinduer og varme lys omgivet af gråt græs og en grå himmel.",
+    "radius": "0px",
+    "w": 358,
+    "h": 352
+   },
+   {
+    "src": "http://127.0.0.1:8899/a/389e611793c3e1c9.avif",
+    "alt": "Ungt par kigger smilende på farveprøver på et træbord i et lyst rum.",
+    "radius": "0px",
+    "w": 358,
+    "h": 352
+   },
+   {
+    "src": "http://127.0.0.1:8899/a/b6a0f7448bd30f97.avif",
+    "alt": "Fire erhvervsfolk står i en lys moderne kontorbygning med armene krydset.",
+    "radius": "0px",
+    "w": 358,
+    "h": 500
+   },
+   {
+    "src": "http://127.0.0.1:8899/a/2fa106797adefe50.webp",
+    "alt": "Smilende kvinde med kort lyst hår og briller foran murstensbygning.",
+    "radius": "100%",
+    "w": 40,
+    "h": 40
+   }
+  ],
+  "buttons": [
+   {
+    "text": "",
+    "bg": "rgb(245, 245, 246)",
+    "color": "rgb(0, 0, 0)",
+    "radius": "100%",
+    "border": "0px rgb(0, 0, 0)",
+    "weight": "400",
+    "transform": "none",
+    "family": "Porteron"
+   },
+   {
+    "text": "Netbank",
+    "bg": "rgb(245, 245, 246)",
+    "color": "rgb(0, 0, 0)",
+    "radius": "32px",
+    "border": "0px rgb(0, 0, 0)",
+    "weight": "500",
+    "transform": "none",
+    "family": "Porteron"
+   },
+   {
+    "text": "Forside",
+    "bg": "rgba(0, 0, 0, 0)",
+    "color": "rgb(0, 0, 0)",
+    "radius": "0px",
+    "border": "0px rgb(0, 0, 0)",
+    "weight": "500",
+    "transform": "none",
+    "family": "Porteron"
+   },
+   {
+    "text": "Bolig",
+    "bg": "rgba(0, 0, 0, 0)",
+    "color": "rgb(0, 0, 0)",
+    "radius": "0px",
+    "border": "0px rgb(0, 0, 0)",
+    "weight": "500",
+    "transform": "none",
+    "family": "Porteron"
+   },
+   {
+    "text": "Beregn dit realkreditlån",
+    "bg": "rgb(255, 255, 255)",
+    "color": "rgb(0, 0, 0)",
+    "radius": "32px",
+    "border": "0px rgb(33, 152, 75)",
+    "weight": "500",
+    "transform": "none",
+    "family": "Porteron"
+   },
+   {
+    "text": "Beregn friværdi",
+    "bg": "rgb(0, 0, 0)",
+    "color": "rgb(255, 255, 255)",
+    "radius": "32px",
+    "border": "1px rgb(0, 0, 0)",
+    "weight": "400",
+    "transform": "none",
+    "family": "Porteron"
+   },
+   {
+    "text": "Beregn KundeKroner",
+    "bg": "rgb(255, 255, 255)",
+    "color": "rgb(0, 0, 0)",
+    "radius": "32px",
+    "border": "1px rgb(0, 0, 0)",
+    "weight": "400",
+    "transform": "none",
+    "family": "Porteron"
+   },
+   {
+    "text": "Lån",
+    "bg": "rgb(255, 255, 255)",
+    "color": "rgb(0, 0, 0)",
+    "radius": "32px",
+    "border": "1px rgb(0, 0, 0)",
+    "weight": "400",
+    "transform": "none",
+    "family": "Porteron"
+   },
+   {
+    "text": "Tillægslån",
+    "bg": "rgb(255, 255, 255)",
+    "color": "rgb(0, 0, 0)",
+    "radius": "32px",
+    "border": "1px rgb(0, 0, 0)",
+    "weight": "400",
+    "transform": "none",
+    "family": "Porteron"
+   },
+   {
+    "text": "Læs mere",
+    "bg": "rgb(255, 255, 255)",
+    "color": "rgb(0, 0, 0)",
+    "radius": "32px",
+    "border": "1px rgb(0, 0, 0)",
+    "weight": "500",
+    "transform": "none",
+    "family": "Porteron"
+   },
+   {
+    "text": "Læs om BoligLønkonto",
+    "bg": "rgb(255, 255, 255)",
+    "color": "rgb(0, 0, 0)",
+    "radius": "32px",
+    "border": "1px rgb(0, 0, 0)",
+    "weight": "500",
+    "transform": "none",
+    "family": "Porteron"
+   },
+   {
+    "text": "43 86 11 11",
+    "bg": "rgb(255, 255, 255)",
+    "color": "rgb(0, 0, 0)",
+    "radius": "32px",
+    "border": "0px rgb(33, 152, 75)",
+    "weight": "500",
+    "transform": "none",
+    "family": "Porteron"
+   },
+   {
+    "text": "Send os en besked",
+    "bg": "rgba(0, 0, 0, 0)",
+    "color": "rgb(255, 255, 255)",
+    "radius": "32px",
+    "border": "1px rgb(255, 255, 255)",
+    "weight": "500",
+    "transform": "none",
+    "family": "Porteron"
+   }
+  ],
+  "sizes": {
+   "14px": 26,
+   "28px": 1,
+   "16px": 9,
+   "36px": 9,
+   "18px": 3,
+   "20px": 8,
+   "12px": 2
+  },
+  "body": {
+   "color": "rgb(76, 77, 82)",
+   "bg": "rgb(255, 255, 255)",
+   "family": "Porteron, Arial, sans-serif",
+   "size": "14px",
+   "weight": "400"
+  },
+  "fontLoaded": [
+   "webflow-icons:400:unloaded",
+   "Porteron:700:unloaded",
+   "Porteron:500:loaded",
+   "Porteron:600:loaded",
+   "Porteron:400:loaded"
+  ]
+ },
+ "laan": {
+  "radii": {
+   "100%": 28,
+   "32px": 12,
+   "24px": 10,
+   "16px": 14,
+   "12px": 6,
+   "8px": 26
+  },
+  "textColors": {
+   "rgb(0, 0, 0)": 58,
+   "rgb(255, 255, 255)": 18,
+   "rgb(76, 77, 82)": 46,
+   "rgb(12, 12, 13)": 6,
+   "rgb(34, 67, 238)": 9,
+   "rgba(255, 255, 255, 0.7)": 2
+  },
+  "bgColors": {
+   "rgb(255, 255, 255)": 37,
+   "rgb(245, 245, 246)": 29,
+   "rgba(0, 0, 0, 0.5)": 1,
+   "rgba(190, 16, 17, 0.85)": 1,
+   "rgb(0, 0, 0)": 3,
+   "rgb(229, 229, 232)": 2,
+   "rgba(0, 0, 0, 0.2)": 1,
+   "rgb(196, 190, 244)": 1,
+   "rgb(100, 215, 140)": 2,
+   "rgb(195, 20, 20)": 2,
+   "rgb(92, 40, 51)": 2,
+   "rgb(166, 153, 236)": 1,
+   "rgb(119, 159, 253)": 1
+  },
+  "fonts": {
+   "Porteron, Arial, sans-serif": 139
+  },
+  "weights": {
+   "400": 58,
+   "500": 9,
+   "600": 64,
+   "700": 8
+  },
+  "headings": [
+   {
+    "tag": "h1",
+    "text": "Find lånet der passer til dig",
+    "color": "rgb(255, 255, 255)",
+    "weight": "600",
+    "size": "28px",
+    "family": "Porteron",
+    "lh": "30.24px",
+    "transform": "none"
+   },
+   {
+    "tag": "h2",
+    "text": "Beregn dit lån",
+    "color": "rgb(0, 0, 0)",
+    "weight": "600",
+    "size": "36px",
+    "family": "Porteron",
+    "lh": "39.6px",
+    "transform": "none"
+   },
+   {
+    "tag": "h2",
+    "text": "Nemt og hurtigt",
+    "color": "rgb(255, 255, 255)",
+    "weight": "600",
+    "size": "28px",
+    "family": "Porteron",
+    "lh": "30.24px",
+    "transform": "none"
+   },
+   {
+    "tag": "h3",
+    "text": "Vælg beløb",
+    "color": "rgb(255, 255, 255)",
+    "weight": "600",
+    "size": "20px",
+    "family": "Porteron",
+    "lh": "24px",
+    "transform": "none"
+   },
+   {
+    "tag": "h3",
+    "text": "Ansøgning",
+    "color": "rgb(255, 255, 255)",
+    "weight": "600",
+    "size": "20px",
+    "family": "Porteron",
+    "lh": "24px",
+    "transform": "none"
+   },
+   {
+    "tag": "h3",
+    "text": "Lånetilbud",
+    "color": "rgb(255, 255, 255)",
+    "weight": "600",
+    "size": "20px",
+    "family": "Porteron",
+    "lh": "24px",
+    "transform": "none"
+   },
+   {
+    "tag": "h3",
+    "text": "Udbetaling",
+    "color": "rgb(255, 255, 255)",
+    "weight": "600",
+    "size": "20px",
+    "family": "Porteron",
+    "lh": "24px",
+    "transform": "none"
+   },
+   {
+    "tag": "h2",
+    "text": "Udforsk vores lån",
+    "color": "rgb(0, 0, 0)",
+    "weight": "600",
+    "size": "36px",
+    "family": "Porteron",
+    "lh": "39.6px",
+    "transform": "none"
+   },
+   {
+    "tag": "h3",
+    "text": "CoopLån 20+",
+    "color": "rgb(0, 0, 0)",
+    "weight": "600",
+    "size": "28px",
+    "family": "Porteron",
+    "lh": "30.24px",
+    "transform": "none"
+   },
+   {
+    "tag": "h3",
+    "text": "CoopLån 50+",
+    "color": "rgb(0, 0, 0)",
+    "weight": "600",
+    "size": "28px",
+    "family": "Porteron",
+    "lh": "30.24px",
+    "transform": "none"
+   },
+   {
+    "tag": "h3",
+    "text": "Samlelån",
+    "color": "rgb(0, 0, 0)",
+    "weight": "600",
+    "size": "20px",
+    "family": "Porteron",
+    "lh": "21.6px",
+    "transform": "none"
+   },
+   {
+    "tag": "h3",
+    "text": "Energilån",
+    "color": "rgb(0, 0, 0)",
+    "weight": "600",
+    "size": "20px",
+    "family": "Porteron",
+    "lh": "21.6px",
+    "transform": "none"
+   },
+   {
+    "tag": "h3",
+    "text": "Billån",
+    "color": "rgb(0, 0, 0)",
+    "weight": "600",
+    "size": "20px",
+    "family": "Porteron",
+    "lh": "21.6px",
+    "transform": "none"
+   },
+   {
+    "tag": "h2",
+    "text": "Kan din økonomi hænge sammen hvis indkomsten stopper?",
+    "color": "rgb(0, 0, 0)",
+    "weight": "600",
+    "size": "36px",
+    "family": "Porteron",
+    "lh": "39.6px",
+    "transform": "none"
+   },
+   {
+    "tag": "h2",
+    "text": "Gode råd når du skal vælge lån",
+    "color": "rgb(0, 0, 0)",
+    "weight": "600",
+    "size": "36px",
+    "family": "Porteron",
+    "lh": "39.6px",
+    "transform": "none"
+   },
+   {
+    "tag": "h2",
+    "text": "Brug for hjælp? Vi er her.",
+    "color": "rgb(0, 0, 0)",
+    "weight": "600",
+    "size": "36px",
+    "family": "Porteron",
+    "lh": "39.6px",
+    "transform": "none"
+   },
+   {
+    "tag": "h3",
+    "text": "Kan jeg få et lån i Coop Bank?",
+    "color": "rgb(0, 0, 0)",
+    "weight": "600",
+    "size": "18px",
+    "family": "Porteron",
+    "lh": "18px",
+    "transform": "none"
+   },
+   {
+    "tag": "h3",
+    "text": "Skal jeg være medlem af Coop for at ansøge om et Coop Lån?",
+    "color": "rgb(0, 0, 0)",
+    "weight": "600",
+    "size": "18px",
+    "family": "Porteron",
+    "lh": "18px",
+    "transform": "none"
+   },
+   {
+    "tag": "h3",
+    "text": "Er det en god idé at ansøge sammen med min samlever/ægtefælle?",
+    "color": "rgb(0, 0, 0)",
+    "weight": "600",
+    "size": "18px",
+    "family": "Porteron",
+    "lh": "18px",
+    "transform": "none"
+   },
+   {
+    "tag": "h3",
+    "text": "Kan jeg bruge et Coop Lån til at komme af med anden gæld?",
+    "color": "rgb(0, 0, 0)",
+    "weight": "600",
+    "size": "18px",
+    "family": "Porteron",
+    "lh": "18px",
+    "transform": "none"
+   },
+   {
+    "tag": "h3",
+    "text": "Hvorfor skal jeg give samtykke til Skatteforvaltningen?",
+    "color": "rgb(0, 0, 0)",
+    "weight": "600",
+    "size": "18px",
+    "family": "Porteron",
+    "lh": "18px",
+    "transform": "none"
+   },
+   {
+    "tag": "h3",
+    "text": "Hvad bliver dit samtykke brugt til?",
+    "color": "rgb(0, 0, 0)",
+    "weight": "600",
+    "size": "18px",
+    "family": "Porteron",
+    "lh": "18px",
+    "transform": "none"
+   },
+   {
+    "tag": "h3",
+    "text": "Hvad gør jeg, hvis jeg har udfyldt ansøgningen forkert?",
+    "color": "rgb(0, 0, 0)",
+    "weight": "600",
+    "size": "18px",
+    "family": "Porteron",
+    "lh": "18px",
+    "transform": "none"
+   },
+   {
+    "tag": "h3",
+    "text": "Hvornår har jeg mine penge til rådighed?",
+    "color": "rgb(0, 0, 0)",
+    "weight": "600",
+    "size": "18px",
+    "family": "Porteron",
+    "lh": "18px",
+    "transform": "none"
+   },
+   {
+    "tag": "h3",
+    "text": "Kan jeg ansøge igen, hvis jeg tidligere har fået afslag?",
+    "color": "rgb(0, 0, 0)",
+    "weight": "600",
+    "size": "18px",
+    "family": "Porteron",
+    "lh": "18px",
+    "transform": "none"
+   },
+   {
+    "tag": "h3",
+    "text": "Kan jeg få en forklaring på et afslag?",
+    "color": "rgb(0, 0, 0)",
+    "weight": "600",
+    "size": "18px",
+    "family": "Porteron",
+    "lh": "18px",
+    "transform": "none"
+   },
+   {
+    "tag": "h3",
+    "text": "Skal jeg indsende en masse papirer for at ansøge om et Coop Lån?",
+    "color": "rgb(0, 0, 0)",
+    "weight": "600",
+    "size": "18px",
+    "family": "Porteron",
+    "lh": "18px",
+    "transform": "none"
+   },
+   {
+    "tag": "h3",
+    "text": "Kan jeg betale hele mit lån før tid?",
+    "color": "rgb(0, 0, 0)",
+    "weight": "600",
+    "size": "18px",
+    "family": "Porteron",
+    "lh": "18px",
+    "transform": "none"
+   },
+   {
+    "tag": "h3",
+    "text": "Kan jeg ændre ydelsen på mit lån?",
+    "color": "rgb(0, 0, 0)",
+    "weight": "600",
+    "size": "18px",
+    "family": "Porteron",
+    "lh": "18px",
+    "transform": "none"
+   },
+   {
+    "tag": "h3",
+    "text": "Kan jeg indbetale ekstra på mit lån?",
+    "color": "rgb(0, 0, 0)",
+    "weight": "600",
+    "size": "18px",
+    "family": "Porteron",
+    "lh": "18px",
+    "transform": "none"
+   },
+   {
+    "tag": "h3",
+    "text": "Kan jeg få henstand på mit lån?",
+    "color": "rgb(0, 0, 0)",
+    "weight": "600",
+    "size": "18px",
+    "family": "Porteron",
+    "lh": "18px",
+    "transform": "none"
+   },
+   {
+    "tag": "h3",
+    "text": "Hvordan søger jeg om en forhøjelse af mit nuværende lån?",
+    "color": "rgb(0, 0, 0)",
+    "weight": "600",
+    "size": "18px",
+    "family": "Porteron",
+    "lh": "18px",
+    "transform": "none"
+   },
+   {
+    "tag": "h3",
+    "text": "Kan jeg risikere, at ydelsen pludselig stiger markant, nu hvor renten er variabel?",
+    "color": "rgb(0, 0, 0)",
+    "weight": "600",
+    "size": "18px",
+    "family": "Porteron",
+    "lh": "18px",
+    "transform": "none"
+   },
+   {
+    "tag": "h3",
+    "text": "Hvor kan jeg se rentesatsen på mit lån?",
+    "color": "rgb(0, 0, 0)",
+    "weight": "600",
+    "size": "18px",
+    "family": "Porteron",
+    "lh": "18px",
+    "transform": "none"
+   },
+   {
+    "tag": "h3",
+    "text": "Hvordan betaler jeg ydelsen på mit lån?",
+    "color": "rgb(0, 0, 0)",
+    "weight": "600",
+    "size": "18px",
+    "family": "Porteron",
+    "lh": "18px",
+    "transform": "none"
+   }
+  ],
+  "imgs": [
+   {
+    "src": "http://127.0.0.1:8899/a/2c45c4d99f628456.avif",
+    "alt": "Kvinde kigger på tøj på et stativ i en butik",
+    "radius": "0px",
+    "w": 358,
+    "h": 690
+   },
+   {
+    "src": "http://127.0.0.1:8899/a/36fa3ce1a4094413.avif",
+    "alt": "Kvinde i lys frakke står i moderne bymiljø",
+    "radius": "0px",
+    "w": 358,
+    "h": 614
+   },
+   {
+    "src": "http://127.0.0.1:8899/a/b1037033c7974008.svg",
+    "alt": "",
+    "radius": "0px",
+    "w": 24,
+    "h": 24
+   },
+   {
+    "src": "http://127.0.0.1:8899/a/71c4e6d466069f51.svg",
+    "alt": "",
+    "radius": "8px",
+    "w": 40,
+    "h": 40
+   },
+   {
+    "src": "http://127.0.0.1:8899/a/a0c4babe706416b7.svg",
+    "alt": "",
+    "radius": "8px",
+    "w": 40,
+    "h": 40
+   },
+   {
+    "src": "http://127.0.0.1:8899/a/e07a3f6069419ff3.svg",
+    "alt": "",
+    "radius": "8px",
+    "w": 40,
+    "h": 40
+   },
+   {
+    "src": "http://127.0.0.1:8899/a/f85cc1cdb353cd20.avif",
+    "alt": "Mand slapper af i sofaen med Økonomisikring Lån fra Coop Bank",
+    "radius": "0px",
+    "w": 358,
+    "h": 352
+   },
+   {
+    "src": "http://127.0.0.1:8899/a/c441dba075c0f68f.avif",
+    "alt": "Ung kvinde sidder derhjemme og bruger computer til sin økonomi",
+    "radius": "0px",
+    "w": 358,
+    "h": 352
+   }
+  ],
+  "buttons": [
+   {
+    "text": "",
+    "bg": "rgb(245, 245, 246)",
+    "color": "rgb(0, 0, 0)",
+    "radius": "100%",
+    "border": "0px rgb(0, 0, 0)",
+    "weight": "400",
+    "transform": "none",
+    "family": "Porteron"
+   },
+   {
+    "text": "Netbank",
+    "bg": "rgb(245, 245, 246)",
+    "color": "rgb(0, 0, 0)",
+    "radius": "32px",
+    "border": "0px rgb(0, 0, 0)",
+    "weight": "500",
+    "transform": "none",
+    "family": "Porteron"
+   },
+   {
+    "text": "Forside",
+    "bg": "rgba(0, 0, 0, 0)",
+    "color": "rgb(0, 0, 0)",
+    "radius": "0px",
+    "border": "0px rgb(0, 0, 0)",
+    "weight": "500",
+    "transform": "none",
+    "family": "Porteron"
+   },
+   {
+    "text": "Lån",
+    "bg": "rgba(0, 0, 0, 0)",
+    "color": "rgb(0, 0, 0)",
+    "radius": "0px",
+    "border": "0px rgb(0, 0, 0)",
+    "weight": "500",
+    "transform": "none",
+    "family": "Porteron"
+   },
+   {
+    "text": "Beregn dit lån",
+    "bg": "rgb(255, 255, 255)",
+    "color": "rgb(0, 0, 0)",
+    "radius": "32px",
+    "border": "0px rgb(33, 152, 75)",
+    "weight": "500",
+    "transform": "none",
+    "family": "Porteron"
+   },
+   {
+    "text": "CoopLån 50+",
+    "bg": "rgb(0, 0, 0)",
+    "color": "rgb(255, 255, 255)",
+    "radius": "32px",
+    "border": "1px rgb(0, 0, 0)",
+    "weight": "400",
+    "transform": "none",
+    "family": "Porteron"
+   },
+   {
+    "text": "CoopLån 20+",
+    "bg": "rgb(255, 255, 255)",
+    "color": "rgb(0, 0, 0)",
+    "radius": "32px",
+    "border": "1px rgb(0, 0, 0)",
+    "weight": "400",
+    "transform": "none",
+    "family": "Porteron"
+   },
+   {
+    "text": "Samlelån",
+    "bg": "rgb(255, 255, 255)",
+    "color": "rgb(0, 0, 0)",
+    "radius": "32px",
+    "border": "1px rgb(0, 0, 0)",
+    "weight": "400",
+    "transform": "none",
+    "family": "Porteron"
+   },
+   {
+    "text": "Energilån",
+    "bg": "rgb(255, 255, 255)",
+    "color": "rgb(0, 0, 0)",
+    "radius": "32px",
+    "border": "1px rgb(0, 0, 0)",
+    "weight": "400",
+    "transform": "none",
+    "family": "Porteron"
+   },
+   {
+    "text": "Billån",
+    "bg": "rgb(255, 255, 255)",
+    "color": "rgb(0, 0, 0)",
+    "radius": "32px",
+    "border": "1px rgb(0, 0, 0)",
+    "weight": "400",
+    "transform": "none",
+    "family": "Porteron"
+   },
+   {
+    "text": "Ansøg nu",
+    "bg": "rgb(100, 215, 140)",
+    "color": "rgb(0, 0, 0)",
+    "radius": "32px",
+    "border": "1px rgb(33, 152, 75)",
+    "weight": "500",
+    "transform": "none",
+    "family": "Porteron"
+   },
+   {
+    "text": "Læs mere",
+    "bg": "rgba(0, 0, 0, 0)",
+    "color": "rgb(0, 0, 0)",
+    "radius": "0px",
+    "border": "0px rgb(33, 152, 75)",
+    "weight": "500",
+    "transform": "none",
+    "family": "Porteron"
+   },
+   {
+    "text": "Ansøg nu",
+    "bg": "rgb(100, 215, 140)",
+    "color": "rgb(0, 0, 0)",
+    "radius": "32px",
+    "border": "1px rgb(33, 152, 75)",
+    "weight": "500",
+    "transform": "none",
+    "family": "Porteron"
+   },
+   {
+    "text": "Læs mere",
+    "bg": "rgba(0, 0, 0, 0)",
+    "color": "rgb(0, 0, 0)",
+    "radius": "0px",
+    "border": "0px rgb(33, 152, 75)",
+    "weight": "500",
+    "transform": "none",
+    "family": "Porteron"
+   },
+   {
+    "text": "Få et økonomisikret lån",
+    "bg": "rgb(255, 255, 255)",
+    "color": "rgb(0, 0, 0)",
+    "radius": "32px",
+    "border": "1px rgb(0, 0, 0)",
+    "weight": "500",
+    "transform": "none",
+    "family": "Porteron"
+   }
+  ],
+  "sizes": {
+   "14px": 45,
+   "28px": 4,
+   "16px": 48,
+   "36px": 5,
+   "18px": 22,
+   "20px": 7,
+   "12px": 8
+  },
+  "body": {
+   "color": "rgb(76, 77, 82)",
+   "bg": "rgb(255, 255, 255)",
+   "family": "Porteron, Arial, sans-serif",
+   "size": "14px",
+   "weight": "400"
+  },
+  "fontLoaded": [
+   "webflow-icons:400:unloaded",
+   "Porteron:700:loaded",
+   "Porteron:500:loaded",
+   "Porteron:600:loaded",
+   "Porteron:400:loaded"
+  ]
+ },
+ "priser": {
+  "radii": {
+   "100%": 4,
+   "32px": 1,
+   "24px": 1,
+   "12px": 1
+  },
+  "textColors": {
+   "rgb(0, 0, 0)": 16,
+   "rgb(12, 12, 13)": 1,
+   "rgb(107, 114, 128)": 68,
+   "rgb(17, 24, 39)": 32,
+   "rgb(76, 77, 82)": 3,
+   "rgb(34, 67, 238)": 1,
+   "rgb(255, 255, 255)": 6,
+   "rgba(255, 255, 255, 0.7)": 2
+  },
+  "bgColors": {
+   "rgb(255, 255, 255)": 3,
+   "rgb(245, 245, 246)": 3,
+   "rgba(0, 0, 0, 0.5)": 1,
+   "rgb(249, 250, 251)": 52,
+   "rgb(92, 40, 51)": 2,
+   "rgb(166, 153, 236)": 1,
+   "rgb(119, 159, 253)": 1
+  },
+  "fonts": {
+   "Porteron, Arial, sans-serif": 129
+  },
+  "weights": {
+   "400": 107,
+   "500": 2,
+   "600": 17,
+   "700": 3
+  },
+  "headings": [
+   {
+    "tag": "h1",
+    "text": "Ingen skjulte gebyrer - bare lave priser",
+    "color": "rgb(12, 12, 13)",
+    "weight": "600",
+    "size": "36px",
+    "family": "Porteron",
+    "lh": "39.6px",
+    "transform": "none"
+   },
+   {
+    "tag": "h2",
+    "text": "De vigtigste priser",
+    "color": "rgb(0, 0, 0)",
+    "weight": "600",
+    "size": "36px",
+    "family": "Porteron",
+    "lh": "36px",
+    "transform": "none"
+   },
+   {
+    "tag": "h2",
+    "text": "Vores priser for alle markeder",
+    "color": "rgb(0, 0, 0)",
+    "weight": "600",
+    "size": "36px",
+    "family": "Porteron",
+    "lh": "36px",
+    "transform": "none"
+   }
+  ],
+  "imgs": [
+   {
+    "src": "http://127.0.0.1:8899/a/bd410f7174c8ff0e.webp",
+    "alt": "Coop Bank Investering logo",
+    "radius": "0px",
+    "w": 215,
+    "h": 121
+   }
+  ],
+  "buttons": [
+   {
+    "text": "",
+    "bg": "rgb(245, 245, 246)",
+    "color": "rgb(0, 0, 0)",
+    "radius": "100%",
+    "border": "0px rgb(0, 0, 0)",
+    "weight": "400",
+    "transform": "none",
+    "family": "Porteron"
+   },
+   {
+    "text": "Netbank",
+    "bg": "rgb(245, 245, 246)",
+    "color": "rgb(0, 0, 0)",
+    "radius": "32px",
+    "border": "0px rgb(0, 0, 0)",
+    "weight": "500",
+    "transform": "none",
+    "family": "Porteron"
+   },
+   {
+    "text": "Forside",
+    "bg": "rgba(0, 0, 0, 0)",
+    "color": "rgb(0, 0, 0)",
+    "radius": "0px",
+    "border": "0px rgb(0, 0, 0)",
+    "weight": "500",
+    "transform": "none",
+    "family": "Porteron"
+   },
+   {
+    "text": "Ingen skjulte gebyrer - bare lave priser",
+    "bg": "rgba(0, 0, 0, 0)",
+    "color": "rgb(0, 0, 0)",
+    "radius": "0px",
+    "border": "0px rgb(0, 0, 0)",
+    "weight": "500",
+    "transform": "none",
+    "family": "Porteron"
+   }
+  ],
+  "sizes": {
+   "14px": 110,
+   "36px": 3,
+   "16px": 13,
+   "12px": 2,
+   "18px": 1
+  },
+  "body": {
+   "color": "rgb(76, 77, 82)",
+   "bg": "rgb(255, 255, 255)",
+   "family": "Porteron, Arial, sans-serif",
+   "size": "14px",
+   "weight": "400"
+  },
+  "fontLoaded": [
+   "webflow-icons:400:unloaded",
+   "Porteron:700:loaded",
+   "Porteron:500:loaded",
+   "Porteron:600:loaded",
+   "Porteron:400:loaded"
+  ]
+ },
+ "kontakt": {
+  "radii": {
+   "100%": 4,
+   "32px": 6,
+   "16px": 2,
+   "12px": 10,
+   "8px": 8,
+   "100px": 11,
+   "14px": 1,
+   "24px": 1
+  },
+  "textColors": {
+   "rgb(76, 77, 82)": 10,
+   "rgb(12, 12, 13)": 12,
+   "rgb(0, 0, 0)": 4,
+   "rgb(24, 102, 54)": 2,
+   "rgb(255, 255, 255)": 6,
+   "rgba(255, 255, 255, 0.7)": 2
+  },
+  "bgColors": {
+   "rgb(255, 255, 255)": 17,
+   "rgb(245, 245, 246)": 9,
+   "rgba(0, 0, 0, 0.5)": 1,
+   "rgb(255, 241, 241)": 2,
+   "rgb(241, 252, 244)": 3,
+   "rgb(33, 152, 75)": 4,
+   "rgb(245, 244, 254)": 1,
+   "rgb(239, 244, 255)": 2,
+   "rgba(255, 152, 0, 0.1)": 2,
+   "rgb(190, 16, 17)": 1,
+   "rgb(100, 215, 140)": 1,
+   "rgb(92, 40, 51)": 2,
+   "rgb(166, 153, 236)": 1,
+   "rgb(119, 159, 253)": 1
+  },
+  "fonts": {
+   "Porteron, Arial, sans-serif": 36
+  },
+  "weights": {
+   "400": 10,
+   "500": 3,
+   "600": 23
+  },
+  "headings": [
+   {
+    "tag": "h1",
+    "text": "Kontakt os",
+    "color": "rgb(12, 12, 13)",
+    "weight": "600",
+    "size": "36px",
+    "family": "Porteron",
+    "lh": "40px",
+    "transform": "none"
+   },
+   {
+    "tag": "h2",
+    "text": "Oftest stillede spørgsmål",
+    "color": "rgb(12, 12, 13)",
+    "weight": "600",
+    "size": "36px",
+    "family": "Porteron",
+    "lh": "40px",
+    "transform": "none"
+   },
+   {
+    "tag": "h2",
+    "text": "Skriftlig henvendelse",
+    "color": "rgb(12, 12, 13)",
+    "weight": "600",
+    "size": "28px",
+    "family": "Porteron",
+    "lh": "30px",
+    "transform": "none"
+   }
+  ],
+  "imgs": [],
+  "buttons": [
+   {
+    "text": "",
+    "bg": "rgb(245, 245, 246)",
+    "color": "rgb(0, 0, 0)",
+    "radius": "100%",
+    "border": "0px rgb(0, 0, 0)",
+    "weight": "400",
+    "transform": "none",
+    "family": "Porteron"
+   },
+   {
+    "text": "Netbank",
+    "bg": "rgb(245, 245, 246)",
+    "color": "rgb(0, 0, 0)",
+    "radius": "32px",
+    "border": "0px rgb(0, 0, 0)",
+    "weight": "500",
+    "transform": "none",
+    "family": "Porteron"
+   },
+   {
+    "text": "Skriv til os",
+    "bg": "rgb(255, 255, 255)",
+    "color": "rgb(0, 0, 0)",
+    "radius": "32px",
+    "border": "1px rgb(0, 0, 0)",
+    "weight": "400",
+    "transform": "none",
+    "family": "Porteron"
+   },
+   {
+    "text": "MitID.dk",
+    "bg": "rgb(255, 255, 255)",
+    "color": "rgb(0, 0, 0)",
+    "radius": "32px",
+    "border": "1px rgb(0, 0, 0)",
+    "weight": "400",
+    "transform": "none",
+    "family": "Porteron"
+   },
+   {
+    "text": "Kort6",
+    "bg": "rgba(0, 0, 0, 0)",
+    "color": "rgb(255, 255, 255)",
+    "radius": "0px",
+    "border": "0px rgb(255, 255, 255)",
+    "weight": "400",
+    "transform": "none",
+    "family": "Porteron"
+   },
+   {
+    "text": "Konto7",
+    "bg": "rgba(0, 0, 0, 0)",
+    "color": "rgb(255, 255, 255)",
+    "radius": "0px",
+    "border": "0px rgb(255, 255, 255)",
+    "weight": "400",
+    "transform": "none",
+    "family": "Porteron"
+   },
+   {
+    "text": "Mobilbetaling5",
+    "bg": "rgba(0, 0, 0, 0)",
+    "color": "rgb(255, 255, 255)",
+    "radius": "0px",
+    "border": "0px rgb(255, 255, 255)",
+    "weight": "400",
+    "transform": "none",
+    "family": "Porteron"
+   },
+   {
+    "text": "Diverse6",
+    "bg": "rgba(0, 0, 0, 0)",
+    "color": "rgb(255, 255, 255)",
+    "radius": "0px",
+    "border": "0px rgb(255, 255, 255)",
+    "weight": "400",
+    "transform": "none",
+    "family": "Porteron"
+   },
+   {
+    "text": "Læs mere",
+    "bg": "rgb(255, 255, 255)",
+    "color": "rgb(0, 0, 0)",
+    "radius": "32px",
+    "border": "1px rgb(0, 0, 0)",
+    "weight": "400",
+    "transform": "none",
+    "family": "Porteron"
+   },
+   {
+    "text": "Skriv til os",
+    "bg": "rgb(100, 215, 140)",
+    "color": "rgb(12, 12, 13)",
+    "radius": "32px",
+    "border": "1px rgb(33, 152, 75)",
+    "weight": "400",
+    "transform": "none",
+    "family": "Porteron"
+   },
+   {
+    "text": "Ring 43 86 11 11",
+    "bg": "rgb(255, 255, 255)",
+    "color": "rgb(0, 0, 0)",
+    "radius": "32px",
+    "border": "1px rgb(0, 0, 0)",
+    "weight": "400",
+    "transform": "none",
+    "family": "Porteron"
+   }
+  ],
+  "sizes": {
+   "14px": 13,
+   "36px": 2,
+   "16px": 3,
+   "12px": 7,
+   "26px": 2,
+   "13px": 2,
+   "20px": 5,
+   "28px": 1,
+   "18px": 1
+  },
+  "body": {
+   "color": "rgb(76, 77, 82)",
+   "bg": "rgb(255, 255, 255)",
+   "family": "Porteron, Arial, sans-serif",
+   "size": "14px",
+   "weight": "400"
+  },
+  "fontLoaded": [
+   "webflow-icons:400:unloaded",
+   "Porteron:700:unloaded",
+   "Porteron:500:loaded",
+   "Porteron:600:loaded",
+   "Porteron:400:loaded"
+  ]
+ }
+}

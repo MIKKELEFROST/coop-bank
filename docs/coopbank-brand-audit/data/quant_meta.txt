@@ -1,0 +1,63 @@
+SIDER: 418
+Uden meta description: 3 (0.7 %)
+    /guider/risiko-profiler
+    /investering/aktiesparekonto
+    /nyheder-og-presse/det-bliver-billigere-at-vaelge-afdragsfrihed
+
+Uden og:title: 87 (20.8 %)
+Uden og:image: 181 (43.3 %)
+
+SEO-titler med pris-/bonussignal: 21 (5.0 %)
+SEO-titler med salgs-/klik-markører (»,!,'Ansøg nu','Se her','Start her'): 45 (10.8 %)
+    /bolig :: Bolig - Det skal være billigt at være boligejer. Start her »
+    /bolig/beregn-tillaegslaan :: Tillægslån - Beregn hvad et tillægslån koster her på siden »
+    /bolig/boligberegnere :: Boliglån beregner - Beregn dit boliglån lige her på siden »
+    /bolig/boliglaan :: Boliglån - Billigt og gennemskueligt boliglån. Se det her »
+    /bolig/energiberegner :: Energiberegner - Se hvad du kan spare her »
+    /bolig/energirenovering :: Energirenovering - læs om energirenovering her »
+    /bolig/f-kort :: F-kort-lån - Indstil lån ud fra din økonomiske situation »
+    /bolig/faa-bonus :: Få bonus med et realkreditlån via Coop Bank. Læs mere her »
+    /bolig/hvad-koster-det-at-laane :: Hvad koster det at låne til bolig? Beregn og få svaret her »
+    /bolig/laan-i-frivaerdi :: Lån i friværdi - Har du friværdi i din bolig? Se mere her »
+    /bolig/laan-til-boligkoeb :: Boligkøb - Søger du om et lån til boligkøb? Find det her »
+    /formularer/ansoeg-om-bankskifte :: Coop Bank - Lån penge online - Ansøg let & sikkert - Se her
+    /formularer/basal-konti-rki :: Coop Bank - Lån penge online - Ansøg let & sikkert - Se her
+    /formularer/basal-konti-udenlandsk-adresse :: Coop Bank - Lån penge online - Ansøg let & sikkert - Se her
+    /guider/besked-om-valutatillaeg-paa-kortbetalinger :: Besked om valutatillæg på kortbetalinger - Læs mere her
+    /guider/budget :: Budget - Læg dit budget med vores budgetskabelon - Klik her
+    /guider/campingvogn :: Lån til campingvogn - Få finansieret hele dit køb - Klik her
+    /guider/naar-i-har-fundet-droemmeboligen :: Guide til jer der har fundet drømmeboligen. Læs guiden her »
+    /guider/omlaegning-af-laan :: Omlægning af lån - Læs om omlægning af realkreditlån her »
+    /guider/realkreditlaan :: Realkreditlån - Få et overblik over realkreditlån lige her »
+    /guider/rentemax :: RenteMax-lån - Få et billigt lån med indbygget fast loft »
+    /konti :: Bankkonto - Opret en Coop Konto hos Coop Bank - Klik her
+    /konti/coop-konto :: Coop Konto - Opret din Coop Bank Konto online - Klik her
+    /laan :: Lån penge - Lån op til 350.000 kr. med Coop Lån - Ansøg her »
+    /laan/bedst-i-test :: Forbrugslån – DK's (måske) billigste forbrugslån – Se her »
+    /laan/billaan :: Få et Coop Billån - Beregn lånet her »
+    /laan/cooplaan-20plus :: Lån fra 20.000 kr. med et CoopLån 20+ [Forbrugslån] - Ansøg nu
+    /laan/cooplaan-50plus :: Lån op til 350.000 kr - CoopLån 50+ [Forbrugslån] - Klik her
+    /laan/laan-100000 :: Lån 100.000 kr. til en lav rente - Ansøg nu | Coop Bank
+    /laan/laan-50000 :: Lån 50.000 kr. - Ansøg nu | Coop Bank
+    /laan/laan-til-elbil :: Få et af markedets billigste elbillån - Beregn lån til elbil »
+    /laan/laan-til-motorcykel :: Motorcykel lån - Lån op til 350.000 kr. - Se her
+    /laan/renovering :: Lån til renovering - Ansøg nu - Coop Bank
+    /laan/samlelaan :: Samlelån - Saml dine lån og spar penge - Beregn & ansøg her »
+    /nyheder-og-presse :: Nyheder og presse - Læs seneste nyt fra Coop Bank - Klik her
+    /nyheder-og-presse/coop-bank-fortsaetter-fremgang :: Coop Bank  - Lancering af ny Coop Opsparing - Se her
+    /nyheder-og-presse/coop-bank-vinder-stor-test-af-forbrugslaan :: Bedste forbrugslån - Coop Bank vinder stor test - Læs mere her
+    /nyheder-og-presse/fremgang-i-coop-bank :: Fremgang i Coop Bank - Bedst i test forbrugslån og vækst - Se her
+    /om-coop-bank/indskydergaranti :: Indskydergaranti - Oplysninger om garantiformuen - Læs mere her
+    /om-coop-bank/priser-og-vilkaar :: Priser og vilkår - Om at være kunde i Coop Bank - Læs mere her
+    /open-banking :: Open Banking - Læs mere her
+    /regnskaber :: Regnskaber - Se de seneste regnskaber fra Coop Bank - Klik her
+    /services :: Bankservice - Services, support og mobilbank - Læs mere her
+    /services/mobilbank :: Mobilbank - Mobilbetaling & selvbetjening i samme app - Klik her
+    /services/netbank :: Netbank - Tjek din saldo & betal dine regninger online - Klik her
+
+Dubletter i sidetitler: 2 titler bruges på flere sider
+   3x  Coop Bank - Lån penge online - Ansøg let & sikkert - Se her
+   2x  Kontakt os | Coop Bank
+
+Titler over 65 tegn: 8
+Sider med description: 415; gennemsnitslængde 134 tegn
