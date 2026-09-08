@@ -39,10 +39,12 @@ Tonen er stærkest dér, hvor der er skrevet nyt: forsiden, kategorisiderne og
 | Sider uden rådgiver/kontakt i eget indhold | **253 af 418 — 60,5 %** |
 | Sidetitler med klik-/salgsmarkører | **45 af 418 — 10,8 %** |
 | `<img>` med tom alt-tekst | **2.658 af 3.836** |
+| Skrifttyper i brug | **3** — Porteron, Proxima Nova (formularer), systemstak i widgets |
+| Verificerede tekststeder (bilag A) | **255** af 325 rå fund, på 195 sider |
 
 ## Fund
 
-**Del A — tone of voice (8 fund)**
+**Del A — tone of voice (13 fund)**
 
 | # | Fund | Alvor |
 |---|---|---|
@@ -54,8 +56,13 @@ Tonen er stærkest dér, hvor der er skrevet nyt: forsiden, kategorisiderne og
 | A6 | De lovpligtige tekster er ikke oversat til menneskesprog | Væsentlig |
 | A7 | Fagsproget står uoversat, og ordbogen er ikke linket fra produktsiderne | Mindre |
 | A8 | Enkelte salgs- og hastemarkører bryder den rolige tone | Mindre |
+| A9 | Formularerne — dér hvor kunden handler — er skrevet i rent systemsprog | Kritisk |
+| A10 | Metabeskrivelserne er sitets mest ureviderede tekstflade | Væsentlig |
+| A11 | 404-siden er en blindgyde uden en vej videre | Væsentlig |
+| A12 | Sproglige inkonsistenser der står på alle 418 sider | Væsentlig |
+| A13 | Teaser-moduler spreder samme tekst ud over fremmede sektioner | Mindre |
 
-**Del B — designguide (12 fund)**
+**Del B — designguide (15 fund)**
 
 | # | Fund | Alvor |
 |---|---|---|
@@ -71,9 +78,18 @@ Tonen er stærkest dér, hvor der er skrevet nyt: forsiden, kategorisiderne og
 | B10 | Billedstilen holder — med to undtagelser og et alt-tekst-problem | Mindre |
 | B11 | Ét af guidens fem skriftsnit er ikke uploadet | Mindre |
 | B12 | Designsystemet har efterladenskaber, der stadig sendes i produktion | Mindre |
+| B13 | Formularerne kører et helt selvstændigt designsystem med en tredje skrifttype | Kritisk |
+| B14 | Coop Bordeaux bruges aldrig som flade — footeren kører på klonen | Væsentlig |
+| B15 | Guidens fjerde tekstniveau, manchetten, findes ikke i systemet | Mindre |
+
+**Bilag A** rummer alle **255 verificerede tekststeder** med URL, ordret citat, regelhenvisning
+og et konkret omskrivningsforslag. De 325 rå fund fra den sidevise gennemgang er hvert især
+kontrolleret af en uafhængig instans, der har slået citatet op i kildeteksten; 70 blev afvist
+som overfortolkning eller uverificerbare.
 
 Rapporten indeholder desuden et afsnit om **hvad der følger guiden** — de steder,
-hvor arbejdet allerede er gjort, og som resten af sitet kan rettes ind efter.
+hvor arbejdet allerede er gjort, og som resten af sitet kan rettes ind efter — og en
+kontrasttabel, der tester designguidens egen undtagelsesklausul for web.
 
 ## Mapper
 
@@ -97,6 +113,9 @@ data/             Alle måledata, så hvert tal i rapporten kan slås efter.
 | `quant_tone.txt` | Optællinger: pris-H1, rådgiverdækning, administrativt sprog |
 | `quant_meta.txt` | Optællinger: sidetitler, klikmarkører, dubletter |
 | `quant_sprog.txt` | Optællinger: tiltale, fagbegreber, udråbstegn |
+| `tone-of-voice-fund-bekraeftede.json` | De 255 verificerede tekststeder |
+| `tone-of-voice-fund-afviste.json` | De 70 afviste fund, med begrundelse |
+| `design-fund-raa.json` | Designfundene fra de syv dimensionsgennemgange |
 | `design_guide.md`, `tone_of_voice.md` | Kildematerialet, udtrukket og struktureret |
 
 ## Metode og forbehold
@@ -109,5 +128,10 @@ data/             Alle måledata, så hvert tal i rapporten kan slås efter.
   blive talt 418 gange, og vurderet separat.
 - **Guidens eget forbehold** på s.23–25 om tilpasning af farvevalg og -kombinationer til
   digitale muligheder er lagt til grund og nævnt eksplicit i de fund, hvor det er relevant.
+- **Mobil er kun målt på 5 sider.** Designfundene er reelt desktop-fund med fem mobile stikprøver.
+- **Tabelindhold (`<td>`/`<th>`) er ikke i tekstkorpusset.** Prislister og rentetabeller er
+  vurderet på design, men ikke læst som tekst.
+- **Cookie-samtykkebanneret er ikke vurderet.** Det er den første tekst og designflade,
+  enhver besøgende møder, og bør revideres som en selvstændig opgave.
 - **Rapporten vurderer efterlevelse, ikke performance.** Om et prisbudskab konverterer
   bedre end et rådgivningsbudskab er ikke undersøgt.
