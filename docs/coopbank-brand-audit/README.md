@@ -8,6 +8,7 @@ Gennemgang af **alle 418 sider** på coopbank.dk målt mod Coop Banks to brandok
 Sitet er hentet 8. september 2026, kort efter seneste publicering.
 
 **Læs rapporten:** [`rapport.html`](rapport.html) — åbn filen i en browser.
+**Præsentation:** [`coopbank-brandrevision.pptx`](coopbank-brandrevision.pptx) — 16 slides med hovedfundene.
 
 ---
 
@@ -94,9 +95,10 @@ kontrasttabel, der tester designguidens egen undtagelsesklausul for web.
 ## Mapper
 
 ```
-rapport.html      Rapporten. Selvstændig HTML-fil med indlejrede billeder.
-billeder/         Sammenligninger side om side: guide vs. site.
-data/             Alle måledata, så hvert tal i rapporten kan slås efter.
+rapport.html                  Rapporten. Selvstændig HTML-fil med indlejrede billeder.
+coopbank-brandrevision.pptx   Præsentation, 16 slides med hovedfundene.
+billeder/                     Sammenligninger side om side: guide vs. site.
+data/                         Alle måledata, så hvert tal i rapporten kan slås efter.
 ```
 
 ### data/
