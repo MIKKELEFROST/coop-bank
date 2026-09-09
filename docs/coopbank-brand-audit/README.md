@@ -9,6 +9,7 @@ Sitet er hentet 8. september 2026, kort efter seneste publicering.
 
 **Læs rapporten:** [`rapport.html`](rapport.html) — åbn filen i en browser.
 **Præsentation:** [`coopbank-brandrevision.pptx`](coopbank-brandrevision.pptx) — 16 slides med hovedfundene.
+**Implementering:** [`implementering-kopisite.md`](implementering-kopisite.md) — hvad der er ændret på kopi-sitet, og hvad der ikke kunne lade sig gøre.
 
 ---
 
