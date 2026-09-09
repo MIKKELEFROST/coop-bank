@@ -42,10 +42,11 @@ råbe og i stedet siger, hvad siden er.
 * Eksempler: `/bolig` → „Bolig – tryg rådgivning hele vejen til nøglerne | Coop Bank",
   `/laan` → „Lån penge – find lånet der passer til din økonomi | Coop Bank".
 
-## 3. Sideindhold — 13 overskrifter
+## 3. Overskrifter — 28 sider
 
-**`/bolig`-heroen** (fund A1). Prisbudskabet lå øverst, rådgiveren nede på siden.
-De byttede plads:
+### 3.1 `/bolig`-heroen (fund A1)
+
+Prisbudskabet lå øverst, rådgiveren nede på siden. De byttede plads:
 
 > **Før:** „Det skal være billigt at være boligejer"
 > **Efter:** „Boligbeslutningen er den største, du træffer. Du skal ikke træffe den alene."
@@ -56,11 +57,13 @@ KundeKroner som det sekundære.
 Teksten ligger i **component props**, ikke i sidens elementer — `set_text` virker
 ikke her; det kræver `data_component_props_tool`.
 
-**Rene produktnavne som H1.** Modellen fandtes allerede på sitet:
-`Coop Konto. Gør hverdagen lidt lettere.` Samme greb er lagt på de tolv øvrige.
-Hver kundesætning siger noget, manchetten nedenunder *ikke* allerede siger:
+### 3.2 Rene produktnavne som overskrift (fund A4) — 18 af 21
 
-| Side | Ny H1 |
+Modellen fandtes allerede på sitet: `Coop Konto. Gør hverdagen lidt lettere.`
+Samme greb er lagt på de øvrige. Hver kundesætning siger noget, manchetten
+nedenunder *ikke* allerede siger.
+
+| Side | Ny overskrift |
 |---|---|
 | `/konti/basal-konti` | Basale konti. Du har ret til en konto — også når din situation er speciel. |
 | `/konti/boerneopsparing` | Børneopsparing. Det du lægger til side nu, betyder noget senere. |
@@ -74,8 +77,40 @@ Hver kundesætning siger noget, manchetten nedenunder *ikke* allerede siger:
 | `/kort/mastercard-debet` | Mastercard Debet. Betalingskort og Coop-kort i ét. |
 | `/kort/mastercard-kredit` | Mastercard Kredit. Du behøver ikke vente til lønningsdagen. |
 | `/kort/visa-dankort` | Visa/Dankort. Færre kort i pungen. |
+| `/bolig/andelsboliglaan` | Andelsboliglån. Du skal kunne se dig selv i tallene, før du siger ja. |
+| `/laan/banklaan` | Banklån. Vi finder det lån, der passer til det, du skal bruge det til. |
+| `/laan/cooplaan-20plus` | CoopLån 20+. Til det mindre lån, der ikke kan vente. |
+| `/laan/forbrugslaan` | Forbrugslån. Du får svar, før du binder dig til noget. |
+| `/laan/samlelaan` | Samlelån. Ét overblik i stedet for fem regninger. |
+| `/investering/aktiesparekonto` | Aktiesparekonto. Til dig, der selv vil styre investeringen. |
 
-Ingen af dem indeholder et prisløfte, et udråbstegn eller en klikmarkør.
+### 3.3 Pris og bonus som overskrift (fund A2) — 11 af 23
+
+Princippet: **søgeordet bliver stående forrest**, så organisk trafik ikke tager skade,
+og prisløftet erstattes af den halvdel, der taler til mennesket.
+
+| Side | Før | Efter |
+|---|---|---|
+| `/bolig` | Det skal være billigt at være boligejer | Boligbeslutningen er den største, du træffer. Du skal ikke træffe den alene. |
+| `/bolig/boliglaan` | Få et billigt og gennemskueligt boliglån | Boliglån. Du skal kunne gennemskue, hvad du siger ja til. |
+| `/bolig/faa-bonus` | Få realkredit med bonus og KundeKroner | Realkreditlån. Du får en rådgiver med — og bonus oveni. |
+| `/bolig/faa-bonus-andelsboliglan` | Få andelsboliglån med bonus | Andelsboliglån med bonus. Først rådgivningen, så bonussen. |
+| `/bolig/det-giver-bonus-kampagne` | Det giver bonus at have et Totalkreditlån i Coop Bank | Flyt dit Totalkreditlån til os. Så følger bonussen med. |
+| `/laan/bedst-i-test` | Bedst i test for 6. gang i træk**!** | Bedst i test for sjette gang i træk |
+| `/laan/billige-laan` | Billige lån | Billige lån. Vi regner det igennem med dig, før du siger ja. |
+| `/laan/laan-100000` | Lån 100.000 kr. til en lav rente | Lån 100.000 kr. Se hvad det koster, før du ansøger. |
+| `/laan/laan-til-elbil` | Få et billigt billån til elbiler | Billån til elbil. Vi ser på din økonomi, ikke kun på bilen. |
+| `/laan/samlelaan` | Samlelån - saml dine lån og spar penge | Samlelån. Ét overblik i stedet for fem regninger. |
+| `/ditlaan` | Ansøg om et Coop Lån … til en af markedets laveste renter | Coop Lån. Find det lån, der passer til din situation. |
+
+`/laan/bedst-i-test` var sitets eneste overskrift med udråbstegn. Selve kåringen er
+en efterprøvet kendsgerning og står — det er råbet, der er væk.
+
+### 3.4 Knaptekster (fund A8)
+
+„Ansøg nu" → **„Ansøg om kortet"** på `/kort/mastercard-debet`,
+`/kort/mastercard-kredit` og `/kort/visa-dankort`. Handlingen er den samme; hastværket
+er væk.
 
 ## 4. Tekstfarve → Coop Bordeaux (fund B1)
 
@@ -147,6 +182,34 @@ Undtaget bevidst: `.icon_wrapper` og `.icon-button` (runde ikonknapper, `Circle`
 ---
 
 ## Ikke gennemført — og hvorfor
+
+### Tone of voice
+
+**A2 · Ti pris-overskrifter står bevidst tilbage.** Heuristikken der fandt dem
+markerede på ord som „billig" og „spar penge", og på tre slags sider er den
+markering forkert:
+
+* **Fem nyhedsartikler** under `/nyheder-og-presse/`. „Laveste F1-rente siden 2022 –
+  men rentestigninger til F3 og F5" er en journalistisk rubrik, ikke et salgsløfte.
+  At omskrive dem ville forvanske allerede publicerede artikler.
+* **Fire guider** under `/guider/`. „Luk sommerhuset ned for vinteren – undgå skader
+  og spar penge" taler til læseren om hendes situation. Det er tone of voice, når
+  den virker — ikke et brud.
+* **`/legal/priser`.** En prisoverskrift på prissiden er på sin plads.
+
+**A4 · Tre produktnavne mangler, fordi de er CMS-elementer.**
+`/ordbog/samlelaan` og de to `/formularer/basal-konti-*` ligger som collection items
+under templates (`/ordbog`, `/formularer`), ikke som statiske sider. Deres
+overskrifter kommer fra CMS-felter og skal rettes i collection'en — samme greb,
+andet værktøj.
+
+**A5, A6, A11, A12, A13 · urørt.** A5 er det tungeste: rådgiveren står kun i den
+globale menu, aldrig i sidens egen tekst, på 253 af 418 sider. Det kan ikke løses med
+søg-og-erstat — det kræver, at nogen skriver et rådgiverafsnit pr. sidetype. Det
+samme gælder oversættelsen af de lovpligtige tekster (A6) og 404-siden (A11).
+
+### Design
+
 
 **B6 · Knapperne på forsiden styres af indsat custom code.**
 Blokeret. Webflow-MCP'ens værktøjer eksponerer ikke sidens custom code
