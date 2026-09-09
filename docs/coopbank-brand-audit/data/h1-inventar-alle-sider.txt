@@ -1,0 +1,86 @@
+
+### 00 forside  (1 sider)  H1 med pris 0 | udraabstegn 0 | rent produktnavn 0 | tiltaler dig 1 (100 %)
+
+### 01 bolig  (20 sider)  H1 med pris 5 | udraabstegn 0 | rent produktnavn 1 | tiltaler dig 5 (25 %)
+   [PRIS] /bolig                                                  Det skal være billigt at være boligejer
+   [PRIS] /bolig/boliglaan                                        Få et billigt og gennemskueligt boliglån
+   [PRIS] /bolig/det-giver-bonus-kampagne                         Det giver bonus at have et Totalkreditlån i Coop Bank
+   [PRIS] /bolig/faa-bonus-andelsboliglan                         Få andelsboliglån med bonus
+   [PRIS] /bolig/faa-bonus                                        Få realkredit med bonus og KundeKroner
+   [PROD] /bolig/andelsboliglaan                                  Andelsboliglån
+
+### 02 laan  (40 sider)  H1 med pris 5 | udraabstegn 1 | rent produktnavn 4 | tiltaler dig 8 (20 %)
+   [PRIS] /laan/bedst-i-test                                      Bedst i test for 6. gang i træk!
+   [PRIS] /laan/billige-laan                                      Billige lån
+   [PRIS] /laan/laan-100000                                       Lån 100.000 kr. til en lav rente
+   [PRIS] /laan/laan-til-elbil                                    Få et billigt billån til elbiler
+   [PRIS] /laan/samlelaan                                         Samlelån - saml dine lån og spar penge
+   [ !  ] /laan/bedst-i-test                                      Bedst i test for 6. gang i træk!
+   [PROD] /laan/banklaan                                          Banklån
+   [PROD] /laan/cooplaan-20plus                                   CoopLån 20+
+   [PROD] /laan/forbrugslaan                                      Forbrugslån
+   [PROD] /laan/samlelaan                                         Samlelån - saml dine lån og spar penge
+
+### 03 konti  (12 sider)  H1 med pris 0 | udraabstegn 0 | rent produktnavn 10 | tiltaler dig 1 (8 %)
+   [PROD] /konti/basal-konti                                      Basale konti
+   [PROD] /konti/boerneopsparing                                  Børneopsparing
+   [PROD] /konti/boligloenkonto                                   BoligLønkonto
+   [PROD] /konti/budgetkonto                                      Budgetkonto
+   [PROD] /konti/coop-konto                                       Coop Konto. Gør hverdagen lidt lettere.
+   [PROD] /konti/juniorkonto                                      Juniorkonto
+   [PROD] /konti/kassekredit                                      Kassekredit
+   [PROD] /konti/loenkonto                                        Lønkonto
+   [PROD] /konti/nemkonto                                         NemKonto
+   [PROD] /konti/opsparingskonto                                  Opsparingskonto
+
+### 04 kort  (4 sider)  H1 med pris 0 | udraabstegn 0 | rent produktnavn 3 | tiltaler dig 1 (25 %)
+   [PROD] /kort/mastercard-debet                                  Mastercard Debet
+   [PROD] /kort/mastercard-kredit                                 Mastercard Kredit
+   [PROD] /kort/visa-dankort                                      Visa/Dankort
+
+### 05 investering  (5 sider)  H1 med pris 0 | udraabstegn 0 | rent produktnavn 1 | tiltaler dig 0 (0 %)
+   [PROD] /investering/aktiesparekonto                            Aktiesparekonto
+
+### 06 guider  (77 sider)  H1 med pris 4 | udraabstegn 0 | rent produktnavn 0 | tiltaler dig 24 (31 %)
+   [PRIS] /guider/budget                                          Gratis budgetskabelon - et realistisk budget kan godt betale sig
+   [PRIS] /guider/luk-sommerhuset-ned-for-vinteren                Luk sommerhuset ned for vinteren - undgå skader og spar penge
+   [PRIS] /guider/rentemax                                        Få en lav rente med indbygget tryghed
+   [PRIS] /guider/tilpasningslaan                                 Få lav rente og økonomisk sikkerhed med et tilpasningslån
+
+### 07 hjaelpecenter  (32 sider)  H1 med pris 0 | udraabstegn 0 | rent produktnavn 0 | tiltaler dig 1 (3 %)
+
+### 08 nyheder  (101 sider)  H1 med pris 5 | udraabstegn 0 | rent produktnavn 0 | tiltaler dig 24 (24 %)
+   [PRIS] /nyheder-og-presse/2024-boed-paa-laveste-antal-laanetilbud-nogensinde 2024 bød på laveste antal lånetilbud nogensinde
+   [PRIS] /nyheder-og-presse/bedst-i-test-realkreditlaan          Totalkredit er Bedst i Test på realkreditlån
+   [PRIS] /nyheder-og-presse/det-bliver-billigere-at-vaelge-afdragsfrihed Det bliver billigere at vælge afdragsfrihed – og hos Coop Bank får du bonus oven
+   [PRIS] /nyheder-og-presse/fest-paa-budget                      Fest på budget – tips til en billig fest
+   [PRIS] /nyheder-og-presse/laveste-f1-rente-siden-2022-men-rentestigninger-til-f3-og-f5 Laveste F1-rente siden 2022 – men rentestigninger til F3 og F5
+
+### 09 ordbog  (52 sider)  H1 med pris 0 | udraabstegn 0 | rent produktnavn 1 | tiltaler dig 1 (2 %)
+   [PROD] /ordbog/samlelaan                                       Samlelån - Hvad er et samlelån?
+
+### 10 formularer  (24 sider)  H1 med pris 2 | udraabstegn 0 | rent produktnavn 2 | tiltaler dig 2 (8 %)
+   [PRIS] /formularer/faa-bonus-paa-eksisterende-totalkreditlaan  Få bonus på dit eksisterende Totalkreditlån
+   [PRIS] /formularer/kontakt-mig-det-giver-bonus                 Kontakt mig om mine muligheder for at få bonus på mit eksisterende Totalkreditlå
+   [PROD] /formularer/basal-konti-rki                             Basal Konto
+   [PROD] /formularer/basal-konti-udenlandsk-adresse              Basal Konto
+
+### 11 legal  (9 sider)  H1 med pris 1 | udraabstegn 0 | rent produktnavn 0 | tiltaler dig 0 (0 %)
+   [PRIS] /legal/priser                                           Ingen skjulte gebyrer - bare lave priser
+
+### 12 om  (8 sider)  H1 med pris 0 | udraabstegn 0 | rent produktnavn 0 | tiltaler dig 0 (0 %)
+
+### 13 kundehistorier  (7 sider)  H1 med pris 0 | udraabstegn 0 | rent produktnavn 0 | tiltaler dig 0 (0 %)
+
+### 14 kampagner  (2 sider)  H1 med pris 0 | udraabstegn 0 | rent produktnavn 0 | tiltaler dig 1 (50 %)
+
+### 15 services  (10 sider)  H1 med pris 0 | udraabstegn 0 | rent produktnavn 0 | tiltaler dig 2 (20 %)
+
+### 16 job  (2 sider)  H1 med pris 0 | udraabstegn 0 | rent produktnavn 0 | tiltaler dig 0 (0 %)
+
+### 17 regnskaber  (2 sider)  H1 med pris 0 | udraabstegn 0 | rent produktnavn 0 | tiltaler dig 0 (0 %)
+
+### 18 oevrige  (10 sider)  H1 med pris 1 | udraabstegn 0 | rent produktnavn 0 | tiltaler dig 1 (10 %)
+   [PRIS] /ditlaan                                                Ansøg om et Coop Lån på op til 350.000 kr. til en af markedets laveste renter
+
+=== I ALT: pris-H1 23 | udraabstegn-H1 1 | rent produktnavn som H1 22 | H1 der tiltaler kunden direkte 72 af 418 (17 %)

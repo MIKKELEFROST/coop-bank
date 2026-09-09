@@ -1,0 +1,156 @@
+SIDER I ALT: 418
+
+== H1 med pris-/bonus-/billigst-signal: 23 sider (5.5 %)
+    /bolig :: Det skal være billigt at være boligejer
+    /bolig/boliglaan :: Få et billigt og gennemskueligt boliglån
+    /bolig/det-giver-bonus-kampagne :: Det giver bonus at have et Totalkreditlån i Coop Bank
+    /bolig/faa-bonus-andelsboliglan :: Få andelsboliglån med bonus
+    /bolig/faa-bonus :: Få realkredit med bonus og KundeKroner
+    /ditlaan :: Ansøg om et Coop Lån på op til 350.000 kr. til en af markedets laveste renter
+    /formularer/faa-bonus-paa-eksisterende-totalkreditlaan :: Få bonus på dit eksisterende Totalkreditlån
+    /formularer/kontakt-mig-det-giver-bonus :: Kontakt mig om mine muligheder for at få bonus på mit eksisterende Totalkreditlån
+    /guider/budget :: Gratis budgetskabelon - et realistisk budget kan godt betale sig
+    /guider/luk-sommerhuset-ned-for-vinteren :: Luk sommerhuset ned for vinteren - undgå skader og spar penge
+    /guider/rentemax :: Få en lav rente med indbygget tryghed
+    /guider/tilpasningslaan :: Få lav rente og økonomisk sikkerhed med et tilpasningslån
+    /laan/bedst-i-test :: Bedst i test for 6. gang i træk!
+    /laan/billige-laan :: Billige lån
+    /laan/laan-100000 :: Lån 100.000 kr. til en lav rente
+    /laan/laan-til-elbil :: Få et billigt billån til elbiler
+    /laan/samlelaan :: Samlelån - saml dine lån og spar penge
+    /legal/priser :: Ingen skjulte gebyrer - bare lave priser
+    /nyheder-og-presse/2024-boed-paa-laveste-antal-laanetilbud-nogensinde :: 2024 bød på laveste antal lånetilbud nogensinde
+    /nyheder-og-presse/bedst-i-test-realkreditlaan :: Totalkredit er Bedst i Test på realkreditlån
+    /nyheder-og-presse/det-bliver-billigere-at-vaelge-afdragsfrihed :: Det bliver billigere at vælge afdragsfrihed – og hos Coop Bank får du bonus oveni
+    /nyheder-og-presse/fest-paa-budget :: Fest på budget – tips til en billig fest
+    /nyheder-og-presse/laveste-f1-rente-siden-2022-men-rentestigninger-til-f3-og-f5 :: Laveste F1-rente siden 2022 – men rentestigninger til F3 og F5
+
+== H1 med rådgivnings-/kontaktsignal: 4 sider (1.0 %)
+    /formularer/finansiering-af-bolig :: Få rådgivning om finansiering af bolig
+    /job/privatraadgiver-vaer-med-til-at-nytaenke-raadgivning-i-en-digital-verden :: Privatrådgiver - vær med til at nytænke rådgivning i en digital verden
+    /kontakt-gammel :: Kontakt os
+    /kontakt :: Kontakt os
+
+== SEO-titler med pris-signal: 21 sider (5.0 %)
+    /bolig :: Bolig - Det skal være billigt at være boligejer. Start her »
+    /bolig/boliglaan :: Boliglån - Billigt og gennemskueligt boliglån. Se det her »
+    /bolig/det-giver-bonus-kampagne :: Det giver bonus at have dit Totalkreditlån i Coop Bank
+    /bolig/faa-bonus-andelsboliglan :: Få bonus - andelsboliglån
+    /bolig/faa-bonus :: Få bonus med et realkreditlån via Coop Bank. Læs mere her »
+    /formularer/faa-bonus-paa-eksisterende-totalkreditlaan :: Få bonus på dit eksisterende Totalkreditlån
+    /formularer/kontakt-mig-det-giver-bonus :: Kontakt mig om bonus på realkreditlån
+    /guider/kviklaan :: Glem de dyre kviklån og ansøg om et billigt forbrugslån
+    /guider/rentemax :: RenteMax-lån - Få et billigt lån med indbygget fast loft »
+    /laan/banklaan :: Banklån til en lav rente og lave omkostninger - Coop Bank
+    /laan/bedst-i-test :: Forbrugslån – DK's (måske) billigste forbrugslån – Se her »
+    /laan/billige-laan :: Billige lån - Se dine muligheder og ansøg online - Coop Bank
+    /laan/laan-100000 :: Lån 100.000 kr. til en lav rente - Ansøg nu | Coop Bank
+    /laan/laan-til-elbil :: Få et af markedets billigste elbillån - Beregn lån til elbil »
+    /laan/privatlaan :: Privatlån - billigt lån uden krav om sikkerhed | Coop Bank
+    /laan/samlelaan :: Samlelån - Saml dine lån og spar penge - Beregn & ansøg her »
+    /legal/priser :: Ingen skjulte gebyrer - bare lave priser.
+    /nyheder-og-presse/bedst-i-test-realkreditlaan :: Totalkredit er Bedst i Test på realkreditlån | Coop Bank
+    /nyheder-og-presse/det-bliver-billigere-at-vaelge-afdragsfrihed :: Det bliver billigere at vælge afdragsfrihed – og hos Coop Bank får du bonus oveni
+    /nyheder-og-presse/fremgang-i-coop-bank :: Fremgang i Coop Bank - Bedst i test forbrugslån og vækst - Se her
+    /nyheder-og-presse/laveste-f1-rente-siden-2022-men-rentestigninger-til-f3-og-f5 :: Laveste F1-rente siden 2022 – men stigninger for F3- og F5-renter
+
+== Sider helt uden H1: 0
+
+== Sider hvor rådgiver/kontakt slet ikke nævnes i indholdet: 253 (60.5 %)
+    /aarlige-investeringsomkostninger
+    /bolig/beregn-30-aars-afdragsfrihed
+    /bolig/beregn-tillaegslaan
+    /bolig/boliglaan
+    /bolig/f-kort
+    /bolig/foraeldrekoeb
+    /ditlaan
+    /driftsstatus
+    /fordelskonto
+    /formularer/anmod-om-oplysninger
+    /formularer/ansoeg-om-bankskifte
+    /formularer/ansoeg-om-faelleskonto
+    /formularer/ansoeg-om-fuldmagt
+    /formularer/basal-konti-rki
+    /formularer/basal-konti-udenlandsk-adresse
+    /formularer/bliv-ringet-op-om-bolig
+    /formularer/faa-bonus-paa-eksisterende-totalkreditlaan
+    /formularer/flyt-depot
+    /formularer/fordelskonto-doedsbo
+    /formularer/fraud-og-svindel
+    /formularer/har-jeg-det-rigtige-realkreditlaan
+    /formularer/kontakt-mig-det-giver-bonus
+    /formularer/opret-boerneopsparing
+    /formularer/opret-hoejrentekonto
+    /formularer/overfoersler-til-udlandet
+    /formularer/pressekontakt
+    /formularer/skriv-til-direktionen
+    /formularer/skriv-til-os
+    /formularer/skriv-til-os-om-bolig
+    /formularer/tilfoej-oekonomisikring-kredit
+    /formularer/tilfoej-oekonomisikring-laan
+    /formularer/udbetal-af-indestaaende
+    /hjaelpecenter/adgang-til-mobilbank-faq
+    /hjaelpecenter/aendring-af-oplysninger-faq
+    /hjaelpecenter/afvist-kort-faq
+    /hjaelpecenter/aktivering-af-kort-faq
+    /hjaelpecenter/ansoeg-om-kredit-faq
+    /hjaelpecenter/apple-pay-faq
+    /hjaelpecenter/beloebsgraenser-for-kort-faq
+    /hjaelpecenter/betalinger-og-overfoersler
+    /hjaelpecenter/coop-medlemskab-faq
+    /hjaelpecenter/doedsfald-faq
+    /hjaelpecenter/fitbit-pay-faq
+    /hjaelpecenter/garmin-pay-faq
+    /hjaelpecenter/google-pay-faq
+
+== Sider med tydeligt administrativt/juridisk sprog (KOLD-mønstre) ==
+   3 sider med >=3 forekomster
+      4  /hjaelpecenter
+      4  /legal/privatlivspolitik
+      3  /guider/kreditvurdering
+
+== Meta-beskrivelser ==
+   RETTET: den oprindelige måling var forkert (regex matchede ikke Webflows attributrækkefølge).
+   Korrekt tal står i ref/quant_meta.txt: kun 3 af 418 sider mangler meta description.
+
+== CTA-etiketter: hyppighed (top 40) ==
+    418  Alt om bolig
+    418  Bliv kunde
+    418  Bolig
+    418  Daglig økonomi
+    418  Download nu
+    418  Investering
+    418  Kontakt
+    418  Lån
+    418  Lån penge nu
+    418  Mere om bolig
+    418  Mere om daglig bank
+    418  Mere om investering
+    418  Netbank
+    418  Se alle konti
+    418  Se alle kort
+    418  Se alle lån
+    418  Se alle service
+    418  ×
+    363  Forside
+    178  Se alle artikler
+    100  Nyheder Og Presse
+     77  Guider
+     52  Ordbog
+     51  43 86 11 11
+     48  Kontakt os
+     46  Skriv til os
+     38  Ansøg her
+     36  Bilens type El / Plug-in hybrid
+     36  Bilens årgang 2026
+     30  Læs mere
+     29  CoopLån 50+
+     27  CoopLån 20+
+     20  Home
+     17  Ansøg
+     16  Send os en besked
+     12  Konti
+     10  Ring 43 86 11 11
+     10  BEREGN LÅN
+     10  Services
+      8  Om Coop Bank
