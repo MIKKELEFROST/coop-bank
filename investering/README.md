@@ -95,6 +95,38 @@ Alt CSS er scopet under `.cbx-`, så blokken ikke kan ramme resten af sitet, og
 alt er sat eksplicit frem for at arve fra Webflow-klasser — så ser den ens ud
 uanset hvad der ændres i designsystemet.
 
+## Responsivt, mobile-first
+
+CSS'en er skrevet med den lille skærm som udgangspunkt: basen er mobilen, og hver
+`min-width` lægger til. Spring som sitets eget — 768, 992, 1200.
+
+| | mobil (base) | ≥ 768 | ≥ 992 | ≥ 1200 |
+|---|---|---|---|---|
+| Sektion | 64/80 px | 96/120 px | — | — |
+| Container | uden sidepadding | 16 px | — | — |
+| Panel | 80/16 px | 96/40 px | 120/48 px | 120/80 px |
+| Kort | 24 px | 32 px | — | — |
+| Overskrift | 36 px | 48 px | — | — |
+| Manchet | 14 px | 16 px | — | — |
+| Resultattal | 36 px | 48 px | — | — |
+| Graf | 196 px høj | 232 px | — | — |
+| Spalter | én | én | to (1 : 1,25) | to, 40 px mellemrum |
+
+Fingre frem for mus er en egen ting, ikke en bredde: `@media (pointer:coarse)` giver
+skyderen en 40 px gribeflade i stedet for 24, og margenerne trækker de ekstra 16 px
+ud igen, så linjerne står nøjagtig samme sted.
+
+To fejl kom først frem, da det blev prøvet med rigtige fingerbevægelser:
+
+- **Tooltippen lukkede i samme øjeblik, den åbnede.** En finger udløser
+  `pointerleave`, så snart den løftes — modsat en mus. Den lukker nu kun for mus;
+  på touch lukker den ved et tryk uden for grafen.
+- **Skyderen reagerede ikke på tryk.** Uden `touch-action` på feltet tolker browseren
+  berøringen som en mulig scroll. Med `touch-action:pan-y` styrer vandret træk
+  skyderen, mens lodret stadig scroller siden.
+
+Tekstfelterne står i 16 px, så iOS ikke zoomer ind, når man taster i dem.
+
 ## Tilgængelighed
 
 - Felterne har rigtige `<label>`, skyderne er almindelige `<input type="range">`
@@ -121,4 +153,11 @@ Chromium via Playwright, både alene og indsat i en lokal kopi af den rigtige
 - Tastede værdier over maksimum klippes. Meget lange beløb skrumper overskriften
   frem for at sprænge kortet.
 - Årstal på x-aksen sættes på runde spring og klippes ikke i kanterne.
-- Tooltip virker på både hover og tryk.
+- Tooltip virker på både hover og tryk — afprøvet med rigtige `Input.dispatchTouchEvent`-
+  bevægelser, ikke kun museklik.
+- CSS'en blev lagt om til mobile-first uden at ændre en eneste pixel: skærmbilleder
+  af panelet ved 360, 390, 500, 767, 768, 900, 991, 992, 1200 og 1440 px er
+  byte-identiske før og efter.
+- På en emuleret iPhone: skyderen svarer på tryk (15 → 33 år) og på fingertræk,
+  lodret scroll hen over skyderen scroller stadig siden, og tooltippen bliver
+  stående til man trykker uden for grafen.
