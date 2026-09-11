@@ -114,6 +114,7 @@ stilarter, ikke gættet:
 | Overskrift | 48 px / 36 px på mobil, vægt 600, `letter-spacing −0.02em` |
 | Brødtekst | `#4c4d52` |
 | Container | max 1920 px, 16 px sidepadding — samme bredde som nabosektionerne |
+| Afstand om sektionen | 96/120 px, 64/80 px på mobil — sidens egen luftige sektionsafstand |
 
 Grafens to farver er brandfarver: afkast i `green-600 #21984b`, indbetalt i
 `neutral-200 #ceced3`. Parret er kontrolleret for farveblindhed (ΔE 24 protan,
@@ -144,6 +145,8 @@ Chromium via Playwright, både alene og indsat i en lokal kopi af den rigtige
   kontrolleret ved 0 %, uden månedlig indbetaling, ved 1 år og ved 0 i alle felter.
 - Panelet får præcis samme bredde som nabosektionen (1408 px desktop, 390 px mobil),
   og overskriften samme størrelse som sidens øvrige (48/36 px).
+- Luften om panelet er målt på den rigtige side: 112 px over og 120 px under på
+  desktop, 80 px begge steder på mobil.
 - Ingen vandret scroll ved 390 px. Ingen fejl i konsollen.
 - Tastede værdier over maksimum klippes. Meget lange beløb skrumper overskriften
   frem for at sprænge kortet.
