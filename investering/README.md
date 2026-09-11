@@ -19,6 +19,36 @@ investerer med Coop Bank" og trin-banneret. Rækkefølgen på siden bliver:
 
 ![Overgangen til „Kom i gang på få minutter"](billeder/beregner-placering.jpg)
 
+## Forhåndsvisning på den rigtige side
+
+`forhaandsvisning/index.html` er `/investering` hentet fra coopbank.dk med beregneren
+sat ind det rigtige sted, så hele siden kan ses og klikkes igennem, før noget røres i
+Webflow. På Vercel-previewet af branchen ligger den på `/investering/forhaandsvisning/`.
+
+Den bygges af scriptet ved siden af — ret aldrig i den genererede fil:
+
+```bash
+node investering/byg-forhaandsvisning.mjs
+```
+
+Scriptet henter siden live, henter beregneren fra `afkastberegner.html` (så der kun er
+ét sted at rette den), indsætter den over „Kom i gang på få minutter" og kontrollerer
+resultatet, før det skrives: at beregneren er med præcis én gang, at den ligger før
+ankeret, og at resten af siden er tegn for tegn urørt. Fejler en kontrol, skrives der
+ingenting.
+
+Filen er et **øjebliksbillede til gennemsyn, ikke til publicering**:
+
+- CSS, skrifter og billeder hentes fra Coops eget CDN, så den følger sitets design.
+- Interne links peger via `<base>` tilbage på coopbank.dk.
+- Siden er sat til `noindex,nofollow`, og samtykkebanner og måling er pillet ud.
+- Den forældes, når Coop Bank ændrer siden — kør scriptet igen.
+
+Målt i Chromium mod den genererede fil: panelet får præcis samme bredde som
+nabosektionen (1408 px ved 1440, 1248 px ved 1280, 390 px ved 390), samme
+containerindrykning og samme sektionsafstand. Ingen fejl i konsollen, intet vandret
+overløb.
+
 ## Sådan lægges den på i Webflow
 
 1. Åbn `/investering` i Designeren.
