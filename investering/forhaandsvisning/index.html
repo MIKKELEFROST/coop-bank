@@ -1,5 +1,5 @@
 <!DOCTYPE html><!-- Last Published: Tue Sep 08 2026 06:58:22 GMT+0000 (Coordinated Universal Time) --><html data-wf-domain="coopbank.dk" data-wf-page="69fcfa5727c2e9ceed44ae23" data-wf-site="694a6f40021364d1efffc3a5" lang="da"><head>
-<!-- FORHÅNDSVISNING. Kopi af https://coopbank.dk/investering hentet 2026-09-11 12:01 UTC, med afkastberegneren
+<!-- FORHÅNDSVISNING. Kopi af https://coopbank.dk/investering hentet 2026-09-11 13:01 UTC, med afkastberegneren
      sat ind over trin-sektionen. Ikke til publicering.
      Bygget af investering/byg-forhaandsvisning.mjs — ret ikke i denne fil. -->
 <base href="https://coopbank.dk/">
@@ -973,24 +973,25 @@ body {
   --cbx-radius-card:16px;
   font-family:Porteron,Arial,sans-serif;
   color:var(--cbx-body);
-  /* samme luft som sidens øvrige sektioner med plads om sig */
-  padding:96px 0 120px;
+  /* mobilen først: basen herunder er den lille skærm, og hver min-width
+     lægger til. Afstanden er sidens egen for sektioner med plads om sig. */
+  padding:64px 0 80px;
   -webkit-font-smoothing:antialiased;
 }
 .cbx-section *,.cbx-section *::before,.cbx-section *::after{box-sizing:border-box}
-.cbx-container{max-width:1920px;margin:0 auto;padding:0 16px}
-.cbx-panel{background:var(--cbx-panel);border-radius:var(--cbx-radius-panel);padding:120px 80px}
+.cbx-container{max-width:1920px;margin:0 auto;padding:0}
+.cbx-panel{background:var(--cbx-panel);border-radius:var(--cbx-radius-panel);padding:80px 16px}
 
-.cbx-head{max-width:64rem;margin:0 auto 56px;text-align:center}
+.cbx-head{max-width:64rem;margin:0 auto 40px;text-align:center}
 .cbx-h2{
   margin:0 0 20px;color:var(--cbx-ink);
-  font-size:3rem;line-height:1.05;font-weight:600;letter-spacing:-.02em;
+  font-size:2.25rem;line-height:1.05;font-weight:600;letter-spacing:-.02em;
   text-wrap:balance;
 }
-.cbx-lead{margin:0 auto;font-size:1rem;line-height:1.4;color:var(--cbx-body);max-width:38rem;text-wrap:pretty}
+.cbx-lead{margin:0 auto;font-size:.875rem;line-height:1.4;color:var(--cbx-body);max-width:38rem;text-wrap:pretty}
 
-.cbx-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:40px;align-items:stretch}
-.cbx-card{background:var(--cbx-surface);border-radius:var(--cbx-radius-card);padding:32px}
+.cbx-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:20px;align-items:stretch}
+.cbx-card{background:var(--cbx-surface);border-radius:var(--cbx-radius-card);padding:24px}
 
 /* ── felter ─────────────────────────────────────────────── */
 .cbx-field + .cbx-field{margin-top:32px}
@@ -1014,6 +1015,7 @@ body {
 .cbx-range{
   -webkit-appearance:none;appearance:none;display:block;width:100%;height:24px;
   margin:12px 0 0;padding:0;background:transparent;cursor:pointer;
+  touch-action:pan-y;   /* vandret træk styrer skyderen, lodret scroller siden */
 }
 .cbx-range:focus{outline:none}
 .cbx-range::-webkit-slider-runnable-track{
@@ -1039,13 +1041,13 @@ body {
 .cbx-result__label{margin:0;font-size:.875rem;line-height:1.2;color:var(--cbx-body)}
 .cbx-result__hero{
   margin:8px 0 0;color:var(--cbx-ink);
-  font-size:3rem;line-height:1.05;font-weight:600;letter-spacing:-.02em;
+  font-size:2.25rem;line-height:1.05;font-weight:600;letter-spacing:-.02em;
 }
 /* meget lange tal må ikke sprænge kortet */
-.cbx-result__hero[data-len="long"]{font-size:2.5rem}
-.cbx-result__hero[data-len="xlong"]{font-size:2rem}
+.cbx-result__hero[data-len="long"]{font-size:1.75rem}
+.cbx-result__hero[data-len="xlong"]{font-size:1.375rem}
 .cbx-split{list-style:none;margin:24px 0 0;padding:24px 0 0;border-top:1px solid var(--cbx-line);
-  display:flex;flex-wrap:wrap;gap:12px 40px}
+  display:flex;flex-wrap:wrap;gap:16px 32px}
 .cbx-split__item{display:flex;align-items:baseline;gap:10px}
 .cbx-dot{width:10px;height:10px;border-radius:50%;flex:none;transform:translateY(-1px)}
 .cbx-dot--paid{background:var(--cbx-paid)}
@@ -1057,7 +1059,7 @@ body {
 /* ── graf ───────────────────────────────────────────────── */
 .cbx-chart{margin:24px 0 0}
 .cbx-chart__box{position:relative}
-.cbx-chart__svg{display:block;width:100%;height:232px;overflow:visible;touch-action:pan-y}
+.cbx-chart__svg{display:block;width:100%;height:196px;overflow:visible;touch-action:pan-y}
 .cbx-tip{
   position:absolute;z-index:2;pointer-events:none;opacity:0;transform:translate(-50%,-100%);
   background:var(--cbx-ink);color:#fff;border-radius:8px;padding:10px 12px;
@@ -1098,28 +1100,35 @@ body {
 
 .cbx-sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
 
-/* ── responsivt ─────────────────────────────────────────── */
-@media screen and (max-width:1199px){
-  .cbx-panel{padding:120px 48px}
-  .cbx-grid{gap:32px}
-}
-@media screen and (max-width:991px){
+/* ── større skærme lægger til ───────────────────────────── */
+/* tablet og opefter — samme spring som sitets eget (768/992/1200) */
+@media screen and (min-width:768px){
+  .cbx-section{padding:96px 0 120px}
+  .cbx-container{padding:0 16px}
   .cbx-panel{padding:96px 40px}
-  .cbx-grid{grid-template-columns:minmax(0,1fr);gap:20px}
-  .cbx-head{margin-bottom:40px}
+  .cbx-card{padding:32px}
+  .cbx-h2{font-size:3rem}
+  .cbx-lead{font-size:1rem}
+  .cbx-result__hero{font-size:3rem}
+  .cbx-result__hero[data-len="long"]{font-size:2.5rem}
+  .cbx-result__hero[data-len="xlong"]{font-size:2rem}
+  .cbx-chart__svg{height:232px}
+  .cbx-split{gap:12px 40px}
 }
-@media screen and (max-width:767px){
-  .cbx-section{padding:64px 0 80px}
-  .cbx-container{padding:0}
-  .cbx-panel{padding:80px 16px}
-  .cbx-card{padding:24px}
-  .cbx-h2{font-size:2.25rem}
-  .cbx-lead{font-size:.875rem}
-  .cbx-result__hero{font-size:2.25rem}
-  .cbx-result__hero[data-len="long"]{font-size:1.75rem}
-  .cbx-result__hero[data-len="xlong"]{font-size:1.375rem}
-  .cbx-chart__svg{height:196px}
-  .cbx-split{gap:16px 32px}
+/* to spalter: felterne til venstre, resultatet til højre */
+@media screen and (min-width:992px){
+  .cbx-panel{padding:120px 48px}
+  .cbx-head{margin-bottom:56px}
+  .cbx-grid{grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:32px}
+}
+@media screen and (min-width:1200px){
+  .cbx-panel{padding:120px 80px}
+  .cbx-grid{gap:40px}
+}
+/* fingre frem for mus: større gribeflade på skyderen. Margenerne trækker
+   de ekstra 16 px ud igen, så linjerne står samme sted som med mus. */
+@media (pointer:coarse){
+  .cbx-range{height:40px;margin:4px 0 -8px}
 }
 @media (prefers-reduced-motion:reduce){
   .cbx-section *{transition:none!important}
@@ -1447,7 +1456,13 @@ body {
 
   svg.addEventListener('pointermove', function (ev) { showTip(pointerIndex(ev)); });
   svg.addEventListener('pointerdown', function (ev) { showTip(pointerIndex(ev)); });
-  svg.addEventListener('pointerleave', hideTip);
+  // en finger udløser pointerleave i det øjeblik den løftes, og ville lukke
+  // tooltippen igen med det samme — derfor kun for mus
+  svg.addEventListener('pointerleave', function (ev) { if (ev.pointerType !== 'touch') hideTip(); });
+  // en finger har ingen pointerleave: et tryk uden for grafen lukker tooltippen
+  document.addEventListener('pointerdown', function (ev) {
+    if (!svg.contains(ev.target)) hideTip();
+  }, true);
 
   /* ── tabel ──────────────────────────────────────────── */
   function drawTable() {
