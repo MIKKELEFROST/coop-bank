@@ -1,0 +1,626 @@
+<!doctype html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Afkastberegner – Coop Bank Investering</title>
+
+<!--
+  Alt uden for KLIP-markørerne herunder er kun til denne forhåndsvisning:
+  skriften og sidebaggrunden, som coopbank.dk allerede selv har.
+  Se README.md for, hvor blokken skal ind på /investering.
+-->
+<style>
+  @font-face{font-family:Porteron;src:url(https://cdn.prod.website-files.com/694a6f40021364d1efffc3a5/695e5de0999c3c4d65751cb5_Porteron-Regular.woff2)format("woff2");font-weight:400;font-style:normal;font-display:swap}
+  @font-face{font-family:Porteron;src:url(https://cdn.prod.website-files.com/694a6f40021364d1efffc3a5/695e5de07325495ff2af8900_Porteron-Medium.woff2)format("woff2");font-weight:500;font-style:normal;font-display:swap}
+  @font-face{font-family:Porteron;src:url(https://cdn.prod.website-files.com/694a6f40021364d1efffc3a5/695e5de00538fe661b0a6c62_Porteron-Semi.woff2)format("woff2");font-weight:600;font-style:normal;font-display:swap}
+  @font-face{font-family:Porteron;src:url(https://cdn.prod.website-files.com/694a6f40021364d1efffc3a5/695e5de023b9b382c8071eae_Porteron-Bold.woff2)format("woff2");font-weight:700;font-style:normal;font-display:swap}
+  html,body{margin:0;padding:0;background:#fff}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════ KLIP HER – START PÅ EMBED ══════════════════ -->
+<style>
+/* Afkastberegner – Coop Bank Investering
+   Alt er scopet under .cbx- så den ikke kan ramme resten af sitet.
+   Værdierne er aflæst på coopbank.dk: Porteron, panel #f5f5f6 / 24px,
+   kort #fff / 16px / 32px, pilleknapper 32px, brødtekst #4c4d52. */
+.cbx-section{
+  /* farver */
+  --cbx-ink:#0c0c0d;
+  --cbx-body:#4c4d52;
+  --cbx-muted:#83858d;
+  --cbx-line:#e5e5e8;
+  --cbx-panel:#f5f5f6;
+  --cbx-surface:#fff;
+  --cbx-gain:#21984b;      /* green-600 – afkast */
+  --cbx-paid:#ceced3;      /* neutral-200 – indbetalt */
+  --cbx-focus:#2243ee;     /* blue-600 – fokus, som resten af sitet */
+  /* mål */
+  --cbx-radius-panel:24px;
+  --cbx-radius-card:16px;
+  font-family:Porteron,Arial,sans-serif;
+  color:var(--cbx-body);
+  /* mobilen først: basen herunder er den lille skærm, og hver min-width
+     lægger til. Afstanden er sidens egen for sektioner med plads om sig. */
+  padding:64px 0 80px;
+  -webkit-font-smoothing:antialiased;
+}
+.cbx-section *,.cbx-section *::before,.cbx-section *::after{box-sizing:border-box}
+.cbx-container{max-width:1920px;margin:0 auto;padding:0}
+.cbx-panel{background:var(--cbx-panel);border-radius:var(--cbx-radius-panel);padding:80px 16px}
+
+.cbx-head{max-width:64rem;margin:0 auto 40px;text-align:center}
+.cbx-h2{
+  margin:0 0 20px;color:var(--cbx-ink);
+  font-size:2.25rem;line-height:1.05;font-weight:600;letter-spacing:-.02em;
+  text-wrap:balance;
+}
+.cbx-lead{margin:0 auto;font-size:.875rem;line-height:1.4;color:var(--cbx-body);max-width:38rem;text-wrap:pretty}
+
+.cbx-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:20px;align-items:stretch}
+.cbx-card{background:var(--cbx-surface);border-radius:var(--cbx-radius-card);padding:24px}
+
+/* ── felter ─────────────────────────────────────────────── */
+.cbx-field + .cbx-field{margin-top:32px}
+.cbx-field__top{display:flex;align-items:baseline;justify-content:space-between;gap:16px}
+.cbx-field__label{font-size:.875rem;line-height:1.2;font-weight:500;color:var(--cbx-ink)}
+.cbx-field__valuebox{display:flex;align-items:baseline;gap:.25em;
+  border-bottom:1.5px solid transparent;transition:border-color .12s ease}
+.cbx-field__valuebox:focus-within{border-bottom-color:var(--cbx-ink)}
+.cbx-field__input{
+  font:inherit;font-size:1rem;font-weight:600;color:var(--cbx-ink);
+  text-align:right;width:5.5em;padding:0;margin:0;border:0;background:none;
+  -moz-appearance:textfield;appearance:textfield;
+}
+.cbx-field__input:focus{outline:none}
+.cbx-field__input--years{width:2.5em}
+.cbx-field__input--rate{width:2.75em}
+.cbx-field__unit{font-size:1rem;font-weight:600;color:var(--cbx-ink);white-space:nowrap}
+.cbx-field__hint{margin:6px 0 0;font-size:.75rem;line-height:1.3;color:var(--cbx-body)}
+
+/* ── slider ─────────────────────────────────────────────── */
+.cbx-range{
+  -webkit-appearance:none;appearance:none;display:block;width:100%;height:24px;
+  margin:12px 0 0;padding:0;background:transparent;cursor:pointer;
+  touch-action:pan-y;   /* vandret træk styrer skyderen, lodret scroller siden */
+}
+.cbx-range:focus{outline:none}
+.cbx-range::-webkit-slider-runnable-track{
+  height:4px;border-radius:2px;
+  background:linear-gradient(to right,var(--cbx-ink) 0 var(--cbx-fill,0%),var(--cbx-line) var(--cbx-fill,0%) 100%);
+}
+.cbx-range::-moz-range-track{height:4px;border-radius:2px;background:var(--cbx-line)}
+.cbx-range::-moz-range-progress{height:4px;border-radius:2px;background:var(--cbx-ink)}
+.cbx-range::-webkit-slider-thumb{
+  -webkit-appearance:none;appearance:none;width:24px;height:24px;margin-top:-10px;
+  border-radius:50%;background:var(--cbx-surface);border:2px solid var(--cbx-ink);
+  box-shadow:0 1px 3px rgba(0,0,0,.14);transition:transform .12s ease;
+}
+.cbx-range::-moz-range-thumb{
+  width:20px;height:20px;border-radius:50%;background:var(--cbx-surface);
+  border:2px solid var(--cbx-ink);box-shadow:0 1px 3px rgba(0,0,0,.14);
+}
+.cbx-range:active::-webkit-slider-thumb{transform:scale(1.08)}
+.cbx-range:focus-visible::-webkit-slider-thumb{box-shadow:0 0 0 3px #fff,0 0 0 5px var(--cbx-focus)}
+.cbx-range:focus-visible::-moz-range-thumb{box-shadow:0 0 0 3px #fff,0 0 0 5px var(--cbx-focus)}
+
+/* ── resultat ───────────────────────────────────────────── */
+.cbx-result__label{margin:0;font-size:.875rem;line-height:1.2;color:var(--cbx-body)}
+.cbx-result__hero{
+  margin:8px 0 0;color:var(--cbx-ink);
+  font-size:2.25rem;line-height:1.05;font-weight:600;letter-spacing:-.02em;
+}
+/* meget lange tal må ikke sprænge kortet */
+.cbx-result__hero[data-len="long"]{font-size:1.75rem}
+.cbx-result__hero[data-len="xlong"]{font-size:1.375rem}
+.cbx-split{list-style:none;margin:24px 0 0;padding:24px 0 0;border-top:1px solid var(--cbx-line);
+  display:flex;flex-wrap:wrap;gap:16px 32px}
+.cbx-split__item{display:flex;align-items:baseline;gap:10px}
+.cbx-dot{width:10px;height:10px;border-radius:50%;flex:none;transform:translateY(-1px)}
+.cbx-dot--paid{background:var(--cbx-paid)}
+.cbx-dot--gain{background:var(--cbx-gain)}
+.cbx-split__text{display:flex;flex-direction:column;gap:2px}
+.cbx-split__label{font-size:.75rem;line-height:1.3;color:var(--cbx-body)}
+.cbx-split__value{font-size:1.125rem;line-height:1.2;font-weight:600;color:var(--cbx-ink)}
+
+/* ── graf ───────────────────────────────────────────────── */
+.cbx-chart{margin:24px 0 0}
+.cbx-chart__box{position:relative}
+.cbx-chart__svg{display:block;width:100%;height:196px;overflow:visible;touch-action:pan-y}
+.cbx-tip{
+  position:absolute;z-index:2;pointer-events:none;opacity:0;transform:translate(-50%,-100%);
+  background:var(--cbx-ink);color:#fff;border-radius:8px;padding:10px 12px;
+  font-size:.75rem;line-height:1.35;white-space:nowrap;
+  box-shadow:0 6px 20px rgba(0,0,0,.18);transition:opacity .1s ease;
+}
+.cbx-tip[data-show="1"]{opacity:1}
+.cbx-tip__year{font-weight:600;margin-bottom:4px}
+.cbx-tip__row{display:flex;justify-content:space-between;gap:16px;color:#e5e5e8}
+.cbx-tip__row b{font-weight:600;color:#fff}
+.cbx-tip__row--total{margin-top:4px;padding-top:4px;border-top:1px solid rgba(255,255,255,.25);color:#fff}
+
+/* ── tabel ──────────────────────────────────────────────── */
+.cbx-details{margin:24px 0 0;border-top:1px solid var(--cbx-line);padding-top:16px}
+.cbx-details__summary{
+  font-size:.875rem;font-weight:500;color:var(--cbx-ink);cursor:pointer;
+  list-style:none;display:inline-flex;align-items:center;gap:8px;
+}
+.cbx-details__summary::-webkit-details-marker{display:none}
+.cbx-details__summary::after{
+  content:"";width:8px;height:8px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;
+  transform:rotate(45deg) translate(-2px,-2px);transition:transform .15s ease;
+}
+.cbx-details[open] .cbx-details__summary::after{transform:rotate(225deg) translate(-1px,-1px)}
+.cbx-details__summary:focus-visible{outline:2px solid var(--cbx-focus);outline-offset:3px;border-radius:2px}
+.cbx-tablewrap{max-height:260px;overflow:auto;margin-top:12px}
+.cbx-table{width:100%;border-collapse:collapse;font-size:.75rem;font-variant-numeric:tabular-nums}
+.cbx-table th,.cbx-table td{padding:8px 12px 8px 0;text-align:right;white-space:nowrap}
+.cbx-table th:first-child,.cbx-table td:first-child{text-align:left}
+.cbx-table thead th{
+  position:sticky;top:0;background:var(--cbx-surface);color:var(--cbx-muted);
+  font-weight:500;border-bottom:1px solid var(--cbx-line);
+}
+.cbx-table tbody td{border-bottom:1px solid var(--cbx-line);color:var(--cbx-body)}
+.cbx-table tbody tr:last-child td{border-bottom:0;font-weight:600;color:var(--cbx-ink)}
+
+.cbx-disclaimer{margin:32px 0 0;max-width:52rem;font-size:.75rem;line-height:1.5;color:var(--cbx-body)}
+
+.cbx-sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+/* ── større skærme lægger til ───────────────────────────── */
+/* tablet og opefter — samme spring som sitets eget (768/992/1200) */
+@media screen and (min-width:768px){
+  .cbx-section{padding:96px 0 120px}
+  .cbx-container{padding:0 16px}
+  .cbx-panel{padding:96px 40px}
+  .cbx-card{padding:32px}
+  .cbx-h2{font-size:3rem}
+  .cbx-lead{font-size:1rem}
+  .cbx-result__hero{font-size:3rem}
+  .cbx-result__hero[data-len="long"]{font-size:2.5rem}
+  .cbx-result__hero[data-len="xlong"]{font-size:2rem}
+  .cbx-chart__svg{height:232px}
+  .cbx-split{gap:12px 40px}
+}
+/* to spalter: felterne til venstre, resultatet til højre */
+@media screen and (min-width:992px){
+  .cbx-panel{padding:120px 48px}
+  .cbx-head{margin-bottom:56px}
+  .cbx-grid{grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:32px}
+}
+@media screen and (min-width:1200px){
+  .cbx-panel{padding:120px 80px}
+  .cbx-grid{gap:40px}
+}
+/* fingre frem for mus: større gribeflade på skyderen. Margenerne trækker
+   de ekstra 16 px ud igen, så linjerne står samme sted som med mus. */
+@media (pointer:coarse){
+  .cbx-range{height:40px;margin:4px 0 -8px}
+}
+@media (prefers-reduced-motion:reduce){
+  .cbx-section *{transition:none!important}
+}
+</style>
+
+<section class="cbx-section" aria-labelledby="cbx-title">
+  <div class="cbx-container">
+    <div class="cbx-panel">
+
+      <div class="cbx-head">
+        <h2 class="cbx-h2" id="cbx-title">Se hvad din opsparing kan vokse til</h2>
+        <p class="cbx-lead">Sæt beløb, tid og forventet afkast, som det passer dig – så viser beregneren, hvordan din investering kan udvikle sig år for år.</p>
+      </div>
+
+      <div class="cbx-grid">
+
+        <!-- Dine tal -->
+        <div class="cbx-card">
+          <div class="cbx-field">
+            <div class="cbx-field__top">
+              <label class="cbx-field__label" for="cbx-start">Startbeløb</label>
+              <span class="cbx-field__valuebox">
+                <input class="cbx-field__input" id="cbx-start" type="text" inputmode="numeric"
+                       autocomplete="off" aria-describedby="cbx-start-hint" value="25.000">
+                <span class="cbx-field__unit">kr.</span>
+              </span>
+            </div>
+            <input class="cbx-range" type="range" id="cbx-start-range" min="0" max="500000" step="1000"
+                   value="25000" aria-label="Startbeløb i kroner">
+            <p class="cbx-field__hint" id="cbx-start-hint">Det beløb, du starter med at investere.</p>
+          </div>
+
+          <div class="cbx-field">
+            <div class="cbx-field__top">
+              <label class="cbx-field__label" for="cbx-monthly">Fast beløb hver måned</label>
+              <span class="cbx-field__valuebox">
+                <input class="cbx-field__input" id="cbx-monthly" type="text" inputmode="numeric"
+                       autocomplete="off" aria-describedby="cbx-monthly-hint" value="1.500">
+                <span class="cbx-field__unit">kr.</span>
+              </span>
+            </div>
+            <input class="cbx-range" type="range" id="cbx-monthly-range" min="0" max="20000" step="100"
+                   value="1500" aria-label="Fast beløb hver måned i kroner">
+            <p class="cbx-field__hint" id="cbx-monthly-hint">Sæt 0, hvis du kun vil investere startbeløbet.</p>
+          </div>
+
+          <div class="cbx-field">
+            <div class="cbx-field__top">
+              <label class="cbx-field__label" for="cbx-years">Antal år</label>
+              <span class="cbx-field__valuebox">
+                <input class="cbx-field__input cbx-field__input--years" id="cbx-years" type="text"
+                       inputmode="numeric" autocomplete="off" aria-describedby="cbx-years-hint" value="15">
+                <span class="cbx-field__unit">år</span>
+              </span>
+            </div>
+            <input class="cbx-range" type="range" id="cbx-years-range" min="1" max="40" step="1"
+                   value="15" aria-label="Antal år">
+            <p class="cbx-field__hint" id="cbx-years-hint">Hvor længe pengene bliver stående.</p>
+          </div>
+
+          <div class="cbx-field">
+            <div class="cbx-field__top">
+              <label class="cbx-field__label" for="cbx-rate">Forventet årligt afkast</label>
+              <span class="cbx-field__valuebox">
+                <input class="cbx-field__input cbx-field__input--rate" id="cbx-rate" type="text"
+                       inputmode="decimal" autocomplete="off" aria-describedby="cbx-rate-hint" value="6">
+                <span class="cbx-field__unit">%</span>
+              </span>
+            </div>
+            <input class="cbx-range" type="range" id="cbx-rate-range" min="0" max="12" step="0.5"
+                   value="6" aria-label="Forventet årligt afkast i procent">
+            <p class="cbx-field__hint" id="cbx-rate-hint">Du vælger selv tallet – beregningen bruger det samme hvert år.</p>
+          </div>
+        </div>
+
+        <!-- Resultat -->
+        <div class="cbx-card">
+          <p class="cbx-result__label" id="cbx-total-label">Din opsparing kan vokse til</p>
+          <p class="cbx-result__hero" id="cbx-total" aria-labelledby="cbx-total-label" aria-live="polite">–</p>
+
+          <ul class="cbx-split">
+            <li class="cbx-split__item">
+              <span class="cbx-dot cbx-dot--paid" aria-hidden="true"></span>
+              <span class="cbx-split__text">
+                <span class="cbx-split__label">Du indbetaler</span>
+                <span class="cbx-split__value" id="cbx-paid">–</span>
+              </span>
+            </li>
+            <li class="cbx-split__item">
+              <span class="cbx-dot cbx-dot--gain" aria-hidden="true"></span>
+              <span class="cbx-split__text">
+                <span class="cbx-split__label">Afkast</span>
+                <span class="cbx-split__value" id="cbx-gain">–</span>
+              </span>
+            </li>
+          </ul>
+
+          <figure class="cbx-chart">
+            <div class="cbx-chart__box">
+              <svg class="cbx-chart__svg" id="cbx-svg" role="img" aria-labelledby="cbx-chart-desc"></svg>
+              <p class="cbx-sr" id="cbx-chart-desc">Søjlediagram: for hvert år vises, hvor meget du har indbetalt, og hvor meget afkast der er lagt oveni. Alle tal står i tabellen under grafen.</p>
+              <div class="cbx-tip" id="cbx-tip" role="presentation"></div>
+            </div>
+          </figure>
+
+          <details class="cbx-details">
+            <summary class="cbx-details__summary">Se tal år for år</summary>
+            <div class="cbx-tablewrap">
+              <table class="cbx-table">
+                <thead>
+                  <tr><th scope="col">År</th><th scope="col">Indbetalt</th><th scope="col">Afkast</th><th scope="col">I alt</th></tr>
+                </thead>
+                <tbody id="cbx-tbody"></tbody>
+              </table>
+            </div>
+          </details>
+        </div>
+      </div>
+
+      <p class="cbx-disclaimer">
+        Beregningen er et regneeksempel. Du vælger selv det årlige afkast, den regner med – det er hverken et
+        forventet eller et garanteret afkast fra Coop Bank. Historiske afkast er ikke en pålidelig indikator for
+        fremtidige afkast, og du kan tabe hele eller dele af det investerede beløb. Tallene er før skat og uden
+        kurtage og øvrige omkostninger, og afkastet er regnet med som det samme hvert år – i virkeligheden
+        svinger det.
+      </p>
+
+    </div>
+  </div>
+</section>
+
+<script>
+(function () {
+  var root = document.querySelector('.cbx-section');
+  if (!root || root.dataset.cbxReady === '1') return;
+  root.dataset.cbxReady = '1';
+
+  var $ = function (id) { return document.getElementById(id); };
+  var nf = new Intl.NumberFormat('da-DK', { maximumFractionDigits: 0 });
+  var kr = function (n) { return nf.format(Math.round(n)) + ' kr.'; };
+
+  // max = sliderens yderpunkt, hard = det højeste man kan taste ind
+  var FIELDS = {
+    start:   { text: $('cbx-start'),   range: $('cbx-start-range'),   min: 0, max: 500000, hard: 10000000, dec: false },
+    monthly: { text: $('cbx-monthly'), range: $('cbx-monthly-range'), min: 0, max: 20000,  hard: 250000,   dec: false },
+    years:   { text: $('cbx-years'),   range: $('cbx-years-range'),   min: 1, max: 40,     hard: 50,       dec: false },
+    rate:    { text: $('cbx-rate'),    range: $('cbx-rate-range'),    min: 0, max: 12,     hard: 20,       dec: true  }
+  };
+
+  var state = { start: 25000, monthly: 1500, years: 15, rate: 6 };
+
+  var svg = $('cbx-svg'), tip = $('cbx-tip'), tbody = $('cbx-tbody');
+  var SVGNS = 'http://www.w3.org/2000/svg';
+  var series = [];   // [{year, paid, gain, total}]
+  var bands = [];    // [{x0, x1, cx, year}] – til hover
+
+  /* ── beregning ──────────────────────────────────────────
+     Månedlig rente afledt af den årlige: i = (1+r)^(1/12) - 1.
+     Værdi efter n måneder = start*(1+i)^n + md*((1+i)^n - 1)/i
+     (indbetaling ved månedens udgang; i = 0 håndteres separat). */
+  function project() {
+    var r = state.rate / 100;
+    var i = Math.pow(1 + r, 1 / 12) - 1;
+    var out = [];
+    for (var y = 0; y <= state.years; y++) {
+      var n = y * 12;
+      var growth = Math.pow(1 + i, n);
+      var total = i === 0
+        ? state.start + state.monthly * n
+        : state.start * growth + state.monthly * (growth - 1) / i;
+      var paid = state.start + state.monthly * n;
+      out.push({ year: y, paid: paid, gain: Math.max(0, total - paid), total: total });
+    }
+    return out;
+  }
+
+  /* ── graf ───────────────────────────────────────────── */
+  function el(name, attrs) {
+    var n = document.createElementNS(SVGNS, name);
+    for (var k in attrs) n.setAttribute(k, attrs[k]);
+    return n;
+  }
+
+  // Søjle med runde hjørner foroven og lige kant mod grundlinjen.
+  function capPath(x, y, w, h, r) {
+    r = Math.max(0, Math.min(r, w / 2, h));
+    return 'M' + x + ' ' + (y + h) +
+           'V' + (y + r) +
+           'a' + r + ' ' + r + ' 0 0 1 ' + r + ' ' + -r +
+           'h' + (w - 2 * r) +
+           'a' + r + ' ' + r + ' 0 0 1 ' + r + ' ' + r +
+           'V' + (y + h) + 'Z';
+  }
+
+  function drawChart() {
+    var box = svg.parentNode;
+    var W = box.clientWidth;
+    var H = svg.clientHeight || 232;
+    if (!W) return;
+
+    while (svg.firstChild) svg.removeChild(svg.firstChild);
+    svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+
+    var padTop = 30, padBottom = 26;                 // plads til slutmærkat og årstal
+    var plotH = Math.max(20, H - padTop - padBottom);
+    var baseY = padTop + plotH;
+    var n = series.length;
+    var max = 0;
+    for (var k = 0; k < n; k++) max = Math.max(max, series[k].total);
+    if (max <= 0) max = 1;
+
+    var band = W / n;
+    var colW = Math.max(3, Math.min(24, band * 0.7));
+    var gap = colW >= 10 ? 2 : 1;                     // hvid luft mellem indbetalt og afkast
+    var scale = function (v) { return v / max * plotH; };
+
+    bands = [];
+
+    // grundlinje
+    svg.appendChild(el('line', { x1: 0, y1: baseY + 0.5, x2: W, y2: baseY + 0.5,
+      stroke: '#e5e5e8', 'stroke-width': 1 }));
+
+    // årstal på runde spring (1, 2, 5, 10 …) og kun så tæt, at de ikke rører hinanden
+    var labelGap = 48;
+    var minStep = labelGap / band;
+    var nice = [1, 2, 5, 10, 20, 25, 50];
+    var labelStep = nice[nice.length - 1];
+    for (var s = 0; s < nice.length; s++) { if (nice[s] >= minStep) { labelStep = nice[s]; break; } }
+
+    for (var idx = 0; idx < n; idx++) {
+      var d = series[idx];
+      var cx = band * idx + band / 2;
+      var x = Math.round(cx - colW / 2);
+      var w = Math.round(colW);
+      bands.push({ x0: band * idx, x1: band * (idx + 1), cx: cx, i: idx });
+
+      var totalH = scale(d.total);
+      var paidH = scale(d.paid);
+      var gainH = Math.max(0, totalH - paidH);
+
+      if (gainH > 0.5) {
+        // indbetalt: lige kant både foroven (mod afkastet) og forneden
+        var ph = Math.max(0, paidH - gap);
+        if (ph > 0) {
+          svg.appendChild(el('rect', { x: x, y: baseY - ph, width: w, height: ph,
+            fill: '#ceced3' }));
+        }
+        svg.appendChild(el('path', { d: capPath(x, baseY - totalH, w, gainH, 4),
+          fill: '#21984b' }));
+      } else if (totalH > 0.5) {
+        svg.appendChild(el('path', { d: capPath(x, baseY - totalH, w, totalH, 4),
+          fill: '#ceced3' }));
+      }
+
+      if (idx === 0 || idx === n - 1 || idx % labelStep === 0) {
+        // spring over, hvis mærkaten ville støde ind i den sidste
+        if (idx === n - 1 || (n - 1 - idx) * band >= labelGap) {
+          // første og sidste mærkat sættes ind mod kanten, så de ikke bliver klippet
+          var anchor = idx === 0 ? 'start' : (idx === n - 1 ? 'end' : 'middle');
+          var tx = idx === 0 ? 0 : (idx === n - 1 ? W : cx);
+          var t = el('text', { x: tx, y: baseY + 18, 'text-anchor': anchor,
+            fill: '#83858d', 'font-size': '11', 'font-family': 'Porteron, Arial, sans-serif' });
+          t.textContent = d.year === 0 ? 'I dag' : d.year + ' år';
+          svg.appendChild(t);
+        }
+      }
+    }
+
+    // slutbeløbet skrevet direkte på den sidste søjle
+    var last = series[n - 1];
+    var lastCx = band * (n - 1) + band / 2;
+    var lbl = el('text', { x: Math.min(W - 2, lastCx + colW / 2), y: baseY - scale(last.total) - 12,
+      'text-anchor': 'end', fill: '#0c0c0d', 'font-size': '13', 'font-weight': '600',
+      'font-family': 'Porteron, Arial, sans-serif' });
+    lbl.textContent = kr(last.total);
+    svg.appendChild(lbl);
+
+    // markør, der følger den søjle man peger på
+    var hover = el('rect', { id: 'cbx-hoverline', x: 0, y: padTop - 6, width: Math.max(colW + 8, 14),
+      height: plotH + 12, rx: 8, fill: '#0c0c0d', opacity: '0' });
+    svg.appendChild(hover);
+  }
+
+  /* ── tooltip ────────────────────────────────────────── */
+  function showTip(idx, clientX) {
+    var d = series[idx];
+    if (!d) return;
+    var b = bands[idx];
+    var box = svg.parentNode;
+    tip.innerHTML =
+      '<div class="cbx-tip__year">' + (d.year === 0 ? 'I dag' : 'Om ' + d.year + (d.year === 1 ? ' år' : ' år')) + '</div>' +
+      '<div class="cbx-tip__row"><span>Indbetalt</span><b>' + kr(d.paid) + '</b></div>' +
+      '<div class="cbx-tip__row"><span>Afkast</span><b>' + kr(d.gain) + '</b></div>' +
+      '<div class="cbx-tip__row cbx-tip__row--total"><span>I alt</span><b>' + kr(d.total) + '</b></div>';
+    tip.setAttribute('data-show', '1');
+
+    var w = tip.offsetWidth, boxW = box.clientWidth;
+    var x = Math.max(w / 2 + 4, Math.min(boxW - w / 2 - 4, b.cx));
+    var H = svg.clientHeight || 232;
+    var max = series.reduce(function (m, s) { return Math.max(m, s.total); }, 1);
+    var y = (H - 30 - 26) * (1 - d.total / max) + 30;
+    tip.style.left = x + 'px';
+    tip.style.top = Math.max(tip.offsetHeight + 4, y - 8) + 'px';
+
+    var hover = document.getElementById('cbx-hoverline');
+    if (hover) {
+      hover.setAttribute('x', b.cx - parseFloat(hover.getAttribute('width')) / 2);
+      hover.setAttribute('opacity', '0.05');
+    }
+  }
+
+  function hideTip() {
+    tip.setAttribute('data-show', '0');
+    var hover = document.getElementById('cbx-hoverline');
+    if (hover) hover.setAttribute('opacity', '0');
+  }
+
+  function pointerIndex(ev) {
+    var rect = svg.getBoundingClientRect();
+    var x = ev.clientX - rect.left;
+    for (var i = 0; i < bands.length; i++) if (x >= bands[i].x0 && x < bands[i].x1) return i;
+    return x < 0 ? 0 : bands.length - 1;
+  }
+
+  svg.addEventListener('pointermove', function (ev) { showTip(pointerIndex(ev)); });
+  svg.addEventListener('pointerdown', function (ev) { showTip(pointerIndex(ev)); });
+  // en finger udløser pointerleave i det øjeblik den løftes, og ville lukke
+  // tooltippen igen med det samme — derfor kun for mus
+  svg.addEventListener('pointerleave', function (ev) { if (ev.pointerType !== 'touch') hideTip(); });
+  // en finger har ingen pointerleave: et tryk uden for grafen lukker tooltippen
+  document.addEventListener('pointerdown', function (ev) {
+    if (!svg.contains(ev.target)) hideTip();
+  }, true);
+
+  /* ── tabel ──────────────────────────────────────────── */
+  function drawTable() {
+    var rows = '';
+    for (var i = 0; i < series.length; i++) {
+      var d = series[i];
+      rows += '<tr><td>' + (d.year === 0 ? 'I dag' : d.year) + '</td><td>' + nf.format(Math.round(d.paid)) +
+              '</td><td>' + nf.format(Math.round(d.gain)) + '</td><td>' + nf.format(Math.round(d.total)) + '</td></tr>';
+    }
+    tbody.innerHTML = rows;
+  }
+
+  /* ── render ─────────────────────────────────────────── */
+  function render() {
+    series = project();
+    var last = series[series.length - 1];
+    var totalText = kr(last.total);
+    var hero = $('cbx-total');
+    hero.textContent = totalText;
+    hero.setAttribute('data-len', totalText.length >= 17 ? 'xlong' : (totalText.length >= 14 ? 'long' : 'short'));
+    $('cbx-paid').textContent = kr(last.paid);
+    $('cbx-gain').textContent = kr(last.gain);
+    hideTip();
+    drawChart();
+    drawTable();
+  }
+
+  /* ── felter ─────────────────────────────────────────── */
+  function fillTrack(f) {
+    var pct = (f.range.value - f.range.min) / (f.range.max - f.range.min) * 100;
+    f.range.style.setProperty('--cbx-fill', pct + '%');
+  }
+
+  function fmtField(key, value) {
+    var f = FIELDS[key];
+    f.text.value = f.dec
+      ? value.toLocaleString('da-DK', { maximumFractionDigits: 2 })
+      : nf.format(value);
+  }
+
+  function setValue(key, value, fromText) {
+    var f = FIELDS[key];
+    if (isNaN(value)) value = state[key];
+    value = Math.max(f.min, Math.min(f.hard, value));
+    state[key] = value;
+    f.range.value = Math.min(f.max, value);
+    fillTrack(f);
+    if (!fromText) fmtField(key, value);
+    render();
+  }
+
+  Object.keys(FIELDS).forEach(function (key) {
+    var f = FIELDS[key];
+    fillTrack(f);
+
+    f.range.addEventListener('input', function () {
+      setValue(key, parseFloat(f.range.value), false);
+    });
+
+    f.text.addEventListener('focus', function () {
+      f.text.value = String(state[key]).replace('.', ',');
+      f.text.select();
+    });
+
+    f.text.addEventListener('input', function () {
+      var raw = f.text.value.replace(/\s/g, '').replace(/\./g, '').replace(',', '.').replace(/[^\d.]/g, '');
+      var v = parseFloat(raw);
+      if (raw === '' || isNaN(v)) return;
+      setValue(key, f.dec ? v : Math.round(v), true);
+    });
+
+    f.text.addEventListener('blur', function () { fmtField(key, state[key]); });
+
+    f.text.addEventListener('keydown', function (ev) {
+      if (ev.key === 'Enter') { ev.preventDefault(); f.text.blur(); }
+    });
+  });
+
+  if (window.ResizeObserver) {
+    new ResizeObserver(function () { drawChart(); }).observe(svg.parentNode);
+  } else {
+    window.addEventListener('resize', drawChart);
+  }
+
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(drawChart);
+  render();
+})();
+</script>
+<!-- ══════════════════ KLIP HER – SLUT PÅ EMBED ══════════════════ -->
+
+</body>
+</html>
