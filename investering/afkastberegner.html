@@ -42,7 +42,8 @@
   --cbx-radius-card:16px;
   font-family:Porteron,Arial,sans-serif;
   color:var(--cbx-body);
-  padding:0 0 16px;
+  /* samme luft som sidens øvrige sektioner med plads om sig */
+  padding:96px 0 120px;
   -webkit-font-smoothing:antialiased;
 }
 .cbx-section *,.cbx-section *::before,.cbx-section *::after{box-sizing:border-box}
@@ -177,6 +178,7 @@
   .cbx-head{margin-bottom:40px}
 }
 @media screen and (max-width:767px){
+  .cbx-section{padding:64px 0 80px}
   .cbx-container{padding:0}
   .cbx-panel{padding:80px 16px}
   .cbx-card{padding:24px}
